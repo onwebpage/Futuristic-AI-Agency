@@ -1,0 +1,565 @@
+You are a Senior Award-Winning Frontend Engineer and Motion Designer.
+
+Your job is NOT to redesign the website.
+
+Your job is to transform the existing Thinkatic website into a world-class enterprise experience inspired by Accenture while strictly following the Thinkatic Developer Specification PDF.
+
+REFERENCE
+
+Old Website
+https://thinkatic.com/
+
+Animation Inspiration
+https://www.accenture.com/in-en
+
+The Thinkatic PDF is the source of truth.
+
+Do NOT change the sitemap.
+
+Do NOT remove sections.
+
+Do NOT change navigation.
+
+Do NOT change content hierarchy.
+
+Do NOT change color palette.
+
+Do NOT change branding.
+
+Do NOT simplify anything.
+
+Keep everything exactly according to the PDF.
+
+Instead upgrade every single component with premium motion, cinematic scrolling, modern enterprise interactions and immersive storytelling.
+
+=====================================================
+
+FOLLOW THE PDF 100%
+
+Keep
+
+Homepage Flow
+
+Hero
+
+BPO Services
+
+Industries
+
+AI Powered BPO
+
+Why Thinkatic
+
+IT Services
+
+Case Studies
+
+About
+
+Careers
+
+Contact
+
+Footer
+
+Use the exact structure defined inside the Thinkatic specification.
+
+=====================================================
+
+TECH STACK
+
+React
+
+TypeScript
+
+TailwindCSS
+
+Framer Motion
+
+GSAP
+
+GSAP ScrollTrigger
+
+Lenis Smooth Scroll
+
+Motion Values
+
+React Intersection Observer
+
+Spline if required
+
+React Three Fiber only where necessary
+
+Do not overuse heavy 3D.
+
+=====================================================
+
+OVERALL DESIGN
+
+Enterprise
+
+Luxury
+
+Premium
+
+Modern
+
+AI-first
+
+Future Ready
+
+Very smooth
+
+Minimal
+
+No flashy effects.
+
+Everything should feel expensive.
+
+=====================================================
+
+SMOOTH SCROLL
+
+Implement buttery smooth scrolling using Lenis.
+
+Synchronize GSAP ScrollTrigger with Lenis.
+
+No scroll lag.
+
+No jumping.
+
+No layout shift.
+
+Everything should feel cinematic.
+
+=====================================================
+
+PAGE TRANSITIONS
+
+Create premium page transitions.
+
+Fade
+
+Scale
+
+Blur
+
+Mask reveal
+
+Slide
+
+Cross dissolve
+
+=====================================================
+
+TEXT REVEAL ANIMATIONS
+
+Every Heading
+
+Split into characters.
+
+Split into words.
+
+Animate character reveal.
+
+Animate word reveal.
+
+Animate line reveal.
+
+Mask reveal.
+
+Gradient reveal.
+
+Slide upward.
+
+Blur removal.
+
+Opacity animation.
+
+Letter stagger.
+
+Headline should feel premium.
+
+=====================================================
+
+PARAGRAPH ANIMATION
+
+Every paragraph
+
+Fade in
+
+Blur in
+
+Translate upward
+
+Line by line reveal
+
+Word stagger
+
+Smooth easing
+
+=====================================================
+
+SCROLL STORYTELLING
+
+Every section should tell a story.
+
+Nothing should instantly appear.
+
+Each section should reveal progressively.
+
+Animate based on scroll progress.
+
+Content should move naturally.
+
+=====================================================
+
+HERO SECTION
+
+Keep existing layout.
+
+Do NOT redesign.
+
+Enhance using
+
+Animated AI background
+
+Floating particles
+
+Moving gradients
+
+Glass overlays
+
+Parallax layers
+
+Mouse movement
+
+Magnetic CTA
+
+Animated CTA border
+
+Animated statistics
+
+Text reveal
+
+Button reveal
+
+Background glow
+
+Depth effect
+
+=====================================================
+
+NAVBAR
+
+Glass morphism
+
+Transparent initially
+
+Blur while scrolling
+
+Shrink on scroll
+
+Animated active indicator
+
+Animated underline
+
+Smooth mega menu
+
+Hover reveal
+
+Magnetic buttons
+
+=====================================================
+
+SERVICES
+
+Cards should
+
+Reveal stagger
+
+Hover lift
+
+Tilt
+
+Glow
+
+Animated border
+
+Animated icon
+
+Depth shadow
+
+Gradient animation
+
+Hover background movement
+
+=====================================================
+
+INDUSTRIES
+
+Grid reveal
+
+Sequential animation
+
+3D hover
+
+Icon animation
+
+Floating cards
+
+Depth movement
+
+=====================================================
+
+WHY THINKATIC
+
+Animate every single line separately.
+
+Each line fades and slides independently.
+
+Keep PDF formatting.
+
+Do NOT merge paragraphs.
+
+=====================================================
+
+STATISTICS
+
+Animated Count Up
+
+Glow
+
+Floating numbers
+
+Gradient animation
+
+Scroll activation
+
+=====================================================
+
+AI POWERED BPO
+
+This is the premium highlight.
+
+Use subtle animated network nodes.
+
+Animated workflow lines.
+
+Flowing connections.
+
+Small glowing particles.
+
+Animated AI visualization.
+
+NO heavy robots.
+
+NO stock AI graphics.
+
+=====================================================
+
+IT SERVICES
+
+Card stagger
+
+Animated icons
+
+Process reveal
+
+Smooth hover
+
+Floating gradients
+
+=====================================================
+
+AI TRANSFORMATION FRAMEWORK
+
+Animated horizontal timeline.
+
+Each stage activates while scrolling.
+
+Draw connecting line.
+
+Animated progress.
+
+Step scaling.
+
+Glow.
+
+=====================================================
+
+CASE STUDIES
+
+Reveal cards one by one.
+
+Hover elevation.
+
+Animated result numbers.
+
+Progress bars.
+
+Glass cards.
+
+=====================================================
+
+ABOUT
+
+Image reveal.
+
+Parallax image.
+
+Text reveal.
+
+Mission and Vision stagger.
+
+Core values animation.
+
+=====================================================
+
+CAREERS
+
+Animated job cards.
+
+Filter animation.
+
+Hover effects.
+
+Apply button animation.
+
+=====================================================
+
+CONTACT
+
+Floating labels.
+
+Animated inputs.
+
+Glow on focus.
+
+Magnetic submit button.
+
+Map reveal.
+
+=====================================================
+
+FOOTER
+
+Reveal upward.
+
+Animated logo.
+
+Social hover.
+
+Animated links.
+
+Gradient underline.
+
+=====================================================
+
+MICRO INTERACTIONS
+
+Cursor follower
+
+Magnetic buttons
+
+Hover lighting
+
+Glow
+
+Depth
+
+Ripple
+
+Soft shadows
+
+Gradient shifts
+
+Animated borders
+
+Floating elements
+
+Mouse parallax
+
+=====================================================
+
+BACKGROUND
+
+Use subtle moving gradients.
+
+Noise texture.
+
+Very light particles.
+
+AI inspired network motion.
+
+Never distract content.
+
+=====================================================
+
+3D
+
+Use only subtle 3D.
+
+Small floating AI objects.
+
+Depth layers.
+
+Perspective cards.
+
+Mouse tilt.
+
+Never overload performance.
+
+=====================================================
+
+PERFORMANCE
+
+Maintain 60 FPS.
+
+Code splitting.
+
+Lazy loading.
+
+Image optimization.
+
+GPU accelerated transforms.
+
+Avoid layout thrashing.
+
+Respect prefers-reduced-motion.
+
+=====================================================
+
+ACCESSIBILITY
+
+Animations must never reduce readability.
+
+Maintain contrast.
+
+Maintain focus states.
+
+Keyboard navigation.
+
+Responsive everywhere.
+
+=====================================================
+
+IMPORTANT
+
+DO NOT redesign.
+
+DO NOT replace UI.
+
+DO NOT change sections.
+
+DO NOT change content.
+
+DO NOT remove components.
+
+DO NOT modify the homepage flow.
+
+DO NOT modify PDF hierarchy.
+
+Only upgrade the website using premium motion design inspired by Accenture while preserving the Thinkatic specification exactly.
+
+The final result should look like an award-winning enterprise AI company website capable of competing with Accenture, Deloitte Digital, IBM Consulting, and Microsoft AI while fully respecting the Thinkatic PDF.

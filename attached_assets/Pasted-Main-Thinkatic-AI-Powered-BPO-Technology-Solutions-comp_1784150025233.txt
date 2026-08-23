@@ -1,0 +1,51 @@
+Main Thinkatic (AI-Powered BPO & Technology Solutions company) ki corporate website 
+ke liye missing/pending content tayyar kar raha hoon. Website developer spec document 
+ke mutabiq neeche diye gaye content items abhi tak finalize nahi hue. Har item ke liye 
+professional, brand-appropriate (premium, enterprise-grade, AI-driven tone) content 
+likho:
+
+1. HEALTHCARE BPO — COMPLIANCE/TRUST CONTENT
+   Healthcare BPO service page ke top par dikhne wala compliance aur data-handling 
+   trust-signal content likho. Isme HIPAA-type data privacy commitment, call-compliance 
+   (TCPA jaisa), aur patient data security ka zikr ho. 2-3 short trust badges/statements 
+   ke roop mein.
+
+2. CASE STUDIES — FULL DETAILS (4 case studies)
+   Neeche di gayi 4 headlines ke liye full case study content likho (Problem → 
+   Approach → Result format, har ek 150-200 words):
+   - Healthcare Process Optimization (Result: Reduced processing time by 60%)
+   - Customer Support Transformation (Result: Improved response time by 45%)
+   - AI Automation (Result: Reduced manual work by 70%)
+   - Software Modernization (Result: Migrated legacy systems to cloud infrastructure)
+
+3. CONTACT PAGE — FINAL DETAILS
+   - Office address ko finalize karo (draft: Magarpatta City, Hadapsar, Pune) — 
+     complete address format (building/street/pincode ke placeholders ke saath) do.
+   - Business phone number aur email format suggest karo (placeholder ke saath).
+   - Contact form ke liye "Service Interest" dropdown options likho (BPO services 
+     aur IT services dono cover karte hue).
+
+4. FOOTER LEGAL PAGES CONTENT
+   - Privacy Policy (draft, standard BPO/tech company template)
+   - Terms & Conditions (draft, standard template)
+   - Blog — 3 starter blog post titles + 100-word intro/outline for each, 
+     Thinkatic ke AI + BPO positioning se related.
+
+5. CAREERS PAGE — JOB LISTING TEMPLATE CONTENT
+   9 open positions ke liye har ek ka structured content banao (title, department, 
+   location, employment type, 3-4 line job description, key requirements):
+   Customer Support Executive, Healthcare Process Associate, Call Transfer Specialist, 
+   Sales Development Representative, AI Engineer, Software Developer, Business Analyst, 
+   Operations Manager, HR Executive.
+
+BRAND GUIDELINES (in sab content mein follow karo):
+- Tone: Enterprise, professional, technical — generic "call center" tropes avoid karo.
+- Core message: Thinkatic sirf outsourcing vendor nahi, balki AI + human expertise ka 
+  combination hai jo measurable outcomes deta hai.
+- Colors/design isn't relevant to content, but copy style short, punchy sentences use 
+  kar sakti hai (jaisa homepage "Why Thinkatic" section mein hai).
+- Avoid making unverified compliance claims — flag kisi bhi cheez ko jo legal review 
+  chahegi.
+
+Output format: Har section ko clearly labeled headings ke saath do, taake seedha 
+website CMS mein copy-paste ho sake.

@@ -1,0 +1,294 @@
+Mujhe Thinkatic (AI-Powered Business Process Outsourcing & Technology Solutions company) 
+ki poori corporate website banani hai. Neeche complete content, structure, aur design 
+guidelines di gayi hain — inhe follow karte hue pura website (all pages) develop karo.
+
+=====================================================
+BRAND POSITIONING
+=====================================================
+Positioning: AI-Powered Business Process Outsourcing & Technology Solutions.
+Vision: "To transform businesses through intelligent and future-ready AI technology."
+
+Site ka structure 70/30 split follow kare:
+- BPO Services = 70% (primary nav item, mega menu, homepage leads with this)
+- IT & Technology Services = 30% (secondary nav item, differentiator)
+
+Core Narrative: Thinkatic traditional labor-outsourcing vendor nahi hai. Yeh trained 
+human teams ko AI, automation, aur analytics ke saath combine karke measurable outcomes 
+deta hai. Generic "call center" stock imagery avoid karo — enterprise-software jaisa 
+technical aesthetic use karo.
+
+=====================================================
+DESIGN SYSTEM
+=====================================================
+Theme: Premium, modern, AI-driven corporate — enterprise SaaS product jaisa look.
+
+Colors:
+- Deep Navy: #081B3A
+- Electric Blue: #2563EB
+- White: #FFFFFF
+- Gradient: Navy → Blue
+- Cyan Accent (subtle use only)
+
+Visual Style:
+- Animated AI-inspired graphics (network nodes, subtle particle/gradient motion — 
+  literal robot imagery nahi)
+- Glassmorphism cards (frosted, translucent panels) for feature/stat blocks
+- Clean modern sans-serif typography, clear type scale
+- Generous white space
+
+Navigation:
+- BPO = primary top-level menu item with full mega menu (Healthcare BPO, Customer 
+  Support, Sales & Lead Generation, Back Office, AI-Powered BPO)
+- Technology & AI = secondary menu item, visually lighter weight
+
+Interactive Elements:
+- Animated statistics (count-up on scroll)
+- Hover cards on service/industry tiles
+- Process timelines (animated on scroll)
+- Client testimonial carousel/slider
+- Industry icon grid with hover states
+- Prominent "Book a Consultation" CTAs throughout the site (not just hero/footer)
+
+Performance & SEO:
+- Mobile-first responsive
+- Optimized Core Web Vitals (LCP, CLS, INP)
+- Schema markup: Organization, Service, BreadcrumbList
+- Har service ka apna dedicated indexable landing page ho (sirf anchor section nahi)
+- Compressed images/videos, lazy-load below-the-fold media
+
+=====================================================
+HOMEPAGE
+=====================================================
+Section Order: Hero → BPO Services → Industries → AI-Powered BPO → Why Thinkatic → 
+IT Services → Case Studies → About → Careers → Contact
+
+--- HERO SECTION ---
+Headline: "AI-Powered BPO That Delivers Business Outcomes"
+Subheading: "Thinkatic helps global businesses accelerate growth through intelligent 
+Business Process Outsourcing, AI-enabled customer operations, healthcare outsourcing, 
+and enterprise technology solutions. Whether you're looking to scale customer support, 
+outbound sales, healthcare operations, or build AI-powered software, Thinkatic becomes 
+your long-term growth partner."
+CTA Primary: "Book a Free Consultation" (solid electric blue, dominant)
+CTA Secondary: "Explore BPO Services" (outline/ghost button)
+Background: Deep Navy → Electric Blue gradient with subtle animated AI graphics
+
+--- WHY THINKATIC + STATISTICS ---
+Heading: "More Than Outsourcing. We Build Intelligent Operations."
+Body copy (preserve line breaks, staggered scroll-reveal per line):
+"Traditional outsourcing focuses on manpower.
+Thinkatic combines skilled professionals, artificial intelligence, automation, 
+analytics, and enterprise technology to deliver measurable business outcomes.
+We don't simply execute processes.
+We optimize, automate, and continuously improve them."
+
+Statistics Bar (display as icon + label strip, NOT numeric counters):
+AI-Enabled Operations | 24×7 Global Delivery | Multi-Industry Expertise | 
+Enterprise Security | Outcome-Focused Delivery | Scalable Teams
+
+=====================================================
+SERVICES — BPO (70%) — Route: /services
+=====================================================
+Parent "Our Services" page: two sections — Section 1 BPO (70%), Section 2 IT (30%). 
+Each pillar = card (icon, title, one-line description, "View Services" link) that 
+expands to its own dedicated landing page.
+
+--- 1. HEALTHCARE BPO --- Route: /services/healthcare-bpo
+Description: "Support healthcare organizations through compliant, efficient, and 
+patient-focused outsourcing solutions."
+Services (10): Medical Call Transfer, Lead Qualification, Patient Outreach, 
+Appointment Scheduling, Customer Support, Back Office Processing, Healthcare 
+Documentation Support, Insurance Process Support, Revenue Cycle Assistance, 
+Virtual Administrative Teams
+Note: Add visible compliance/data-handling trust signals near top of page.
+
+--- 2. CUSTOMER SUPPORT --- Route: /services/customer-support
+Description: "Deliver exceptional customer experiences through AI-assisted 
+support teams."
+Services (8): Voice Support, Email Support, Live Chat, WhatsApp Support, 
+Social Media Support, Help Desk, Technical Support, Tier 1 Customer Service
+
+--- 3. SALES & LEAD GENERATION --- Route: /services/sales-lead-generation
+Description: "Generate qualified opportunities with intelligent outbound operations."
+Services (8): Outbound Calling, Appointment Setting, Lead Qualification, 
+Customer Verification, Inside Sales, Telemarketing, Sales Development 
+Representatives, Customer Surveys
+
+--- 4. BACK OFFICE OPERATIONS --- Route: /services/back-office
+Description: "Improve operational efficiency while reducing costs."
+Services (8): Data Entry, CRM Management, Document Processing, Virtual 
+Assistants, Order Processing, Billing Support, Quality Assurance, Reporting
+
+--- 5. AI-POWERED BPO --- Route: /services/ai-powered-bpo
+Description: "The future of outsourcing combines human expertise with 
+intelligent automation."
+Solutions (8): AI Voice Agents, AI Chatbots, Workflow Automation, AI Quality 
+Monitoring, AI Agent Assist, Intelligent Call Routing, Process Automation, 
+Knowledge Management
+Note: Use technical/product-style layout (short workflow diagrams per solution).
+
+--- INDUSTRIES (BPO Section) ---
+Healthcare, Insurance, Technology, SaaS, Retail, Finance, Real Estate, Education, 
+Telecommunications, Logistics
+(Render as icon grid with hover states, linking to filtered case-study/service view)
+
+--- WHY BUSINESSES CHOOSE THINKATIC (9 items, 3×3 grid) ---
+AI-first approach, Highly trained professionals, Enterprise-grade security, 
+Flexible engagement models, Rapid team scaling, Transparent reporting, 
+Continuous process improvement, Dedicated account management, Global delivery 
+capabilities
+
+=====================================================
+TECHNOLOGY — IT SERVICES (30%) — Route: /technology
+=====================================================
+Intro: "Build intelligent digital products that solve real business problems."
+Visually distinct from BPO section but consistent component style.
+
+--- Artificial Intelligence ---
+Custom AI Solutions, LLM Integration, Private AI, Generative AI, AI Agents, 
+Computer Vision, Natural Language Processing, Machine Learning
+
+--- Software Development ---
+Custom Software, Enterprise Applications, CRM Development, ERP Solutions, 
+SaaS Platforms, Web Applications, Mobile Applications, API Development
+
+--- Cloud & DevOps ---
+Cloud Migration, AWS, Azure, Google Cloud, CI/CD, Infrastructure Automation, 
+Monitoring, Containerization
+
+--- Automation ---
+Business Process Automation, Robotic Process Automation, Workflow Automation, 
+Enterprise Integration
+
+--- Data & Analytics ---
+Business Intelligence, Dashboards, Data Warehousing, Predictive Analytics, 
+Reporting
+
+--- AI TRANSFORMATION FRAMEWORK ---
+Six-stage horizontal animated timeline:
+Discover → Analyze → Design → Develop → Deploy → Optimize
+
+--- INDUSTRIES WE SERVE (IT Section — keep SEPARATE from BPO industries list) ---
+Healthcare, Finance, Insurance, Retail, Manufacturing, Technology, Education, 
+Real Estate, Government
+
+--- ENGAGEMENT MODELS ---
+Dedicated Teams, Managed Services, Project-Based, Outcome-Based, Staff Augmentation
+
+=====================================================
+CASE STUDIES — Route: /case-studies
+=====================================================
+4 case study cards (headline + result; link to full detail page template 
+problem → approach → result):
+1. Healthcare Process Optimization — Reduced processing time by 60%
+2. Customer Support Transformation — Improved response time by 45%
+3. AI Automation — Reduced manual work by 70%
+4. Software Modernization — Migrated legacy systems to cloud infrastructure
+
+Section Heading: "AI Meets Human Excellence"
+Body: "Businesses need more than outsourcing. They need intelligent operations. 
+At Thinkatic, we combine AI technology with experienced professionals to create 
+faster, smarter, and more scalable business processes."
+
+=====================================================
+ABOUT US — Route: /about
+=====================================================
+Heading: "Building The Future Of Intelligent Business Operations"
+Body: "Thinkatic is a next-generation AI-powered BPO and technology company 
+helping businesses transform operations through outsourcing, automation, and 
+software innovation. We believe technology should empower people—not replace 
+them. By combining operational excellence with intelligent AI solutions, we 
+help organizations increase efficiency, reduce operational costs, improve 
+customer experiences, and accelerate growth."
+
+Mission: "To build intelligent business operations that create measurable 
+value through people, technology, and innovation."
+Vision: "To transform businesses through intelligent and future-ready AI 
+technology."
+
+Core Values (7): Innovation, Integrity, Ownership, Customer Success, 
+Continuous Learning, Speed, Excellence
+
+=====================================================
+CAREERS — Route: /careers
+=====================================================
+Heading: "Grow with Thinkatic."
+Build as CMS-driven, filterable/searchable job listing (fields: title, 
+department, location, employment type, description, apply link).
+
+Open Positions (9):
+1. Customer Support Executive
+2. Healthcare Process Associate
+3. Call Transfer Specialist
+4. Sales Development Representative
+5. AI Engineer
+6. Software Developer
+7. Business Analyst
+8. Operations Manager
+9. HR Executive
+
+=====================================================
+CONTACT — Route: /contact
+=====================================================
+Heading: "Let's Build Smarter Business Together."
+Components:
+- Book a Discovery Call (calendar-scheduling embed, Calendly-style)
+- Request a Proposal (form/link)
+- Email (click-to-mail)
+- Phone (click-to-call)
+- Office Address: Magarpatta City, Hadapsar, Pune (placeholder — confirm 
+  exact address later)
+- Contact Form fields: name, company, email, phone, service interest, message
+Layout suggestion: split layout — form + scheduling widget on one side, 
+address/map embed on other.
+
+=====================================================
+FOOTER
+=====================================================
+Background: Deep Navy, light/white Thinkatic logo, social links, optional 
+newsletter micro-form.
+
+Services column: Healthcare BPO, Customer Support, Sales Outsourcing, 
+Back Office, AI Services, Software Development, Automation
+Company column: About, Careers, Blogs, Privacy Policy, Terms, Contact
+
+=====================================================
+SITEMAP / ROUTES
+=====================================================
+/ (Homepage) — P0
+/services/healthcare-bpo — P0
+/services/customer-support — P0
+/services/sales-lead-generation — P0
+/services/back-office — P1
+/services/ai-powered-bpo — P0
+/technology — P1
+/case-studies — P1
+/about — P0
+/careers — P1
+/contact — P0
+/privacy-policy, /terms, /blog — P2 (content pending)
+
+=====================================================
+REUSABLE COMPONENTS TO BUILD
+=====================================================
+- Sticky header with mega menu (BPO) + standard dropdown (Technology & AI)
+- Gradient hero block with dual CTA
+- Animated stat strip
+- Service pillar card (icon, title, description, link)
+- Glassmorphism feature card
+- Industry icon grid
+- Horizontal process/framework timeline
+- Case study result card
+- Testimonial carousel
+- Job listing card + filter bar
+- Contact form + scheduling embed
+- Dark footer with multi-column link groups
+
+=====================================================
+INSTRUCTIONS
+=====================================================
+Upar diye gaye tamam content, structure, colors, aur components ko exactly 
+follow karte hue pura responsive website banao (mobile-first). Content ko 
+exactly waise hi use karo jaisa diya gaya hai — koi bhi headline, description, 
+ya list item badalo mat. Design system (colors, glassmorphism, gradients) 
+sabhi pages par consistently apply karo.

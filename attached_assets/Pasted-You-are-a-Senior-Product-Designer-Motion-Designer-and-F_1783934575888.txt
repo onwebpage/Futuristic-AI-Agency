@@ -1,0 +1,239 @@
+You are a Senior Product Designer, Motion Designer, and Frontend Architect.
+
+Your task is to completely redesign ONLY the Hero Section of the existing Thinkatic website.
+
+IMPORTANT RULES
+
+• Do NOT modify any other section.
+• Do NOT change the navigation.
+• Do NOT change the branding.
+• Do NOT change the company colors.
+• Do NOT change the company logo.
+• Do NOT create a template.
+• The hero must feel like a premium enterprise website built by a world-class design agency.
+
+=====================================================
+
+DESIGN GOAL
+
+The current Hero feels like an AI-generated template.
+
+Transform it into something that instantly impresses enterprise clients.
+
+The visitor should immediately feel:
+
+• Premium
+• Trust
+• Innovation
+• Enterprise
+• AI
+• Technology
+• Luxury
+
+The Hero must be memorable.
+
+=====================================================
+
+LAYOUT
+
+Do NOT keep the current centered layout.
+
+Create a modern split layout.
+
+LEFT SIDE
+
+• Small premium badge
+• Large enterprise headline
+• Supporting description
+• Primary CTA
+• Secondary CTA
+• Animated trust metrics
+
+RIGHT SIDE
+
+Instead of empty space, build an impressive animated AI visualization.
+
+Examples of what to create:
+
+• Neural network
+• AI core
+• Enterprise dashboard
+• Floating holographic cards
+• Digital workflow
+• 3D AI sphere
+• Animated data visualization
+• Connected nodes
+• Processing animation
+
+The right side should become the visual identity of Thinkatic.
+
+=====================================================
+
+BACKGROUND
+
+Replace the flat background.
+
+Create multiple layers.
+
+Include
+
+• Animated gradient
+• Soft blue glow
+• Digital grid
+• Tiny particles
+• Slow moving stars
+• Neural connections
+• Noise texture
+• Light beams
+• Depth
+• Ambient lighting
+
+Everything should move slowly.
+
+=====================================================
+
+PARALLAX
+
+Implement premium parallax.
+
+Background moves slower.
+
+Floating objects move independently.
+
+Glow reacts subtly.
+
+Mouse movement creates depth.
+
+Everything should feel immersive.
+
+=====================================================
+
+TEXT
+
+Redesign typography completely.
+
+Avoid long boring text.
+
+Create a powerful enterprise headline.
+
+Use strong hierarchy.
+
+Animate headings word-by-word.
+
+Characters should reveal smoothly.
+
+Subheading fades in naturally.
+
+Buttons appear after text animation.
+
+=====================================================
+
+BUTTONS
+
+Premium rounded buttons.
+
+Magnetic hover.
+
+Glow.
+
+Ripple.
+
+Micro interactions.
+
+Smooth scaling.
+
+=====================================================
+
+TRUST SECTION
+
+Below the CTA include premium trust indicators.
+
+Examples
+
+500+
+
+99.8%
+
+40%
+
+15+
+
+2B+
+
+Animate every number.
+
+=====================================================
+
+VISUALS
+
+The Hero MUST NOT rely only on text.
+
+Create an impressive animated visual.
+
+It should immediately communicate:
+
+Artificial Intelligence
+
+Automation
+
+Enterprise
+
+Innovation
+
+Technology
+
+=====================================================
+
+SCROLL EXPERIENCE
+
+When scrolling:
+
+Hero content moves with subtle parallax.
+
+Background remains alive.
+
+Elements transition naturally.
+
+No abrupt movement.
+
+=====================================================
+
+MICRO INTERACTIONS
+
+Every element should respond beautifully.
+
+Hover.
+
+Glow.
+
+Depth.
+
+Perspective.
+
+Motion.
+
+Everything should feel handcrafted.
+
+=====================================================
+
+PERFORMANCE
+
+Animations must remain smooth.
+
+GPU accelerated.
+
+60 FPS.
+
+Responsive on desktop, tablet and mobile.
+
+=====================================================
+
+FINAL GOAL
+
+Do NOT make the Hero look like an AI-generated SaaS template.
+
+Make it look like something created by an elite product design studio.
+
+The Hero should be comparable to modern enterprise websites from companies like Accenture, Stripe, Vercel, Linear, OpenAI, Apple and IBM.
+
+The first impression should immediately communicate that Thinkatic is a premium AI-powered enterprise company.

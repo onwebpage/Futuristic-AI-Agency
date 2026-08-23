@@ -1,0 +1,390 @@
+WEBSITE STYLE
+
+Design language:
+
+black background
+dark gray sections
+neon green accents
+subtle white typography
+blurred glass cards
+rounded corners
+huge typography
+cinematic spacing
+floating gradients
+premium motion
+
+Typography:
+
+Neue Montreal
+General Sans
+Satoshi
+
+Buttons:
+
+magnetic hover
+glow effect
+liquid hover animation
+
+Scrolling:
+
+smooth inertia scrolling
+pinned sections
+horizontal gallery scrolling
+zoom on scroll
+fade and blur reveals
+HOMEPAGE STRUCTURE
+HERO SECTION
+
+Full screen hero with animated background.
+
+Top Navbar:
+
+logo left
+menu items center
+CTA button right
+
+Menu:
+
+Home
+Services
+Case Studies
+Process
+About
+Contact
+
+Hero headline:
+
+“AI-Native Digital Experiences That Drive Growth”
+
+Subheading:
+“We design futuristic AI products, websites, SaaS platforms, and digital experiences that turn complex ideas into intuitive interfaces.”
+
+CTA Buttons:
+
+Book a Call
+View Work
+
+Background:
+
+animated mesh gradient
+floating particles
+moving 3D objects
+subtle grid overlay
+
+Hero effects:
+
+text reveal animation
+word stagger animation
+mouse reactive glow
+parallax movement
+
+Add stats section below hero:
+
+$500M+ client funding
+120+ awards
+10+ years experience
+200+ projects delivered
+
+Use animated counters.
+
+SERVICES SECTION
+
+Sticky scroll animated cards.
+
+Headline:
+
+“What We Build”
+
+Service cards:
+
+AI Product Design
+SaaS UX/UI Design
+Branding & Identity
+Motion Design
+Webflow Development
+Full Stack Development
+AI Automation Systems
+Enterprise Dashboards
+
+Each card includes:
+
+animated icon
+hover glow
+tilt effect
+short description
+animated border
+
+Scroll interaction:
+Cards stack while scrolling.
+
+CASE STUDIES SECTION
+
+Horizontal scroll showcase.
+
+Headline:
+
+“Selected Work”
+
+Projects:
+
+AI Finance Platform
+Crypto Trading Dashboard
+Video AI Editor
+Enterprise Analytics SaaS
+Smart Healthcare Platform
+Real Estate AI CRM
+
+Each project card includes:
+
+fullscreen image/video
+hover animation
+motion blur transition
+category tags
+large typography
+CTA button
+
+Effects:
+
+horizontal scrolling
+pinned animation
+image zoom
+video autoplay on hover
+PROCESS SECTION
+
+Interactive timeline.
+
+Headline:
+
+“Our Process”
+
+Steps:
+
+Discovery
+Research
+Strategy
+Design
+Development
+Launch
+Optimization
+
+Effects:
+
+line draw animation
+scroll activated transitions
+animated SVG paths
+floating cards
+WHY US SECTION
+
+Dark futuristic grid layout.
+
+Headline:
+
+“Why Founders Choose Us”
+
+Content:
+
+startup-focused approach
+AI-first thinking
+scalable systems
+premium UX
+conversion-focused design
+fast delivery
+
+Add:
+
+glowing grid
+animated spotlight
+hover interaction
+TESTIMONIALS SECTION
+
+Large cinematic slider.
+
+Headline:
+
+“Clients Speak”
+
+Cards include:
+
+profile image
+founder name
+company
+testimonial
+animated quote icon
+
+Use:
+
+autoplay slider
+smooth transitions
+blur effect
+AWARDS SECTION
+
+Animated marquee section.
+
+Headline:
+
+“Recognized Globally”
+
+Include:
+
+Awwwards
+CSSDA
+Behance
+Dribbble
+FWA
+
+Scrolling infinite marquee logos.
+
+FAQ SECTION
+
+Accordion with glassmorphism.
+
+Questions:
+
+How long does a project take?
+What technologies do you use?
+Do you work with startups?
+What is your pricing?
+Can you redesign existing products?
+
+Smooth open-close animations.
+
+CONTACT SECTION
+
+Massive CTA section.
+
+Headline:
+
+“Let’s Build Something Extraordinary”
+
+Buttons:
+
+Schedule a Call
+Start Your Project
+
+Background:
+
+animated aurora gradients
+floating particles
+subtle noise texture
+FOOTER
+
+Include:
+
+navigation links
+social icons
+copyright
+email
+location
+newsletter form
+
+Add subtle hover animations.
+
+ADVANCED ANIMATIONS
+
+Implement:
+
+GSAP ScrollTrigger
+Lenis smooth scrolling
+text splitting animation
+image reveal masks
+SVG morphing
+page loader animation
+WebGL distortion
+custom cursor
+smooth route transitions
+TECH STACK
+
+Frontend:
+
+Next.js 15
+React
+Tailwind CSS
+Framer Motion
+GSAP
+Lenis
+Three.js
+React Three Fiber
+
+Backend:
+
+Node.js
+Express
+Supabase/Firebase
+
+CMS:
+
+Sanity or Contentful
+
+Deployment:
+
+Vercel
+IMPORTANT DESIGN RULES
+NEVER use template-looking layouts
+Maintain premium spacing
+Use cinematic transitions
+Every section must feel alive
+Avoid flat UI
+Add subtle motion everywhere
+Keep interactions smooth and modern
+Use immersive storytelling layout
+Create Awwwards-level visuals
+EXTRA EFFECTS TO ADD
+magnetic buttons
+scroll velocity effects
+sticky image transitions
+mouse distortion shader
+hover ripple effects
+animated gradients
+cinematic loader
+floating glass cards
+infinite marquee
+animated stats counter
+dynamic navbar blur
+section snap scrolling
+MOBILE EXPERIENCE
+
+Make mobile version:
+
+fully responsive
+ultra smooth
+optimized animations
+touch-friendly interactions
+reduced heavy effects for performance
+PERFORMANCE
+
+Optimize:
+
+lazy loading
+image compression
+GPU accelerated animations
+code splitting
+smooth rendering
+SEO optimized
+DESIGN REFERENCES
+
+Take inspiration from:
+
+Lazarev Agency
+Awwwards
+Framer
+Linear
+Apple
+CONTENT STYLE
+
+Tone:
+
+futuristic
+confident
+premium
+startup-focused
+AI-native
+modern
+
+Writing style:
+
+short punchy headlines
+minimal paragraphs
+emotionally impactful
+conversion-focused
+
+urn0search0turn0search1turn0search9turn0search13

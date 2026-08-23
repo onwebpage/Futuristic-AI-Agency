@@ -1,0 +1,370 @@
+Privacy Policy – Thinkatic
+
+Last Updated: 01st May 2026
+Welcome to Thinkatic (“Thinkatic”, “Company”, “we”, “our”, or “us”). This Privacy Policy explains how we collect, use, disclose, process, and protect your information when you use our website, products, software, AI solutions, applications, APIs, consulting services, and related platforms.
+By using our website or services, you agree to this Privacy Policy.
+________________________________________
+1. Information We Collect
+1.1 Personal Information
+We may collect:
+●	Full name
+●	Email address
+●	Phone number
+●	Company name
+●	Job title
+●	Billing information
+●	Payment details
+●	Address and country
+●	Tax/GST/VAT information
+●	Identity verification details
+●	Communication records
+________________________________________
+1.2 Technical Information
+We automatically collect:
+●	IP address
+●	Browser type
+●	Device information
+●	Operating system
+●	Referral URLs
+●	Cookies and tracking identifiers
+●	Session duration
+●	Usage analytics
+●	AI interaction logs
+________________________________________
+1.3 Client Project Data
+When using Thinkatic services, we may process:
+●	Documents
+●	Source code
+●	APIs
+●	Databases
+●	AI training datasets
+●	Business workflows
+●	Application files
+●	Cloud infrastructure information
+Clients retain ownership of their data.
+________________________________________
+2. How We Use Information
+We use information to:
+●	Provide AI and software development services
+●	Process payments
+●	Improve products and infrastructure
+●	Maintain security
+●	Prevent fraud and abuse
+●	Respond to inquiries
+●	Deliver customer support
+●	Send invoices and legal notices
+●	Conduct analytics and performance optimization
+●	Comply with laws and regulations
+●	Train internal operational systems (unless contractually restricted)
+________________________________________
+3. Cookies & Tracking Technologies
+We use:
+●	Essential cookies
+●	Analytics cookies
+●	Performance cookies
+●	Security cookies
+●	Marketing cookies
+●	Third-party tracking tools
+You may disable cookies through browser settings.
+________________________________________
+4. Sharing of Information
+We may share data with:
+●	Payment processors
+●	Cloud hosting providers
+●	Security vendors
+●	Analytics providers
+●	Legal authorities when required
+●	Contractors and employees under confidentiality obligations
+We do not sell personal information.
+________________________________________
+5. International Data Transfers
+Your data may be processed in:
+●	India
+●	United States
+●	Europe
+●	Other operational jurisdictions
+By using our services, you consent to international data transfers.
+________________________________________
+6. Data Retention
+We retain information:
+●	As long as necessary for business purposes
+●	For legal compliance
+●	For dispute resolution
+●	For accounting and taxation requirements
+Project data may be deleted after project termination unless otherwise agreed.
+________________________________________
+7. Security Measures
+We implement:
+●	Encryption
+●	Access control systems
+●	Firewalls
+●	Secure cloud infrastructure
+●	Monitoring systems
+●	Internal confidentiality agreements
+However, no system is 100% secure.
+________________________________________
+8. Your Rights
+Depending on your jurisdiction, you may:
+●	Access your data
+●	Correct inaccurate data
+●	Request deletion
+●	Object to processing
+●	Withdraw consent
+●	Request portability
+●	File complaints with regulators
+Requests can be sent to: privacy@thinkatic.com
+________________________________________
+9. Third-Party Services
+Our website may contain links to third-party websites and platforms. We are not responsible for their policies or practices.
+________________________________________
+10. Children’s Privacy
+Our services are not intended for individuals under 18 years of age.
+________________________________________
+11. AI & Automation Disclaimer
+Thinkatic develops and deploys AI systems. AI-generated outputs:
+●	May contain inaccuracies
+●	Require human verification
+●	Should not solely be relied upon for legal, medical, financial, or critical decisions
+Clients are responsible for reviewing AI-generated results.
+________________________________________
+12. Changes to Privacy Policy
+We may update this policy anytime. Continued use of services constitutes acceptance of changes.
+________________________________________
+13. Contact Information
+Thinkatic
+Email: thinkaticai@gmail.com 
+Website: www.thinkatic,com 
+________________________________________
+Terms of Service 
+Effective Date: 01st May 2026
+By accessing or using Thinkatic services, you agree to these Terms of Use.
+________________________________________
+1. Services
+Thinkatic provides:
+●	AI development
+●	Software engineering
+●	SaaS solutions
+●	Automation systems
+●	APIs
+●	Consulting
+●	Cybersecurity services
+●	Cloud integrations
+●	Technical support
+________________________________________
+2. Eligibility
+You must be at least 18 years old and legally capable of entering agreements.
+________________________________________
+3. Client Responsibilities
+Clients agree to:
+●	Provide accurate information
+●	Cooperate during project execution
+●	Review deliverables timely
+●	Ensure lawful use of services
+●	Maintain credentials securely
+________________________________________
+4. Payments & Billing Terms
+4.1 Pricing
+Project pricing may include:
+●	Fixed pricing
+●	Hourly billing
+●	Monthly retainers
+●	Milestone payments
+●	Subscription fees
+________________________________________
+4.2 Payment Schedule
+Unless otherwise agreed:
+●	50% advance before project initiation
+●	25% during development milestone
+●	25% before final deployment
+Subscription services are billed monthly or annually.
+________________________________________
+4.3 Payment Timeline
+Invoices must be paid within:
+●	7 days for startups/small businesses
+●	15 days for enterprise clients
+Late payments may result in:
+●	Service suspension
+●	Delayed delivery
+●	Additional charges
+●	Legal recovery proceedings
+________________________________________
+4.4 Refund Policy
+Payments are generally non-refundable once work begins.
+Refunds may be considered only if:
+●	Thinkatic fails to initiate the project
+●	Duplicate payments occur
+●	Legal requirements mandate refunds
+No refunds for completed milestones.
+________________________________________
+5. Intellectual Property
+Unless otherwise agreed:
+●	Clients own fully paid custom deliverables
+●	Thinkatic retains ownership of internal frameworks, reusable libraries, AI systems, and proprietary tools
+________________________________________
+6. Confidentiality
+Both parties agree to protect confidential information.
+Non-disclosure obligations survive project termination.
+________________________________________
+7. Delivery Timelines
+Estimated timelines depend on:
+●	Scope changes
+●	Client approvals
+●	Third-party dependencies
+●	Technical complexity
+Delays caused by clients may extend deadlines.
+________________________________________
+8. Revisions Policy
+Standard projects include limited revision rounds unless otherwise stated in proposal documents.
+Major scope changes require additional billing.
+________________________________________
+9. Acceptable Use
+You may not use Thinkatic services for:
+●	Illegal activities
+●	Malware creation
+●	Hacking
+●	Fraud
+●	Spam
+●	Exploitation
+●	Hate speech
+●	Intellectual property infringement
+________________________________________
+10. AI Usage Terms
+AI outputs may:
+●	Require human review
+●	Produce unexpected results
+●	Contain inaccuracies
+Clients assume responsibility for final usage decisions.
+________________________________________
+11. Limitation of Liability
+Thinkatic shall not be liable for:
+●	Indirect damages
+●	Lost profits
+●	Data loss
+●	Business interruption
+●	Third-party failures
+Maximum liability shall not exceed the amount paid for services.
+________________________________________
+12. Termination
+We may terminate services for:
+●	Policy violations
+●	Non-payment
+●	Abuse
+●	Illegal activities
+Clients may terminate projects subject to outstanding dues.
+________________________________________
+13. Governing Law
+These Terms are governed by laws applicable in India unless otherwise contractually agreed.
+________________________________________
+14. Contact
+Email: thinkaticai@gmail.com 
+Website: www.thinkatic.com 
+________________________________________
+Cookie Policy
+Effective Date: 01st May 2026
+This Cookie Policy explains how Thinkatic uses cookies and similar technologies.
+________________________________________
+1. What Are Cookies?
+Cookies are small files stored on your device to improve user experience and website performance.
+________________________________________
+2. Types of Cookies We Use
+Essential Cookies
+Required for core website functionality.
+Analytics Cookies
+Help us understand user behavior and improve services.
+Functional Cookies
+Remember preferences and settings.
+Security Cookies
+Protect against fraud and malicious activities.
+Marketing Cookies
+Used for advertising and remarketing campaigns.
+________________________________________
+3. Third-Party Cookies
+We may use:
+●	Google Analytics
+●	Meta Pixel
+●	LinkedIn Insights
+●	Cloudflare
+●	CRM systems
+●	Marketing automation platforms
+________________________________________
+4. Managing Cookies
+Users can:
+●	Disable cookies
+●	Delete cookies
+●	Modify browser settings
+Disabling cookies may affect functionality.
+________________________________________
+5. Consent
+By continuing to use the website, you consent to cookie usage.
+________________________________________
+Frequently Asked Questions (FAQs)
+1. What does Thinkatic do?
+Thinkatic is an AI and software development company providing AI solutions, SaaS platforms, automation systems, cybersecurity services, cloud applications, APIs, and enterprise software.
+________________________________________
+2. Which countries do you serve?
+We work with clients globally including the United States, India, Europe, Middle East, and other regions.
+________________________________________
+3. How long does a project take?
+Typical timelines:
+●	Small AI tools: 2–6 weeks
+●	SaaS products: 2–6 months
+●	Enterprise systems: 6–18 months
+Actual timelines depend on scope and approvals.
+________________________________________
+4. What payment methods do you accept?
+We may accept:
+●	Bank transfers
+●	Wire transfers
+●	UPI
+●	Credit/debit cards
+●	Stripe
+●	PayPal
+●	Cryptocurrency (where legally permitted)
+________________________________________
+5. Do you provide support after deployment?
+Yes. Support plans may include:
+●	Bug fixes
+●	Maintenance
+●	Security updates
+●	Server monitoring
+●	Feature enhancements
+________________________________________
+6. Who owns the project after completion?
+Clients generally own custom-developed deliverables after full payment.
+________________________________________
+7. Do you sign NDAs?
+Yes. We can sign Non-Disclosure Agreements before discussing confidential projects.
+________________________________________
+8. Can Thinkatic build AI products?
+Yes. We specialize in:
+●	Generative AI
+●	AI agents
+●	Automation
+●	Computer vision
+●	NLP systems
+●	Predictive analytics
+●	AI SaaS products
+________________________________________
+9. Do you offer cybersecurity services?
+Yes. We offer:
+●	Security audits
+●	Vulnerability assessments
+●	Secure architecture consulting
+●	Cloud security solutions
+________________________________________
+10. What happens if a client delays approvals?
+Project timelines may automatically extend.
+________________________________________
+11. Are refunds available?
+Refunds are limited and subject to contract terms.
+________________________________________
+12. Do you provide source code?
+Yes, unless otherwise agreed in the contract.
+________________________________________
+13. Can project scope change during development?
+Yes, but additional scope may require revised pricing and timelines.
+________________________________________
+14. How can I contact Thinkatic?
+Website: www.thinkatic.com 
+Email: thinkaticai@gmail.com 
+

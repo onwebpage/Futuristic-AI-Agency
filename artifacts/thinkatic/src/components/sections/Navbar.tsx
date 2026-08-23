@@ -1,0 +1,53 @@
+import { useEffect, useState } from 'react';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { MagneticButton } from '../ui/MagneticButton';
+
+export function Navbar() {
+  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    if (latest > previous && latest > 150) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+    setScrolled(latest > 50);
+  });
+
+  return (
+    <motion.nav
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-100%" },
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+        scrolled ? "bg-background/80 backdrop-blur-lg border-b border-white/5" : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center">
+            <div className="w-3 h-3 bg-background rounded-full" />
+          </div>
+          <span className="text-xl font-display font-bold tracking-tight">THINKATIC</span>
+        </div>
+
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
+          <a href="#services" className="hover:text-foreground transition-colors">Services</a>
+          <a href="#process" className="hover:text-foreground transition-colors">Process</a>
+          <a href="#work" className="hover:text-foreground transition-colors">Work</a>
+          <a href="#about" className="hover:text-foreground transition-colors">About</a>
+        </div>
+
+        <MagneticButton variant="outline" className="hidden md:block py-2 px-6 text-sm">
+          Get in Touch
+        </MagneticButton>
+      </div>
+    </motion.nav>
+  );
+}

@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: thinkatic
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: npx pnpm@10 install --frozen-lockfile && BASE_PATH=/ PORT=3000 npx pnpm@10 --filter @workspace/thinkatic run build && npx pnpm@10 --filter @workspace/api-server run build
+    startCommand: node artifacts/api-server/dist/index.mjs
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: thinkatic-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+
+databases:
+  - name: thinkatic-db
+    databaseName: thinkatic
+    region: oregon
+    plan: free

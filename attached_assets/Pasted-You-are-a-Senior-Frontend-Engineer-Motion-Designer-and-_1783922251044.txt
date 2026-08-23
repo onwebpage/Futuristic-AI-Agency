@@ -1,0 +1,351 @@
+You are a Senior Frontend Engineer, Motion Designer, and UI/UX Architect.
+
+Your task is to transform the existing Thinkatic website into a premium enterprise experience.
+
+Do NOT redesign the website.
+
+Do NOT change the branding.
+
+Do NOT change the content.
+
+Do NOT change the page structure.
+
+Do NOT change the navigation.
+
+Keep everything exactly as it is.
+
+Your responsibility is to elevate the website through exceptional motion design, visual polish, premium interactions, and smooth storytelling.
+
+The website should feel like a Fortune 500 enterprise company.
+
+Every interaction should feel intentional.
+
+Every scroll should feel cinematic.
+
+Every animation should improve the user experience instead of distracting from it.
+
+====================================================
+
+GLOBAL EXPERIENCE
+
+Create a premium, luxurious and modern browsing experience.
+
+The website should feel smooth, intelligent and elegant.
+
+Every section should naturally flow into the next one.
+
+Nothing should suddenly appear.
+
+Everything should be revealed beautifully while scrolling.
+
+====================================================
+
+SCROLL EXPERIENCE
+
+Implement buttery smooth scrolling.
+
+Each section should enter the screen with elegant motion.
+
+Content should reveal progressively while scrolling.
+
+Add depth using subtle parallax effects.
+
+Create seamless transitions between every section.
+
+Scrolling should feel continuous instead of jumping from one section to another.
+
+====================================================
+
+TEXT ANIMATIONS
+
+Every heading should animate beautifully.
+
+Reveal headings word by word or character by character.
+
+Use staggered timing.
+
+Apply subtle blur removal.
+
+Smooth upward movement.
+
+Elegant masking effects.
+
+Paragraphs should fade in naturally.
+
+Reveal paragraphs line by line.
+
+Buttons should appear after the text finishes revealing.
+
+====================================================
+
+HERO
+
+Keep the existing layout.
+
+Transform it into a premium experience.
+
+Create an elegant animated background.
+
+Add depth.
+
+Create floating visual elements.
+
+Introduce subtle movement.
+
+Make the hero feel alive.
+
+Buttons should have premium hover interactions.
+
+Statistics should animate when entering the viewport.
+
+The hero should immediately impress the visitor.
+
+====================================================
+
+NAVIGATION
+
+Transparent initially.
+
+Become blurred while scrolling.
+
+Shrink slightly after scrolling.
+
+Smooth hover effects.
+
+Elegant active state.
+
+Beautiful transition between states.
+
+====================================================
+
+BUTTONS
+
+Premium hover animations.
+
+Magnetic movement.
+
+Soft scaling.
+
+Glow effects.
+
+Animated borders.
+
+Elegant transitions.
+
+====================================================
+
+CARDS
+
+Every card should reveal while scrolling.
+
+Cards should lift slightly on hover.
+
+Create depth using shadows.
+
+Animate borders.
+
+Animate icons.
+
+Smooth hover movement.
+
+Premium glass-like feeling.
+
+====================================================
+
+SERVICES
+
+Reveal service cards one after another.
+
+Create beautiful stagger animations.
+
+Icons should animate subtly.
+
+Hover interactions should feel modern.
+
+====================================================
+
+WHY THINKATIC
+
+Reveal each sentence independently.
+
+Never reveal the whole section at once.
+
+Guide the user's attention naturally.
+
+====================================================
+
+STATISTICS
+
+Animate numbers counting upward.
+
+Introduce subtle glow.
+
+Animate when visible.
+
+====================================================
+
+INDUSTRIES
+
+Sequential card reveal.
+
+Hover movement.
+
+Depth.
+
+Smooth transitions.
+
+====================================================
+
+AI POWERED BPO
+
+Make this the most visually impressive section.
+
+Introduce premium animated visual elements.
+
+Create intelligent workflow inspired motion.
+
+Show elegant connected animations.
+
+Everything should feel innovative and futuristic.
+
+====================================================
+
+IT SERVICES
+
+Reveal each card independently.
+
+Hover animations.
+
+Smooth transitions.
+
+Premium interactions.
+
+====================================================
+
+TIMELINE
+
+Animate every step progressively.
+
+Create an animated connecting line.
+
+Highlight the active step.
+
+Guide the user naturally through the journey.
+
+====================================================
+
+CASE STUDIES
+
+Reveal cards progressively.
+
+Animate metrics.
+
+Smooth hover interactions.
+
+====================================================
+
+ABOUT
+
+Reveal content beautifully.
+
+Introduce subtle movement.
+
+Guide attention toward important information.
+
+====================================================
+
+CAREERS
+
+Animate job listings.
+
+Hover transitions.
+
+Smooth filtering interactions if available.
+
+====================================================
+
+CONTACT
+
+Animate form fields.
+
+Elegant focus states.
+
+Animated labels.
+
+Premium submit button interaction.
+
+====================================================
+
+FOOTER
+
+Reveal footer naturally.
+
+Animate social icons.
+
+Animate links.
+
+Introduce subtle movement without distraction.
+
+====================================================
+
+MICRO INTERACTIONS
+
+Every interactive element should respond beautifully.
+
+Hover effects.
+
+Smooth transitions.
+
+Cursor interactions.
+
+Depth.
+
+Lighting.
+
+Motion.
+
+Refined animations.
+
+Nothing should feel static.
+
+====================================================
+
+VISUAL DEPTH
+
+Introduce subtle floating elements.
+
+Layered backgrounds.
+
+Moving gradients.
+
+Soft lighting.
+
+Elegant visual motion.
+
+Everything should feel premium.
+
+====================================================
+
+PERFORMANCE
+
+Animations must remain smooth.
+
+Maintain high frame rates.
+
+Optimize rendering.
+
+Avoid unnecessary animations.
+
+Animations should never impact usability.
+
+====================================================
+
+FINAL OBJECTIVE
+
+Do not create a template website.
+
+Transform the current Thinkatic website into an enterprise-level experience comparable to the world's best consulting and technology companies.
+
+The user should feel that every interaction has been carefully crafted.
+
+The final website should look polished, modern, luxurious, responsive, and professionally animated while preserving the original Thinkatic branding, layout, and content.

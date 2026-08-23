@@ -1,0 +1,314 @@
+Create a world-class ultra premium futuristic AI agency website for “THINKATIC” inspired by the design quality, motion system, smoothness, transitions, interactions, and premium feel of Lazarev Agency website (lazarev.agency), but DO NOT directly copy layouts. Use the same high-end creative direction and immersive experience style.
+
+The website should feel:
+
+Futuristic
+AI-first
+Premium startup vibe
+Silicon Valley + Cyberpunk aesthetic
+Smooth cinematic scrolling
+Highly interactive
+Enterprise-level polished
+Minimal but visually powerful
+
+Use the provided Thinkatic content exactly and structure sections professionally.
+
+TECH STACK
+
+Frontend:
+
+Next.js 15
+React
+TypeScript
+Tailwind CSS
+Framer Motion
+GSAP
+Lenis Smooth Scroll
+Three.js / React Three Fiber
+Shadcn UI
+Lucide Icons
+
+Animations & Effects:
+
+GSAP ScrollTrigger
+Magnetic buttons
+Smooth inertia scrolling
+Mouse-follow glow effects
+Floating gradients
+Text reveal animations
+Stagger animations
+Blur transitions
+Perspective transforms
+Horizontal scroll sections
+Sticky scroll storytelling
+Parallax motion
+Noise texture overlays
+Glassmorphism
+Gradient mesh backgrounds
+Dynamic cursor effects
+
+Performance:
+
+Fully optimized
+90+ Lighthouse score
+Lazy loading
+GPU accelerated animations
+Mobile optimized smooth scrolling
+DESIGN STYLE
+
+Visual Theme:
+
+Black/Dark futuristic UI
+Neon blue + purple gradients
+Soft glass morphism cards
+Huge typography
+Cinematic section spacing
+Floating UI panels
+Modern AI startup visuals
+Dynamic background lighting
+Motion-heavy but clean
+
+Typography:
+
+Large bold headings
+Modern geometric fonts
+Tight spacing
+Minimal text blocks
+Strong visual hierarchy
+
+Use:
+
+Inter
+Satoshi
+Clash Display
+SCROLLING EXPERIENCE
+
+IMPORTANT:
+The scrolling experience should feel exactly like a premium award-winning agency website.
+
+Implement:
+
+Lenis smooth scrolling
+GSAP ScrollTrigger animations
+Sticky sections
+Scroll-driven transforms
+Smooth section transitions
+Fade + scale reveals
+Horizontal scroll showcases
+Layered parallax movement
+Floating animated gradients
+Mouse reactive elements
+
+Scrolling should feel:
+
+buttery smooth
+cinematic
+immersive
+modern
+premium
+HERO SECTION
+
+Create an ultra immersive hero section with:
+
+Massive animated heading
+AI futuristic background
+Dynamic particles/grid
+Floating gradients
+Mouse reactive lighting
+Animated text reveals
+Smooth intro animation
+Large CTA buttons
+Floating stats cards
+AI-themed visual effects
+
+Hero Text:
+“Building Intelligent AI Solutions for the Future”
+
+Subheading:
+“Thinkatic is a global AI development company helping startups, enterprises, and fast-growing businesses transform operations through cutting-edge Artificial Intelligence solutions.”
+
+CTA Buttons:
+
+Book a Free Consultation
+Start Your AI Project
+
+Hero should include:
+
+Animated grid
+Glow orbs
+Moving light beams
+Interactive cursor glow
+AI network visualization
+WEBSITE SECTIONS
+
+Create these premium sections:
+
+Hero Section
+About Thinkatic
+Why Businesses Choose Thinkatic
+AI Development Services
+Industries We Serve
+AI Development Process
+Technology Stack
+Case Studies
+Testimonials
+FAQ
+Contact Section
+Premium Footer
+
+Use ALL content from provided Thinkatic document.
+
+SERVICES SECTION
+
+Create highly animated premium service cards for:
+
+Custom AI Software Development
+Generative AI Development
+AI Automation Solutions
+Machine Learning Development
+AI SaaS Product Development
+AI Mobile App Development
+Enterprise AI Solutions
+UI/UX Design for AI Products
+Web Design & Development
+AI Consulting & Strategy
+
+Effects:
+
+Hover glow
+Tilt effect
+Mouse follow light
+Expand animation
+Scroll reveal
+INTERACTIVE EFFECTS
+
+Add:
+
+Custom animated cursor
+Cursor scaling on hover
+Magnetic buttons
+Text scramble hover effects
+Smooth hover transitions
+Gradient borders
+Animated underline effects
+Reveal-on-scroll animations
+Blur-to-clear section transitions
+THREE.JS EFFECTS
+
+Add subtle premium 3D visuals:
+
+Floating AI particles
+Neural network animation
+Interactive glowing sphere
+Abstract AI grid
+Depth movement on scroll
+
+Do NOT overuse 3D.
+Keep it elegant and premium.
+
+CASE STUDIES SECTION
+
+Create horizontally scrolling animated showcase cards with:
+
+Large visuals
+Smooth transitions
+Animated metrics
+Hover motion
+Glass effect
+TESTIMONIALS
+
+Create:
+
+Auto sliding testimonials
+Glass cards
+Animated quotes
+Infinite marquee effect
+FAQ
+
+Create animated accordion FAQ with:
+
+Smooth expand/collapse
+Blur transitions
+Minimal futuristic UI
+CONTACT SECTION
+
+Create a premium CTA ending section with:
+
+Large typography
+Animated gradient background
+Floating particles
+Contact form
+Strong conversion-focused layout
+
+CTA:
+“Let’s Build the Future with AI”
+
+FOOTER
+
+Premium futuristic footer with:
+
+Gradient glow
+Animated hover links
+Social icons
+Minimal layout
+Floating background effects
+IMPORTANT UX DETAILS
+
+Website must feel:
+
+Awwwards level
+Ultra modern
+Smooth and expensive
+Startup enterprise hybrid
+High-end AI company branding
+
+Focus heavily on:
+
+Motion design
+Micro interactions
+Scroll storytelling
+Premium transitions
+Smoothness
+RESPONSIVENESS
+
+Must be:
+
+Fully responsive
+Perfect mobile experience
+Optimized animations for mobile
+Touch friendly
+Fast loading
+SEO
+
+Implement:
+
+Metadata
+Open Graph
+Structured data
+Semantic HTML
+Fast performance
+
+SEO Keywords:
+
+AI Development Company
+Generative AI Development
+AI Automation Services
+SaaS Development Company
+Enterprise AI Solutions
+Machine Learning Development
+FINAL OUTPUT
+
+Generate:
+
+Complete production-ready Next.js project
+Modular components
+Clean architecture
+Reusable animations
+Smooth scroll setup
+GSAP timeline setup
+Framer Motion integration
+Fully styled pages
+Responsive layouts
+Professional code structure
+
+Make the final result feel like a billion-dollar AI company website.

@@ -1,0 +1,137 @@
+Upgrade the existing Thinkatic website by adding premium parallax effects throughout the website.
+
+Do NOT redesign the UI.
+
+Do NOT change the layout.
+
+Do NOT change the content.
+
+Keep everything exactly as it is.
+
+Only enhance the experience using elegant parallax effects.
+
+====================================================
+
+GLOBAL PARALLAX
+
+Create multi-layer depth throughout the website.
+
+Different elements should move at different speeds while scrolling.
+
+Foreground elements move faster.
+
+Background elements move slower.
+
+Everything should feel smooth and natural.
+
+====================================================
+
+HERO
+
+Create a layered parallax Hero.
+
+Background moves very slowly.
+
+Floating elements move independently.
+
+Headline moves subtly.
+
+Buttons move slightly.
+
+Statistics float independently.
+
+Mouse movement should create a gentle parallax effect.
+
+====================================================
+
+BACKGROUND
+
+Add subtle animated gradients.
+
+Soft floating particles.
+
+Light moving grid.
+
+Very slow background movement.
+
+Never distract from the content.
+
+====================================================
+
+SECTIONS
+
+Every major section should have a unique parallax effect.
+
+Section backgrounds should move independently.
+
+Images should move slightly slower than text.
+
+Cards should have depth.
+
+====================================================
+
+TEXT
+
+Headings should move slightly slower while scrolling.
+
+Paragraphs should fade and translate smoothly.
+
+Text should never jump.
+
+====================================================
+
+CARDS
+
+Cards should lift slightly on hover.
+
+Apply subtle 3D perspective.
+
+Create depth using parallax.
+
+====================================================
+
+IMAGES & VISUALS
+
+Every illustration should have layered parallax.
+
+Floating decorative elements should move independently.
+
+====================================================
+
+TIMELINE
+
+Timeline should animate progressively.
+
+The connecting line should move with scroll progress.
+
+====================================================
+
+CASE STUDIES
+
+Cards should reveal with parallax movement.
+
+Metrics should animate into view.
+
+====================================================
+
+FOOTER
+
+Footer background should have subtle parallax.
+
+Social icons should have hover depth.
+
+====================================================
+
+PERFORMANCE
+
+All parallax animations must be GPU accelerated.
+
+Maintain smooth 60 FPS.
+
+Optimize for desktop, tablet, and mobile.
+
+Do not create excessive movement.
+
+Animations should feel premium, subtle, and inspired by enterprise websites like Accenture and Apple.
+
+The final result should make the website feel immersive, luxurious, and professionally crafted without changing the existing design.

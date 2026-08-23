@@ -1,0 +1,163 @@
+Upgrade the Thinkatic website with premium cinematic parallax scrolling inspired by modern award-winning enterprise websites.
+
+Do NOT redesign the UI.
+
+Do NOT change the layout.
+
+Do NOT modify the content.
+
+Do NOT change the branding.
+
+Only enhance the scrolling experience.
+
+====================================================
+
+GLOBAL SCROLL
+
+Create a smooth cinematic scrolling experience.
+
+Every section should feel connected.
+
+Scrolling should feel immersive instead of simply moving down the page.
+
+Implement layered parallax throughout the website.
+
+====================================================
+
+MULTI-LAYER PARALLAX
+
+Every section should have 3-5 depth layers.
+
+Background moves the slowest.
+
+Decorative elements move independently.
+
+Content moves naturally.
+
+Foreground elements move slightly faster.
+
+Create a strong sense of depth.
+
+====================================================
+
+HERO
+
+The hero should remain alive while scrolling.
+
+Background grid moves slowly.
+
+Particles float independently.
+
+Glows shift naturally.
+
+Floating cards move at different speeds.
+
+The AI visualization reacts subtly to scroll.
+
+====================================================
+
+TEXT PARALLAX
+
+Headings should translate slightly upward while fading into place.
+
+Paragraphs reveal progressively.
+
+Buttons appear naturally.
+
+Never animate everything together.
+
+====================================================
+
+CARDS
+
+Cards should enter with staggered timing.
+
+Cards should slightly lift while entering.
+
+Hover should add subtle 3D depth.
+
+====================================================
+
+SECTION TRANSITIONS
+
+Every section should overlap naturally.
+
+Avoid hard cuts.
+
+Create seamless cinematic transitions.
+
+====================================================
+
+BACKGROUND
+
+Background should never remain static.
+
+Add:
+
+• Moving grid
+• Floating particles
+• Neural lines
+• Ambient blue glow
+• Noise texture
+• Dynamic lighting
+• Slow gradient movement
+
+Everything should move subtly.
+
+====================================================
+
+PARALLAX OBJECTS
+
+Floating objects should move independently.
+
+Mouse movement should slightly affect foreground objects.
+
+Scrolling should create realistic depth.
+
+====================================================
+
+TIMELINE
+
+Timeline should progress with scroll.
+
+Lines should animate naturally.
+
+Steps should activate while entering the viewport.
+
+====================================================
+
+CASE STUDIES
+
+Cards should slide with parallax.
+
+Metrics should animate.
+
+Background should continue moving independently.
+
+====================================================
+
+FOOTER
+
+Footer should reveal with depth.
+
+Background elements continue moving slowly.
+
+====================================================
+
+PERFORMANCE
+
+Animations must remain GPU accelerated.
+
+Maintain 60 FPS.
+
+Optimize for desktop, tablet and mobile.
+
+Avoid excessive movement.
+
+The effect should feel premium, luxurious, smooth and handcrafted.
+
+The final scrolling experience should resemble modern interactive agency websites, where the website feels alive instead of static.
+
+Do not use basic translateY animations.
+
+Create true multi-layer cinematic parallax with depth and premium motion.
