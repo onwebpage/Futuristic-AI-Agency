@@ -36,7 +36,7 @@ export function PageSkeleton() {
       {/* Navbar skeleton */}
       <div
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10"
-        style={{ height: "68px", background: "rgba(5,5,8,0.95)", borderBottom: "1px solid rgba(33,78,207,0.04)" }}
+        style={{ height: "68px", background: "rgba(255,255,255,0.95)", borderBottom: "1px solid rgba(33,78,207,0.12)" }}
       >
         <Shimmer className="h-10 w-36" />
         <div className="hidden md:flex items-center gap-4">

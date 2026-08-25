@@ -179,7 +179,7 @@ function GoogleMapEmbed() {
       </div>
       {/* Overlay pin label */}
       <div className="absolute bottom-3 left-3 flex items-center gap-2 px-3 py-2 rounded-xl backdrop-blur-sm"
-        style={{ background: "rgba(5,5,10,0.85)", border: "1px solid rgba(33,78,207,0.08)" }}>
+        style={{ background: "rgba(255, 255, 255, 0.9)", border: "1px solid rgba(33,78,207,0.12)" }}>
         <MapPin size={13} className="text-[#214ECF]" />
         <span className="text-xs text-muted-foreground">Magarpatta City, Pune</span>
       </div>

@@ -218,7 +218,7 @@ export function GoldStandard() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, delay: 0.3 }}
           className="text-base mb-10"
-          style={{ color: "rgba(255,255,255,0.4)" }}
+          style={{ color: "#4B5563" }}
         >
           Want to see how we do it?
         </motion.p>

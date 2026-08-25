@@ -118,12 +118,12 @@ export function Hero() {
             className="mb-9 flex items-center gap-3 flex-wrap"
           >
             {CERT_BADGES.map(({ icon: Icon, label }, i) => (
-              <div key={label} className="flex items-center gap-1.5">
-                <Icon size={11} className="text-primary/60" aria-hidden="true" />
-                <span className="text-[10px] font-mono uppercase tracking-[0.12em]" style={{ color: 'rgba(255,255,255,0.3)' }}>
+              <div key={label} className="flex items-center gap-1.5 text-slate-700">
+                <Icon size={11} className="text-[#214ECF]" aria-hidden="true" />
+                <span className="text-[10px] font-mono uppercase tracking-[0.12em] text-slate-600">
                   {label}
                 </span>
-                {i < CERT_BADGES.length - 1 && <span className="ml-2 w-px h-3 bg-white/10" aria-hidden="true" />}
+                {i < CERT_BADGES.length - 1 && <span className="ml-2 w-px h-3 bg-[#DCE5FF]" aria-hidden="true" />}
               </div>
             ))}
           </motion.div>
@@ -136,9 +136,9 @@ export function Hero() {
           >
             <Link href="/contact">
               <button
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-bold text-foreground text-[13px] tracking-wide border-0 flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(37,99,235,0.28)]"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-bold text-white text-[13px] tracking-wide border-0 flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(33,78,207,0.28)]"
                 style={{
-                  background: 'linear-gradient(135deg,#214ECF 0%,#214ECF 100%)',
+                  background: 'linear-gradient(135deg,#214ECF 0%,#1a43c8 100%)',
                   boxShadow: '0 12px 24px rgba(33,78,207,0.18)',
                 }}
               >
@@ -148,8 +148,8 @@ export function Hero() {
             </Link>
             <Link href="/services">
               <button
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-bold text-muted-foreground text-[13px] tracking-wide flex items-center gap-2 transition-colors duration-200 hover:text-foreground hover:bg-white/[0.08]"
-                style={{ border: '1px solid rgba(33,78,207,0.18)', background: 'rgba(33,78,207,0.04)' }}
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-bold text-[#214ECF] text-[13px] tracking-wide flex items-center gap-2 transition-colors duration-200 hover:bg-[#214ECF]/5"
+                style={{ border: '1px solid rgba(33,78,207,0.2)', background: '#FFFFFF' }}
               >
                 Explore BPO Services
                 <ArrowRight size={14} aria-hidden="true" />
@@ -178,8 +178,7 @@ export function Hero() {
                     <div className="absolute top-0 left-2 right-2 h-px bg-[linear-gradient(90deg,transparent,rgba(71,163,255,0.4),transparent)]" />
                     <div className="flex flex-col gap-1.5">
                       <span
-                        className="text-xl md:text-2xl font-display font-bold"
-                        style={{ background: 'linear-gradient(135deg,#fff 0%,#214ECF 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+                        className="text-xl md:text-2xl font-display font-bold text-[#214ECF]"
                       >
                         {stat.value}
                       </span>
@@ -213,7 +212,7 @@ export function Hero() {
                     </div>
                   ))}
                 </div>
-                <span className="text-[10px] font-mono uppercase tracking-[0.18em]" style={{ color: 'rgba(255,255,255,0.28)' }}>
+                <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-slate-600">
                   Trusted by 500+ enterprise clients worldwide
                 </span>
                 <div className="ml-auto flex items-center gap-1.5">
@@ -234,7 +233,7 @@ export function Hero() {
                     style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(33,78,207,0.04)' }}
                   >
                     <span className="text-xs" aria-hidden="true">{client.icon}</span>
-                    <span className="text-[11px] font-semibold" style={{ color: 'rgba(255,255,255,0.4)' }}>{client.name}</span>
+                    <span className="text-[11px] font-semibold text-slate-700">{client.name}</span>
                   </div>
                 ))}
                 <span className="text-[10px]" style={{ color: 'rgba(255,255,255,0.2)' }}>+496 more</span>

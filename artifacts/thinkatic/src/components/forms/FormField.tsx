@@ -65,11 +65,11 @@ export function FieldWrapper({ label, error, hint, required, children, className
 // ─── Shared input style ───────────────────────────────────────────────────────
 
 const inputBase = [
-  "w-full bg-white/[0.04] border border-border rounded-xl px-4 py-3",
+  "w-full bg-white border border-border rounded-xl px-4 py-3",
   "text-sm text-foreground placeholder:text-muted-foreground",
   "transition-all duration-200",
-  "focus:outline-none focus:border-[#214ECF]/60 focus:bg-white/[0.06] focus:ring-1 focus:ring-[#214ECF]/20",
-  "hover:border-[#DCE5FF] hover:bg-white/[0.05]",
+  "focus:outline-none focus:border-[#214ECF]/60 focus:bg-[#F4F7FF] focus:ring-1 focus:ring-[#214ECF]/20",
+  "hover:border-[#DCE5FF] hover:bg-[#F8FAFF]",
   "disabled:opacity-40 disabled:cursor-not-allowed",
 ].join(" ");
 
@@ -222,10 +222,10 @@ export function FormCheckbox({ label, error, wrapperClassName, className, ...pro
             {...props}
           />
           <div className={cn(
-            "w-4.5 h-4.5 w-[18px] h-[18px] rounded-[5px] border border-[#DCE5FF] bg-white/[0.04]",
+            "w-4.5 h-4.5 w-[18px] h-[18px] rounded-[5px] border border-[#DCE5FF] bg-white",
             "peer-checked:bg-[#214ECF] peer-checked:border-[#214ECF]",
             "peer-focus-visible:ring-2 peer-focus-visible:ring-[#214ECF]/30",
-            "transition-all duration-150 group-hover:border-white/40",
+            "transition-all duration-150 group-hover:border-[#214ECF]/40",
             error && "border-red-500/60",
           )}>
             <AnimatePresence>

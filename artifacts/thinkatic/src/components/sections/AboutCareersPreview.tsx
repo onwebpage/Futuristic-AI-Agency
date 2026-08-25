@@ -24,7 +24,7 @@ export function AboutPreview() {
   const bgY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px", "0px"] : ["40px", "-40px"]);
 
   return (
-    <section ref={sectionRef} className="py-32 relative overflow-hidden" style={{ background: "#050505" }}>
+    <section ref={sectionRef} className="py-32 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.04) 50%, transparent)" }}

@@ -589,7 +589,7 @@ export function IndustriesSection() {
 
   return (
     <section ref={sectionRef} className="py-28 md:py-36 relative overflow-hidden"
-      style={{ background: "linear-gradient(180deg,#050505 0%,#F5F8FF 50%,#050505 100%)" }}>
+      style={{ background: "linear-gradient(180deg,#FFFFFF 0%,#F5F8FF 50%,#FFFFFF 100%)" }}>
 
       {/* Background depth layer */}
       <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>

@@ -179,13 +179,13 @@ function FinalCTA() {
               </Link>
               <Link href="/contact">
                 <motion.button
-                  whileHover={{ scale: 1.04, borderColor: "rgba(33,78,207,0.38)", background: "rgba(33,78,207,0.08)" }}
+                  whileHover={{ scale: 1.04, borderColor: "rgba(33,78,207,0.38)", background: "rgba(33,78,207,0.04)" }}
                   whileTap={{ scale: 0.97 }}
                   className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold border transition-all duration-300"
                   style={{
-                    borderColor: "rgba(33,78,207,0.12)",
-                    color: "rgba(255,255,255,0.65)",
-                    background: "rgba(33,78,207,0.02)",
+                    borderColor: "rgba(33,78,207,0.2)",
+                    color: "#214ECF",
+                    background: "#FFFFFF",
                     fontSize: "0.875rem",
                     letterSpacing: "0.03em",
                   }}

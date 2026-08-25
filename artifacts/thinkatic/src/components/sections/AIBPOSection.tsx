@@ -92,7 +92,7 @@ function SolutionCard({ s, i }: { s: (typeof solutions)[0]; i: number }) {
         initial={{ opacity: 0, y: 30, scale: 0.97 }}
         animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: i * 0.07 }}
-        className="group relative rounded-xl p-6 border border-border bg-[#0a0a14] cursor-default overflow-hidden h-full"
+        className="group relative rounded-xl p-6 border border-[#DDE7FF] bg-white cursor-default overflow-hidden h-full shadow-[0_8px_28px_rgba(33,78,207,0.05)]"
         style={{ transition: "border-color 0.35s, box-shadow 0.35s" }}
       >
         {/* Hover glow */}
@@ -118,7 +118,7 @@ function SolutionCard({ s, i }: { s: (typeof solutions)[0]; i: number }) {
         </div>
 
         <h3
-          className="font-bold text-foreground mb-2 leading-tight relative z-10 group-hover:text-[#214ECF] transition-colors duration-300"
+          className="font-bold text-slate-900 mb-2 leading-tight relative z-10 group-hover:text-[#214ECF] transition-colors duration-300"
           style={{ fontSize: "0.95rem" }}
         >
           {s.name}
@@ -138,7 +138,7 @@ export function AIBPOSection() {
   return (
     <section
       className="py-32 relative overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #080818 0%, #050510 50%, #080818 100%)" }}
+      style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #F5F9FF 100%)" }}
     >
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
@@ -215,9 +215,9 @@ export function AIBPOSection() {
           className="relative rounded-2xl overflow-hidden mb-20"
           style={{
             height: "320px",
-            background: "linear-gradient(135deg, #050510 0%, #080820 100%)",
-            border: "1px solid rgba(33,78,207,0.15)",
-            boxShadow: "0 0 32px rgba(33,78,207,0.08), inset 0 0 24px rgba(37,99,235,0.02)",
+            background: "linear-gradient(135deg, #F8FBFF 0%, #EEF4FF 100%)",
+            border: "1px solid rgba(33,78,207,0.12)",
+            boxShadow: "0 0 32px rgba(33,78,207,0.06)",
           }}
         >
           <div className="absolute top-0 left-0 w-12 h-12 pointer-events-none" style={{

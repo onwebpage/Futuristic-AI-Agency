@@ -68,7 +68,7 @@ const pillars = [
     services: ["AI Voice Agents", "AI Chatbots", "Workflow Automation", "AI Quality Monitoring"],
     stat: { value: "2B+", label: "Operations / year" },
     accent: "#214ECF",
-    gradient: "from-[#081B3A] to-[#0a1628]",
+    gradient: "from-[#F4F8FF] to-[#E9F1FF]",
     featured: true,
   },
 ];
@@ -158,7 +158,7 @@ function PillarCard({ pillar, index }: { pillar: (typeof pillars)[0]; index: num
           <h3 className="font-display font-bold text-foreground text-xl leading-tight mb-2">
             {pillar.title}
           </h3>
-          <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.48)" }}>
+          <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
             {pillar.desc}
           </p>
         </div>
@@ -320,7 +320,7 @@ export function BPOServices() {
         >
           <div>
             <p className="text-foreground font-bold text-base mb-1">Not sure which service fits your needs?</p>
-            <p className="text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>
+            <p className="text-sm" style={{ color: "#4B5563" }}>
               Our team will assess your operations and recommend the right BPO solution — free of charge.
             </p>
           </div>

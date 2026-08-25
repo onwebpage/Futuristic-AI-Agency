@@ -427,11 +427,11 @@ export default function AdminDashboardPage() {
   const panelOpen = editingPlan !== null || isAddingPlan;
 
   return (
-    <div className="min-h-screen flex" style={{ background: "#050505", color: "white" }}>
+    <div className="min-h-screen flex" style={{ background: "#FFFFFF", color: "#111827" }}>
       {/* Sidebar */}
       <aside
         className="w-56 flex-shrink-0 flex flex-col py-8 px-4"
-        style={{ borderRight: "1px solid rgba(33,78,207,0.04)", background: "rgba(0,0,0,0.4)" }}
+                  style={{ borderRight: "1px solid rgba(33,78,207,0.12)", background: "#F4F7FF" }}
       >
         <div className="px-2 mb-8">
           <div className="flex items-center gap-2 mb-1">
@@ -498,7 +498,7 @@ export default function AdminDashboardPage() {
         {/* Header */}
         <div
           className="px-8 py-5 flex items-center justify-between sticky top-0 z-10"
-          style={{ borderBottom: "1px solid rgba(33,78,207,0.04)", background: "rgba(5,5,5,0.9)", backdropFilter: "blur(12px)" }}
+          style={{ borderBottom: "1px solid rgba(33,78,207,0.12)", background: "rgba(255,255,255,0.92)", backdropFilter: "blur(12px)" }}
         >
           <h1 className="text-lg font-bold text-foreground capitalize">
             {tab === "overview" ? "Dashboard Overview" : tab === "leads" ? "Lead Management" : tab === "analytics" ? "Analytics" : tab === "plans" ? "Plan Management" : "Settings"}
@@ -507,7 +507,7 @@ export default function AdminDashboardPage() {
             <button
               onClick={refresh}
               className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm transition-all"
-              style={{ color: "rgba(255,255,255,0.4)", border: "1px solid rgba(33,78,207,0.06)" }}
+              style={{ color: "#4B5563", border: "1px solid rgba(33,78,207,0.06)" }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "white"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.4)"; }}
             >
@@ -591,12 +591,12 @@ export default function AdminDashboardPage() {
                               </div>
                               <div>
                                 <div className="font-medium text-foreground text-sm">{s.name}</div>
-                                <div className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{s.email}</div>
+                                <div className="text-xs" style={{ color: "#4B5563" }}>{s.email}</div>
                               </div>
                             </div>
                             <div className="flex items-center gap-4">
                               {s.budget && (
-                                <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{s.budget}</span>
+                                <span className="text-xs" style={{ color: "#4B5563" }}>{s.budget}</span>
                               )}
                               <StatusBadge status={s.status} />
                               <span className="text-xs" style={{ color: "rgba(33,78,207,0.16)" }}>
@@ -741,7 +741,7 @@ export default function AdminDashboardPage() {
                             </div>
                             <div>
                               <div className="font-semibold text-foreground text-sm">{selected.name}</div>
-                              <div className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{selected.email}</div>
+                              <div className="text-xs" style={{ color: "#4B5563" }}>{selected.email}</div>
                             </div>
                           </div>
                           <button onClick={() => setSelected(null)} style={{ color: "#4B5563" }}>
@@ -915,7 +915,7 @@ export default function AdminDashboardPage() {
                                         <Star size={11} fill="#214ECF" style={{ color: "#214ECF", flexShrink: 0 }} />
                                       )}
                                     </div>
-                                    <div className="text-xs truncate" style={{ color: "rgba(255,255,255,0.4)" }}>
+                                    <div className="text-xs truncate" style={{ color: "#4B5563" }}>
                                       {plan.tag} · {plan.features.length} features
                                     </div>
                                   </div>
@@ -1025,7 +1025,7 @@ export default function AdminDashboardPage() {
                           />
 
                           <div className="flex flex-col gap-1.5">
-                            <label className="text-xs font-medium uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.4)" }}>
+                            <label className="text-xs font-medium uppercase tracking-widest" style={{ color: "#4B5563" }}>
                               Features (one per line)
                             </label>
                             <textarea
@@ -1045,7 +1045,7 @@ export default function AdminDashboardPage() {
                           </div>
 
                           <div className="pt-1 border-t" style={{ borderColor: "rgba(33,78,207,0.04)" }}>
-                            <p className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>
+                            <p className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: "#4B5563" }}>
                               Category
                             </p>
                             <div className="flex gap-2">

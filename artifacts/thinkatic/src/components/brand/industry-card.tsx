@@ -59,7 +59,7 @@ export function IndustryCard({
       {/* Icon */}
       {icon && (
         <div
-          className="flex items-center justify-center w-10 h-10 rounded-lg bg-white/[0.05] text-primary shrink-0 group-hover:bg-primary/10 transition-colors duration-200"
+          className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#F4F7FF] text-primary shrink-0 group-hover:bg-primary/10 transition-colors duration-200"
           aria-hidden="true"
         >
           {icon}
@@ -80,7 +80,7 @@ export function IndustryCard({
 
       {/* Stat */}
       {stat && (
-        <div className="flex items-baseline gap-1.5 mt-auto pt-3 border-t border-white/[0.06]">
+        <div className="flex items-baseline gap-1.5 mt-auto pt-3 border-t border-[#DCE5FF]">
           <span className="font-mono font-bold text-xl text-primary leading-none">
             {stat}
           </span>

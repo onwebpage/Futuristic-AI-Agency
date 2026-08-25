@@ -44,7 +44,7 @@ export default function AdminLoginPage() {
   return (
     <div
       className="min-h-screen flex items-center justify-center"
-      style={{ background: "#050505" }}
+      style={{ background: "#FFFFFF" }}
     >
       <motion.div
         initial={{ opacity: 0, y: 32 }}
@@ -67,7 +67,7 @@ export default function AdminLoginPage() {
             <span className="text-xl font-bold text-foreground tracking-tight">Thinkatic</span>
           </div>
           <h1 className="text-3xl font-bold text-foreground mb-2">Admin Panel</h1>
-          <p className="text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>
+          <p className="text-sm" style={{ color: "#4B5563" }}>
             Sign in to manage your leads and site data
           </p>
         </div>

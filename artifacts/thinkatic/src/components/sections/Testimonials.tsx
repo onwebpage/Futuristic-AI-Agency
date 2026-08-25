@@ -119,7 +119,7 @@ function Slide({ t, direction }: { t: typeof TESTIMONIALS[0]; direction: number 
           />
           <div>
             <p className="text-foreground font-bold text-sm">{t.name}</p>
-            <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+            <p className="text-xs mt-0.5" style={{ color: "#4B5563" }}>
               {t.title} · {t.company}
             </p>
           </div>

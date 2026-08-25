@@ -211,7 +211,7 @@ function JobCard({ job, index }: { job: Job; index: number }) {
       viewport={{ once: true, margin: "-40px" }}
       variants={{ ...fadeUp, visible: { ...fadeUp.visible, transition: { duration: 0.5, ease, delay: index * 0.04 } } }}
       className="rounded-2xl border overflow-hidden transition-all duration-200 group"
-      style={{ background: "#0d0d11", borderColor: "rgba(255,255,255,0.07)" }}
+      style={{ background: "#FFFFFF", borderColor: "rgba(33,78,207,0.12)", boxShadow: "0 16px 40px rgba(33,78,207,0.04)" }}
     >
       <div className="p-6 sm:p-7">
         {/* Header */}
@@ -356,9 +356,9 @@ export default function CareersPage() {
       </section>
 
       {/* ── Department cards ── */}
-      <section className="py-16 bg-[#060609] border-b border-border">
+      <section className="py-16 bg-white border-b border-border">
         <div className="max-w-6xl mx-auto px-6">
-          <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-muted-foreground mb-5">Browse by Department</p>
+          <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#214ECF] mb-5">Browse by Department</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5">
             {departments.map(dept => (
               <DeptCard

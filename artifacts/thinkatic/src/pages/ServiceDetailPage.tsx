@@ -24,7 +24,7 @@ function WhiteBadge({ text }: { text: string }) {
   return (
     <span
       className="px-3 py-1.5 rounded-full text-xs font-medium"
-      style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.65)" }}
+      style={{ background: "rgba(33,78,207,0.08)", border: "1px solid rgba(33,78,207,0.2)", color: "#214ECF" }}
     >
       {text}
     </span>
@@ -72,7 +72,7 @@ export default function ServiceDetailPage() {
             className="flex items-center gap-2 mb-10 text-xs font-mono"
           >
             <Link href="/services" className="text-muted-foreground hover:text-muted-foreground transition-colors">Services</Link>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6" /></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(33,78,207,0.3)" strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6" /></svg>
             <span style={{ color: BLUE }}>{svc.title}</span>
           </motion.div>
 

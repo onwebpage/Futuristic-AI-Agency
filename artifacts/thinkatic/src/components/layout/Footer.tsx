@@ -331,8 +331,8 @@ export default function Footer() {
                       className="shrink-0 mt-0.5 text-primary/50 group-hover:text-primary/80 transition-colors"
                       aria-hidden="true"
                     />
-                    <span className="text-[12px] leading-relaxed transition-colors group-hover:text-muted-foreground"
-                      style={{ color: "rgba(33,78,207,0.22)" }}>
+                    <span className="text-[12px] leading-relaxed transition-colors group-hover:text-slate-700"
+                      style={{ color: "#475569" }}>
                       {c.text}
                     </span>
                   </div>
@@ -354,10 +354,10 @@ export default function Footer() {
                   whileHover={shouldReduce ? {} : { scale: 1.04, backgroundColor: "rgba(33,78,207,0.09)" }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.18 }}
-                  className="w-8 h-8 rounded-full border border-white/[0.08] flex items-center justify-center transition-colors duration-200"
+                  className="w-8 h-8 rounded-full border border-[#DDE7FF] bg-white flex items-center justify-center transition-colors duration-200"
                   aria-label={s.label}
                 >
-                  <s.icon size={13} className="text-muted-foreground" aria-hidden="true" />
+                  <s.icon size={13} className="text-[#214ECF]" aria-hidden="true" />
                 </motion.a>
               ))}
             </div>
@@ -382,7 +382,7 @@ export default function Footer() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease, delay: 0.26 }}
           >
-            <p className="text-[10px] font-mono tracking-[0.24em] uppercase mb-5" style={{ color: "rgba(255,255,255,0.2)" }}>
+            <p className="text-[10px] font-mono tracking-[0.24em] uppercase mb-5" style={{ color: "#214ECF" }}>
               Legal
             </p>
             <ul className="flex flex-col gap-1.5" role="list">
@@ -412,8 +412,8 @@ export default function Footer() {
               className="mt-8 rounded-xl p-4"
               style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(33,78,207,0.12)" }}
             >
-              <p className="text-[11px] font-semibold text-foreground mb-1">Ready to scale?</p>
-              <p className="text-[10px] mb-3" style={{ color: "rgba(33,78,207,0.22)" }}>
+              <p className="text-[11px] font-semibold text-slate-900 mb-1">Ready to scale?</p>
+              <p className="text-[10px] mb-3" style={{ color: "#475569" }}>
                 Free 30-min strategy call with our BPO experts.
               </p>
               <Link href="/contact">

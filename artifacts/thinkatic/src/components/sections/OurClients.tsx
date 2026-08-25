@@ -199,11 +199,11 @@ function CaseCard({ cs, index }: { cs: typeof CASE_STUDIES[0]; index: number }) 
         >
           {cs.metric}
         </span>
-        <span className="text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>{cs.metricLabel}</span>
+        <span className="text-sm" style={{ color: "#4B5563" }}>{cs.metricLabel}</span>
       </div>
 
       {/* Result */}
-      <p className="text-sm leading-relaxed flex-1" style={{ color: "rgba(255,255,255,0.5)" }}>
+      <p className="text-sm leading-relaxed flex-1" style={{ color: "#4B5563" }}>
         {cs.result}
       </p>
 
@@ -233,7 +233,7 @@ export function OurClients() {
   return (
     <section
       className="relative py-28 md:py-36 overflow-hidden"
-      style={{ background: "#0c0c0c" }}
+      style={{ background: "#FFFFFF" }}
       data-testid="section-clients"
     >
       {/* Top divider */}

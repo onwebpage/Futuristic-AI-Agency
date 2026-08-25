@@ -167,6 +167,9 @@ importers:
         specifier: ^1.33.0
         version: 1.33.0
     devDependencies:
+      cross-env:
+        specifier: ^10.1.0
+        version: 10.1.0
       prettier:
         specifier: ^3.8.1
         version: 3.8.1

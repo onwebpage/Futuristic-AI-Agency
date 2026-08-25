@@ -326,7 +326,7 @@ export default function ChatBot() {
         whileTap={{ scale: 0.93 }}
         className="fixed bottom-6 right-6 z-[998] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl"
         style={{
-          background: open ? "#1a1a1a" : "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)",
+          background: open ? "#F4F7FF" : "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)",
           boxShadow: open ? "0 4px 24px rgba(0,0,0,0.5)" : "0 0 40px rgba(71,163,255,0.45), 0 4px 24px rgba(0,0,0,0.4)",
           border: open ? "1px solid rgba(33,78,207,0.12)" : "none",
         }}
@@ -365,7 +365,7 @@ export default function ChatBot() {
             {/* Header */}
             <div
               className="flex items-center gap-3 px-5 py-4 flex-shrink-0"
-              style={{ borderBottom: "1px solid rgba(255,255,255,0.07)", background: "#0e0e0e" }}
+              style={{ borderBottom: "1px solid rgba(33,78,207,0.12)", background: "#FFFFFF" }}
             >
               <div
                 className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
@@ -380,7 +380,7 @@ export default function ChatBot() {
                 <p className="text-foreground font-bold text-sm leading-tight">Thinkatic Guide</p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6] animate-pulse" />
-                  <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.4)" }}>Online now</span>
+                  <span className="text-[11px]" style={{ color: "#111827" }}>Online now</span>
                 </div>
               </div>
               <button
@@ -473,7 +473,7 @@ export default function ChatBot() {
             <form
               onSubmit={handleSubmit}
               className="flex-shrink-0 flex items-center gap-3 px-4 py-3"
-              style={{ borderTop: "1px solid rgba(255,255,255,0.07)", background: "#0e0e0e" }}
+              style={{ borderTop: "1px solid rgba(33,78,207,0.12)", background: "#FFFFFF" }}
             >
               <input
                 ref={inputRef}

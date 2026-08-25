@@ -156,7 +156,7 @@ function CaseCard({ study, index }: { study: (typeof cases)[0]; index: number })
           </div>
 
           {/* Description */}
-          <p className="text-xs leading-relaxed relative z-10" style={{ color: "rgba(255,255,255,0.4)" }}>
+          <p className="text-xs leading-relaxed relative z-10" style={{ color: "#4B5563" }}>
             {study.description}
           </p>
 
@@ -199,7 +199,7 @@ function CaseCard({ study, index }: { study: (typeof cases)[0]; index: number })
                 {study.suffix}
               </span>
             </div>
-            <p className="text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>
+            <p className="text-sm" style={{ color: "#4B5563" }}>
               {study.resultLabel}
             </p>
           </div>

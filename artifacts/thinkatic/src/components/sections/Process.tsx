@@ -146,7 +146,7 @@ function StepCard({ step, index, isLast }: { step: typeof STEPS[0]; index: numbe
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease, delay: 0.22 }}
           className="text-base leading-relaxed mb-5"
-          style={{ color: "rgba(255,255,255,0.5)", maxWidth: "62ch" }}
+          style={{ color: "#4B5563", maxWidth: "62ch" }}
         >
           {step.desc}
         </motion.p>
@@ -231,7 +231,7 @@ export function Process() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease, delay: 0.2 }}
               className="text-base leading-relaxed mb-10"
-              style={{ color: "rgba(255,255,255,0.4)", maxWidth: "38ch" }}
+              style={{ color: "#4B5563", maxWidth: "38ch" }}
             >
               A rigorous, repeatable methodology that ships reliable AI and delivers measurable business outcomes — every engagement, every time.
             </motion.p>

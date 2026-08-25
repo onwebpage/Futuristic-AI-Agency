@@ -183,7 +183,7 @@ function RegionCard({ region, index }: { region: typeof REGIONS[0]; index: numbe
           <span
             key={office}
             className="px-2.5 py-1 rounded-lg text-xs font-medium"
-            style={{ background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.5)", border: "1px solid rgba(255,255,255,0.07)" }}
+            style={{ background: "rgba(33,78,207,0.08)", color: "#4B5563", border: "1px solid rgba(33,78,207,0.15)" }}
           >
             {office}
           </span>
@@ -262,7 +262,7 @@ export function GlobalCoverage() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease, delay: 0.2 }}
             className="text-base max-w-2xl mx-auto"
-            style={{ color: "rgba(255,255,255,0.4)" }}
+            style={{ color: "#4B5563" }}
           >
             With operations across 25 countries and three global delivery regions, Thinkatic provides round-the-clock BPO coverage in every major market.
           </motion.p>
@@ -291,7 +291,7 @@ export function GlobalCoverage() {
               >
                 <Icon size={16} style={{ color: stat.color }} />
                 <span className="font-display font-black text-foreground text-lg leading-none">{stat.value}</span>
-                <span className="text-xs font-medium" style={{ color: "rgba(255,255,255,0.4)" }}>{stat.label}</span>
+                <span className="text-xs font-medium" style={{ color: "#4B5563" }}>{stat.label}</span>
               </motion.div>
             );
           })}

@@ -64,7 +64,7 @@ export function TestimonialCard({
       </blockquote>
 
       {/* Author */}
-      <footer className="flex items-center gap-3 pt-4 border-t border-white/[0.06]">
+      <footer className="flex items-center gap-3 pt-4 border-t border-[#DCE5FF]">
         {avatar ? (
           <img
             src={avatar}

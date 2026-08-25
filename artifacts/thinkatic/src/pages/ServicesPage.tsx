@@ -24,7 +24,7 @@ function WhiteBadge({ text }: { text: string }) {
   return (
     <span
       className="px-3 py-1.5 rounded-full text-xs font-medium"
-      style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.65)" }}
+      style={{ background: "rgba(33,78,207,0.08)", border: "1px solid rgba(33,78,207,0.2)", color: "#214ECF" }}
     >
       {text}
     </span>
@@ -140,7 +140,7 @@ function ServiceSection({ svc }: { svc: ServiceItem }) {
         {(svc.technologies || svc.benefits || svc.whyUs || svc.industries || svc.principles || svc.fullServices || svc.process) && (
           <div
             className="px-8 md:px-12 py-8 border-t flex flex-col gap-8"
-            style={{ borderColor: "rgba(33,78,207,0.04)", background: "rgba(0,0,0,0.2)" }}
+                        style={{ borderColor: "rgba(33,78,207,0.12)", background: "rgba(244,247,255,0.8)" }}
           >
             {svc.process && (
               <div>

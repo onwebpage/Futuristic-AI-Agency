@@ -303,7 +303,7 @@ export default function Navbar() {
                         fontSize: "11px",
                         letterSpacing: "0.12em",
                         fontWeight: 500,
-                        color: isActive ? "#214ECF" : "#4B5563",
+                        color: isActive ? "#214ECF" : "#111827",
                       }}
                     >
                       {item.label}
@@ -332,16 +332,12 @@ export default function Navbar() {
                 <div key={item.label} className="relative">
                   <Link
                     href={item.href}
-                    className="px-3 py-2 rounded-lg transition-colors duration-150 block hover:text-foreground"
+                    className="px-3 py-2 rounded-lg transition-colors duration-150 block hover:text-[#214ECF]"
                     style={{
                       fontSize: "11px",
                       letterSpacing: "0.12em",
                       fontWeight: item.isSecondary ? 400 : 500,
-                      color: isActive
-                        ? "#214ECF"
-                        : item.isSecondary
-                        ? "rgba(33,78,207,0.22)"
-                        : "rgba(255,255,255,0.52)",
+                      color: isActive ? "#214ECF" : "#111827",
                     }}
                   >
                     {item.label}
@@ -379,12 +375,13 @@ export default function Navbar() {
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-full text-foreground/75 transition-all duration-200 hover:text-foreground hover:border-[#DCE5FF]"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-full transition-all duration-200 hover:border-[#214ECF]/40"
                 style={{
                   fontSize: "11px",
                   letterSpacing: "0.12em",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  background: "rgba(244,247,255,0.8)",
+                  border: "1px solid rgba(33,78,207,0.15)",
+                  background: "#FFFFFF",
+                  color: "#214ECF",
                 }}
                 aria-label="Request a proposal"
               >
@@ -398,12 +395,12 @@ export default function Navbar() {
               <motion.button
                 whileHover={{ scale: 1.04, boxShadow: "0 0 32px rgba(37,99,235,0.6)" }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-5 py-2 rounded-full font-bold text-foreground transition-all duration-200"
+                className="flex items-center gap-2 px-5 py-2 rounded-full font-bold text-white transition-all duration-200"
                 style={{
                   fontSize: "11px",
                   letterSpacing: "0.13em",
-                  background: "linear-gradient(135deg,#214ECF 0%,#214ECF 60%,#3b82f6 100%)",
-                  boxShadow: "0 0 20px rgba(33,78,207,0.25), inset 0 1px 0 rgba(255,255,255,0.1)",
+                  background: "linear-gradient(135deg,#214ECF 0%,#173db6 100%)",
+                  boxShadow: "0 12px 24px rgba(33,78,207,0.18)",
                 }}
                 data-testid="button-book-consultation"
               >

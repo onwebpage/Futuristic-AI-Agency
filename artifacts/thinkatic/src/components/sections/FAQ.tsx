@@ -72,7 +72,7 @@ function FAQItem({ faq, index }: { faq: typeof FAQS[0]; index: number }) {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease, delay: (index % 5) * 0.06 }}
       className="border-b"
-      style={{ borderColor: "rgba(255,255,255,0.07)" }}
+      style={{ borderColor: "rgba(33,78,207,0.12)" }}
     >
       <button
         onClick={() => setOpen((v) => !v)}
@@ -93,7 +93,7 @@ function FAQItem({ faq, index }: { faq: typeof FAQS[0]; index: number }) {
 
         <span
           className="flex-1 text-base md:text-lg font-semibold leading-snug transition-colors duration-200"
-          style={{ color: open ? "#fff" : "rgba(255,255,255,0.75)" }}
+          style={{ color: open ? "#0F172A" : "#334155" }}
         >
           {faq.q}
         </span>
@@ -123,7 +123,7 @@ function FAQItem({ faq, index }: { faq: typeof FAQS[0]; index: number }) {
           >
             <p
               className="text-base leading-relaxed pb-7 pl-0 sm:pl-[80px] pr-10"
-              style={{ color: "rgba(255,255,255,0.5)" }}
+              style={{ color: "#475569" }}
             >
               {faq.a}
             </p>
@@ -146,7 +146,7 @@ export function FAQ() {
   return (
     <section
       className="relative py-28 md:py-36 overflow-hidden"
-      style={{ background: "#070707", borderTop: "1px solid rgba(33,78,207,0.04)" }}
+      style={{ background: "#FFFFFF", borderTop: "1px solid rgba(33,78,207,0.08)" }}
     >
       {/* Ambient glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] pointer-events-none"
@@ -183,7 +183,7 @@ export function FAQ() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease, delay: 0.2 }}
             className="text-base max-w-xl mx-auto"
-            style={{ color: "rgba(255,255,255,0.4)" }}
+            style={{ color: "#475569" }}
           >
             Everything you need to know about working with Thinkatic. Can't find an answer? Contact us directly.
           </motion.p>
@@ -202,9 +202,9 @@ export function FAQ() {
               onClick={() => setActiveCategory(cat)}
               className="relative px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300"
               style={{
-                background: activeCategory === cat ? "rgba(33,78,207,0.15)" : "rgba(255,255,255,0.04)",
-                border: `1px solid ${activeCategory === cat ? "rgba(37,99,235,0.5)" : "rgba(33,78,207,0.06)"}`,
-                color: activeCategory === cat ? "#214ECF" : "rgba(255,255,255,0.45)",
+                background: activeCategory === cat ? "rgba(33,78,207,0.08)" : "#F8FAFF",
+                border: `1px solid ${activeCategory === cat ? "rgba(33,78,207,0.25)" : "rgba(33,78,207,0.12)"}`,
+                color: activeCategory === cat ? "#214ECF" : "#475569",
               }}
             >
               {activeCategory === cat && (
@@ -252,8 +252,8 @@ export function FAQ() {
               <MessageCircle size={18} style={{ color: "#214ECF" }} />
             </div>
             <div>
-              <p className="text-foreground font-semibold text-sm mb-1">Still have questions?</p>
-              <p className="text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>
+              <p className="text-slate-900 font-semibold text-sm mb-1">Still have questions?</p>
+              <p className="text-sm" style={{ color: "#475569" }}>
                 Our team typically responds within 2 hours during business days.
               </p>
             </div>
