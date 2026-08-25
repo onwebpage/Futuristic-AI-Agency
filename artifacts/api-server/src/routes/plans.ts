@@ -189,7 +189,7 @@ function ensureSeedData() {
           await tx.insert(plansTable).values(SEED_PLANS);
         }
       });
-    }, "Plan seed initialization").catch((error) => {
+    }, "Plan seed initialization", 6).catch((error) => {
       seedPromise = undefined;
       throw error;
     });
