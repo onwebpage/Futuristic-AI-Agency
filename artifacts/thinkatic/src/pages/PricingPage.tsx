@@ -33,7 +33,7 @@ export default function PricingPage() {
   const [portfolioSearch, setPortfolioSearch] = useState<string>("");
   const [activeAiPackage, setActiveAiPackage] = useState<string | null>(null);
   const [activeScaleOSTier, setActiveScaleOSTier] = useState<string | null>(null);
-  const [checkoutPlan, setCheckoutPlan] = useState<{ name: string; price: number; currency: "USD" | "INR" } | null>(null);
+  const [checkoutPlan, setCheckoutPlan] = useState<{ packageId: string; name: string; price: number; currency: "USD" } | null>(null);
 
   // Filter 17-project portfolio
   const filteredProjects = useMemo(() => {
@@ -394,7 +394,7 @@ export default function PricingPage() {
                               setCheckoutPlan(
                                 checkoutPlan?.name === pkg.name
                                   ? null
-                                  : { name: pkg.name, price: pkg.setupPrice, currency: "USD" }
+                                  : { packageId: pkg.id, name: pkg.name, price: pkg.setupPrice, currency: "USD" }
                               )
                             }
                             className={`w-full py-3.5 px-6 rounded-xl font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-150 ${
@@ -420,7 +420,7 @@ export default function PricingPage() {
                                 <span className="text-muted-foreground text-[10px]">Secure PayPal Capture</span>
                               </div>
                               <Suspense fallback={<div className="h-10 rounded bg-white/5 animate-pulse" />}>
-                                <PayPalButton amount={String(pkg.setupPrice)} currency="USD" intent="CAPTURE" />
+                                <PayPalButton key={pkg.id} packageId={pkg.id} />
                               </Suspense>
                             </motion.div>
                           )}

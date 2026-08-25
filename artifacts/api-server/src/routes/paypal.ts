@@ -9,10 +9,7 @@ router.get("/paypal/setup", async (req, res) => {
   } catch (err: any) {
     const status = err?.statusCode ?? err?.status ?? 500;
     console.error("PayPal setup error:", err?.message ?? err);
-    res.status(status).json({
-      error: "PayPal initialisation failed",
-      detail: err?.message ?? "Unknown error",
-    });
+    res.status(status).json({ error: "PayPal initialisation failed" });
   }
 });
 
@@ -22,10 +19,7 @@ router.post("/paypal/order", async (req, res) => {
   } catch (err: any) {
     const status = err?.statusCode ?? err?.status ?? 500;
     console.error("PayPal create order error:", err?.message ?? err);
-    res.status(status).json({
-      error: "Failed to create PayPal order",
-      detail: err?.message ?? "Unknown error",
-    });
+    res.status(status).json({ error: "Failed to create PayPal order" });
   }
 });
 
@@ -35,10 +29,7 @@ router.post("/paypal/order/:orderID/capture", async (req, res) => {
   } catch (err: any) {
     const status = err?.statusCode ?? err?.status ?? 500;
     console.error("PayPal capture error:", err?.message ?? err);
-    res.status(status).json({
-      error: "Failed to capture PayPal order",
-      detail: err?.message ?? "Unknown error",
-    });
+    res.status(status).json({ error: "Failed to capture PayPal order" });
   }
 });
 
