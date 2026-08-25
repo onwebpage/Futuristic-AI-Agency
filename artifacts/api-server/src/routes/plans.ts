@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { db } from "@workspace/db";
+import { db, withDbRetry } from "@workspace/db";
 import { plansTable } from "@workspace/db/schema";
-import { eq, asc } from "drizzle-orm";
+import { eq, asc, sql } from "drizzle-orm";
 import { requireAuth } from "../lib/auth.js";
 
 const router = Router();
@@ -177,43 +177,67 @@ const SEED_PLANS = [
   },
 ];
 
-async function ensureSeedData() {
-  const existing = await db.select({ id: plansTable.id }).from(plansTable).limit(1);
-  if (existing.length === 0) {
-    await db.insert(plansTable).values(SEED_PLANS);
+let seedPromise: Promise<void> | undefined;
+
+function ensureSeedData() {
+  if (!seedPromise) {
+    seedPromise = withDbRetry(async () => {
+      await db.transaction(async (tx) => {
+        await tx.execute(sql`select pg_advisory_xact_lock(873421)`);
+        const existing = await tx.select({ id: plansTable.id }).from(plansTable).limit(1);
+        if (existing.length === 0) {
+          await tx.insert(plansTable).values(SEED_PLANS);
+        }
+      });
+    }, "Plan seed initialization").catch((error) => {
+      seedPromise = undefined;
+      throw error;
+    });
   }
+  return seedPromise;
 }
 
-ensureSeedData().catch(console.error);
+ensureSeedData().catch((error) => console.error("Plan seed initialization failed:", error));
 
 router.get("/plans", async (_req, res) => {
-  const plans = await db
-    .select()
-    .from(plansTable)
-    .orderBy(asc(plansTable.serviceNumber), asc(plansTable.sortOrder));
+  try {
+    await ensureSeedData();
+    const plans = await withDbRetry(
+      () => db.select().from(plansTable).orderBy(asc(plansTable.serviceNumber), asc(plansTable.sortOrder)),
+      "Plans query",
+    );
 
-  const groupMap = new Map<string, { id: string; number: string; category: string; plans: typeof plans }>();
-  for (const plan of plans) {
-    if (!groupMap.has(plan.serviceId)) {
-      groupMap.set(plan.serviceId, {
-        id: plan.serviceId,
-        number: plan.serviceNumber,
-        category: plan.category,
-        plans: [],
-      });
+    const groupMap = new Map<string, { id: string; number: string; category: string; plans: typeof plans }>();
+    for (const plan of plans) {
+      if (!groupMap.has(plan.serviceId)) {
+        groupMap.set(plan.serviceId, {
+          id: plan.serviceId,
+          number: plan.serviceNumber,
+          category: plan.category,
+          plans: [],
+        });
+      }
+      groupMap.get(plan.serviceId)!.plans.push(plan);
     }
-    groupMap.get(plan.serviceId)!.plans.push(plan);
+    res.json(Array.from(groupMap.values()));
+  } catch (error) {
+    console.error("Plans query failed:", error);
+    res.status(503).json({ error: "Plans are temporarily unavailable." });
   }
-
-  res.json(Array.from(groupMap.values()));
 });
 
 router.get("/admin/plans", requireAuth, async (_req, res) => {
-  const plans = await db
-    .select()
-    .from(plansTable)
-    .orderBy(asc(plansTable.serviceNumber), asc(plansTable.sortOrder));
-  res.json(plans);
+  try {
+    await ensureSeedData();
+    const plans = await withDbRetry(
+      () => db.select().from(plansTable).orderBy(asc(plansTable.serviceNumber), asc(plansTable.sortOrder)),
+      "Admin plans query",
+    );
+    res.json(plans);
+  } catch (error) {
+    console.error("Admin plans query failed:", error);
+    res.status(503).json({ error: "Plans are temporarily unavailable." });
+  }
 });
 
 router.post("/admin/plans", requireAuth, async (req, res) => {

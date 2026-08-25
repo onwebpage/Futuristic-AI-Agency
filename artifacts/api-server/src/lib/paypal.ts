@@ -62,7 +62,7 @@ function getControllers() {
     timeout: 0,
     environment: environment === "production" ? Environment.Production : Environment.Sandbox,
     logging: {
-      logLevel: LogLevel.Error,
+      logLevel: LogLevel.Info,
       logRequest: { logBody: false },
       logResponse: { logHeaders: false },
     },
