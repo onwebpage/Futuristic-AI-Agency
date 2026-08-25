@@ -14,9 +14,9 @@ import {
 function ThinkaticLogo({ compact }: { compact?: boolean }) {
   return (
     <img
-      src="/logo-transparent.png"
+      src="/logo-transparent-light.png"
       alt="Thinkatic"
-      style={{ height: compact ? "52px" : "64px", width: "auto", objectFit: "contain", backgroundColor: "#111827", borderRadius: "6px", filter: "contrast(1.18) saturate(1.15)", transition: "height 0.3s" }}
+      style={{ height: compact ? "52px" : "64px", width: "auto", objectFit: "contain", filter: "contrast(1.18) saturate(1.15)", transition: "height 0.3s" }}
     />
   );
 }
