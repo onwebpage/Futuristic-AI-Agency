@@ -286,8 +286,8 @@ export function OurClients() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mb-12 rounded-2xl border border-white/6 overflow-hidden"
-          style={{ background: "rgba(255,255,255,0.015)" }}
+          className="mb-12 rounded-2xl border border-[#DCE5FF] overflow-hidden"
+          style={{ background: "#FFFFFF" }}
         >
           <MarqueeStrip />
         </motion.div>
@@ -297,19 +297,19 @@ export function OurClients() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease, delay: 0.35 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-px mb-16 rounded-2xl overflow-hidden border border-white/6"
-          style={{ background: "rgba(255,255,255,0.04)" }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-px mb-16 rounded-2xl overflow-hidden border border-[#DCE5FF] shadow-[0_8px_24px_rgba(33,78,207,0.06)]"
+          style={{ background: "#DCE5FF" }}
         >
           {STATS.map((stat, i) => (
             <div
               key={stat.label}
-              className="flex flex-col items-center justify-center py-7 px-4 gap-1.5 hover:bg-white/[0.03] transition-colors duration-300"
-              style={{ background: "rgba(13,13,13,0.6)" }}
+              className="flex flex-col items-center justify-center py-7 px-4 gap-1.5 hover:bg-[#F4F7FF] transition-colors duration-200"
+              style={{ background: "#FFFFFF" }}
             >
-              <span className="font-display font-black text-foreground text-3xl md:text-4xl leading-none" style={{ background: "linear-gradient(135deg, #fff 60%, rgba(255,255,255,0.5))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span className="font-display font-black text-[#214ECF] text-3xl md:text-4xl leading-none">
                 {stat.value}
               </span>
-              <span className="text-xs font-medium tracking-wide text-center" style={{ color: "rgba(33,78,207,0.22)" }}>
+              <span className="text-xs font-medium tracking-wide text-center text-[#4B5563]">
                 {stat.label}
               </span>
             </div>

@@ -84,10 +84,9 @@ function CaseCard({ study, index }: { study: (typeof cases)[0]; index: number })
           onMouseLeave={() => setHovered(false)}
           className="group relative rounded-2xl p-8 border border-border bg-[#FFFFFF] flex flex-col gap-6 overflow-hidden cursor-default"
           style={{
-            transition: "border-color 0.4s, box-shadow 0.4s, transform 0.4s",
+            transition: "border-color 0.2s, box-shadow 0.2s",
             borderColor: hovered ? `${study.color}40` : "rgba(33,78,207,0.06)",
-            boxShadow: hovered ? `0 20px 60px rgba(0,0,0,0.4), 0 0 40px ${study.color}12` : "0 0 0 transparent",
-            transform: hovered ? "translateY(-6px)" : "translateY(0px)",
+            boxShadow: hovered ? `0 10px 28px rgba(33,78,207,0.10)` : "0 0 0 transparent",
           }}
         >
           {/* Corner gradient on hover */}
@@ -122,7 +121,7 @@ function CaseCard({ study, index }: { study: (typeof cases)[0]; index: number })
             >
               {study.tag}
             </motion.span>
-            <span className="text-xs font-mono" style={{ color: "rgba(255,255,255,0.2)" }}>
+            <span className="text-xs font-mono" style={{ color: "#4B5563" }}>
               {study.id}
             </span>
           </div>

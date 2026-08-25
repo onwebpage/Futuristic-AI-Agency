@@ -16,7 +16,7 @@ function ThinkaticLogo({ compact }: { compact?: boolean }) {
     <img
       src="/logo-transparent.png"
       alt="Thinkatic"
-      style={{ height: compact ? "52px" : "64px", width: "auto", objectFit: "contain", transition: "height 0.3s" }}
+      style={{ height: compact ? "52px" : "64px", width: "auto", objectFit: "contain", filter: "contrast(1.18) saturate(1.15)", transition: "height 0.3s" }}
     />
   );
 }

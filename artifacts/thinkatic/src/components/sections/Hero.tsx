@@ -85,7 +85,7 @@ export function Hero() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.08 + i * 0.08, duration: 0.55, ease: EASE }}
                   style={{
-                    fontSize: isSmaller ? 'clamp(2.4rem,4.2vw,4rem)' : 'clamp(3rem,5.8vw,5.4rem)',
+                    fontSize: isSmaller ? 'clamp(2.2rem,3.8vw,3.6rem)' : 'clamp(2.7rem,5.2vw,4.8rem)',
                     ...(isAccent
                       ? {
                           background: 'linear-gradient(135deg,#214ECF 0%,#4A7BFF 60%,#93c5fd 100%)',
@@ -115,7 +115,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.55, duration: 0.5, ease: EASE }}
-            className="mb-9 flex items-center gap-3 flex-wrap"
+            className="mb-7 flex items-center gap-3 flex-wrap"
           >
             {CERT_BADGES.map(({ icon: Icon, label }, i) => (
               <div key={label} className="flex items-center gap-1.5 text-slate-700">
@@ -132,7 +132,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.65, duration: 0.55, ease: EASE }}
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-10 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-8 w-full sm:w-auto"
           >
             <Link href="/contact">
               <button
@@ -163,16 +163,16 @@ export function Hero() {
             transition={{ delay: 0.75, duration: 0.55, ease: EASE }}
             className="w-full"
           >
-            <div className="pt-7 border-t w-full" style={{ borderColor: 'rgba(33,78,207,0.08)' }}>
+            <div className="pt-6 border-t w-full" style={{ borderColor: 'rgba(33,78,207,0.12)' }}>
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 md:gap-3">
                 {HERO_STATS.map((stat) => (
                   <div
                     key={stat.label}
                     className="relative rounded-xl px-3 py-3 overflow-hidden cursor-default"
                     style={{
-                      background: 'linear-gradient(135deg,rgba(71,163,255,0.06) 0%,rgba(37,99,235,0.02) 100%)',
-                      border: '1px solid rgba(71,163,255,0.13)',
-                      boxShadow: '0 2px 12px rgba(0,0,0,0.18)',
+                      background: '#FFFFFF',
+                      border: '1px solid #DCE5FF',
+                      boxShadow: '0 4px 12px rgba(33,78,207,0.06)',
                     }}
                   >
                     <div className="absolute top-0 left-2 right-2 h-px bg-[linear-gradient(90deg,transparent,rgba(71,163,255,0.4),transparent)]" />
@@ -236,7 +236,7 @@ export function Hero() {
                     <span className="text-[11px] font-semibold text-slate-700">{client.name}</span>
                   </div>
                 ))}
-                <span className="text-[10px]" style={{ color: 'rgba(255,255,255,0.2)' }}>+496 more</span>
+                <span className="text-[10px] font-medium text-[#4B5563]">+496 more</span>
               </div>
             </div>
           </motion.div>
@@ -249,12 +249,12 @@ export function Hero() {
           className="w-full lg:w-[48%] relative mt-14 lg:mt-0 flex-shrink-0"
           aria-hidden="true"
         >
-          <div className="relative rounded-[2rem] border p-6 md:p-8 overflow-hidden" style={{ background: 'rgba(255,255,255,0.025)', borderColor: 'rgba(33,78,207,0.06)', boxShadow: '0 18px 50px rgba(0,0,0,0.32)' }}>
+          <div className="relative rounded-[2rem] border p-5 md:p-6 overflow-hidden" style={{ background: '#F4F7FF', borderColor: '#DCE5FF', boxShadow: '0 18px 50px rgba(33,78,207,0.10)' }}>
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_25%,rgba(33,78,207,0.14),transparent_30%),radial-gradient(circle_at_50%_78%,rgba(33,78,207,0.09),transparent_36%)]" />
             <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-[linear-gradient(90deg,transparent,rgba(37,99,235,0.6)_30%,rgba(33,78,207,0.72)_50%,rgba(37,99,235,0.6)_70%,transparent)]" />
 
-            <div className="relative z-10 min-h-[560px] md:min-h-[640px] flex flex-col">
-              <div className="rounded-[1.75rem] border px-6 py-7 md:px-8 md:py-9 mb-5" style={{ background: 'linear-gradient(180deg,rgba(7,17,36,0.92),rgba(4,10,22,0.9))', borderColor: 'rgba(71,163,255,0.14)' }}>
+            <div className="relative z-10 min-h-[500px] md:min-h-[570px] flex flex-col">
+              <div className="rounded-[1.5rem] border px-5 py-6 md:px-6 md:py-7 mb-4" style={{ background: '#FFFFFF', borderColor: '#DCE5FF', boxShadow: '0 8px 24px rgba(33,78,207,0.06)' }}>
                 <div className="flex items-center justify-between mb-8">
                   <div>
                     <p className="text-[10px] font-mono font-bold uppercase tracking-[0.28em] mb-2" style={{ color: 'rgba(71,163,255,0.65)' }}>
@@ -264,9 +264,9 @@ export function Hero() {
                       Premium operations, simplified.
                     </h3>
                   </div>
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-400/20 bg-emerald-400/10">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-200 bg-emerald-50">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-300">Active</span>
+                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-700">Active</span>
                   </div>
                 </div>
 
@@ -279,13 +279,13 @@ export function Hero() {
                   ].map((stat) => (
                     <div
                       key={stat.label}
-                      className="rounded-2xl p-5 border text-center transition-transform duration-200 hover:-translate-y-0.5"
-                      style={{ background: `${stat.color}08`, borderColor: `${stat.color}20` }}
+                      className="rounded-xl p-4 border text-center"
+                      style={{ background: '#F8FAFF', borderColor: '#DCE5FF' }}
                     >
                       <p className="font-display font-black text-3xl md:text-4xl leading-none mb-2" style={{ color: stat.color }}>
                         {stat.value}
                       </p>
-                      <p className="text-[10px] font-medium uppercase tracking-wider" style={{ color: 'rgba(33,78,207,0.22)' }}>
+                      <p className="text-[10px] font-medium uppercase tracking-wider text-[#4B5563]">
                         {stat.label}
                       </p>
                     </div>
@@ -297,19 +297,19 @@ export function Hero() {
                 {SURFACE_CARDS.map((card) => (
                   <div
                     key={card.label}
-                    className="rounded-2xl px-4 py-4 min-h-[128px] transition-transform duration-200 hover:-translate-y-0.5"
+                    className="rounded-xl px-4 py-4 min-h-[116px]"
                     style={{
-                      background: 'linear-gradient(135deg,rgba(5,13,26,0.9) 0%,rgba(8,18,40,0.82) 100%)',
-                      border: '1px solid rgba(71,163,255,0.16)',
-                      boxShadow: '0 12px 30px rgba(0,0,0,0.24)',
+                      background: '#FFFFFF',
+                      border: '1px solid #DCE5FF',
+                      boxShadow: '0 6px 18px rgba(33,78,207,0.06)',
                     }}
                   >
                     <div className="flex items-center gap-2 mb-2.5">
                       <span className="text-base leading-none" aria-hidden="true">{card.icon}</span>
                       <span className="text-[8px] uppercase tracking-[0.2em] text-muted-foreground font-mono">{card.label}</span>
                     </div>
-                    <div className="text-[22px] font-bold font-display text-foreground leading-none">{card.value}</div>
-                    <div className="text-[10px] text-muted-foreground mt-1 font-mono">{card.sub}</div>
+                    <div className="text-[22px] font-bold font-display text-[#111827] leading-none">{card.value}</div>
+                    <div className="text-[10px] text-[#4B5563] mt-1 font-mono">{card.sub}</div>
                   </div>
                 ))}
               </div>
@@ -323,7 +323,7 @@ export function Hero() {
                     SB
                   </div>
                   <div>
-                    <p className="text-sm leading-relaxed italic mb-2" style={{ color: 'rgba(255,255,255,0.65)' }}>
+                    <p className="text-sm leading-relaxed italic mb-2" style={{ color: '#4B5563' }}>
                       "They shipped our AI SaaS MVP in six weeks. Quality is genuinely world-class."
                     </p>
                     <p className="text-xs font-semibold text-foreground">Samantha Brooks</p>
