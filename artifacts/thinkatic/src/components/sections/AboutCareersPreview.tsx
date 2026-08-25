@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion, useInView, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Link } from "wouter";
 import { TiltCard } from "@/components/ui/TiltCard";
 
@@ -15,26 +15,21 @@ const openRoles = [
 ];
 
 export function AboutPreview() {
-  const sectionRef = useRef<HTMLElement>(null);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const shouldReduce = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px", "0px"] : ["40px", "-40px"]);
 
   return (
-    <section ref={sectionRef} className="py-32 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
+    <section className="py-32 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.04) 50%, transparent)" }}
       />
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
+      <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{ background: "radial-gradient(ellipse at 20% 50%, rgba(37,99,235,0.04) 0%, transparent 60%)" }}
         />
-      </motion.div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -158,7 +153,7 @@ export function AboutPreview() {
                       initial={{ opacity: 0, scale: 0.85 }}
                       animate={inView ? { opacity: 1, scale: 1 } : {}}
                       transition={{ duration: 0.35, delay: 0.55 + i * 0.06 }}
-                      whileHover={shouldReduce ? {} : { scale: 1.08, color: "#fff", borderColor: "rgba(37,99,235,0.4)" }}
+                      whileHover={{ scale: 1.04, color: "#214ECF", borderColor: "rgba(37,99,235,0.4)" }}
                       className="text-xs px-3 py-1.5 rounded-full border border-border font-medium cursor-default"
                       style={{ color: "rgba(255,255,255,0.65)", background: "rgba(244,247,255,0.8)", transition: "all 0.25s" }}
                     >
@@ -248,26 +243,21 @@ function RoleRow({
 }
 
 export function CareersPreview() {
-  const sectionRef = useRef<HTMLElement>(null);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const shouldReduce = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px", "0px"] : ["30px", "-30px"]);
 
   return (
-    <section ref={sectionRef} className="py-32 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
+    <section className="py-32 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.04) 50%, transparent)" }}
       />
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
+      <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute bottom-0 left-1/4 w-[400px] h-[300px] rounded-full"
           style={{ background: "radial-gradient(ellipse, rgba(37,99,235,0.04) 0%, transparent 70%)", filter: "blur(40px)" }}
         />
-      </motion.div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
@@ -301,7 +291,7 @@ export function CareersPreview() {
             <Link href="/about">
               <motion.span
                 className="flex items-center gap-2 text-sm font-medium cursor-pointer"
-                whileHover={shouldReduce ? {} : { gap: "12px" }}
+                whileHover={{ gap: "12px" }}
                 style={{ color: "#214ECF" }}
               >
                 View All Positions

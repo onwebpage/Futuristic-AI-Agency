@@ -203,27 +203,6 @@
   }
 }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-33.333%); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(37,99,235,0.3); }
-  50% { box-shadow: 0 0 40px rgba(37,99,235,0.6); }
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
 .text-gradient {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-[#214ECF];
 }
@@ -236,12 +215,11 @@
 }
 
 .glass-panel {
-  @apply bg-white/80 backdrop-blur-md border border-[#DCE5FF];
+  @apply bg-white/95 border border-[#DCE5FF];
 }
 
 .glass-card {
   background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
   border: 1px solid rgba(33, 78, 207, 0.08);
 }
 

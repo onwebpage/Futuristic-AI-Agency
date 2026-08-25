@@ -1,8 +1,7 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { CalendarDays, FileText, ArrowRight, CheckCircle2 } from "lucide-react";
-import { MovingGrid, AmbientParticles, GlowOrb } from "@/components/ui/ParallaxLayers";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -25,39 +24,22 @@ const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 // ─── Section ───────────────────────────────────────────────────────────────────
 
 export function ProjectCTA() {
-  const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
-  const shouldReduce = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px","0px"] : ["50px", "-50px"]);
-  const midY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px","0px"] : ["80px", "-80px"]);
 
   return (
     <section
-      ref={sectionRef}
       className="relative py-32 md:py-44 overflow-hidden"
       style={{ background: "linear-gradient(180deg, #F5F8FF 0%, #F5F8FF 50%, #F5F8FF 100%)" }}
     >
       <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(37,99,235,0.3) 50%, transparent)" }} />
 
       {/* Background depth layer */}
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
-        <MovingGrid opacity={0.025} size={52} duration={35} />
+      <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(33,78,207,0.08) 0%, transparent 70%)" }}
         />
-      </motion.div>
-
-      {/* Mid glow layer */}
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: midY }}>
-        <GlowOrb x="20%" y="30%" size={700} color="rgba(37,99,235,0.06)" blur={100} duration={12} delay={0} />
-        <GlowOrb x="80%" y="70%" size={500} color="rgba(71,163,255,0.05)" blur={80}  duration={9}  delay={4} />
-      </motion.div>
-
-      {/* Ambient particles */}
-      <AmbientParticles count={28} color="rgba(71,163,255,0.22)" seed={7} />
+      </div>
 
       <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
 

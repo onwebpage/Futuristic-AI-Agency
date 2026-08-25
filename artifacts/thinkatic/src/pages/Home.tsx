@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, Calendar, FileText, Sparkles, CheckCircle2 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
@@ -24,16 +24,8 @@ const GUARANTEES = [
 
 // ─── Final CTA ────────────────────────────────────────────────────────────────
 function FinalCTA() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const shouldReduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px", "0px"] : ["40px", "-40px"]);
-  const orb1Y = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px", "0px"] : ["60px", "-60px"]);
-  const orb2Y = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px", "0px"] : ["-40px", "40px"]);
-
   return (
     <section
-      ref={sectionRef}
       className="relative py-32 md:py-44 overflow-hidden"
       style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #F5F8FF 50%, #FFFFFF 100%)" }}
     >
@@ -41,9 +33,9 @@ function FinalCTA() {
       <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.18) 50%, transparent)" }} />
 
       {/* Parallax background layer */}
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 60%, rgba(33,78,207,0.08) 0%, transparent 65%)" }} />
-      </motion.div>
+      </div>
 
       {/* Glowing orbs */}
       <motion.div
@@ -51,7 +43,7 @@ function FinalCTA() {
         style={{
           left: "15%", top: "20%", width: 500, height: 500,
           background: "radial-gradient(circle, rgba(37,99,235,0.07) 0%, transparent 70%)",
-          filter: "blur(80px)", y: orb1Y,
+          filter: "blur(40px)",
         }}
       />
       <motion.div
@@ -59,7 +51,7 @@ function FinalCTA() {
         style={{
           right: "10%", bottom: "15%", width: 400, height: 400,
           background: "radial-gradient(circle, rgba(71,163,255,0.06) 0%, transparent 70%)",
-          filter: "blur(80px)", y: orb2Y,
+          filter: "blur(40px)",
         }}
       />
 
