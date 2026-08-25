@@ -184,6 +184,7 @@ export default function AdminDashboardPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [pwMessage, setPwMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [dataError, setDataError] = useState("");
 
   // Plans state
   const [plans, setPlans] = useState<Plan[]>([]);
@@ -207,6 +208,7 @@ export default function AdminDashboardPage() {
     if (!token) { setLocation("/admin-login"); return; }
 
     setLoading(true);
+    setDataError("");
     try {
       const [subRes, statRes] = await Promise.all([
         apiCall("/admin/submissions"),
@@ -218,8 +220,14 @@ export default function AdminDashboardPage() {
         return;
       }
 
+      if (!subRes.ok || !statRes.ok) {
+        throw new Error("Unable to load dashboard data");
+      }
+
       setSubmissions(await subRes.json() as Submission[]);
       setStats(await statRes.json() as Stats);
+    } catch (error) {
+      setDataError(error instanceof Error ? error.message : "Unable to load dashboard data");
     } finally {
       setLoading(false);
     }
@@ -249,41 +257,61 @@ export default function AdminDashboardPage() {
   };
 
   const updateSubmission = async (id: number, patch: { status?: string; notes?: string }) => {
-    const res = await apiCall(`/admin/submissions/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify(patch),
-    });
-    const updated = await res.json() as Submission;
-    setSubmissions((prev) => prev.map((s) => (s.id === id ? updated : s)));
-    if (selected?.id === id) setSelected(updated);
+    try {
+      const res = await apiCall(`/admin/submissions/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(patch),
+      });
+      if (!res.ok) throw new Error("Unable to update lead");
+      const updated = await res.json() as Submission;
+      setSubmissions((prev) => prev.map((s) => (s.id === id ? updated : s)));
+      if (selected?.id === id) setSelected(updated);
+    } catch (error) {
+      setDataError(error instanceof Error ? error.message : "Unable to update lead");
+    }
   };
 
   const deleteSubmission = async (id: number) => {
     if (!confirm("Delete this lead permanently?")) return;
-    await apiCall(`/admin/submissions/${id}`, { method: "DELETE" });
-    setSubmissions((prev) => prev.filter((s) => s.id !== id));
-    if (selected?.id === id) setSelected(null);
+    try {
+      const res = await apiCall(`/admin/submissions/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Unable to delete lead");
+      setSubmissions((prev) => prev.filter((s) => s.id !== id));
+      if (selected?.id === id) setSelected(null);
+    } catch (error) {
+      setDataError(error instanceof Error ? error.message : "Unable to delete lead");
+    }
   };
 
   const exportCSV = async () => {
-    const token = localStorage.getItem("admin_token");
-    const res = await fetch("/api/admin/submissions-export", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `thinkatic-leads-${new Date().toISOString().slice(0, 10)}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+    try {
+      const token = localStorage.getItem("admin_token");
+      const res = await fetch("/api/admin/submissions-export", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error("Unable to export leads");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `thinkatic-leads-${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      setDataError(error instanceof Error ? error.message : "Unable to export leads");
+    }
   };
 
   const saveNote = async () => {
     if (!selected) return;
     setSavingNote(true);
-    await updateSubmission(selected.id, { notes: noteText });
-    setSavingNote(false);
+    try {
+      await updateSubmission(selected.id, { notes: noteText });
+    } catch (error) {
+      setDataError(error instanceof Error ? error.message : "Unable to save note");
+    } finally {
+      setSavingNote(false);
+    }
   };
 
   const changePassword = async (e: React.FormEvent) => {
@@ -293,16 +321,20 @@ export default function AdminDashboardPage() {
       setPwMessage({ type: "error", text: "New passwords do not match" });
       return;
     }
-    const res = await apiCall("/admin/settings/password", {
-      method: "PATCH",
-      body: JSON.stringify({ currentPassword, newPassword }),
-    });
-    const data = await res.json() as { success?: boolean; error?: string };
-    if (res.ok) {
-      setPwMessage({ type: "success", text: "Password changed successfully" });
-      setCurrentPassword(""); setNewPassword(""); setConfirmPassword("");
-    } else {
-      setPwMessage({ type: "error", text: data.error ?? "Failed to change password" });
+    try {
+      const res = await apiCall("/admin/settings/password", {
+        method: "PATCH",
+        body: JSON.stringify({ currentPassword, newPassword }),
+      });
+      const data = await res.json() as { success?: boolean; error?: string };
+      if (res.ok) {
+        setPwMessage({ type: "success", text: "Password changed successfully" });
+        setCurrentPassword(""); setNewPassword(""); setConfirmPassword("");
+      } else {
+        setPwMessage({ type: "error", text: data.error ?? "Failed to change password" });
+      }
+    } catch {
+      setPwMessage({ type: "error", text: "Connection error. Please try again." });
     }
   };
 
@@ -537,6 +569,11 @@ export default function AdminDashboardPage() {
         </div>
 
         <div className="p-8">
+          {dataError && (
+            <div className="mb-6 px-4 py-3 rounded-xl text-sm font-medium" style={{ background: "rgba(239,68,68,0.08)", color: "#B91C1C", border: "1px solid rgba(239,68,68,0.2)" }}>
+              {dataError}
+            </div>
+          )}
           {loading ? (
             <div className="flex items-center justify-center h-64">
               <div className="animate-spin rounded-full border-2 border-border border-t-blue-400 w-8 h-8" />

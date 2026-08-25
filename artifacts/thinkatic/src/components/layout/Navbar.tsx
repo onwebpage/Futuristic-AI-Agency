@@ -16,7 +16,7 @@ function ThinkaticLogo({ compact }: { compact?: boolean }) {
     <img
       src="/logo-transparent.png"
       alt="Thinkatic"
-      style={{ height: compact ? "52px" : "64px", width: "auto", objectFit: "contain", filter: "contrast(1.18) saturate(1.15)", transition: "height 0.3s" }}
+      style={{ height: compact ? "52px" : "64px", width: "auto", objectFit: "contain", backgroundColor: "#111827", borderRadius: "6px", filter: "contrast(1.18) saturate(1.15)", transition: "height 0.3s" }}
     />
   );
 }
@@ -419,17 +419,17 @@ export default function Navbar() {
               aria-controls="mobile-nav"
             >
               <motion.span
-                className="block w-5 h-[1.5px] bg-white/80 origin-center"
+                className="block w-5 h-[1.5px] bg-[#111827] origin-center"
                 animate={mobileOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }}
                 transition={{ duration: 0.25 }}
               />
               <motion.span
-                className="block w-5 h-[1.5px] bg-white/80"
+                className="block w-5 h-[1.5px] bg-[#111827]"
                 animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
                 transition={{ duration: 0.15 }}
               />
               <motion.span
-                className="block w-5 h-[1.5px] bg-white/80 origin-center"
+                className="block w-5 h-[1.5px] bg-[#111827] origin-center"
                 animate={mobileOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }}
                 transition={{ duration: 0.25 }}
               />

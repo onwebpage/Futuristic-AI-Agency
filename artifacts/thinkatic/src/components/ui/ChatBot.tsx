@@ -358,8 +358,8 @@ export default function ChatBot() {
               width: "min(400px, calc(100vw - 24px))",
               height: "min(580px, calc(100vh - 120px))",
               background: "#FFFFFF",
-              border: "1px solid rgba(255,255,255,0.1)",
-              boxShadow: "0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04)",
+              border: "1px solid rgba(33,78,207,0.14)",
+              boxShadow: "0 24px 60px rgba(17,24,39,0.18), 0 0 0 1px rgba(33,78,207,0.06)",
             }}
           >
             {/* Header */}
@@ -385,9 +385,9 @@ export default function ChatBot() {
               </div>
               <button
                 onClick={() => setOpen(false)}
-                className="ml-auto p-1 rounded-lg transition-colors hover:bg-white/10"
+                className="ml-auto p-1 rounded-lg transition-colors hover:bg-[#F4F7FF]"
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2.5" strokeLinecap="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4B5563" strokeWidth="2.5" strokeLinecap="round">
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
               </button>
@@ -402,7 +402,7 @@ export default function ChatBot() {
                     style={
                       msg.role === "user"
                         ? { background: "#3B82F6", color: "#fff", fontWeight: 500, borderBottomRightRadius: 6 }
-                        : { background: "rgba(33,78,207,0.04)", color: "rgba(255,255,255,0.88)", borderBottomLeftRadius: 6, border: "1px solid rgba(255,255,255,0.07)" }
+                        : { background: "#F4F7FF", color: "#111827", borderBottomLeftRadius: 6, border: "1px solid rgba(33,78,207,0.12)" }
                     }
                     dangerouslySetInnerHTML={{
                       __html: msg.text
@@ -435,8 +435,8 @@ export default function ChatBot() {
                         <button
                           key={chip}
                           onClick={() => send(chip)}
-                          className="px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-150 hover:bg-white/10"
-                          style={{ background: "rgba(33,78,207,0.04)", color: "#4B5563", border: "1px solid rgba(255,255,255,0.1)" }}
+                          className="px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-150 hover:bg-[#EEF3FF]"
+                          style={{ background: "#FFFFFF", color: "#214ECF", border: "1px solid rgba(33,78,207,0.2)" }}
                         >
                           {chip}
                         </button>
@@ -451,13 +451,13 @@ export default function ChatBot() {
                 <div className="flex items-start">
                   <div
                     className="px-4 py-3 rounded-2xl rounded-bl-md flex gap-1.5 items-center"
-                    style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
+                    style={{ background: "#F4F7FF", border: "1px solid rgba(33,78,207,0.12)" }}
                   >
                     {[0, 1, 2].map((i) => (
                       <motion.span
                         key={i}
                         className="w-1.5 h-1.5 rounded-full"
-                        style={{ background: "rgba(255,255,255,0.4)" }}
+                        style={{ background: "#214ECF" }}
                         animate={{ opacity: [0.3, 1, 0.3] }}
                         transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
                       />
@@ -489,10 +489,10 @@ export default function ChatBot() {
                 whileTap={{ scale: 0.92 }}
                 className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-150 flex-shrink-0"
                 style={{
-                  background: input.trim() && !typing ? "#3B82F6" : "rgba(33,78,207,0.06)",
+                  background: input.trim() && !typing ? "#214ECF" : "rgba(33,78,207,0.08)",
                 }}
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={input.trim() && !typing ? "black" : "rgba(255,255,255,0.3)"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={input.trim() && !typing ? "white" : "#9CA3AF"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
                 </svg>
               </motion.button>
