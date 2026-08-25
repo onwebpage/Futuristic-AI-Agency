@@ -92,10 +92,10 @@ export function FileUpload({
         className={cn(
           "relative flex flex-col items-center justify-center gap-3 px-6 py-8 rounded-2xl border-2 border-dashed cursor-pointer transition-all duration-200 group",
           dragging
-            ? "border-[#47A3FF]/70 bg-[#47A3FF]/08"
+            ? "border-[#214ECF]/70 bg-[#214ECF]/08"
             : displayError
               ? "border-red-500/40 hover:border-red-500/60"
-              : "border-white/10 hover:border-white/25 hover:bg-white/[0.02]",
+              : "border-border hover:border-white/25 hover:bg-white/[0.02]",
         )}
         style={dragging ? { background: "rgba(71,163,255,0.06)" } : undefined}
       >
@@ -114,17 +114,17 @@ export function FileUpload({
           transition={{ duration: 0.2, ease }}
           className={cn(
             "w-10 h-10 rounded-xl flex items-center justify-center transition-colors",
-            dragging ? "bg-[#47A3FF]/20" : "bg-white/[0.05] group-hover:bg-white/[0.08]",
+            dragging ? "bg-[#214ECF]/20" : "bg-white/[0.05] group-hover:bg-white/[0.08]",
           )}
         >
-          <Upload size={18} className={cn("transition-colors", dragging ? "text-[#47A3FF]" : "text-white/40 group-hover:text-white/60")} />
+          <Upload size={18} className={cn("transition-colors", dragging ? "text-[#214ECF]" : "text-muted-foreground group-hover:text-muted-foreground")} />
         </motion.div>
 
         <div className="text-center">
-          <p className="text-sm text-white/50 group-hover:text-white/70 transition-colors">
-            <span className="text-[#47A3FF]">Click to upload</span> or drag & drop
+          <p className="text-sm text-muted-foreground group-hover:text-muted-foreground transition-colors">
+            <span className="text-[#214ECF]">Click to upload</span> or drag & drop
           </p>
-          <p className="text-xs text-white/25 mt-1">
+          <p className="text-xs text-muted-foreground mt-1">
             {acceptLabel} · Max {maxSizeMB} MB {multiple && "· Multiple files OK"}
           </p>
         </div>
@@ -148,17 +148,17 @@ export function FileUpload({
                 exit={{ opacity: 0, x: 10 }}
                 transition={{ duration: 0.2, ease }}
                 className="flex items-center gap-3 px-3 py-2.5 rounded-xl border"
-                style={{ background: "rgba(71,163,255,0.05)", borderColor: "rgba(71,163,255,0.15)" }}
+                style={{ background: "rgba(71,163,255,0.05)", borderColor: "rgba(33,78,207,0.12)" }}
               >
-                <div className="text-[#47A3FF]/70">{fileIcon(file.type)}</div>
+                <div className="text-[#214ECF]/70">{fileIcon(file.type)}</div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs text-white/80 truncate">{file.name}</p>
-                  <p className="text-[10px] text-white/30 font-mono">{formatBytes(file.size)}</p>
+                  <p className="text-xs text-muted-foreground truncate">{file.name}</p>
+                  <p className="text-[10px] text-muted-foreground font-mono">{formatBytes(file.size)}</p>
                 </div>
                 <button
                   type="button"
                   onClick={e => { e.stopPropagation(); remove(i); }}
-                  className="text-white/30 hover:text-red-400 transition-colors p-1"
+                  className="text-muted-foreground hover:text-red-400 transition-colors p-1"
                 >
                   <X size={13} />
                 </button>

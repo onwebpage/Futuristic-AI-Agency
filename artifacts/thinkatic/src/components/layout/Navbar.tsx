@@ -57,17 +57,17 @@ function MegaMenu({ visible }: { visible: boolean }) {
           transition={{ duration: 0.22, ease }}
           className="absolute top-full left-1/2 -translate-x-1/2 mt-3 rounded-2xl border overflow-hidden z-50"
           style={{
-            background: "rgba(5,8,18,0.97)",
+            background: "rgba(255,255,255,0.96)",
             backdropFilter: "blur(32px)",
-            borderColor: "rgba(255,255,255,0.08)",
+            borderColor: "rgba(33,78,207,0.12)",
             minWidth: "640px",
-            boxShadow: "0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(37,99,235,0.07)",
+            boxShadow: "0 24px 80px rgba(17,24,39,0.10), 0 0 0 1px rgba(33,78,207,0.08)",
           }}
         >
           {/* Top eyebrow bar */}
           <div
             className="px-6 py-2.5 border-b flex items-center justify-between"
-            style={{ borderColor: "rgba(255,255,255,0.05)", background: "rgba(37,99,235,0.03)" }}
+            style={{ borderColor: "rgba(33,78,207,0.10)", background: "rgba(33,78,207,0.03)" }}
           >
             <span className="text-[9px] font-mono tracking-[0.28em] uppercase" style={{ color: "rgba(71,163,255,0.55)" }}>
               BPO &amp; Technology Services
@@ -97,15 +97,15 @@ function MegaMenu({ visible }: { visible: boolean }) {
                     >
                       <div
                         className="flex items-center justify-center w-7 h-7 rounded-lg shrink-0 transition-colors duration-200 group-hover:bg-primary/15"
-                        style={{ background: "rgba(37,99,235,0.08)" }}
+                        style={{ background: "rgba(33,78,207,0.08)" }}
                       >
                         <Icon size={13} className="text-primary opacity-70 group-hover:opacity-100 transition-opacity" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[13px] font-medium text-white/85 group-hover:text-white leading-none mb-0.5 transition-colors">
+                        <p className="text-[13px] font-medium text-slate-800 group-hover:text-[#214ECF] leading-none mb-0.5 transition-colors">
                           {item.label}
                         </p>
-                        <p className="text-[11px] truncate" style={{ color: "rgba(255,255,255,0.3)" }}>
+                        <p className="text-[11px] truncate" style={{ color: "#6B7280" }}>
                           {item.desc}
                         </p>
                       </div>
@@ -122,29 +122,29 @@ function MegaMenu({ visible }: { visible: boolean }) {
             {/* Right — featured card */}
             <div
               className="w-[210px] shrink-0 p-4 flex flex-col justify-between border-l"
-              style={{ borderColor: "rgba(255,255,255,0.05)", background: "rgba(37,99,235,0.025)" }}
+              style={{ borderColor: "rgba(33,78,207,0.10)", background: "rgba(33,78,207,0.025)" }}
             >
               <div>
                 <div
                   className="w-8 h-8 rounded-xl flex items-center justify-center mb-3"
-                  style={{ background: "linear-gradient(135deg,rgba(37,99,235,0.35),rgba(71,163,255,0.2))" }}
+                  style={{ background: "linear-gradient(135deg,rgba(33,78,207,0.25),rgba(33,78,207,0.18))" }}
                 >
                   <Globe size={14} className="text-primary" />
                 </div>
-                <p className="text-[11px] font-mono uppercase tracking-[0.18em] mb-1.5" style={{ color: "rgba(71,163,255,0.6)" }}>
+                <p className="text-[11px] font-mono uppercase tracking-[0.18em] mb-1.5" style={{ color: "#214ECF" }}>
                   Enterprise BPO
                 </p>
-                <p className="text-[13px] font-semibold text-white leading-snug mb-2">
+                <p className="text-[13px] font-semibold text-slate-900 leading-snug mb-2">
                   AI-First Operations at Global Scale
                 </p>
-                <p className="text-[11px] leading-relaxed" style={{ color: "rgba(255,255,255,0.35)" }}>
+                <p className="text-[11px] leading-relaxed" style={{ color: "#4B5563" }}>
                   500+ enterprise clients. 15+ industries. 2B+ ops/year.
                 </p>
               </div>
               <Link
                 href="/request-proposal"
-                className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-semibold rounded-lg px-3 py-2 text-white transition-all duration-200"
-                style={{ background: "linear-gradient(135deg,#1d4ed8,#2563EB)", boxShadow: "0 0 16px rgba(37,99,235,0.3)" }}
+                className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-semibold rounded-lg px-3 py-2 text-foreground transition-all duration-200"
+                style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 16px rgba(33,78,207,0.25)" }}
               >
                 <FileText size={11} />
                 Get a Proposal
@@ -155,7 +155,7 @@ function MegaMenu({ visible }: { visible: boolean }) {
           {/* Footer bar */}
           <div
             className="px-5 py-2.5 border-t flex items-center justify-between"
-            style={{ borderColor: "rgba(255,255,255,0.05)" }}
+            style={{ borderColor: "rgba(33,78,207,0.04)" }}
           >
             <Link
               href="/services"
@@ -167,7 +167,7 @@ function MegaMenu({ visible }: { visible: boolean }) {
             </Link>
             <div className="flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
-              <span className="text-[9px] font-mono uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.25)" }}>
+              <span className="text-[9px] font-mono uppercase tracking-widest" style={{ color: "rgba(33,78,207,0.16)" }}>
                 Accepting New Clients
               </span>
             </div>
@@ -195,20 +195,20 @@ function SearchBar({ open, onClose }: { open: boolean; onClose: () => void }) {
         >
           <div
             className="flex items-center gap-2 rounded-lg px-3 h-8"
-            style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)" }}
+            style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(33,78,207,0.06)" }}
           >
-            <Search size={12} className="text-white/40 shrink-0" aria-hidden="true" />
+            <Search size={12} className="text-muted-foreground shrink-0" aria-hidden="true" />
             <input
               ref={inputRef}
               type="search"
               placeholder="Search services, insights…"
               aria-label="Search"
-              className="flex-1 bg-transparent text-[12px] text-white placeholder-white/25 outline-none min-w-0"
+              className="flex-1 bg-transparent text-[12px] text-foreground placeholder-white/25 outline-none min-w-0"
             />
             <button
               onClick={onClose}
               aria-label="Close search"
-              className="text-white/30 hover:text-white transition-colors shrink-0"
+              className="text-muted-foreground hover:text-foreground transition-colors shrink-0"
             >
               <X size={11} />
             </button>
@@ -256,13 +256,13 @@ export default function Navbar() {
         transition={{ duration: 0.28, ease: "easeInOut" }}
         className="fixed top-0 left-0 right-0 z-50"
         style={{
-          background: scrolled ? "rgba(3,5,14,0.96)" : "rgba(3,5,14,0.5)",
-          backdropFilter: `blur(${scrolled ? "32px" : "14px"})`,
+          background: scrolled ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.68)",
+          backdropFilter: `blur(${scrolled ? "28px" : "14px"})`,
           borderBottom: scrolled
-            ? "1px solid rgba(255,255,255,0.07)"
-            : "1px solid rgba(255,255,255,0.025)",
+            ? "1px solid rgba(33,78,207,0.10)"
+            : "1px solid rgba(33,78,207,0.04)",
           boxShadow: scrolled
-            ? "0 4px 48px rgba(0,0,0,0.35), 0 1px 0 rgba(37,99,235,0.05)"
+            ? "0 10px 30px rgba(17,24,39,0.08), 0 1px 0 rgba(33,78,207,0.06)"
             : "none",
         }}
         role="navigation"
@@ -303,7 +303,7 @@ export default function Navbar() {
                         fontSize: "11px",
                         letterSpacing: "0.12em",
                         fontWeight: 500,
-                        color: isActive ? "#47A3FF" : "rgba(255,255,255,0.52)",
+                        color: isActive ? "#214ECF" : "#4B5563",
                       }}
                     >
                       {item.label}
@@ -332,15 +332,15 @@ export default function Navbar() {
                 <div key={item.label} className="relative">
                   <Link
                     href={item.href}
-                    className="px-3 py-2 rounded-lg transition-colors duration-150 block hover:text-white/90"
+                    className="px-3 py-2 rounded-lg transition-colors duration-150 block hover:text-foreground"
                     style={{
                       fontSize: "11px",
                       letterSpacing: "0.12em",
                       fontWeight: item.isSecondary ? 400 : 500,
                       color: isActive
-                        ? "#47A3FF"
+                        ? "#214ECF"
                         : item.isSecondary
-                        ? "rgba(255,255,255,0.35)"
+                        ? "rgba(33,78,207,0.22)"
                         : "rgba(255,255,255,0.52)",
                     }}
                   >
@@ -367,7 +367,7 @@ export default function Navbar() {
                 <button
                   onClick={() => setSearchOpen(true)}
                   aria-label="Open search"
-                  className="hidden lg:flex w-8 h-8 items-center justify-center rounded-lg transition-colors duration-150 hover:bg-white/[0.06] text-white/40 hover:text-white/70"
+                  className="hidden lg:flex w-8 h-8 items-center justify-center rounded-lg transition-colors duration-150 hover:bg-white/[0.06] text-muted-foreground hover:text-muted-foreground"
                 >
                   <Search size={14} />
                 </button>
@@ -379,12 +379,12 @@ export default function Navbar() {
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-full text-white/75 transition-all duration-200 hover:text-white hover:border-white/20"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-full text-foreground/75 transition-all duration-200 hover:text-foreground hover:border-[#DCE5FF]"
                 style={{
                   fontSize: "11px",
                   letterSpacing: "0.12em",
                   border: "1px solid rgba(255,255,255,0.1)",
-                  background: "rgba(255,255,255,0.03)",
+                  background: "rgba(244,247,255,0.8)",
                 }}
                 aria-label="Request a proposal"
               >
@@ -398,12 +398,12 @@ export default function Navbar() {
               <motion.button
                 whileHover={{ scale: 1.04, boxShadow: "0 0 32px rgba(37,99,235,0.6)" }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-5 py-2 rounded-full font-bold text-white transition-all duration-200"
+                className="flex items-center gap-2 px-5 py-2 rounded-full font-bold text-foreground transition-all duration-200"
                 style={{
                   fontSize: "11px",
                   letterSpacing: "0.13em",
-                  background: "linear-gradient(135deg,#1d4ed8 0%,#2563EB 60%,#3b82f6 100%)",
-                  boxShadow: "0 0 20px rgba(37,99,235,0.35), inset 0 1px 0 rgba(255,255,255,0.1)",
+                  background: "linear-gradient(135deg,#214ECF 0%,#214ECF 60%,#3b82f6 100%)",
+                  boxShadow: "0 0 20px rgba(33,78,207,0.25), inset 0 1px 0 rgba(255,255,255,0.1)",
                 }}
                 data-testid="button-book-consultation"
               >
@@ -459,7 +459,7 @@ export default function Navbar() {
             {/* Top bar — logo + close */}
             <div
               className="flex items-center justify-between px-6 border-b shrink-0"
-              style={{ height: "68px", borderColor: "rgba(255,255,255,0.06)" }}
+              style={{ height: "68px", borderColor: "rgba(33,78,207,0.04)" }}
             >
               <Link href="/" onClick={() => setMobileOpen(false)}>
                 <ThinkaticLogo />
@@ -467,7 +467,7 @@ export default function Navbar() {
               <button
                 onClick={() => setMobileOpen(false)}
                 aria-label="Close menu"
-                className="w-9 h-9 flex items-center justify-center rounded-full border border-white/10 text-white/50 hover:text-white transition-colors"
+                className="w-9 h-9 flex items-center justify-center rounded-full border border-border text-muted-foreground hover:text-foreground transition-colors"
               >
                 <X size={16} />
               </button>
@@ -477,14 +477,14 @@ export default function Navbar() {
             <div className="px-6 py-4 border-b shrink-0" style={{ borderColor: "rgba(255,255,255,0.04)" }}>
               <div
                 className="flex items-center gap-3 rounded-xl px-4 h-11"
-                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}
+                style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
               >
-                <Search size={14} className="text-white/30 shrink-0" aria-hidden="true" />
+                <Search size={14} className="text-muted-foreground shrink-0" aria-hidden="true" />
                 <input
                   type="search"
                   placeholder="Search services, insights…"
                   aria-label="Search"
-                  className="flex-1 bg-transparent text-sm text-white placeholder-white/25 outline-none"
+                  className="flex-1 bg-transparent text-sm text-foreground placeholder-white/25 outline-none"
                 />
               </div>
             </div>
@@ -506,13 +506,13 @@ export default function Navbar() {
                         aria-expanded={mobileBpoOpen}
                       >
                         <span
-                          className="font-bold text-white"
+                          className="font-bold text-foreground"
                           style={{ fontSize: "clamp(1.1rem,4vw,1.5rem)", letterSpacing: "0.04em" }}
                         >
                           {item.label}
                         </span>
                         <motion.span animate={{ rotate: mobileBpoOpen ? 180 : 0 }} transition={{ duration: 0.2 }} aria-hidden="true">
-                          <ChevronDown size={16} className="text-white/40" />
+                          <ChevronDown size={16} className="text-muted-foreground" />
                         </motion.span>
                       </button>
                       <AnimatePresence>
@@ -535,7 +535,7 @@ export default function Navbar() {
                                     className="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-white/[0.04] transition-colors group"
                                   >
                                     <Icon size={13} className="text-primary/60 group-hover:text-primary transition-colors shrink-0" aria-hidden="true" />
-                                    <span className="text-sm text-white/55 group-hover:text-white/80 transition-colors">{b.label}</span>
+                                    <span className="text-sm text-muted-foreground group-hover:text-muted-foreground transition-colors">{b.label}</span>
                                   </Link>
                                 );
                               })}
@@ -548,7 +548,7 @@ export default function Navbar() {
                     <Link
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className="block px-4 py-3.5 rounded-xl font-bold text-white hover:bg-white/[0.04] hover:text-primary transition-colors"
+                      className="block px-4 py-3.5 rounded-xl font-bold text-foreground hover:bg-white/[0.04] hover:text-primary transition-colors"
                       style={{ fontSize: "clamp(1.1rem,4vw,1.5rem)", letterSpacing: "0.04em" }}
                     >
                       {item.label}
@@ -564,12 +564,12 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.35, ease }}
               className="px-6 pb-8 pt-4 border-t flex flex-col gap-3 shrink-0"
-              style={{ borderColor: "rgba(255,255,255,0.05)" }}
+              style={{ borderColor: "rgba(33,78,207,0.04)" }}
             >
               <Link href="/request-proposal" onClick={() => setMobileOpen(false)}>
                 <button
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border font-semibold text-white/80 transition-colors hover:text-white hover:border-white/20"
-                  style={{ fontSize: "12px", letterSpacing: "0.14em", borderColor: "rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.03)" }}
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border font-semibold text-muted-foreground transition-colors hover:text-foreground hover:border-[#DCE5FF]"
+                  style={{ fontSize: "12px", letterSpacing: "0.14em", borderColor: "rgba(33,78,207,0.12)", background: "rgba(244,247,255,0.8)" }}
                 >
                   <FileText size={13} aria-hidden="true" />
                   REQUEST PROPOSAL
@@ -577,11 +577,11 @@ export default function Navbar() {
               </Link>
               <Link href="/contact" onClick={() => setMobileOpen(false)}>
                 <button
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-white"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-foreground"
                   style={{
                     fontSize: "12px",
                     letterSpacing: "0.15em",
-                    background: "linear-gradient(135deg,#1d4ed8 0%,#2563EB 60%,#3b82f6 100%)",
+                    background: "linear-gradient(135deg,#214ECF 0%,#214ECF 60%,#3b82f6 100%)",
                     boxShadow: "0 0 28px rgba(37,99,235,0.4)",
                   }}
                 >

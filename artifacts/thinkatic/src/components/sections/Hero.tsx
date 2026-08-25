@@ -37,7 +37,7 @@ export function Hero() {
   return (
     <section
       className="relative min-h-[100dvh] w-full overflow-hidden flex items-center"
-      style={{ background: 'linear-gradient(160deg,#040d1c 0%,#030b16 45%,#040810 75%,#030608 100%)' }}
+      style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f4f7ff 38%, #eef3ff 100%)' }}
       aria-label="Hero — Thinkatic AI-Powered BPO"
     >
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -49,7 +49,7 @@ export function Hero() {
             maskImage: 'radial-gradient(ellipse 85% 85% at 50% 50%, black 20%, transparent 100%)',
           }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(37,99,235,0.18),transparent_28%),radial-gradient(circle_at_82%_80%,rgba(71,163,255,0.16),transparent_26%),radial-gradient(circle_at_50%_48%,rgba(37,99,235,0.08),transparent_22%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(37,99,235,0.18),transparent_28%),radial-gradient(circle_at_82%_80%,rgba(71,163,255,0.16),transparent_26%),radial-gradient(circle_at_50%_48%,rgba(33,78,207,0.08),transparent_22%)]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10 w-full relative z-10 flex flex-col lg:flex-row items-center pt-36 pb-20 lg:pt-0 lg:pb-0 min-h-[100dvh]">
@@ -61,7 +61,7 @@ export function Hero() {
         >
           <div
             className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border mb-7"
-            style={{ background: 'rgba(37,99,235,0.07)', borderColor: 'rgba(71,163,255,0.22)' }}
+            style={{ background: 'rgba(33,78,207,0.06)', borderColor: 'rgba(33,78,207,0.18)' }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true" />
             <span className="text-[10px] font-mono tracking-[0.22em] uppercase text-primary font-medium">
@@ -72,7 +72,7 @@ export function Hero() {
             </div>
           </div>
 
-          <h1 className="font-display font-bold text-white leading-[1.0] mb-6 tracking-tight">
+          <h1 className="font-display font-bold text-slate-900 leading-[1.0] mb-6 tracking-tight">
             {HERO_LINES.map((word, i) => {
               const isAccent = word === 'AI-Powered BPO' || word === 'Business';
               const isSmaller = word === 'AI-Powered BPO' || word === 'Business';
@@ -88,7 +88,7 @@ export function Hero() {
                     fontSize: isSmaller ? 'clamp(2.4rem,4.2vw,4rem)' : 'clamp(3rem,5.8vw,5.4rem)',
                     ...(isAccent
                       ? {
-                          background: 'linear-gradient(135deg,#2563EB 0%,#47A3FF 60%,#93c5fd 100%)',
+                          background: 'linear-gradient(135deg,#214ECF 0%,#4A7BFF 60%,#93c5fd 100%)',
                           WebkitBackgroundClip: 'text',
                           WebkitTextFillColor: 'transparent',
                         }
@@ -106,7 +106,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45, duration: 0.6, ease: EASE }}
             className="text-base md:text-lg max-w-[480px] leading-relaxed mb-5"
-            style={{ color: 'rgba(255,255,255,0.48)' }}
+            style={{ color: '#4B5563' }}
           >
             Accelerate growth with intelligent BPO — AI-enabled customer operations, healthcare outsourcing, outbound sales, and enterprise technology built for scale.
           </motion.p>
@@ -136,10 +136,10 @@ export function Hero() {
           >
             <Link href="/contact">
               <button
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-bold text-white text-[13px] tracking-wide border-0 flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(37,99,235,0.28)]"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-bold text-foreground text-[13px] tracking-wide border-0 flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(37,99,235,0.28)]"
                 style={{
-                  background: 'linear-gradient(135deg,#1d4ed8 0%,#2563EB 50%,#3b82f6 100%)',
-                  boxShadow: '0 0 24px rgba(37,99,235,0.24),0 4px 16px rgba(0,0,0,0.28)',
+                  background: 'linear-gradient(135deg,#214ECF 0%,#214ECF 100%)',
+                  boxShadow: '0 12px 24px rgba(33,78,207,0.18)',
                 }}
               >
                 <CalendarDays size={14} aria-hidden="true" />
@@ -148,8 +148,8 @@ export function Hero() {
             </Link>
             <Link href="/services">
               <button
-                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-bold text-white/70 text-[13px] tracking-wide flex items-center gap-2 transition-colors duration-200 hover:text-white hover:bg-white/[0.08]"
-                style={{ border: '1px solid rgba(71,163,255,0.2)', background: 'rgba(71,163,255,0.05)' }}
+                className="w-full sm:w-auto px-8 py-3.5 rounded-full font-bold text-muted-foreground text-[13px] tracking-wide flex items-center gap-2 transition-colors duration-200 hover:text-foreground hover:bg-white/[0.08]"
+                style={{ border: '1px solid rgba(33,78,207,0.18)', background: 'rgba(33,78,207,0.04)' }}
               >
                 Explore BPO Services
                 <ArrowRight size={14} aria-hidden="true" />
@@ -163,7 +163,7 @@ export function Hero() {
             transition={{ delay: 0.75, duration: 0.55, ease: EASE }}
             className="w-full"
           >
-            <div className="pt-7 border-t w-full" style={{ borderColor: 'rgba(71,163,255,0.1)' }}>
+            <div className="pt-7 border-t w-full" style={{ borderColor: 'rgba(33,78,207,0.08)' }}>
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 md:gap-3">
                 {HERO_STATS.map((stat) => (
                   <div
@@ -179,11 +179,11 @@ export function Hero() {
                     <div className="flex flex-col gap-1.5">
                       <span
                         className="text-xl md:text-2xl font-display font-bold"
-                        style={{ background: 'linear-gradient(135deg,#fff 0%,#47A3FF 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+                        style={{ background: 'linear-gradient(135deg,#fff 0%,#214ECF 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
                       >
                         {stat.value}
                       </span>
-                      <span className="text-[8px] md:text-[9px] uppercase tracking-[0.18em] text-white/35 font-medium whitespace-nowrap">
+                      <span className="text-[8px] md:text-[9px] uppercase tracking-[0.18em] text-muted-foreground font-medium whitespace-nowrap">
                         {stat.label}
                       </span>
                     </div>
@@ -199,7 +199,7 @@ export function Hero() {
             transition={{ delay: 0.85, duration: 0.55, ease: EASE }}
             className="mt-6 w-full"
           >
-            <div className="rounded-2xl px-5 py-4" style={{ background: 'rgba(255,255,255,0.018)', border: '1px solid rgba(71,163,255,0.08)' }}>
+            <div className="rounded-2xl px-5 py-4" style={{ background: 'rgba(255,255,255,0.018)', border: '1px solid rgba(33,78,207,0.08)' }}>
               <div className="flex items-center gap-2 mb-3.5">
                 <div className="flex -space-x-1.5">
                   {[...Array(4)].map((_, i) => (
@@ -222,7 +222,7 @@ export function Hero() {
                       <Star key={i} size={9} className="fill-yellow-400/80 text-yellow-400/80" aria-hidden="true" />
                     ))}
                   </div>
-                  <span className="text-[9px] font-mono" style={{ color: 'rgba(255,255,255,0.25)' }}>4.9/5</span>
+                  <span className="text-[9px] font-mono" style={{ color: 'rgba(33,78,207,0.16)' }}>4.9/5</span>
                 </div>
               </div>
 
@@ -231,7 +231,7 @@ export function Hero() {
                   <div
                     key={client.name}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg"
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}
+                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(33,78,207,0.04)' }}
                   >
                     <span className="text-xs" aria-hidden="true">{client.icon}</span>
                     <span className="text-[11px] font-semibold" style={{ color: 'rgba(255,255,255,0.4)' }}>{client.name}</span>
@@ -250,9 +250,9 @@ export function Hero() {
           className="w-full lg:w-[48%] relative mt-14 lg:mt-0 flex-shrink-0"
           aria-hidden="true"
         >
-          <div className="relative rounded-[2rem] border p-6 md:p-8 overflow-hidden" style={{ background: 'rgba(255,255,255,0.025)', borderColor: 'rgba(255,255,255,0.08)', boxShadow: '0 18px 50px rgba(0,0,0,0.32)' }}>
-            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_25%,rgba(71,163,255,0.18),transparent_30%),radial-gradient(circle_at_50%_78%,rgba(37,99,235,0.12),transparent_36%)]" />
-            <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-[linear-gradient(90deg,transparent,rgba(37,99,235,0.6)_30%,rgba(71,163,255,0.8)_50%,rgba(37,99,235,0.6)_70%,transparent)]" />
+          <div className="relative rounded-[2rem] border p-6 md:p-8 overflow-hidden" style={{ background: 'rgba(255,255,255,0.025)', borderColor: 'rgba(33,78,207,0.06)', boxShadow: '0 18px 50px rgba(0,0,0,0.32)' }}>
+            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_25%,rgba(33,78,207,0.14),transparent_30%),radial-gradient(circle_at_50%_78%,rgba(33,78,207,0.09),transparent_36%)]" />
+            <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-[linear-gradient(90deg,transparent,rgba(37,99,235,0.6)_30%,rgba(33,78,207,0.72)_50%,rgba(37,99,235,0.6)_70%,transparent)]" />
 
             <div className="relative z-10 min-h-[560px] md:min-h-[640px] flex flex-col">
               <div className="rounded-[1.75rem] border px-6 py-7 md:px-8 md:py-9 mb-5" style={{ background: 'linear-gradient(180deg,rgba(7,17,36,0.92),rgba(4,10,22,0.9))', borderColor: 'rgba(71,163,255,0.14)' }}>
@@ -261,7 +261,7 @@ export function Hero() {
                     <p className="text-[10px] font-mono font-bold uppercase tracking-[0.28em] mb-2" style={{ color: 'rgba(71,163,255,0.65)' }}>
                       Live operations snapshot
                     </p>
-                    <h3 className="text-white font-display text-2xl md:text-3xl font-bold leading-tight">
+                    <h3 className="text-foreground font-display text-2xl md:text-3xl font-bold leading-tight">
                       Premium operations, simplified.
                     </h3>
                   </div>
@@ -273,7 +273,7 @@ export function Hero() {
 
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { value: '500+', label: 'Enterprise Clients', color: '#47A3FF' },
+                    { value: '500+', label: 'Enterprise Clients', color: '#214ECF' },
                     { value: '98.4%', label: 'Accuracy Rate', color: '#34D399' },
                     { value: '2B+', label: 'Ops / Year', color: '#A78BFA' },
                     { value: '24h', label: 'Response Time', color: '#F59E0B' },
@@ -286,7 +286,7 @@ export function Hero() {
                       <p className="font-display font-black text-3xl md:text-4xl leading-none mb-2" style={{ color: stat.color }}>
                         {stat.value}
                       </p>
-                      <p className="text-[10px] font-medium uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                      <p className="text-[10px] font-medium uppercase tracking-wider" style={{ color: 'rgba(33,78,207,0.22)' }}>
                         {stat.label}
                       </p>
                     </div>
@@ -307,10 +307,10 @@ export function Hero() {
                   >
                     <div className="flex items-center gap-2 mb-2.5">
                       <span className="text-base leading-none" aria-hidden="true">{card.icon}</span>
-                      <span className="text-[8px] uppercase tracking-[0.2em] text-white/35 font-mono">{card.label}</span>
+                      <span className="text-[8px] uppercase tracking-[0.2em] text-muted-foreground font-mono">{card.label}</span>
                     </div>
-                    <div className="text-[22px] font-bold font-display text-white leading-none">{card.value}</div>
-                    <div className="text-[10px] text-white/30 mt-1 font-mono">{card.sub}</div>
+                    <div className="text-[22px] font-bold font-display text-foreground leading-none">{card.value}</div>
+                    <div className="text-[10px] text-muted-foreground mt-1 font-mono">{card.sub}</div>
                   </div>
                 ))}
               </div>
@@ -320,15 +320,15 @@ export function Hero() {
                 style={{ background: 'rgba(37,99,235,0.06)', borderColor: 'rgba(37,99,235,0.18)' }}
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-full flex items-center justify-center border border-[#47A3FF]/30 bg-[#47A3FF]/10 text-sm">
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center border border-[#214ECF]/30 bg-[#214ECF]/10 text-sm">
                     SB
                   </div>
                   <div>
                     <p className="text-sm leading-relaxed italic mb-2" style={{ color: 'rgba(255,255,255,0.65)' }}>
                       "They shipped our AI SaaS MVP in six weeks. Quality is genuinely world-class."
                     </p>
-                    <p className="text-xs font-semibold text-white">Samantha Brooks</p>
-                    <p className="text-[10px] mt-0.5" style={{ color: 'rgba(255,255,255,0.35)' }}>Co-founder &amp; CEO · Stackline AI</p>
+                    <p className="text-xs font-semibold text-foreground">Samantha Brooks</p>
+                    <p className="text-[10px] mt-0.5" style={{ color: 'rgba(33,78,207,0.22)' }}>Co-founder &amp; CEO · Stackline AI</p>
                   </div>
                 </div>
               </div>

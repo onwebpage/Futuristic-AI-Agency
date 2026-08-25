@@ -54,7 +54,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
           role="alert"
           aria-live="assertive"
           className="min-h-[100dvh] flex items-center justify-center p-6"
-          style={{ background: "#050508" }}
+          style={{ background: "#FFFFFF" }}
         >
           <div className="max-w-lg w-full text-center">
             {/* Icon */}
@@ -66,10 +66,10 @@ export class ErrorBoundary extends React.Component<Props, State> {
             </div>
 
             {/* Heading */}
-            <h1 className="font-display font-black text-white text-2xl sm:text-3xl mb-3 leading-tight">
+            <h1 className="font-display font-black text-foreground text-2xl sm:text-3xl mb-3 leading-tight">
               Something went wrong
             </h1>
-            <p className="text-white/50 text-sm leading-relaxed mb-2 max-w-sm mx-auto">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-2 max-w-sm mx-auto">
               An unexpected error occurred. This has been logged and we'll look into it.
             </p>
 
@@ -91,15 +91,15 @@ export class ErrorBoundary extends React.Component<Props, State> {
             <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
               <button
                 onClick={this.handleRetry}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold border border-white/10 text-white/70 hover:text-white hover:border-white/25 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold border border-border text-muted-foreground hover:text-foreground hover:border-white/25 transition-all"
               >
                 <RefreshCw size={14} aria-hidden="true" />
                 Try Again
               </button>
               <button
                 onClick={this.handleReset}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white transition-all"
-                style={{ background: "linear-gradient(135deg,#47A3FF,#4040E8)", boxShadow: "0 0 20px rgba(71,163,255,0.25)" }}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-foreground transition-all"
+                style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 20px rgba(71,163,255,0.25)" }}
               >
                 <Home size={14} aria-hidden="true" />
                 Back to Home

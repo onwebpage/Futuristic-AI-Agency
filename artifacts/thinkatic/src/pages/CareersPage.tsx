@@ -18,7 +18,7 @@ const fadeUp = {
 
 const departments = [
   { id: "all",          label: "All Departments", icon: Briefcase,     color: "#ffffff" },
-  { id: "Customer Support", label: "Customer Support", icon: HeadphonesIcon, color: "#47A3FF" },
+  { id: "Customer Support", label: "Customer Support", icon: HeadphonesIcon, color: "#214ECF" },
   { id: "Healthcare BPO",   label: "Healthcare BPO",   icon: Activity,      color: "#34d399" },
   { id: "Operations",       label: "Operations",        icon: BarChart3,     color: "#fb923c" },
   { id: "Sales",            label: "Sales",             icon: Users,         color: "#a78bfa" },
@@ -145,12 +145,12 @@ const jobs: Job[] = [
 
 const modeBadge: Record<string, string> = {
   "On-site": "rgba(251,146,60,0.15)",
-  "Hybrid":  "rgba(71,163,255,0.12)",
+  "Hybrid":  "rgba(33,78,207,0.1)",
   "Remote":  "rgba(52,211,153,0.12)",
 };
 const modeColor: Record<string, string> = {
   "On-site": "#fb923c",
-  "Hybrid":  "#47A3FF",
+  "Hybrid":  "#214ECF",
   "Remote":  "#34d399",
 };
 
@@ -178,12 +178,12 @@ function DeptCard({ dept, active, count, onClick }: {
     >
       <div className="flex items-center justify-between w-full">
         <div className="w-8 h-8 rounded-xl flex items-center justify-center"
-          style={{ background: active ? `${dept.color}20` : "rgba(255,255,255,0.05)" }}>
-          <Icon size={14} style={{ color: active ? dept.color : "rgba(255,255,255,0.35)" }} />
+          style={{ background: active ? `${dept.color}20` : "rgba(33,78,207,0.04)" }}>
+          <Icon size={14} style={{ color: active ? dept.color : "rgba(33,78,207,0.22)" }} />
         </div>
         <span className="text-[10px] font-mono px-2 py-0.5 rounded-full"
           style={{
-            background: active ? `${dept.color}18` : "rgba(255,255,255,0.05)",
+            background: active ? `${dept.color}18` : "rgba(33,78,207,0.04)",
             color: active ? dept.color : "rgba(255,255,255,0.3)",
           }}>
           {count === 0 ? "All" : count}
@@ -202,7 +202,7 @@ function DeptCard({ dept, active, count, onClick }: {
 function JobCard({ job, index }: { job: Job; index: number }) {
   const [expanded, setExpanded] = useState(false);
   const dept = departments.find(d => d.id === job.department);
-  const color = dept?.color ?? "#47A3FF";
+  const color = dept?.color ?? "#214ECF";
 
   return (
     <motion.div
@@ -227,25 +227,25 @@ function JobCard({ job, index }: { job: Job; index: number }) {
                 style={{ background: modeBadge[job.mode], border: `1px solid ${modeColor[job.mode]}25`, color: modeColor[job.mode] }}>
                 {job.mode}
               </span>
-              <span className="text-white/25 text-xs">{job.type}</span>
+              <span className="text-muted-foreground text-xs">{job.type}</span>
             </div>
 
-            <h3 className="font-display font-bold text-white text-lg mb-2 group-hover:text-white transition-colors leading-tight">
+            <h3 className="font-display font-bold text-foreground text-lg mb-2 group-hover:text-foreground transition-colors leading-tight">
               {job.title}
             </h3>
 
-            <div className="flex items-center gap-1.5 text-white/35 text-xs mb-3">
+            <div className="flex items-center gap-1.5 text-muted-foreground text-xs mb-3">
               <MapPin size={11} className="shrink-0" />
               {job.location}
             </div>
 
-            <p className="text-white/45 text-sm leading-relaxed mb-4">{job.description}</p>
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4">{job.description}</p>
 
             {/* Tags */}
             <div className="flex flex-wrap gap-1.5">
               {job.tags.map(tag => (
-                <span key={tag} className="px-2.5 py-1 rounded-lg text-[11px] text-white/40 font-mono"
-                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                <span key={tag} className="px-2.5 py-1 rounded-lg text-[11px] text-muted-foreground font-mono"
+                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(33,78,207,0.04)" }}>
                   {tag}
                 </span>
               ))}
@@ -256,8 +256,8 @@ function JobCard({ job, index }: { job: Job; index: number }) {
           <div className="shrink-0 flex flex-row sm:flex-col items-center sm:items-end gap-3">
             <Link
               href={`/apply-online?position=${job.id}&department=${encodeURIComponent(job.department)}`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm text-white transition-all hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]"
-              style={{ background: "linear-gradient(135deg,#47A3FF,#4040E8)", boxShadow: "0 0 18px rgba(71,163,255,0.18)" }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm text-foreground transition-all hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]"
+              style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 18px rgba(33,78,207,0.14)" }}
             >
               Apply Now
               <ArrowRight size={13} />
@@ -265,7 +265,7 @@ function JobCard({ job, index }: { job: Job; index: number }) {
             <button
               type="button"
               onClick={() => setExpanded(v => !v)}
-              className="text-xs text-white/30 hover:text-white/60 transition-colors underline underline-offset-2"
+              className="text-xs text-muted-foreground hover:text-muted-foreground transition-colors underline underline-offset-2"
             >
               {expanded ? "Less info" : "More info"}
             </button>
@@ -283,10 +283,10 @@ function JobCard({ job, index }: { job: Job; index: number }) {
               className="overflow-hidden"
             >
               <div className="pt-5 mt-5 border-t" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
-                <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/25 mb-3">Key Requirements</p>
+                <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-3">Key Requirements</p>
                 <ul className="flex flex-col gap-2">
                   {job.requirements.map(req => (
-                    <li key={req} className="flex items-start gap-3 text-sm text-white/50">
+                    <li key={req} className="flex items-start gap-3 text-sm text-muted-foreground">
                       <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full" style={{ background: color }} />
                       {req}
                     </li>
@@ -322,8 +322,8 @@ export default function CareersPage() {
   return (
     <Layout>
       {/* ── Hero ── */}
-      <section className="relative pt-44 pb-24 overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0 bg-[#050508]" />
+      <section className="relative pt-44 pb-24 overflow-hidden border-b border-border">
+        <div className="absolute inset-0 bg-[#FFFFFF]" />
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: "radial-gradient(ellipse 65% 55% at 55% 0%, rgba(71,163,255,0.09) 0%, transparent 65%)" }} />
         <div className="absolute inset-0 opacity-[0.025]"
@@ -331,34 +331,34 @@ export default function CareersPage() {
 
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
-            <motion.p variants={fadeUp} className="text-xs font-mono uppercase tracking-[0.25em] mb-5" style={{ color: "#47A3FF" }}>
+            <motion.p variants={fadeUp} className="text-xs font-mono uppercase tracking-[0.25em] mb-5" style={{ color: "#214ECF" }}>
               Careers at Thinkatic
             </motion.p>
             <motion.h1
               variants={fadeUp}
-              className="font-display font-bold text-white leading-[1.0] mb-6"
+              className="font-display font-bold text-foreground leading-[1.0] mb-6"
               style={{ fontSize: "clamp(2.8rem,6vw,5rem)" }}
             >
               Build the Future of<br />
               <span className="text-gradient">Intelligent Work</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-white/50 text-base leading-relaxed max-w-xl mb-10">
+            <motion.p variants={fadeUp} className="text-muted-foreground text-base leading-relaxed max-w-xl mb-10">
               Join a team that's redefining what's possible when AI and human expertise operate together. We move fast, think big, and deliver measurable impact for enterprise clients worldwide.
             </motion.p>
 
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-6 text-sm text-white/40">
-              <span><span className="text-white/75 font-semibold">{jobs.length}</span> open positions</span>
-              <span><span className="text-white/75 font-semibold">Pune, India</span> + Remote</span>
-              <span><span className="text-white/75 font-semibold">Hybrid-first</span> culture</span>
+            <motion.div variants={fadeUp} className="flex flex-wrap gap-6 text-sm text-muted-foreground">
+              <span><span className="text-foreground/75 font-semibold">{jobs.length}</span> open positions</span>
+              <span><span className="text-foreground/75 font-semibold">Pune, India</span> + Remote</span>
+              <span><span className="text-foreground/75 font-semibold">Hybrid-first</span> culture</span>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* ── Department cards ── */}
-      <section className="py-16 bg-[#060609] border-b border-white/5">
+      <section className="py-16 bg-[#060609] border-b border-border">
         <div className="max-w-6xl mx-auto px-6">
-          <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-white/30 mb-5">Browse by Department</p>
+          <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-muted-foreground mb-5">Browse by Department</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5">
             {departments.map(dept => (
               <DeptCard
@@ -374,26 +374,26 @@ export default function CareersPage() {
       </section>
 
       {/* ── Job listings ── */}
-      <section className="py-16 bg-[#050508]">
+      <section className="py-16 bg-[#FFFFFF]">
         <div className="max-w-6xl mx-auto px-6">
 
           {/* Search bar */}
           <div className="flex flex-col sm:flex-row gap-3 mb-10">
             <div className="relative flex-1">
-              <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none" />
+              <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
               <input
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Search roles, departments, skills…"
-                className="w-full bg-white/[0.04] border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-[#47A3FF]/50 focus:ring-1 focus:ring-[#47A3FF]/20 transition-all"
+                className="w-full bg-white/[0.04] border border-border rounded-xl pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-[#214ECF]/50 focus:ring-1 focus:ring-[#214ECF]/20 transition-all"
               />
               {search && (
-                <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors">
+                <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-muted-foreground transition-colors">
                   <X size={14} />
                 </button>
               )}
             </div>
-            <div className="flex items-center gap-2 text-sm text-white/35 shrink-0">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground shrink-0">
               <span className="font-mono">{filteredJobs.length}</span>
               <span>position{filteredJobs.length !== 1 ? "s" : ""}</span>
             </div>
@@ -403,9 +403,9 @@ export default function CareersPage() {
           <AnimatePresence mode="wait">
             {filteredJobs.length === 0 ? (
               <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                className="text-center py-20 text-white/30">
+                className="text-center py-20 text-muted-foreground">
                 <Search size={32} className="mx-auto mb-4 opacity-40" />
-                <p className="text-lg font-medium text-white/40 mb-2">No positions found</p>
+                <p className="text-lg font-medium text-muted-foreground mb-2">No positions found</p>
                 <p className="text-sm">Try adjusting your search or department filter</p>
               </motion.div>
             ) : (
@@ -424,17 +424,17 @@ export default function CareersPage() {
             className="mt-12 text-center p-10 rounded-3xl border"
             style={{ background: "rgba(71,163,255,0.04)", borderColor: "rgba(71,163,255,0.14)" }}
           >
-            <p className="text-[10px] font-mono uppercase tracking-[0.22em] mb-3" style={{ color: "#47A3FF" }}>
+            <p className="text-[10px] font-mono uppercase tracking-[0.22em] mb-3" style={{ color: "#214ECF" }}>
               Don't see your role?
             </p>
-            <h3 className="font-display font-bold text-white text-2xl mb-3">Send an Open Application</h3>
-            <p className="text-white/45 text-sm max-w-md mx-auto mb-6 leading-relaxed">
+            <h3 className="font-display font-bold text-foreground text-2xl mb-3">Send an Open Application</h3>
+            <p className="text-muted-foreground text-sm max-w-md mx-auto mb-6 leading-relaxed">
               We're always looking for exceptional talent. Send us your details and we'll keep you in mind for future openings.
             </p>
             <Link
               href="/apply-online"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-white transition-all hover:opacity-90 hover:scale-[1.02]"
-              style={{ background: "linear-gradient(135deg,#47A3FF,#4040E8)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-foreground transition-all hover:opacity-90 hover:scale-[1.02]"
+              style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}
             >
               Apply Online
               <ArrowRight size={14} />

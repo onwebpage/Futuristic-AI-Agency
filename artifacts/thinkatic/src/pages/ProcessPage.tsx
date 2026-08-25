@@ -25,14 +25,14 @@ export default function ProcessPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <div className="text-primary font-bold tracking-widest text-sm uppercase mb-6">PROCESS</div>
-            <h1 className="text-5xl md:text-8xl font-display font-bold text-white leading-[1.0]">
+            <h1 className="text-5xl md:text-8xl font-display font-bold text-foreground leading-[1.0]">
               How We Turn Ideas Into Reality
             </h1>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-32 bg-[#0a0a0a] relative overflow-hidden">
+      <section className="py-32 bg-[#FFFFFF] relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-6 relative">
           {/* Vertical glowing line */}
           <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-border -translate-x-1/2" />
@@ -52,13 +52,13 @@ export default function ProcessPage() {
                 >
                   <div className={`w-full md:w-1/2 flex ${isEven ? "md:justify-end" : "md:justify-start"}`}>
                     <div className="bg-card border border-border p-8 rounded-[24px] max-w-md w-full">
-                      <h3 className="text-3xl font-display font-bold text-white mb-4">{step.title}</h3>
+                      <h3 className="text-3xl font-display font-bold text-foreground mb-4">{step.title}</h3>
                       <p className="text-muted-foreground text-lg">{step.desc}</p>
                     </div>
                   </div>
                   
                   {/* Number Circle */}
-                  <div className="absolute left-6 md:left-1/2 w-12 h-12 rounded-full bg-black border-4 border-primary -translate-x-1/2 flex items-center justify-center text-primary font-mono font-bold shadow-[0_0_20px_rgba(71,163,255,0.5)] z-20 mt-8 md:mt-0">
+                  <div className="absolute left-6 md:left-1/2 w-12 h-12 rounded-full bg-background border-4 border-primary -translate-x-1/2 flex items-center justify-center text-primary font-mono font-bold shadow-[0_0_20px_rgba(33,78,207,0.38)] z-20 mt-8 md:mt-0">
                     {step.num}
                   </div>
 
@@ -77,7 +77,7 @@ export default function ProcessPage() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="text-5xl md:text-7xl font-display font-bold text-white mb-10"
+            className="text-5xl md:text-7xl font-display font-bold text-foreground mb-10"
           >
             Let's Start With Discovery
           </motion.h2>

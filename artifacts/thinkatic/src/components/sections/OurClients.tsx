@@ -118,7 +118,7 @@ function MarqueeStrip() {
             </span>
             <span
               className="text-sm font-bold uppercase tracking-[0.15em] transition-all duration-300 group-hover:opacity-60"
-              style={{ color: "rgba(255,255,255,0.25)", letterSpacing: "0.12em" }}
+              style={{ color: "rgba(33,78,207,0.16)", letterSpacing: "0.12em" }}
             >
               {logo.name}
             </span>
@@ -146,8 +146,8 @@ function CaseCard({ cs, index }: { cs: typeof CASE_STUDIES[0]; index: number }) 
       onMouseLeave={() => setHovered(false)}
       className="group relative rounded-2xl border p-7 flex flex-col gap-5 overflow-hidden cursor-default transition-all duration-400"
       style={{
-        background: hovered ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.02)",
-        borderColor: hovered ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.07)",
+        background: hovered ? "rgba(255,255,255,0.04)" : "rgba(33,78,207,0.02)",
+        borderColor: hovered ? "rgba(33,78,207,0.12)" : "rgba(255,255,255,0.07)",
         boxShadow: hovered ? `0 20px 60px rgba(0,0,0,0.3), 0 0 40px ${cs.color}12` : "none",
         transition: "background 0.3s, border-color 0.3s, box-shadow 0.4s",
       }}
@@ -178,8 +178,8 @@ function CaseCard({ cs, index }: { cs: typeof CASE_STUDIES[0]; index: number }) 
             {cs.symbol}
           </div>
           <div>
-            <p className="text-white font-bold text-sm leading-tight">{cs.name}</p>
-            <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>{cs.category}</p>
+            <p className="text-foreground font-bold text-sm leading-tight">{cs.name}</p>
+            <p className="text-xs mt-0.5" style={{ color: "rgba(33,78,207,0.22)" }}>{cs.category}</p>
           </div>
         </div>
 
@@ -237,7 +237,7 @@ export function OurClients() {
       data-testid="section-clients"
     >
       {/* Top divider */}
-      <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 50%, transparent)" }} />
+      <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.06) 50%, transparent)" }} />
 
       {/* Ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] pointer-events-none"
@@ -262,12 +262,12 @@ export function OurClients() {
               initial={{ y: "100%", opacity: 0 }}
               animate={inView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.85, ease, delay: 0.05 }}
-              className="font-display font-bold text-white leading-[1.0]"
+              className="font-display font-bold text-foreground leading-[1.0]"
               style={{ fontSize: "clamp(2.6rem, 5.5vw, 5rem)" }}
             >
               Trusted by the world's
               <br />
-              <span style={{ background: "linear-gradient(135deg, #2563EB 0%, #47A3FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 leading teams.
               </span>
             </motion.h2>
@@ -278,7 +278,7 @@ export function OurClients() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease, delay: 0.2 }}
             className="text-base md:text-lg leading-relaxed"
-            style={{ color: "rgba(255,255,255,0.45)", maxWidth: "60ch" }}
+            style={{ color: "#4B5563", maxWidth: "60ch" }}
           >
             From high-growth startups to Fortune 500 enterprises — our AI-powered BPO operations drive measurable outcomes across every industry we touch.
           </motion.p>
@@ -309,10 +309,10 @@ export function OurClients() {
               className="flex flex-col items-center justify-center py-7 px-4 gap-1.5 hover:bg-white/[0.03] transition-colors duration-300"
               style={{ background: "rgba(13,13,13,0.6)" }}
             >
-              <span className="font-display font-black text-white text-3xl md:text-4xl leading-none" style={{ background: "linear-gradient(135deg, #fff 60%, rgba(255,255,255,0.5))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span className="font-display font-black text-foreground text-3xl md:text-4xl leading-none" style={{ background: "linear-gradient(135deg, #fff 60%, rgba(255,255,255,0.5))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 {stat.value}
               </span>
-              <span className="text-xs font-medium tracking-wide text-center" style={{ color: "rgba(255,255,255,0.35)" }}>
+              <span className="text-xs font-medium tracking-wide text-center" style={{ color: "rgba(33,78,207,0.22)" }}>
                 {stat.label}
               </span>
             </div>
@@ -338,20 +338,20 @@ export function OurClients() {
             <motion.button
               whileHover={{ scale: 1.03, boxShadow: "0 0 60px rgba(91,63,232,0.5), 0 8px 32px rgba(0,0,0,0.5)" }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-bold tracking-[0.12em] uppercase text-sm text-white"
+              className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-bold tracking-[0.12em] uppercase text-sm text-foreground"
               style={{ background: "linear-gradient(135deg, #3d25d4 0%, #5b3fe8 50%, #7c5cff 100%)", boxShadow: "0 0 40px rgba(91,63,232,0.35), 0 4px 24px rgba(0,0,0,0.4)" }}
             >
               View All Case Studies
               <ArrowUpRight size={16} />
             </motion.button>
           </Link>
-          <p className="text-sm" style={{ color: "rgba(255,255,255,0.3)" }}>
+          <p className="text-sm" style={{ color: "#4B5563" }}>
             40+ detailed outcomes across every major industry
           </p>
         </motion.div>
       </div>
 
-      <div className="absolute bottom-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 50%, transparent)" }} />
+      <div className="absolute bottom-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.06) 50%, transparent)" }} />
     </section>
   );
 }

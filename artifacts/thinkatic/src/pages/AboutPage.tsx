@@ -31,7 +31,7 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto px-6">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <div className="text-primary font-bold tracking-widest text-sm uppercase mb-6">ABOUT</div>
-            <h1 className="text-5xl md:text-8xl font-display font-bold text-white mb-8 leading-[1.0]">
+            <h1 className="text-5xl md:text-8xl font-display font-bold text-foreground mb-8 leading-[1.0]">
               We Are Thinkatic
             </h1>
             <p className="text-2xl text-muted-foreground max-w-3xl">
@@ -41,7 +41,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-[#0a0a0a]">
+      <section className="py-24 bg-[#FFFFFF]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
             <motion.div
@@ -50,13 +50,13 @@ export default function AboutPage() {
               viewport={{ once: true, margin: "-80px" }}
               variants={fadeUp}
               className="rounded-2xl p-10 flex flex-col gap-5"
-              style={{ background: "rgba(71,163,255,0.05)", border: "1px solid rgba(71,163,255,0.15)" }}
+              style={{ background: "rgba(71,163,255,0.05)", border: "1px solid rgba(33,78,207,0.12)" }}
             >
-              <p className="text-xs font-mono uppercase tracking-[0.25em]" style={{ color: "#47A3FF" }}>Our Vision</p>
-              <h3 className="text-white font-display font-bold text-2xl leading-snug">
+              <p className="text-xs font-mono uppercase tracking-[0.25em]" style={{ color: "#214ECF" }}>Our Vision</p>
+              <h3 className="text-foreground font-display font-bold text-2xl leading-snug">
                 Becoming the world's most trusted AI partner
               </h3>
-              <p className="text-white/55 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 To become the world's most trusted AI development partner — enabling every forward-thinking business to harness the full power of artificial intelligence and build products that define the next decade.
               </p>
             </motion.div>
@@ -67,13 +67,13 @@ export default function AboutPage() {
               variants={fadeUp}
               transition={{ delay: 0.1 }}
               className="rounded-2xl p-10 flex flex-col gap-5"
-              style={{ background: "rgba(71,163,255,0.05)", border: "1px solid rgba(71,163,255,0.15)" }}
+              style={{ background: "rgba(71,163,255,0.05)", border: "1px solid rgba(33,78,207,0.12)" }}
             >
-              <p className="text-xs font-mono uppercase tracking-[0.25em]" style={{ color: "#47A3FF" }}>Our Mission</p>
-              <h3 className="text-white font-display font-bold text-2xl leading-snug">
+              <p className="text-xs font-mono uppercase tracking-[0.25em]" style={{ color: "#214ECF" }}>Our Mission</p>
+              <h3 className="text-foreground font-display font-bold text-2xl leading-snug">
                 Engineering intelligence that drives real growth
               </h3>
-              <p className="text-white/55 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 We build production-ready AI systems that drive measurable business growth — from strategy to deployment. We are the dedicated engineering team for the AI era, ensuring every system we ship is aligned with your product, your people, and your market.
               </p>
             </motion.div>
@@ -84,7 +84,7 @@ export default function AboutPage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
-            className="text-4xl md:text-6xl font-display font-medium text-white leading-tight italic text-center"
+            className="text-4xl md:text-6xl font-display font-medium text-foreground leading-tight italic text-center"
           >
             <span className="text-primary font-serif">"</span>We believe AI should be invisible — seamlessly embedded in products that feel like magic and work like science.<span className="text-primary font-serif">"</span>
           </motion.h2>
@@ -98,7 +98,7 @@ export default function AboutPage() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="text-5xl font-display font-bold text-white mb-16 text-center"
+            className="text-5xl font-display font-bold text-foreground mb-16 text-center"
           >
             Our Values
           </motion.h2>
@@ -114,7 +114,7 @@ export default function AboutPage() {
                 className="bg-card border border-border p-8 rounded-[24px]"
               >
                 <v.icon className="text-primary w-10 h-10 mb-6" />
-                <h3 className="text-2xl font-bold text-white mb-4">{v.title}</h3>
+                <h3 className="text-2xl font-bold text-foreground mb-4">{v.title}</h3>
                 <p className="text-muted-foreground">{v.desc}</p>
               </motion.div>
             ))}
@@ -122,9 +122,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-32 bg-[#0a0a0a] border-y border-border">
+      <section className="py-32 bg-[#FFFFFF] border-y border-border">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-5xl font-display font-bold text-white mb-16 text-center">The Minds Behind Thinkatic</h2>
+          <h2 className="text-5xl font-display font-bold text-foreground mb-16 text-center">The Minds Behind Thinkatic</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {team.map((member, i) => (
               <motion.div
@@ -136,13 +136,13 @@ export default function AboutPage() {
                 transition={{ delay: i * 0.1 }}
                 className="bg-card border border-border rounded-[24px] p-8 flex flex-col items-center text-center"
               >
-                <div className="w-24 h-24 rounded-full border-2 border-primary flex items-center justify-center text-3xl font-display font-bold text-primary mb-6 shadow-[0_0_20px_rgba(71,163,255,0.2)]">
+                <div className="w-24 h-24 rounded-full border-2 border-primary flex items-center justify-center text-3xl font-display font-bold text-primary mb-6 shadow-[0_0_20px_rgba(33,78,207,0.18)]">
                   {member.init}
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">{member.name}</h3>
+                <h3 className="text-2xl font-bold text-foreground mb-2">{member.name}</h3>
                 <div className="text-primary font-medium mb-4">{member.role}</div>
                 <p className="text-muted-foreground mb-6">{member.bio}</p>
-                <a href="https://www.linkedin.com/company/thinkatic/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors"><Linkedin size={24} /></a>
+                <a href="https://www.linkedin.com/company/thinkatic/" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-primary transition-colors"><Linkedin size={24} /></a>
               </motion.div>
             ))}
           </div>
@@ -156,7 +156,7 @@ export default function AboutPage() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="text-5xl md:text-7xl font-display font-bold text-white mb-8"
+            className="text-5xl md:text-7xl font-display font-bold text-foreground mb-8"
           >
             Join Our Team
           </motion.h2>

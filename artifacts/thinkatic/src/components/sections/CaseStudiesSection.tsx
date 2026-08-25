@@ -11,7 +11,7 @@ const cases = [
     suffix: "%",
     resultLabel: "Reduction in processing time",
     tag: "Healthcare BPO",
-    color: "#2563EB",
+    color: "#214ECF",
     description: "Streamlined patient intake and claims processing for a US-based health network.",
   },
   {
@@ -21,7 +21,7 @@ const cases = [
     suffix: "%",
     resultLabel: "Improved response time",
     tag: "Customer Support",
-    color: "#47A3FF",
+    color: "#214ECF",
     description: "AI-assisted agents cut resolution times across 12 support channels.",
   },
   {
@@ -31,7 +31,7 @@ const cases = [
     suffix: "%",
     resultLabel: "Reduction in manual work",
     tag: "AI-Powered BPO",
-    color: "#2563EB",
+    color: "#214ECF",
     description: "End-to-end RPA deployment across back-office functions in 90 days.",
   },
   {
@@ -41,7 +41,7 @@ const cases = [
     suffix: "%",
     resultLabel: "Cloud migration achieved",
     tag: "IT Services",
-    color: "#47A3FF",
+    color: "#214ECF",
     description: "Legacy monolith rebuilt into microservices and fully migrated to AWS.",
   },
 ];
@@ -97,10 +97,10 @@ function CaseCard({ study, index }: { study: (typeof cases)[0]; index: number })
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: index * 0.13 }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
-          className="group relative rounded-2xl p-8 border border-white/8 bg-[#0d0d0d] flex flex-col gap-6 overflow-hidden cursor-default"
+          className="group relative rounded-2xl p-8 border border-border bg-[#FFFFFF] flex flex-col gap-6 overflow-hidden cursor-default"
           style={{
             transition: "border-color 0.4s, box-shadow 0.4s, transform 0.4s",
-            borderColor: hovered ? `${study.color}40` : "rgba(255,255,255,0.08)",
+            borderColor: hovered ? `${study.color}40` : "rgba(33,78,207,0.06)",
             boxShadow: hovered ? `0 20px 60px rgba(0,0,0,0.4), 0 0 40px ${study.color}12` : "0 0 0 transparent",
             transform: hovered ? "translateY(-6px)" : "translateY(0px)",
           }}
@@ -148,7 +148,7 @@ function CaseCard({ study, index }: { study: (typeof cases)[0]; index: number })
               initial={{ y: "100%", opacity: 0 }}
               animate={inView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: index * 0.13 + 0.2 }}
-              className="font-display font-bold text-white leading-[1.1]"
+              className="font-display font-bold text-foreground leading-[1.1]"
               style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)" }}
             >
               {study.title}
@@ -162,7 +162,7 @@ function CaseCard({ study, index }: { study: (typeof cases)[0]; index: number })
 
           {/* Metric – count-up preserved as-is */}
           <div className="flex flex-col gap-2 relative z-10 mt-auto">
-            <div className="relative h-1 rounded-full overflow-hidden mb-2" style={{ background: "rgba(255,255,255,0.05)" }}>
+            <div className="relative h-1 rounded-full overflow-hidden mb-2" style={{ background: "rgba(33,78,207,0.04)" }}>
               <motion.div
                 initial={{ width: 0 }}
                 animate={inView ? { width: `${study.result}%` } : {}}
@@ -221,10 +221,10 @@ export function CaseStudiesSection() {
   const deepY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px", "0px"] : ["130px", "-130px"]);
 
   return (
-    <section ref={sectionRef} className="py-32 relative overflow-hidden" style={{ background: "#060606" }}>
+    <section ref={sectionRef} className="py-32 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
       <div
         className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent)" }}
+        style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.04) 50%, transparent)" }}
       />
 
       {/* Deep grid */}
@@ -256,7 +256,7 @@ export function CaseStudiesSection() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6 }}
               className="text-xs font-mono uppercase tracking-[0.25em] mb-4"
-              style={{ color: "rgba(255,255,255,0.3)" }}
+              style={{ color: "#4B5563" }}
             >
               Case Studies · Results That Speak
             </motion.p>
@@ -265,7 +265,7 @@ export function CaseStudiesSection() {
                 initial={{ y: "100%", opacity: 0 }}
                 animate={inView ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-                className="font-display font-bold text-white leading-[1.05]"
+                className="font-display font-bold text-foreground leading-[1.05]"
                 style={{ fontSize: "clamp(2rem, 4vw, 3.4rem)" }}
               >
                 AI Meets Human Excellence
@@ -277,8 +277,8 @@ export function CaseStudiesSection() {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="rounded-xl px-6 py-4 border border-white/8 overflow-hidden"
-            style={{ background: "#0d0d0d" }}
+            className="rounded-xl px-6 py-4 border border-border overflow-hidden"
+            style={{ background: "#FFFFFF" }}
           >
             {["Businesses need more than outsourcing.", "They need intelligent operations."].map((line, i) => (
               <div key={i} className="overflow-hidden">

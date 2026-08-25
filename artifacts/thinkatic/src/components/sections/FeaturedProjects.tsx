@@ -24,7 +24,7 @@ const projects = [
 
 export function FeaturedProjects() {
   return (
-    <section className="py-32 bg-[#0a0a0a] border-t border-white/5">
+    <section className="py-32 bg-[#FFFFFF] border-t border-border">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Header */}
@@ -37,7 +37,7 @@ export function FeaturedProjects() {
             variants={fadeUp}
           >
             <h2
-              className="font-display font-bold text-white leading-[1.05]"
+              className="font-display font-bold text-foreground leading-[1.05]"
               style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.8rem)' }}
             >
               Featured AI development projects
@@ -52,13 +52,13 @@ export function FeaturedProjects() {
             variants={fadeUp}
             className="flex flex-col gap-6 lg:items-start"
           >
-            <p className="text-white/50 text-base leading-relaxed max-w-lg">
+            <p className="text-muted-foreground text-base leading-relaxed max-w-lg">
               Our portfolio spans AI SaaS platforms, voice products, and enterprise tools essential for the growth of modern businesses — from early-stage startups to global enterprises at various stages of their growth.
             </p>
             <Link href="/case-studies">
               <motion.span
                 whileHover={{ scale: 1.04 }}
-                className="inline-flex items-center gap-2 bg-primary text-white font-bold text-sm uppercase tracking-widest px-7 py-4 rounded-full cursor-pointer hover:bg-primary/90 transition-colors"
+                className="inline-flex items-center gap-2 bg-primary text-foreground font-bold text-sm uppercase tracking-widest px-7 py-4 rounded-full cursor-pointer hover:bg-primary/90 transition-colors"
               >
                 See All Case Studies
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -79,21 +79,21 @@ export function FeaturedProjects() {
               whileInView="visible"
               viewport={{ once: true, margin: '-80px' }}
               variants={fadeUp}
-              className="group relative bg-[#111] border border-white/5 rounded-3xl overflow-hidden flex flex-col hover:border-white/15 transition-colors"
+              className="group relative bg-[#FFFFFF] border border-border rounded-3xl overflow-hidden flex flex-col hover:border-border transition-colors"
             >
               {/* Text content */}
               <div className="p-8 md:p-10 flex flex-col gap-5 flex-1">
-                <span className="text-white/30 text-xs font-mono uppercase tracking-widest">{project.tag}</span>
+                <span className="text-muted-foreground text-xs font-mono uppercase tracking-widest">{project.tag}</span>
                 <h3
-                  className="font-display font-bold text-white leading-[1.1]"
+                  className="font-display font-bold text-foreground leading-[1.1]"
                   style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)' }}
                 >
                   {project.title}
                 </h3>
-                <p className="text-white/40 text-sm leading-relaxed">{project.desc}</p>
+                <p className="text-muted-foreground text-sm leading-relaxed">{project.desc}</p>
                 <Link
                   href="/case-studies"
-                  className="text-white/60 text-sm font-medium flex items-center gap-2 hover:text-white hover:gap-3 transition-all mt-auto w-fit"
+                  className="text-muted-foreground text-sm font-medium flex items-center gap-2 hover:text-foreground hover:gap-3 transition-all mt-auto w-fit"
                 >
                   Read Case Study
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

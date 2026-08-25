@@ -27,8 +27,8 @@ const INDUSTRIES = [
         <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
       </svg>
     ),
-    accentColor: "rgba(71,163,255,0.18)",
-    glowColor:   "rgba(37,99,235,0.25)",
+    accentColor: "rgba(33,78,207,0.14)",
+    glowColor:   "rgba(33,78,207,0.18)",
   },
   {
     id: "finance",
@@ -236,7 +236,7 @@ function StatNumber({ value, suffix, label, trigger }: {
         ref={ref}
         className="text-2xl md:text-3xl font-bold font-display"
         style={{
-          background: "linear-gradient(135deg,#ffffff 0%,#47A3FF 100%)",
+          background: "linear-gradient(135deg,#ffffff 0%,#214ECF 100%)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
         }}
@@ -244,7 +244,7 @@ function StatNumber({ value, suffix, label, trigger }: {
         0{suffix}
       </span>
       <span className="text-[9px] uppercase tracking-[0.18em] font-mono"
-        style={{ color: "rgba(255,255,255,0.35)" }}>
+        style={{ color: "rgba(33,78,207,0.22)" }}>
         {label}
       </span>
     </div>
@@ -305,10 +305,10 @@ function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: I
           borderColor: isActive
             ? "rgba(71,163,255,0.28)"
             : hovered
-              ? "rgba(71,163,255,0.15)"
+              ? "rgba(33,78,207,0.12)"
               : "rgba(255,255,255,0.07)",
           boxShadow: isActive
-            ? `0 24px 64px rgba(0,0,0,0.35), 0 0 0 1px rgba(71,163,255,0.12), 0 0 60px ${industry.glowColor}`
+            ? `0 24px 64px rgba(0,0,0,0.35), 0 0 0 1px rgba(33,78,207,0.1), 0 0 60px ${industry.glowColor}`
             : hovered
               ? "0 8px 32px rgba(0,0,0,0.25)"
               : "0 2px 12px rgba(0,0,0,0.15)",
@@ -359,7 +359,7 @@ function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: I
         animate={{ opacity: isActive ? 1 : 0 }}
         transition={{ duration: 0.4 }}
         style={{
-          background: "linear-gradient(90deg,transparent,rgba(71,163,255,0.5),transparent)",
+          background: "linear-gradient(90deg,transparent,rgba(33,78,207,0.38),transparent)",
         }}
       />
 
@@ -370,12 +370,12 @@ function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: I
           <motion.div
             animate={{
               background: isActive
-                ? "rgba(37,99,235,0.2)"
-                : hovered ? "rgba(37,99,235,0.12)" : "rgba(255,255,255,0.05)",
+                ? "rgba(33,78,207,0.15)"
+                : hovered ? "rgba(33,78,207,0.09)" : "rgba(33,78,207,0.04)",
               borderColor: isActive
                 ? "rgba(71,163,255,0.4)"
-                : hovered ? "rgba(71,163,255,0.2)" : "rgba(255,255,255,0.1)",
-              color: isActive ? "rgba(71,163,255,1)" : hovered ? "rgba(71,163,255,0.8)" : "rgba(255,255,255,0.45)",
+                : hovered ? "rgba(33,78,207,0.18)" : "rgba(255,255,255,0.1)",
+              color: isActive ? "rgba(71,163,255,1)" : hovered ? "rgba(33,78,207,0.72)" : "rgba(255,255,255,0.45)",
             }}
             transition={{ duration: 0.3 }}
             className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center border"
@@ -395,7 +395,7 @@ function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: I
             <motion.span
               animate={{ opacity: isActive ? 0.55 : 0.35 }}
               transition={{ duration: 0.25 }}
-              className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#47A3FF]"
+              className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#214ECF]"
             >
               {industry.category}
             </motion.span>
@@ -407,8 +407,8 @@ function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: I
             transition={{ duration: 0.35, ease }}
             className="flex-shrink-0 w-7 h-7 rounded-lg border flex items-center justify-center"
             style={{
-              borderColor: isActive ? "rgba(71,163,255,0.3)" : "rgba(255,255,255,0.1)",
-              background: isActive ? "rgba(37,99,235,0.15)" : "transparent",
+              borderColor: isActive ? "rgba(33,78,207,0.24)" : "rgba(255,255,255,0.1)",
+              background: isActive ? "rgba(33,78,207,0.12)" : "transparent",
             }}
           >
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -432,7 +432,7 @@ function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: I
               <div className="px-6 md:px-8 pb-8 pt-1">
                 {/* Divider */}
                 <div className="mb-6 h-px"
-                  style={{ background: "linear-gradient(90deg,rgba(71,163,255,0.2),rgba(71,163,255,0.06),transparent)" }} />
+                  style={{ background: "linear-gradient(90deg,rgba(33,78,207,0.18),rgba(71,163,255,0.06),transparent)" }} />
 
                 <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-start">
                   {/* Left — text content */}
@@ -455,14 +455,14 @@ function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: I
                       className="relative rounded-xl px-4 py-3.5 mb-7"
                       style={{
                         background: "rgba(37,99,235,0.07)",
-                        border: "1px solid rgba(71,163,255,0.15)",
+                        border: "1px solid rgba(33,78,207,0.12)",
                       }}
                     >
                       <div className="absolute top-0 left-3 right-3 h-px"
                         style={{ background: "linear-gradient(90deg,transparent,rgba(71,163,255,0.35),transparent)" }} />
                       <p className="text-[13px] leading-relaxed font-medium"
-                        style={{ color: "rgba(255,255,255,0.7)" }}>
-                        <span style={{ color: "#47A3FF", fontFamily: "monospace", fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", marginRight: 8 }}>
+                        style={{ color: "#4B5563" }}>
+                        <span style={{ color: "#214ECF", fontFamily: "monospace", fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", marginRight: 8 }}>
                           Business Impact
                         </span>
                         <br className="sm:hidden" />
@@ -478,9 +478,9 @@ function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: I
                       whileHover={{ scale: 1.03, boxShadow: "0 0 30px rgba(37,99,235,0.4)" }}
                       whileTap={{ scale: 0.97 }}
                       onClick={(e) => { e.stopPropagation(); setLocation("/contact"); }}
-                      className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full font-semibold text-[13px] text-white tracking-wide"
+                      className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full font-semibold text-[13px] text-foreground tracking-wide"
                       style={{
-                        background: "linear-gradient(135deg,#1d4ed8 0%,#2563EB 60%,#3b82f6 100%)",
+                        background: "linear-gradient(135deg,#214ECF 0%,#214ECF 60%,#3b82f6 100%)",
                         boxShadow: "0 0 24px rgba(37,99,235,0.3)",
                       }}
                     >
@@ -504,12 +504,12 @@ function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: I
                         key={stat.label}
                         className="relative rounded-xl px-4 py-3.5 flex-1 md:flex-none overflow-hidden"
                         style={{
-                          background: "rgba(255,255,255,0.03)",
-                          border: "1px solid rgba(71,163,255,0.1)",
+                          background: "rgba(244,247,255,0.8)",
+                          border: "1px solid rgba(33,78,207,0.08)",
                         }}
                       >
                         <div className="absolute top-0 left-0 right-0 h-px"
-                          style={{ background: "linear-gradient(90deg,transparent,rgba(71,163,255,0.2),transparent)" }} />
+                          style={{ background: "linear-gradient(90deg,transparent,rgba(33,78,207,0.18),transparent)" }} />
                         <StatNumber
                           value={stat.value}
                           suffix={stat.suffix}
@@ -547,18 +547,18 @@ function ReasonCard({ reason, index }: { reason: string; index: number }) {
       className="group flex items-start gap-4 rounded-xl p-5 border border-white/6 cursor-default overflow-hidden relative"
       style={{
         transition: "border-color 0.3s, background 0.3s, transform 0.3s",
-        borderColor: hovered ? "rgba(37,99,235,0.3)" : "rgba(255,255,255,0.06)",
+        borderColor: hovered ? "rgba(37,99,235,0.3)" : "rgba(33,78,207,0.04)",
         background: hovered ? "rgba(8,27,58,0.3)" : "rgba(8,14,28,0.5)",
         transform: hovered ? "translateX(4px)" : "translateX(0)",
       }}
     >
       <motion.div
         className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center mt-0.5"
-        animate={{ background: hovered ? "rgba(37,99,235,0.25)" : "rgba(37,99,235,0.12)" }}
-        style={{ border: "1px solid rgba(37,99,235,0.25)" }}
+        animate={{ background: hovered ? "rgba(33,78,207,0.18)" : "rgba(33,78,207,0.09)" }}
+        style={{ border: "1px solid rgba(33,78,207,0.18)" }}
       >
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
-          <path d="M20 6L9 17l-5-5" stroke="#2563EB" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M20 6L9 17l-5-5" stroke="#214ECF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </motion.div>
       <motion.span
@@ -589,7 +589,7 @@ export function IndustriesSection() {
 
   return (
     <section ref={sectionRef} className="py-28 md:py-36 relative overflow-hidden"
-      style={{ background: "linear-gradient(180deg,#050505 0%,#040810 50%,#050505 100%)" }}>
+      style={{ background: "linear-gradient(180deg,#050505 0%,#F5F8FF 50%,#050505 100%)" }}>
 
       {/* Background depth layer */}
       <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
@@ -624,7 +624,7 @@ export function IndustriesSection() {
               initial={{ y: "100%", opacity: 0 }}
               animate={inView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.85, ease }}
-              className="font-display font-bold text-white leading-[1.05]"
+              className="font-display font-bold text-foreground leading-[1.05]"
               style={{ fontSize: "clamp(2rem,4vw,3.4rem)" }}
             >
               Global Reach Across Every Sector
@@ -635,7 +635,7 @@ export function IndustriesSection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.15, duration: 0.6, ease }}
             className="text-center text-sm md:text-base max-w-xl mx-auto mt-4"
-            style={{ color: "rgba(255,255,255,0.38)" }}
+            style={{ color: "#4B5563" }}
           >
             Explore how Thinkatic's AI-powered operations transform performance across the industries that drive global enterprise.
           </motion.p>
@@ -665,7 +665,7 @@ export function IndustriesSection() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 1.2, ease }}
           className="mb-24 h-px origin-center"
-          style={{ background: "linear-gradient(90deg,transparent,rgba(255,255,255,0.08) 50%,transparent)" }}
+          style={{ background: "linear-gradient(90deg,transparent,rgba(33,78,207,0.06) 50%,transparent)" }}
         />
 
         {/* ── Why Thinkatic ── */}
@@ -686,7 +686,7 @@ export function IndustriesSection() {
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.75, ease }}
-              className="font-display font-bold text-white"
+              className="font-display font-bold text-foreground"
               style={{ fontSize: "clamp(1.8rem,3vw,2.8rem)" }}
             >
               Nine Reasons to Choose Intelligent Operations

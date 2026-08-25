@@ -105,21 +105,21 @@ export function DatePickerField({
             "w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-sm transition-all duration-200 text-left",
             "bg-white/[0.04] hover:bg-white/[0.06]",
             open
-              ? "border-[#47A3FF]/60 ring-1 ring-[#47A3FF]/20"
+              ? "border-[#214ECF]/60 ring-1 ring-[#214ECF]/20"
               : error
                 ? "border-red-500/50"
-                : "border-white/10 hover:border-white/20",
+                : "border-border hover:border-[#DCE5FF]",
           )}
         >
-          <CalendarDays size={15} className={cn("shrink-0", value ? "text-[#47A3FF]" : "text-white/30")} />
-          <span className={cn("flex-1", value ? "text-white" : "text-white/25")}>
+          <CalendarDays size={15} className={cn("shrink-0", value ? "text-[#214ECF]" : "text-muted-foreground")} />
+          <span className={cn("flex-1", value ? "text-foreground" : "text-muted-foreground")}>
             {formatted ?? placeholder}
           </span>
           {value && (
             <button
               type="button"
               onClick={e => { e.stopPropagation(); onChange?.(null); }}
-              className="text-white/30 hover:text-white/60 transition-colors"
+              className="text-muted-foreground hover:text-muted-foreground transition-colors"
             >
               <X size={13} />
             </button>
@@ -137,27 +137,27 @@ export function DatePickerField({
               style={{
                 background: "rgba(10,10,15,0.97)",
                 backdropFilter: "blur(24px)",
-                borderColor: "rgba(255,255,255,0.10)",
+                borderColor: "rgba(33,78,207,0.08)",
                 boxShadow: "0 24px 60px rgba(0,0,0,0.5)",
               }}
             >
               {/* Header */}
               <div className="flex items-center justify-between mb-4">
                 <button type="button" onClick={prevMonth} className="w-7 h-7 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] flex items-center justify-center transition-colors">
-                  <ChevronLeft size={14} className="text-white/60" />
+                  <ChevronLeft size={14} className="text-muted-foreground" />
                 </button>
-                <span className="text-sm font-semibold text-white">
+                <span className="text-sm font-semibold text-foreground">
                   {MONTHS[viewMonth]} {viewYear}
                 </span>
                 <button type="button" onClick={nextMonth} className="w-7 h-7 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] flex items-center justify-center transition-colors">
-                  <ChevronRight size={14} className="text-white/60" />
+                  <ChevronRight size={14} className="text-muted-foreground" />
                 </button>
               </div>
 
               {/* Day names */}
               <div className="grid grid-cols-7 mb-2">
                 {DAYS.map(d => (
-                  <div key={d} className="text-center text-[10px] font-mono text-white/25 py-1">{d}</div>
+                  <div key={d} className="text-center text-[10px] font-mono text-muted-foreground py-1">{d}</div>
                 ))}
               </div>
 
@@ -182,14 +182,14 @@ export function DatePickerField({
                       className={cn(
                         "aspect-square rounded-lg text-xs font-medium transition-all duration-150",
                         selected
-                          ? "text-white"
+                          ? "text-foreground"
                           : todayMark
-                            ? "text-[#47A3FF] border border-[#47A3FF]/30"
-                            : "text-white/50 hover:text-white hover:bg-white/[0.06]",
+                            ? "text-[#214ECF] border border-[#214ECF]/30"
+                            : "text-muted-foreground hover:text-foreground hover:bg-white/[0.06]",
                         disabled && "opacity-25 cursor-not-allowed",
                       )}
                       style={selected ? {
-                        background: "linear-gradient(135deg,#47A3FF,#4040E8)",
+                        background: "linear-gradient(135deg,#214ECF,#214ECF)",
                       } : undefined}
                     >
                       {day}
@@ -209,7 +209,7 @@ export function DatePickerField({
                       setViewMonth(today.getMonth());
                       setOpen(false);
                     }}
-                    className="w-full text-center text-xs text-[#47A3FF]/70 hover:text-[#47A3FF] transition-colors"
+                    className="w-full text-center text-xs text-[#214ECF]/70 hover:text-[#214ECF] transition-colors"
                   >
                     Today
                   </button>

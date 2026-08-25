@@ -63,8 +63,8 @@ function DepartmentCard({ dept, selected, onSelect }: {
       whileTap={{ scale: 0.97 }}
       className="relative flex flex-col gap-2 p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer"
       style={{
-        background: selected ? "rgba(71,163,255,0.08)" : "rgba(255,255,255,0.03)",
-        borderColor: selected ? "rgba(71,163,255,0.45)" : "rgba(255,255,255,0.08)",
+        background: selected ? "rgba(33,78,207,0.08)" : "rgba(255,255,255,0.03)",
+        borderColor: selected ? "rgba(71,163,255,0.45)" : "rgba(33,78,207,0.06)",
         boxShadow: selected ? "0 0 20px rgba(71,163,255,0.10)" : "none",
       }}
     >
@@ -72,21 +72,21 @@ function DepartmentCard({ dept, selected, onSelect }: {
         <div
           className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-colors"
           style={{
-            background: selected ? "rgba(71,163,255,0.18)" : "rgba(255,255,255,0.05)",
+            background: selected ? "rgba(33,78,207,0.14)" : "rgba(33,78,207,0.04)",
           }}
         >
-          <Icon size={14} className={selected ? "text-[#47A3FF]" : "text-white/40"} />
+          <Icon size={14} className={selected ? "text-[#214ECF]" : "text-muted-foreground"} />
         </div>
-        <span className={`text-sm font-semibold transition-colors ${selected ? "text-white" : "text-white/60"}`}>
+        <span className={`text-sm font-semibold transition-colors ${selected ? "text-foreground" : "text-muted-foreground"}`}>
           {dept.label}
         </span>
       </div>
-      <p className="text-[11px] text-white/30 pl-10 leading-relaxed">{dept.desc}</p>
+      <p className="text-[11px] text-muted-foreground pl-10 leading-relaxed">{dept.desc}</p>
       {selected && (
         <motion.div
           layoutId="dept-check"
           className="absolute top-3 right-3 w-4 h-4 rounded-full flex items-center justify-center"
-          style={{ background: "#47A3FF" }}
+          style={{ background: "#214ECF" }}
         >
           <svg viewBox="0 0 8 6" fill="none" className="w-2.5 h-2.5">
             <path d="M1 3L3 5L7 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -129,7 +129,7 @@ const businessInfo = [
 function PanelBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute inset-0" style={{ background: "#050508" }} />
+      <div className="absolute inset-0" style={{ background: "#FFFFFF" }} />
       <motion.div
         animate={{ x: [0, 30, -15, 0], y: [0, -20, 15, 0], scale: [1, 1.12, 0.95, 1] }}
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
@@ -163,7 +163,7 @@ function PanelBackground() {
 
 function GoogleMapEmbed() {
   return (
-    <div className="relative overflow-hidden rounded-2xl border" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+    <div className="relative overflow-hidden rounded-2xl border" style={{ borderColor: "rgba(33,78,207,0.06)" }}>
       <div className="aspect-[16/7]">
         <iframe
           title="Thinkatic Office - Magarpatta City, Pune"
@@ -179,9 +179,9 @@ function GoogleMapEmbed() {
       </div>
       {/* Overlay pin label */}
       <div className="absolute bottom-3 left-3 flex items-center gap-2 px-3 py-2 rounded-xl backdrop-blur-sm"
-        style={{ background: "rgba(5,5,10,0.85)", border: "1px solid rgba(255,255,255,0.10)" }}>
-        <MapPin size={13} className="text-[#47A3FF]" />
-        <span className="text-xs text-white/70">Magarpatta City, Pune</span>
+        style={{ background: "rgba(5,5,10,0.85)", border: "1px solid rgba(33,78,207,0.08)" }}>
+        <MapPin size={13} className="text-[#214ECF]" />
+        <span className="text-xs text-muted-foreground">Magarpatta City, Pune</span>
       </div>
     </div>
   );
@@ -292,11 +292,11 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease }}
-            className="relative z-10 flex items-center gap-1.5 text-white/35 text-xs font-mono"
+            className="relative z-10 flex items-center gap-1.5 text-muted-foreground text-xs font-mono"
           >
-            <Link href="/" className="hover:text-white/70 transition-colors">Home</Link>
+            <Link href="/" className="hover:text-muted-foreground transition-colors">Home</Link>
             <ChevronRight size={11} />
-            <span className="text-white/55">Contact</span>
+            <span className="text-muted-foreground">Contact</span>
           </motion.nav>
 
           {/* Main content */}
@@ -309,20 +309,20 @@ export default function ContactPage() {
               <motion.p
                 variants={fadeUp}
                 className="text-xs font-mono uppercase tracking-[0.22em] mb-5"
-                style={{ color: "#47A3FF" }}
+                style={{ color: "#214ECF" }}
               >
                 Let's talk
               </motion.p>
               <motion.h1
                 variants={fadeUp}
-                className="font-display font-black text-white leading-[1.0] mb-8"
+                className="font-display font-black text-foreground leading-[1.0] mb-8"
                 style={{ fontSize: "clamp(2.6rem,5.5vw,4.5rem)" }}
               >
                 Let's Build<br />
                 Something<br />
                 <span className="text-gradient">Exceptional.</span>
               </motion.h1>
-              <motion.p variants={fadeUp} className="text-white/45 text-sm leading-relaxed max-w-sm mb-10">
+              <motion.p variants={fadeUp} className="text-muted-foreground text-sm leading-relaxed max-w-sm mb-10">
                 Whether you're exploring AI automation, scaling operations, or building enterprise software — we turn complex challenges into measurable results.
               </motion.p>
 
@@ -333,17 +333,17 @@ export default function ContactPage() {
                   const content = (
                     <div
                       key={info.label}
-                      className="flex items-start gap-3 p-3.5 rounded-2xl border group transition-all duration-200 hover:border-white/15"
-                      style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.07)" }}
+                      className="flex items-start gap-3 p-3.5 rounded-2xl border group transition-all duration-200 hover:border-border"
+                      style={{ background: "rgba(244,247,255,0.8)", borderColor: "rgba(255,255,255,0.07)" }}
                     >
                       <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
                         style={{ background: "rgba(71,163,255,0.10)" }}>
-                        <Icon size={13} className="text-[#47A3FF]" />
+                        <Icon size={13} className="text-[#214ECF]" />
                       </div>
                       <div>
-                        <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/30 mb-1">{info.label}</p>
+                        <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-1">{info.label}</p>
                         {info.lines.map((l, i) => (
-                          <p key={i} className="text-xs text-white/60 leading-relaxed group-hover:text-white/80 transition-colors">{l}</p>
+                          <p key={i} className="text-xs text-muted-foreground leading-relaxed group-hover:text-muted-foreground transition-colors">{l}</p>
                         ))}
                       </div>
                     </div>
@@ -366,11 +366,11 @@ export default function ContactPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="relative z-10 mt-10 flex items-center gap-4 text-white/25 text-xs"
+            className="relative z-10 mt-10 flex items-center gap-4 text-muted-foreground text-xs"
           >
-            <Link href="/privacy-policy" className="hover:text-white/50 transition-colors">Privacy Policy</Link>
+            <Link href="/privacy-policy" className="hover:text-muted-foreground transition-colors">Privacy Policy</Link>
             <span>·</span>
-            <Link href="/terms" className="hover:text-white/50 transition-colors">Terms</Link>
+            <Link href="/terms" className="hover:text-muted-foreground transition-colors">Terms</Link>
           </motion.div>
         </div>
 
@@ -413,10 +413,10 @@ export default function ContactPage() {
                     <StepIndicator step={0} total={2} labels={stepLabels} />
                   </div>
 
-                  <h2 className="font-display font-bold text-white text-2xl sm:text-3xl mb-2 leading-tight">
+                  <h2 className="font-display font-bold text-foreground text-2xl sm:text-3xl mb-2 leading-tight">
                     Start with your<br />contact details
                   </h2>
-                  <p className="text-white/40 text-sm mb-8">We'll use this to reach out personally.</p>
+                  <p className="text-muted-foreground text-sm mb-8">We'll use this to reach out personally.</p>
 
                   <form onSubmit={form1.handleSubmit(onStep1)} className="flex flex-col gap-5">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -466,8 +466,8 @@ export default function ContactPage() {
                       type="submit"
                       whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.98 }}
-                      className="mt-2 flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-white transition-all"
-                      style={{ background: "linear-gradient(135deg,#47A3FF,#4040E8)", boxShadow: "0 0 28px rgba(71,163,255,0.25)" }}
+                      className="mt-2 flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-foreground transition-all"
+                      style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 28px rgba(71,163,255,0.25)" }}
                     >
                       Continue
                       <ArrowRight size={15} />
@@ -488,17 +488,17 @@ export default function ContactPage() {
                     <StepIndicator step={1} total={2} labels={stepLabels} />
                   </div>
 
-                  <h2 className="font-display font-bold text-white text-2xl sm:text-3xl mb-2 leading-tight">
+                  <h2 className="font-display font-bold text-foreground text-2xl sm:text-3xl mb-2 leading-tight">
                     Tell us about<br />your project
                   </h2>
-                  <p className="text-white/40 text-sm mb-8">Help us route you to the right team.</p>
+                  <p className="text-muted-foreground text-sm mb-8">Help us route you to the right team.</p>
 
                   <form onSubmit={form2.handleSubmit(onStep2)} className="flex flex-col gap-5">
 
                     {/* Department cards */}
                     <div>
-                      <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-white/40 mb-3">
-                        Department <span className="text-[#47A3FF]">*</span>
+                      <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-3">
+                        Department <span className="text-[#214ECF]">*</span>
                       </p>
                       <div className="grid grid-cols-2 gap-2.5">
                         {departments.map(dept => (
@@ -569,7 +569,7 @@ export default function ContactPage() {
                       <button
                         type="button"
                         onClick={() => setStep(0)}
-                        className="flex items-center gap-1.5 px-5 py-3.5 rounded-full text-sm font-medium text-white/50 hover:text-white border border-white/10 hover:border-white/25 transition-all"
+                        className="flex items-center gap-1.5 px-5 py-3.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground border border-border hover:border-white/25 transition-all"
                       >
                         ← Back
                       </button>
@@ -578,8 +578,8 @@ export default function ContactPage() {
                         disabled={status === "submitting"}
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.98 }}
-                        className="flex-1 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-white transition-all disabled:opacity-60"
-                        style={{ background: "linear-gradient(135deg,#47A3FF,#4040E8)", boxShadow: "0 0 28px rgba(71,163,255,0.25)" }}
+                        className="flex-1 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-foreground transition-all disabled:opacity-60"
+                        style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 28px rgba(71,163,255,0.25)" }}
                       >
                         {status === "submitting" ? (
                           <><Loader2 size={15} className="animate-spin" /> Sending…</>

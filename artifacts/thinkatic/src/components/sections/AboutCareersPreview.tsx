@@ -27,7 +27,7 @@ export function AboutPreview() {
     <section ref={sectionRef} className="py-32 relative overflow-hidden" style={{ background: "#050505" }}>
       <div
         className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent)" }}
+        style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.04) 50%, transparent)" }}
       />
       <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
         <div
@@ -45,7 +45,7 @@ export function AboutPreview() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
               className="text-xs font-mono uppercase tracking-[0.25em] mb-5"
-              style={{ color: "rgba(255,255,255,0.3)" }}
+              style={{ color: "#4B5563" }}
             >
               About Us
             </motion.p>
@@ -55,11 +55,11 @@ export function AboutPreview() {
                 initial={{ y: "100%", opacity: 0 }}
                 animate={inView ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                className="font-display font-bold text-white leading-[1.05]"
+                className="font-display font-bold text-foreground leading-[1.05]"
                 style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
               >
                 Building The Future Of<br />
-                <span style={{ color: "#2563EB" }}>Intelligent Business Operations</span>
+                <span style={{ color: "#214ECF" }}>Intelligent Business Operations</span>
               </motion.h2>
             </div>
 
@@ -88,12 +88,12 @@ export function AboutPreview() {
             >
               <Link href="/about">
                 <motion.button
-                  whileHover={{ scale: 1.04, boxShadow: "0 0 35px rgba(37,99,235,0.45)" }}
+                  whileHover={{ scale: 1.04, boxShadow: "0 0 35px rgba(33,78,207,0.3)" }}
                   whileTap={{ scale: 0.97 }}
-                  className="flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-white text-sm tracking-wide"
+                  className="flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-foreground text-sm tracking-wide"
                   style={{
-                    background: "linear-gradient(135deg, #2563EB 0%, #1d4ed8 100%)",
-                    boxShadow: "0 0 20px rgba(37,99,235,0.25)",
+                    background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)",
+                    boxShadow: "0 0 20px rgba(33,78,207,0.18)",
                     letterSpacing: "0.04em",
                   }}
                 >
@@ -115,12 +115,12 @@ export function AboutPreview() {
             {[
               {
                 label: "Mission",
-                color: "#2563EB",
+                color: "#214ECF",
                 text: "To build intelligent business operations that create measurable value through people, technology, and innovation.",
               },
               {
                 label: "Vision",
-                color: "#47A3FF",
+                color: "#214ECF",
                 text: "To transform businesses through intelligent and future-ready AI technology.",
               },
             ].map((card, i) => (
@@ -129,7 +129,7 @@ export function AboutPreview() {
                   initial={{ opacity: 0, x: 30 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.25 + i * 0.12 }}
-                  className="group rounded-2xl p-7 border border-white/8 bg-[#0d0d0d] relative overflow-hidden cursor-default"
+                  className="group rounded-2xl p-7 border border-border bg-[#FFFFFF] relative overflow-hidden cursor-default"
                   style={{ transition: "border-color 0.35s" }}
                 >
                   <div
@@ -139,7 +139,7 @@ export function AboutPreview() {
                   <span className="text-xs font-mono tracking-[0.2em] uppercase mb-2 block" style={{ color: card.color }}>
                     {card.label}
                   </span>
-                  <p className="font-medium text-white leading-relaxed text-sm">{card.text}</p>
+                  <p className="font-medium text-foreground leading-relaxed text-sm">{card.text}</p>
                 </motion.div>
               </TiltCard>
             ))}
@@ -150,9 +150,9 @@ export function AboutPreview() {
                 initial={{ opacity: 0, x: 30 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
-                className="rounded-2xl p-7 border border-white/8 bg-[#0d0d0d]"
+                className="rounded-2xl p-7 border border-border bg-[#FFFFFF]"
               >
-                <span className="text-xs font-mono tracking-[0.2em] uppercase mb-4 block" style={{ color: "rgba(255,255,255,0.3)" }}>
+                <span className="text-xs font-mono tracking-[0.2em] uppercase mb-4 block" style={{ color: "#4B5563" }}>
                   Core Values
                 </span>
                 <div className="flex flex-wrap gap-2">
@@ -163,8 +163,8 @@ export function AboutPreview() {
                       animate={inView ? { opacity: 1, scale: 1 } : {}}
                       transition={{ duration: 0.35, delay: 0.55 + i * 0.06 }}
                       whileHover={shouldReduce ? {} : { scale: 1.08, color: "#fff", borderColor: "rgba(37,99,235,0.4)" }}
-                      className="text-xs px-3 py-1.5 rounded-full border border-white/10 font-medium cursor-default"
-                      style={{ color: "rgba(255,255,255,0.65)", background: "rgba(255,255,255,0.03)", transition: "all 0.25s" }}
+                      className="text-xs px-3 py-1.5 rounded-full border border-border font-medium cursor-default"
+                      style={{ color: "rgba(255,255,255,0.65)", background: "rgba(244,247,255,0.8)", transition: "all 0.25s" }}
                     >
                       {v}
                     </motion.span>
@@ -197,11 +197,11 @@ function RoleRow({
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group flex items-center justify-between rounded-xl px-6 py-5 border border-white/8 bg-[#0d0d0d] cursor-pointer relative overflow-hidden"
+      className="group flex items-center justify-between rounded-xl px-6 py-5 border border-border bg-[#FFFFFF] cursor-pointer relative overflow-hidden"
       style={{
         transition: "border-color 0.35s, background 0.35s, transform 0.3s",
-        borderColor: hovered ? "rgba(37,99,235,0.3)" : "rgba(255,255,255,0.08)",
-        background: hovered ? "rgba(8,27,58,0.2)" : "#0d0d0d",
+        borderColor: hovered ? "rgba(37,99,235,0.3)" : "rgba(33,78,207,0.06)",
+        background: hovered ? "rgba(8,27,58,0.2)" : "#FFFFFF",
         transform: hovered ? "translateX(6px)" : "translateX(0)",
       }}
     >
@@ -209,7 +209,7 @@ function RoleRow({
         className="absolute left-0 top-0 bottom-0 w-[2px] rounded-l-xl"
         animate={{ scaleY: hovered ? 1 : 0, opacity: hovered ? 1 : 0 }}
         transition={{ duration: 0.3 }}
-        style={{ background: "#2563EB", transformOrigin: "top" }}
+        style={{ background: "#214ECF", transformOrigin: "top" }}
       />
 
       <div className="flex items-center gap-5">
@@ -228,7 +228,7 @@ function RoleRow({
           >
             {role.role}
           </motion.p>
-          <p className="text-xs mt-0.5 flex items-center gap-2" style={{ color: "rgba(255,255,255,0.35)" }}>
+          <p className="text-xs mt-0.5 flex items-center gap-2" style={{ color: "rgba(33,78,207,0.22)" }}>
             {role.dept}
             <span className="inline-block w-1 h-1 rounded-full bg-white/20" />
             {role.type}
@@ -240,7 +240,7 @@ function RoleRow({
         className="flex items-center gap-2 text-xs font-bold"
         animate={{ opacity: hovered ? 1 : 0, x: hovered ? 0 : 8 }}
         transition={{ duration: 0.25 }}
-        style={{ color: "#2563EB" }}
+        style={{ color: "#214ECF" }}
       >
         Apply Now
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -261,10 +261,10 @@ export function CareersPreview() {
   const bgY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px", "0px"] : ["30px", "-30px"]);
 
   return (
-    <section ref={sectionRef} className="py-32 relative overflow-hidden" style={{ background: "#080808" }}>
+    <section ref={sectionRef} className="py-32 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
       <div
         className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent)" }}
+        style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.04) 50%, transparent)" }}
       />
       <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
         <div
@@ -281,7 +281,7 @@ export function CareersPreview() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
               className="text-xs font-mono uppercase tracking-[0.25em] mb-4"
-              style={{ color: "rgba(255,255,255,0.3)" }}
+              style={{ color: "#4B5563" }}
             >
               Careers
             </motion.p>
@@ -290,7 +290,7 @@ export function CareersPreview() {
                 initial={{ y: "100%", opacity: 0 }}
                 animate={inView ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                className="font-display font-bold text-white"
+                className="font-display font-bold text-foreground"
                 style={{ fontSize: "clamp(2rem, 4vw, 3.4rem)" }}
               >
                 Grow with Thinkatic.
@@ -306,7 +306,7 @@ export function CareersPreview() {
               <motion.span
                 className="flex items-center gap-2 text-sm font-medium cursor-pointer"
                 whileHover={shouldReduce ? {} : { gap: "12px" }}
-                style={{ color: "#2563EB" }}
+                style={{ color: "#214ECF" }}
               >
                 View All Positions
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

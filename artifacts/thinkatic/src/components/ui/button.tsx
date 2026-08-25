@@ -39,9 +39,9 @@ const buttonVariants = cva(
         // Premium gradient pill — the strongest CTA on the page
         cta:
           [
-            'bg-gradient-to-r from-primary to-secondary text-white font-semibold',
+            'bg-gradient-to-r from-primary to-secondary text-foreground font-semibold',
             'rounded-full border-0',
-            'shadow-[0_0_24px_rgba(71,163,255,0.3)]',
+            'shadow-[0_0_24px_rgba(33,78,207,0.24)]',
             'hover:shadow-[0_0_36px_rgba(71,163,255,0.45)] hover:scale-[1.02]',
           ].join(' '),
 

@@ -7,7 +7,7 @@ const industries = [
 
 export function Industries() {
   return (
-    <section className="py-24 border-y border-white/5 bg-background">
+    <section className="py-24 border-y border-border bg-background">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-12 text-center">Industries We Transform</h2>
         
@@ -19,7 +19,7 @@ export function Industries() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="px-6 py-3 rounded-full border border-white/10 text-white/80 hover:text-white hover:border-primary/50 hover:bg-primary/10 transition-all cursor-default text-sm md:text-base whitespace-nowrap"
+              className="px-6 py-3 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-primary/50 hover:bg-primary/10 transition-all cursor-default text-sm md:text-base whitespace-nowrap"
             >
               {industry}
             </motion.div>

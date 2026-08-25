@@ -14,7 +14,7 @@ const STEPS = [
     desc: "We map your business goals, identify automation opportunities, and define measurable success criteria before writing a single line of code.",
     tags: ["Stakeholder Interviews", "ROI Modeling", "Feasibility Analysis"],
     icon: Compass,
-    accent: "#2563EB",
+    accent: "#214ECF",
   },
   {
     number: "02",
@@ -30,7 +30,7 @@ const STEPS = [
     desc: "Cleaning, structuring, chunking, and embedding your proprietary data to create knowledge bases that make AI responses accurate and contextual.",
     tags: ["ETL Pipelines", "Embedding", "Knowledge Graphs"],
     icon: Database,
-    accent: "#47A3FF",
+    accent: "#214ECF",
   },
   {
     number: "04",
@@ -54,7 +54,7 @@ const STEPS = [
     desc: "Zero-downtime production launch on your preferred cloud infrastructure with auto-scaling, CDN, monitoring, and incident response in place from day one.",
     tags: ["Cloud Deploy", "Auto-scaling", "Zero Downtime"],
     icon: Rocket,
-    accent: "#2563EB",
+    accent: "#214ECF",
   },
   {
     number: "07",
@@ -62,7 +62,7 @@ const STEPS = [
     desc: "Continuous monitoring of model drift, accuracy decay, and user feedback loops — plus monthly reviews to retrain, improve, and expand capabilities.",
     tags: ["Drift Monitoring", "Retraining", "Monthly Reviews"],
     icon: BarChart2,
-    accent: "#47A3FF",
+    accent: "#214ECF",
   },
 ];
 
@@ -109,7 +109,7 @@ function StepCard({ step, index, isLast }: { step: typeof STEPS[0]; index: numbe
         {/* Connector line */}
         {!isLast && (
           <div className="flex-1 w-px mt-2 mb-2 relative overflow-hidden" style={{ minHeight: "40px" }}>
-            <div className="absolute inset-0" style={{ background: "rgba(255,255,255,0.06)" }} />
+            <div className="absolute inset-0" style={{ background: "rgba(33,78,207,0.04)" }} />
             <motion.div
               className="absolute top-0 left-0 w-full origin-top"
               initial={{ scaleY: 0 }}
@@ -135,7 +135,7 @@ function StepCard({ step, index, isLast }: { step: typeof STEPS[0]; index: numbe
             initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease, delay: 0.15 }}
-            className="font-display font-bold text-white text-xl md:text-2xl leading-tight mt-1.5"
+            className="font-display font-bold text-foreground text-xl md:text-2xl leading-tight mt-1.5"
           >
             {step.title}
           </motion.h3>
@@ -187,7 +187,7 @@ export function Process() {
     <section
       id="process"
       className="relative py-28 md:py-36 overflow-hidden"
-      style={{ background: "#080808" }}
+      style={{ background: "#FFFFFF" }}
     >
       <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.07) 50%, transparent)" }} />
 
@@ -215,12 +215,12 @@ export function Process() {
                 initial={{ y: "100%", opacity: 0 }}
                 animate={inView ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.85, ease, delay: 0.05 }}
-                className="font-display font-bold text-white leading-[1.05]"
+                className="font-display font-bold text-foreground leading-[1.05]"
                 style={{ fontSize: "clamp(2.2rem, 4vw, 3.8rem)" }}
               >
                 Our battle-tested
                 <br />
-                <span style={{ background: "linear-gradient(135deg, #2563EB 0%, #47A3FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                <span style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                   7-step process.
                 </span>
               </motion.h2>
@@ -246,8 +246,8 @@ export function Process() {
                 <motion.button
                   whileHover={{ scale: 1.04, boxShadow: "0 0 50px rgba(37,99,235,0.4)" }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full font-bold text-sm text-white"
-                  style={{ background: "linear-gradient(135deg, #2563EB 0%, #1d4ed8 100%)", boxShadow: "0 0 30px rgba(37,99,235,0.25)" }}
+                  className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full font-bold text-sm text-foreground"
+                  style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)", boxShadow: "0 0 30px rgba(33,78,207,0.18)" }}
                 >
                   Start Your Journey
                   <ArrowRight size={16} />
@@ -261,10 +261,10 @@ export function Process() {
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.5 }}
               className="mt-10 inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl border"
-              style={{ background: "rgba(37,99,235,0.08)", borderColor: "rgba(37,99,235,0.2)" }}
+              style={{ background: "rgba(33,78,207,0.08)", borderColor: "rgba(33,78,207,0.15)" }}
             >
               <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-              <span className="text-xs font-medium" style={{ color: "rgba(71,163,255,0.8)" }}>
+              <span className="text-xs font-medium" style={{ color: "rgba(33,78,207,0.72)" }}>
                 MVP delivery in 4–8 weeks
               </span>
             </motion.div>

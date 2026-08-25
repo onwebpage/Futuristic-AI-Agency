@@ -326,9 +326,9 @@ export default function ChatBot() {
         whileTap={{ scale: 0.93 }}
         className="fixed bottom-6 right-6 z-[998] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl"
         style={{
-          background: open ? "#1a1a1a" : "linear-gradient(135deg, #47A3FF 0%, #4040E8 100%)",
+          background: open ? "#1a1a1a" : "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)",
           boxShadow: open ? "0 4px 24px rgba(0,0,0,0.5)" : "0 0 40px rgba(71,163,255,0.45), 0 4px 24px rgba(0,0,0,0.4)",
-          border: open ? "1px solid rgba(255,255,255,0.12)" : "none",
+          border: open ? "1px solid rgba(33,78,207,0.12)" : "none",
         }}
         aria-label="Open chat"
       >
@@ -357,7 +357,7 @@ export default function ChatBot() {
             style={{
               width: "min(400px, calc(100vw - 24px))",
               height: "min(580px, calc(100vh - 120px))",
-              background: "#111111",
+              background: "#FFFFFF",
               border: "1px solid rgba(255,255,255,0.1)",
               boxShadow: "0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04)",
             }}
@@ -377,7 +377,7 @@ export default function ChatBot() {
                 </svg>
               </div>
               <div>
-                <p className="text-white font-bold text-sm leading-tight">Thinkatic Guide</p>
+                <p className="text-foreground font-bold text-sm leading-tight">Thinkatic Guide</p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6] animate-pulse" />
                   <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.4)" }}>Online now</span>
@@ -402,7 +402,7 @@ export default function ChatBot() {
                     style={
                       msg.role === "user"
                         ? { background: "#3B82F6", color: "#fff", fontWeight: 500, borderBottomRightRadius: 6 }
-                        : { background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.88)", borderBottomLeftRadius: 6, border: "1px solid rgba(255,255,255,0.07)" }
+                        : { background: "rgba(33,78,207,0.04)", color: "rgba(255,255,255,0.88)", borderBottomLeftRadius: 6, border: "1px solid rgba(255,255,255,0.07)" }
                     }
                     dangerouslySetInnerHTML={{
                       __html: msg.text
@@ -436,7 +436,7 @@ export default function ChatBot() {
                           key={chip}
                           onClick={() => send(chip)}
                           className="px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-150 hover:bg-white/10"
-                          style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.6)", border: "1px solid rgba(255,255,255,0.1)" }}
+                          style={{ background: "rgba(33,78,207,0.04)", color: "#4B5563", border: "1px solid rgba(255,255,255,0.1)" }}
                         >
                           {chip}
                         </button>
@@ -451,7 +451,7 @@ export default function ChatBot() {
                 <div className="flex items-start">
                   <div
                     className="px-4 py-3 rounded-2xl rounded-bl-md flex gap-1.5 items-center"
-                    style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.07)" }}
+                    style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
                   >
                     {[0, 1, 2].map((i) => (
                       <motion.span
@@ -480,7 +480,7 @@ export default function ChatBot() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask me anything…"
-                className="flex-1 bg-transparent text-sm text-white placeholder:text-white/25 outline-none"
+                className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none"
               />
               <motion.button
                 type="submit"
@@ -489,7 +489,7 @@ export default function ChatBot() {
                 whileTap={{ scale: 0.92 }}
                 className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-150 flex-shrink-0"
                 style={{
-                  background: input.trim() && !typing ? "#3B82F6" : "rgba(255,255,255,0.08)",
+                  background: input.trim() && !typing ? "#3B82F6" : "rgba(33,78,207,0.06)",
                 }}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={input.trim() && !typing ? "black" : "rgba(255,255,255,0.3)"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

@@ -19,7 +19,7 @@ const pillars = [
     desc: "HIPAA-compliant outsourcing for healthcare organizations — from patient outreach to revenue cycle management.",
     services: ["Medical Call Transfer", "Patient Outreach", "Appointment Scheduling", "Revenue Cycle Assistance"],
     stat: { value: "62%", label: "Fewer claim denials" },
-    accent: "#2563EB",
+    accent: "#214ECF",
     gradient: "from-[#0B1E3D] to-[#0a1628]",
     featured: false,
   },
@@ -31,7 +31,7 @@ const pillars = [
     desc: "AI-assisted support teams delivering exceptional customer experiences at scale, 24×7 across every channel.",
     services: ["Voice Support", "Live Chat", "WhatsApp Support", "Technical Support"],
     stat: { value: "92%", label: "CSAT score" },
-    accent: "#47A3FF",
+    accent: "#214ECF",
     gradient: "from-[#0a1830] to-[#0a0f1e]",
     featured: false,
   },
@@ -43,7 +43,7 @@ const pillars = [
     desc: "Generate qualified opportunities with intelligent outbound operations built to fill your pipeline at speed.",
     services: ["Outbound Calling", "Appointment Setting", "Lead Qualification", "Sales Development"],
     stat: { value: "3.2×", label: "Pipeline velocity" },
-    accent: "#2563EB",
+    accent: "#214ECF",
     gradient: "from-[#0B1E3D] to-[#0a1628]",
     featured: false,
   },
@@ -55,7 +55,7 @@ const pillars = [
     desc: "Streamlined back-office processes that improve efficiency, reduce errors, and cut operational overhead.",
     services: ["Data Entry", "CRM Management", "Document Processing", "Quality Assurance"],
     stat: { value: "45%", label: "Cost reduction" },
-    accent: "#47A3FF",
+    accent: "#214ECF",
     gradient: "from-[#0a1830] to-[#0a0f1e]",
     featured: false,
   },
@@ -67,7 +67,7 @@ const pillars = [
     desc: "The future of outsourcing — human expertise combined with intelligent automation for measurable, guaranteed outcomes.",
     services: ["AI Voice Agents", "AI Chatbots", "Workflow Automation", "AI Quality Monitoring"],
     stat: { value: "2B+", label: "Operations / year" },
-    accent: "#2563EB",
+    accent: "#214ECF",
     gradient: "from-[#081B3A] to-[#0a1628]",
     featured: true,
   },
@@ -106,7 +106,7 @@ function PillarCard({ pillar, index }: { pillar: (typeof pillars)[0]; index: num
       transition={{ duration: 0.6, ease, delay: index * 0.08 }}
       className={`group relative rounded-2xl p-8 flex flex-col gap-6 border cursor-default overflow-hidden h-full bg-gradient-to-br ${pillar.gradient} transition-all duration-300`}
       style={{
-        borderColor: pillar.featured ? "rgba(37,99,235,0.4)" : "rgba(255,255,255,0.08)",
+        borderColor: pillar.featured ? "rgba(37,99,235,0.4)" : "rgba(33,78,207,0.06)",
       }}
     >
       {/* Subtle hover glow via CSS group-hover */}
@@ -122,10 +122,10 @@ function PillarCard({ pillar, index }: { pillar: (typeof pillars)[0]; index: num
           initial={{ opacity: 0, scale: 0.8 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.5, ease, delay: index * 0.08 + 0.25 }}
-          style={{ background: "rgba(37,99,235,0.2)", border: "1px solid rgba(37,99,235,0.4)" }}
+          style={{ background: "rgba(33,78,207,0.15)", border: "1px solid rgba(37,99,235,0.4)" }}
         >
-          <Star size={10} fill="#47A3FF" color="#47A3FF" />
-          <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#47A3FF" }}>
+          <Star size={10} fill="#214ECF" color="#214ECF" />
+          <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#214ECF" }}>
             Featured
           </span>
         </motion.div>
@@ -155,7 +155,7 @@ function PillarCard({ pillar, index }: { pillar: (typeof pillars)[0]; index: num
       {/* Content */}
       <div className="flex-1 flex flex-col gap-4">
         <div>
-          <h3 className="font-display font-bold text-white text-xl leading-tight mb-2">
+          <h3 className="font-display font-bold text-foreground text-xl leading-tight mb-2">
             {pillar.title}
           </h3>
           <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.48)" }}>
@@ -172,13 +172,13 @@ function PillarCard({ pillar, index }: { pillar: (typeof pillars)[0]; index: num
       </div>
 
       {/* Stat + CTA row */}
-      <div className="flex items-end justify-between gap-4 pt-2 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+      <div className="flex items-end justify-between gap-4 pt-2 border-t" style={{ borderColor: "rgba(33,78,207,0.04)" }}>
         {/* Key metric */}
         <div>
           <p className="font-display font-black text-2xl leading-none" style={{ color: pillar.accent }}>
             {pillar.stat.value}
           </p>
-          <p className="text-[10px] font-medium mt-1" style={{ color: "rgba(255,255,255,0.3)" }}>
+          <p className="text-[10px] font-medium mt-1" style={{ color: "#4B5563" }}>
             {pillar.stat.label}
           </p>
         </div>
@@ -207,7 +207,7 @@ export function BPOServices() {
   return (
     <section
       className="relative py-28 md:py-40 overflow-hidden"
-      style={{ background: "#0a0a0a" }}
+      style={{ background: "#FFFFFF" }}
     >
       {/* Top divider */}
       <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.07) 50%, transparent)" }} />
@@ -237,12 +237,12 @@ export function BPOServices() {
                 initial={{ y: "100%", opacity: 0 }}
                 animate={inView ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.88, ease, delay: 0.05 }}
-                className="font-display font-bold text-white leading-[1.0]"
+                className="font-display font-bold text-foreground leading-[1.0]"
                 style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)" }}
               >
                 Every operation,
                 <br />
-                <span style={{ background: "linear-gradient(135deg, #2563EB 0%, #47A3FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                <span style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                   AI-powered.
                 </span>
               </motion.h2>
@@ -256,7 +256,7 @@ export function BPOServices() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease, delay: 0.2 }}
               className="text-base md:text-lg leading-relaxed mb-6"
-              style={{ color: "rgba(255,255,255,0.42)" }}
+              style={{ color: "#4B5563" }}
             >
               Five core pillars of AI-enabled outsourcing — each combining trained human professionals with intelligent automation to deliver measurable business outcomes.
             </motion.p>
@@ -276,9 +276,9 @@ export function BPOServices() {
                   key={label}
                   className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-semibold"
                   style={{
-                    background: "rgba(37,99,235,0.08)",
+                    background: "rgba(33,78,207,0.08)",
                     borderColor: "rgba(37,99,235,0.22)",
-                    color: "rgba(71,163,255,0.8)",
+                    color: "rgba(33,78,207,0.72)",
                   }}
                 >
                   <Icon size={12} />
@@ -319,7 +319,7 @@ export function BPOServices() {
           style={{ background: "rgba(37,99,235,0.05)", borderColor: "rgba(37,99,235,0.18)" }}
         >
           <div>
-            <p className="text-white font-bold text-base mb-1">Not sure which service fits your needs?</p>
+            <p className="text-foreground font-bold text-base mb-1">Not sure which service fits your needs?</p>
             <p className="text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>
               Our team will assess your operations and recommend the right BPO solution — free of charge.
             </p>
@@ -328,8 +328,8 @@ export function BPOServices() {
             <motion.button
               whileHover={{ scale: 1.04, boxShadow: "0 0 50px rgba(37,99,235,0.4)" }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-bold text-sm text-white flex-shrink-0"
-              style={{ background: "linear-gradient(135deg, #2563EB 0%, #1d4ed8 100%)", boxShadow: "0 0 28px rgba(37,99,235,0.25)" }}
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-bold text-sm text-foreground flex-shrink-0"
+              style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)", boxShadow: "0 0 28px rgba(33,78,207,0.18)" }}
             >
               Get a Free Consultation
               <ArrowRight size={15} />

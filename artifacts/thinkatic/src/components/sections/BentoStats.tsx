@@ -42,7 +42,7 @@ const cardVariants = {
 
 export function BentoStats() {
   return (
-    <section className="py-16 bg-black">
+    <section className="py-16 bg-background">
       <div className="max-w-7xl mx-auto px-6">
         {/* Top row — 3 equal cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
@@ -54,15 +54,15 @@ export function BentoStats() {
               whileInView="visible"
               viewport={{ once: true, margin: '-80px' }}
               variants={cardVariants}
-              className="relative bg-[#111] rounded-2xl p-8 flex flex-col justify-between min-h-[220px] border border-white/5 hover:border-white/15 transition-colors group"
+              className="relative bg-[#FFFFFF] rounded-2xl p-8 flex flex-col justify-between min-h-[220px] border border-border hover:border-border transition-colors group"
             >
-              <span className="text-white/30 text-sm font-mono">{card.index}</span>
+              <span className="text-muted-foreground text-sm font-mono">{card.index}</span>
               <div>
-                <p className="text-white font-display font-bold leading-[1.0] mb-3"
+                <p className="text-foreground font-display font-bold leading-[1.0] mb-3"
                   style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
                   {card.value}
                 </p>
-                <p className="text-white/40 text-sm leading-relaxed whitespace-pre-line">{card.desc}</p>
+                <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">{card.desc}</p>
               </div>
               {/* Subtle green glow on hover */}
               <div className="absolute inset-0 rounded-2xl bg-[#3B82F6]/0 group-hover:bg-[#3B82F6]/[0.03] transition-colors pointer-events-none" />
@@ -80,17 +80,17 @@ export function BentoStats() {
               whileInView="visible"
               viewport={{ once: true, margin: '-80px' }}
               variants={cardVariants}
-              className="relative bg-[#111] rounded-2xl p-8 flex flex-col justify-between min-h-[200px] border border-white/5 hover:border-white/15 transition-colors group"
+              className="relative bg-[#FFFFFF] rounded-2xl p-8 flex flex-col justify-between min-h-[200px] border border-border hover:border-border transition-colors group"
             >
-              <span className="text-white/30 text-sm font-mono">{card.index}</span>
+              <span className="text-muted-foreground text-sm font-mono">{card.index}</span>
               <div>
                 <p
-                  className="text-white font-display font-bold leading-[1.0] mb-3"
+                  className="text-foreground font-display font-bold leading-[1.0] mb-3"
                   style={{ fontSize: card.large ? 'clamp(1.6rem, 3vw, 2.8rem)' : 'clamp(1.6rem, 3vw, 2.5rem)' }}
                 >
                   {card.value}
                 </p>
-                <p className="text-white/40 text-sm leading-relaxed">{card.desc}</p>
+                <p className="text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
               </div>
               <div className="absolute inset-0 rounded-2xl bg-[#3B82F6]/0 group-hover:bg-[#3B82F6]/[0.03] transition-colors pointer-events-none" />
             </motion.div>

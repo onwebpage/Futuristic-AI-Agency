@@ -150,41 +150,41 @@ function SectionBlock({ s, index }: { s: Section; index: number }) {
       className="border-t pt-10"
       style={{ borderColor: "rgba(255,255,255,0.07)" }}
     >
-      <h2 className="text-white font-bold text-xl mb-5">
+      <h2 className="text-foreground font-bold text-xl mb-5">
         {String(index + 1).padStart(2, "0")}. {s.title}
       </h2>
       {s.subsections ? (
         <div className="flex flex-col gap-7">
           {s.subsections.map((sub) => (
             <div key={sub.heading}>
-              <p className="text-white/70 font-semibold text-sm mb-3">{sub.heading}</p>
-              {sub.body && <p className="text-white/50 text-sm mb-3 leading-relaxed">{sub.body}</p>}
+              <p className="text-muted-foreground font-semibold text-sm mb-3">{sub.heading}</p>
+              {sub.body && <p className="text-muted-foreground text-sm mb-3 leading-relaxed">{sub.body}</p>}
               {sub.bullets && (
                 <ul className="flex flex-col gap-1.5 mb-3 pl-4">
                   {sub.bullets.map((b) => (
-                    <li key={b} className="text-white/50 text-sm flex items-start gap-2">
+                    <li key={b} className="text-muted-foreground text-sm flex items-start gap-2">
                       <span className="text-[#3B82F6] mt-1.5 flex-shrink-0">•</span>{b}
                     </li>
                   ))}
                 </ul>
               )}
-              {sub.note && <p className="text-white/35 text-sm italic">{sub.note}</p>}
+              {sub.note && <p className="text-muted-foreground text-sm italic">{sub.note}</p>}
             </div>
           ))}
         </div>
       ) : (
         <>
-          {s.body && <p className="text-white/50 text-sm mb-4 leading-relaxed whitespace-pre-line">{s.body}</p>}
+          {s.body && <p className="text-muted-foreground text-sm mb-4 leading-relaxed whitespace-pre-line">{s.body}</p>}
           {s.bullets && (
             <ul className="flex flex-col gap-1.5 mb-4 pl-4">
               {s.bullets.map((b) => (
-                <li key={b} className="text-white/50 text-sm flex items-start gap-2">
+                <li key={b} className="text-muted-foreground text-sm flex items-start gap-2">
                   <span className="text-[#3B82F6] mt-1.5 flex-shrink-0">•</span>{b}
                 </li>
               ))}
             </ul>
           )}
-          {s.note && <p className="text-white/35 text-sm italic">{s.note}</p>}
+          {s.note && <p className="text-muted-foreground text-sm italic">{s.note}</p>}
         </>
       )}
     </motion.div>
@@ -194,23 +194,23 @@ function SectionBlock({ s, index }: { s: Section; index: number }) {
 export default function TermsPage() {
   return (
     <Layout>
-      <section className="pt-40 pb-24 bg-black">
+      <section className="pt-40 pb-24 bg-background">
         <div className="max-w-4xl mx-auto px-6">
           <motion.p initial="hidden" animate="visible" variants={fadeUp}
             className="text-xs font-mono uppercase tracking-[0.25em] mb-4" style={{ color: "#3B82F6" }}>
             Legal
           </motion.p>
           <motion.h1 initial="hidden" animate="visible" variants={fadeUp} transition={{ delay: 0.05 }}
-            className="font-display font-bold text-white mb-4 leading-[1.05]"
+            className="font-display font-bold text-foreground mb-4 leading-[1.05]"
             style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}>
             Terms of Service
           </motion.h1>
           <motion.p initial="hidden" animate="visible" variants={fadeUp} transition={{ delay: 0.1 }}
-            className="text-white/40 text-sm font-mono mb-6">
+            className="text-muted-foreground text-sm font-mono mb-6">
             Effective Date: 01st May 2026
           </motion.p>
           <motion.p initial="hidden" animate="visible" variants={fadeUp} transition={{ delay: 0.15 }}
-            className="text-white/60 text-base leading-relaxed mb-16 max-w-2xl">
+            className="text-muted-foreground text-base leading-relaxed mb-16 max-w-2xl">
             By accessing or using Thinkatic services, you agree to these Terms of Use. Please read them carefully before engaging our services.
           </motion.p>
 

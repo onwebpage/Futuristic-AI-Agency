@@ -14,7 +14,7 @@ function Shimmer({ className }: { className?: string }) {
       <motion.div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%)",
+          background: "linear-gradient(90deg, transparent 0%, rgba(33,78,207,0.04) 50%, transparent 100%)",
         }}
         animate={{ x: ["-100%", "100%"] }}
         transition={{ duration: 1.4, repeat: Infinity, ease: "linear" }}
@@ -28,7 +28,7 @@ export function PageSkeleton() {
   return (
     <div
       className="min-h-[100dvh] w-full"
-      style={{ background: "#050508" }}
+      style={{ background: "#FFFFFF" }}
       role="status"
       aria-label="Loading page…"
       aria-busy="true"
@@ -36,7 +36,7 @@ export function PageSkeleton() {
       {/* Navbar skeleton */}
       <div
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10"
-        style={{ height: "68px", background: "rgba(5,5,8,0.95)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}
+        style={{ height: "68px", background: "rgba(5,5,8,0.95)", borderBottom: "1px solid rgba(33,78,207,0.04)" }}
       >
         <Shimmer className="h-10 w-36" />
         <div className="hidden md:flex items-center gap-4">
@@ -68,7 +68,7 @@ export function PageSkeleton() {
             <div
               key={i}
               className="rounded-2xl p-6 flex flex-col gap-3"
-              style={{ background: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.06)" }}
+              style={{ background: "rgba(255,255,255,0.025)", border: "1px solid rgba(33,78,207,0.04)" }}
             >
               <Shimmer className="h-8 w-8 rounded-xl" />
               <Shimmer className="h-5 w-3/4" />

@@ -37,7 +37,7 @@ export function ProjectCTA() {
     <section
       ref={sectionRef}
       className="relative py-32 md:py-44 overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #050d1a 0%, #030810 50%, #050d1a 100%)" }}
+      style={{ background: "linear-gradient(180deg, #F5F8FF 0%, #F5F8FF 50%, #F5F8FF 100%)" }}
     >
       <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(37,99,235,0.3) 50%, transparent)" }} />
 
@@ -46,7 +46,7 @@ export function ProjectCTA() {
         <MovingGrid opacity={0.025} size={52} duration={35} />
         <div
           className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(37,99,235,0.08) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(33,78,207,0.08) 0%, transparent 70%)" }}
         />
       </motion.div>
 
@@ -85,7 +85,7 @@ export function ProjectCTA() {
               >
                 {s.value}
               </span>
-              <span className="text-xs font-medium uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.3)" }}>
+              <span className="text-xs font-medium uppercase tracking-wider" style={{ color: "#4B5563" }}>
                 {s.label}
               </span>
             </motion.div>
@@ -99,7 +99,7 @@ export function ProjectCTA() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 1.2, ease }}
           className="mb-16 h-px origin-center"
-          style={{ background: "linear-gradient(90deg, transparent, rgba(37,99,235,0.25) 50%, transparent)" }}
+          style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.18) 50%, transparent)" }}
         />
 
         {/* ── Main heading ── */}
@@ -121,13 +121,13 @@ export function ProjectCTA() {
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.9, ease, delay: 0.1 }}
-              className="font-display font-bold text-white leading-[1.0]"
+              className="font-display font-bold text-foreground leading-[1.0]"
               style={{ fontSize: "clamp(2.6rem, 6vw, 5.5rem)" }}
             >
               Ready to scale your
               <br />
               <span
-                style={{ background: "linear-gradient(135deg, #2563EB 0%, #47A3FF 50%, #60A5FA 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+                style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 50%, #60A5FA 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
               >
                 operations with AI?
               </span>
@@ -140,7 +140,7 @@ export function ProjectCTA() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.7, delay: 0.25 }}
             className="text-base md:text-lg max-w-xl mx-auto mb-10"
-            style={{ color: "rgba(255,255,255,0.42)" }}
+            style={{ color: "#4B5563" }}
           >
             Book a discovery call, request a proposal, or send us a message. Our team responds within 24 hours.
           </motion.p>
@@ -157,10 +157,10 @@ export function ProjectCTA() {
               <motion.button
                 whileHover={{ scale: 1.04, boxShadow: "0 0 60px rgba(37,99,235,0.55), 0 8px 40px rgba(0,0,0,0.5)" }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-3 px-10 py-4.5 rounded-full font-bold text-white"
+                className="inline-flex items-center gap-3 px-10 py-4.5 rounded-full font-bold text-foreground"
                 style={{
-                  background: "linear-gradient(135deg, #2563EB 0%, #1d4ed8 100%)",
-                  boxShadow: "0 0 40px rgba(37,99,235,0.35), 0 4px 24px rgba(0,0,0,0.4)",
+                  background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)",
+                  boxShadow: "0 0 40px rgba(33,78,207,0.25), 0 4px 24px rgba(0,0,0,0.4)",
                   fontSize: "0.95rem",
                   letterSpacing: "0.04em",
                   padding: "1rem 2.5rem",
@@ -173,13 +173,13 @@ export function ProjectCTA() {
 
             <Link href="/contact">
               <motion.button
-                whileHover={{ scale: 1.04, borderColor: "rgba(71,163,255,0.45)", background: "rgba(37,99,235,0.08)" }}
+                whileHover={{ scale: 1.04, borderColor: "rgba(71,163,255,0.45)", background: "rgba(33,78,207,0.08)" }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-3 rounded-full font-bold border transition-all duration-300"
                 style={{
                   borderColor: "rgba(255,255,255,0.14)",
-                  color: "rgba(255,255,255,0.7)",
-                  background: "rgba(255,255,255,0.03)",
+                  color: "#4B5563",
+                  background: "rgba(244,247,255,0.8)",
                   fontSize: "0.95rem",
                   letterSpacing: "0.04em",
                   padding: "1rem 2.5rem",
@@ -203,7 +203,7 @@ export function ProjectCTA() {
             {TRUST_POINTS.map((point) => (
               <div key={point} className="flex items-center gap-2">
                 <CheckCircle2 size={14} style={{ color: "#34D399", flexShrink: 0 }} />
-                <span className="text-sm" style={{ color: "rgba(255,255,255,0.38)" }}>{point}</span>
+                <span className="text-sm" style={{ color: "#4B5563" }}>{point}</span>
               </div>
             ))}
           </motion.div>
@@ -220,17 +220,17 @@ export function ProjectCTA() {
           {/* Card 1: book */}
           <div
             className="rounded-2xl border p-8 flex flex-col gap-5 group hover:border-blue-500/30 transition-all duration-400"
-            style={{ background: "rgba(37,99,235,0.06)", borderColor: "rgba(37,99,235,0.15)" }}
+            style={{ background: "rgba(37,99,235,0.06)", borderColor: "rgba(33,78,207,0.12)" }}
           >
             <div
               className="w-12 h-12 rounded-xl flex items-center justify-center"
-              style={{ background: "rgba(37,99,235,0.15)", border: "1px solid rgba(37,99,235,0.3)" }}
+              style={{ background: "rgba(33,78,207,0.12)", border: "1px solid rgba(37,99,235,0.3)" }}
             >
-              <CalendarDays size={22} style={{ color: "#47A3FF" }} />
+              <CalendarDays size={22} style={{ color: "#214ECF" }} />
             </div>
             <div>
-              <h3 className="text-white font-bold text-lg mb-2">Book a Free Consultation</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
+              <h3 className="text-foreground font-bold text-lg mb-2">Book a Free Consultation</h3>
+              <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
                 45-minute strategy session with a BPO expert. We'll map your current operations and identify the highest-ROI automation opportunities.
               </p>
             </div>
@@ -239,7 +239,7 @@ export function ProjectCTA() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2 text-sm font-bold transition-colors"
-                style={{ color: "#47A3FF" }}
+                style={{ color: "#214ECF" }}
               >
                 Schedule Now <ArrowRight size={15} />
               </motion.button>
@@ -248,18 +248,18 @@ export function ProjectCTA() {
 
           {/* Card 2: proposal */}
           <div
-            className="rounded-2xl border p-8 flex flex-col gap-5 group hover:border-white/15 transition-all duration-400"
-            style={{ background: "rgba(255,255,255,0.025)", borderColor: "rgba(255,255,255,0.08)" }}
+            className="rounded-2xl border p-8 flex flex-col gap-5 group hover:border-border transition-all duration-400"
+            style={{ background: "rgba(255,255,255,0.025)", borderColor: "rgba(33,78,207,0.06)" }}
           >
             <div
               className="w-12 h-12 rounded-xl flex items-center justify-center"
-              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}
+              style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(33,78,207,0.12)" }}
             >
-              <FileText size={22} style={{ color: "rgba(255,255,255,0.7)" }} />
+              <FileText size={22} style={{ color: "#4B5563" }} />
             </div>
             <div>
-              <h3 className="text-white font-bold text-lg mb-2">Request a Custom Proposal</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
+              <h3 className="text-foreground font-bold text-lg mb-2">Request a Custom Proposal</h3>
+              <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
                 Tell us your volume, industry, and goals. We'll send a detailed scope, staffing plan, and pricing within 24 hours — no generic templates.
               </p>
             </div>
@@ -277,7 +277,7 @@ export function ProjectCTA() {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(37,99,235,0.25) 50%, transparent)" }} />
+      <div className="absolute bottom-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.18) 50%, transparent)" }} />
     </section>
   );
 }

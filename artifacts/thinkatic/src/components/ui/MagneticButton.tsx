@@ -23,11 +23,11 @@ export function MagneticButton({
 
   const variants = {
     primary:
-      "bg-primary text-white hover:shadow-[0_0_40px_rgba(71,163,255,0.5)]",
+      "bg-primary text-foreground hover:shadow-[0_0_40px_rgba(33,78,207,0.38)]",
     secondary:
-      "bg-secondary text-white hover:shadow-[0_0_40px_rgba(99,102,241,0.5)]",
+      "bg-secondary text-foreground hover:shadow-[0_0_40px_rgba(99,102,241,0.5)]",
     outline:
-      "border border-primary/50 text-foreground hover:bg-primary/10 hover:shadow-[0_0_30px_rgba(71,163,255,0.2)]",
+      "border border-primary/50 text-foreground hover:bg-primary/10 hover:shadow-[0_0_30px_rgba(33,78,207,0.18)]",
   };
 
   return (
@@ -52,7 +52,7 @@ export function MagneticButton({
           transition={{ duration: 0.5, ease: "easeInOut" }}
           style={{
             background:
-              "linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)",
+              "linear-gradient(90deg, transparent, rgba(33,78,207,0.12), transparent)",
           }}
         />
         <motion.span className="relative z-10 block">

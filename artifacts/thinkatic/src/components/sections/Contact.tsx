@@ -27,20 +27,20 @@ export function Contact() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-medium text-muted-foreground">Name</label>
-              <input type="text" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors" placeholder="John Doe" />
+              <input type="text" className="w-full bg-background/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors" placeholder="John Doe" />
             </div>
             <div className="space-y-2">
               <label className="text-sm font-medium text-muted-foreground">Email</label>
-              <input type="email" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors" placeholder="john@company.com" />
+              <input type="email" className="w-full bg-background/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors" placeholder="john@company.com" />
             </div>
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-muted-foreground">Company</label>
-            <input type="text" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors" placeholder="Acme Inc" />
+            <input type="text" className="w-full bg-background/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-primary transition-colors" placeholder="Acme Inc" />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-muted-foreground">Project Details</label>
-            <textarea className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 h-32 focus:outline-none focus:border-primary transition-colors" placeholder="Tell us what you want to build..."></textarea>
+            <textarea className="w-full bg-background/50 border border-border rounded-lg px-4 py-3 h-32 focus:outline-none focus:border-primary transition-colors" placeholder="Tell us what you want to build..."></textarea>
           </div>
           <MagneticButton className="w-full justify-center text-lg mt-4">Submit Inquiry</MagneticButton>
         </motion.form>

@@ -83,9 +83,9 @@ function FAQItem({ faq, index }: { faq: typeof FAQS[0]; index: number }) {
         <span
           className="mt-0.5 flex-shrink-0 hidden sm:inline-flex px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider"
           style={{
-            background: "rgba(37,99,235,0.12)",
+            background: "rgba(33,78,207,0.09)",
             color: "rgba(71,163,255,0.7)",
-            border: "1px solid rgba(37,99,235,0.2)",
+            border: "1px solid rgba(33,78,207,0.15)",
           }}
         >
           {faq.category}
@@ -103,12 +103,12 @@ function FAQItem({ faq, index }: { faq: typeof FAQS[0]; index: number }) {
           transition={{ duration: 0.35, ease }}
           className="flex-shrink-0 mt-0.5 w-7 h-7 rounded-full flex items-center justify-center border"
           style={{
-            borderColor: open ? "rgba(37,99,235,0.5)" : "rgba(255,255,255,0.12)",
-            background: open ? "rgba(37,99,235,0.15)" : "transparent",
+            borderColor: open ? "rgba(37,99,235,0.5)" : "rgba(33,78,207,0.12)",
+            background: open ? "rgba(33,78,207,0.12)" : "transparent",
             transition: "background 0.3s, border-color 0.3s",
           }}
         >
-          <ChevronDown size={14} style={{ color: open ? "#47A3FF" : "rgba(255,255,255,0.4)" }} />
+          <ChevronDown size={14} style={{ color: open ? "#214ECF" : "rgba(255,255,255,0.4)" }} />
         </motion.div>
       </button>
 
@@ -146,7 +146,7 @@ export function FAQ() {
   return (
     <section
       className="relative py-28 md:py-36 overflow-hidden"
-      style={{ background: "#070707", borderTop: "1px solid rgba(255,255,255,0.05)" }}
+      style={{ background: "#070707", borderTop: "1px solid rgba(33,78,207,0.04)" }}
     >
       {/* Ambient glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] pointer-events-none"
@@ -171,7 +171,7 @@ export function FAQ() {
               initial={{ y: "100%", opacity: 0 }}
               animate={inView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.85, ease, delay: 0.05 }}
-              className="font-display font-bold text-white leading-[1.05]"
+              className="font-display font-bold text-foreground leading-[1.05]"
               style={{ fontSize: "clamp(2rem, 4.5vw, 3.8rem)" }}
             >
               Frequently asked questions
@@ -202,16 +202,16 @@ export function FAQ() {
               onClick={() => setActiveCategory(cat)}
               className="relative px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300"
               style={{
-                background: activeCategory === cat ? "rgba(37,99,235,0.2)" : "rgba(255,255,255,0.04)",
-                border: `1px solid ${activeCategory === cat ? "rgba(37,99,235,0.5)" : "rgba(255,255,255,0.08)"}`,
-                color: activeCategory === cat ? "#47A3FF" : "rgba(255,255,255,0.45)",
+                background: activeCategory === cat ? "rgba(33,78,207,0.15)" : "rgba(255,255,255,0.04)",
+                border: `1px solid ${activeCategory === cat ? "rgba(37,99,235,0.5)" : "rgba(33,78,207,0.06)"}`,
+                color: activeCategory === cat ? "#214ECF" : "rgba(255,255,255,0.45)",
               }}
             >
               {activeCategory === cat && (
                 <motion.div
                   layoutId="faq-active-pill"
                   className="absolute inset-0 rounded-full"
-                  style={{ background: "rgba(37,99,235,0.12)" }}
+                  style={{ background: "rgba(33,78,207,0.09)" }}
                   transition={{ duration: 0.3, ease }}
                 />
               )}
@@ -242,17 +242,17 @@ export function FAQ() {
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.7, ease }}
           className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 rounded-2xl border p-8"
-          style={{ background: "rgba(37,99,235,0.06)", borderColor: "rgba(37,99,235,0.2)" }}
+          style={{ background: "rgba(37,99,235,0.06)", borderColor: "rgba(33,78,207,0.15)" }}
         >
           <div className="flex items-start gap-4">
             <div
               className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-              style={{ background: "rgba(37,99,235,0.15)", border: "1px solid rgba(37,99,235,0.3)" }}
+              style={{ background: "rgba(33,78,207,0.12)", border: "1px solid rgba(37,99,235,0.3)" }}
             >
-              <MessageCircle size={18} style={{ color: "#47A3FF" }} />
+              <MessageCircle size={18} style={{ color: "#214ECF" }} />
             </div>
             <div>
-              <p className="text-white font-semibold text-sm mb-1">Still have questions?</p>
+              <p className="text-foreground font-semibold text-sm mb-1">Still have questions?</p>
               <p className="text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>
                 Our team typically responds within 2 hours during business days.
               </p>
@@ -260,10 +260,10 @@ export function FAQ() {
           </div>
           <Link href="/contact">
             <motion.button
-              whileHover={{ scale: 1.04, boxShadow: "0 0 40px rgba(37,99,235,0.35)" }}
+              whileHover={{ scale: 1.04, boxShadow: "0 0 40px rgba(33,78,207,0.25)" }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full font-bold text-sm text-white flex-shrink-0"
-              style={{ background: "linear-gradient(135deg, #2563EB 0%, #1d4ed8 100%)", boxShadow: "0 0 24px rgba(37,99,235,0.2)" }}
+              className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full font-bold text-sm text-foreground flex-shrink-0"
+              style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)", boxShadow: "0 0 24px rgba(33,78,207,0.15)" }}
             >
               Talk to Us
               <ArrowRight size={15} />

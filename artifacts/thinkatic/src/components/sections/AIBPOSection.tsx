@@ -64,14 +64,14 @@ function NetworkCanvas() {
         >
           {node.isHub ? (
             <div className="flex flex-col items-center gap-2">
-              <div className="w-12 h-12 rounded-full border border-[#47A3FF]/30 bg-[radial-gradient(circle,#47A3FF_0%,#2563EB_60%,#1d4ed8_100%)] flex items-center justify-center shadow-[0_0_24px_rgba(37,99,235,0.18)]">
-                <span className="text-[10px] font-bold text-white">AI</span>
+              <div className="w-12 h-12 rounded-full border border-[#214ECF]/30 bg-[radial-gradient(circle,#214ECF_0%,#214ECF_60%,#214ECF_100%)] flex items-center justify-center shadow-[0_0_24px_rgba(37,99,235,0.18)]">
+                <span className="text-[10px] font-bold text-foreground">AI</span>
               </div>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-1.5">
-              <div className="w-3.5 h-3.5 rounded-full bg-[#47A3FF] shadow-[0_0_10px_rgba(71,163,255,0.22)]" />
-              <span className="text-[7px] font-mono tracking-[0.18em] text-white/45 whitespace-nowrap">{node.label}</span>
+              <div className="w-3.5 h-3.5 rounded-full bg-[#214ECF] shadow-[0_0_10px_rgba(71,163,255,0.22)]" />
+              <span className="text-[7px] font-mono tracking-[0.18em] text-muted-foreground whitespace-nowrap">{node.label}</span>
             </div>
           )}
         </div>
@@ -92,7 +92,7 @@ function SolutionCard({ s, i }: { s: (typeof solutions)[0]; i: number }) {
         initial={{ opacity: 0, y: 30, scale: 0.97 }}
         animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: i * 0.07 }}
-        className="group relative rounded-xl p-6 border border-white/8 bg-[#0a0a14] cursor-default overflow-hidden h-full"
+        className="group relative rounded-xl p-6 border border-border bg-[#0a0a14] cursor-default overflow-hidden h-full"
         style={{ transition: "border-color 0.35s, box-shadow 0.35s" }}
       >
         {/* Hover glow */}
@@ -103,7 +103,7 @@ function SolutionCard({ s, i }: { s: (typeof solutions)[0]; i: number }) {
         {/* Top border reveal */}
         <div
           className="absolute top-0 left-0 h-px w-0 group-hover:w-full transition-all duration-500 pointer-events-none"
-          style={{ background: "linear-gradient(90deg, #2563EB, transparent)" }}
+          style={{ background: "linear-gradient(90deg, #214ECF, transparent)" }}
         />
 
         <div className="flex items-center gap-2 mb-3 relative z-10">
@@ -113,17 +113,17 @@ function SolutionCard({ s, i }: { s: (typeof solutions)[0]; i: number }) {
             initial={{ scaleX: 0 }}
             animate={inView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.07 + 0.2 }}
-            style={{ background: "rgba(37,99,235,0.2)", transformOrigin: "left" }}
+            style={{ background: "rgba(33,78,207,0.15)", transformOrigin: "left" }}
           />
         </div>
 
         <h3
-          className="font-bold text-white mb-2 leading-tight relative z-10 group-hover:text-[#47A3FF] transition-colors duration-300"
+          className="font-bold text-foreground mb-2 leading-tight relative z-10 group-hover:text-[#214ECF] transition-colors duration-300"
           style={{ fontSize: "0.95rem" }}
         >
           {s.name}
         </h3>
-        <p className="text-xs leading-relaxed relative z-10" style={{ color: "rgba(255,255,255,0.38)" }}>
+        <p className="text-xs leading-relaxed relative z-10" style={{ color: "#4B5563" }}>
           {s.desc}
         </p>
       </motion.div>
@@ -150,7 +150,7 @@ export function AIBPOSection() {
         />
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full"
-          style={{ background: "radial-gradient(ellipse, rgba(37,99,235,0.08) 0%, transparent 68%)", filter: "blur(20px)" }}
+          style={{ background: "radial-gradient(ellipse, rgba(33,78,207,0.08) 0%, transparent 68%)", filter: "blur(20px)" }}
         />
         <div
           className="absolute top-1/4 right-1/4 w-[360px] h-[260px] rounded-full"
@@ -177,14 +177,14 @@ export function AIBPOSection() {
               initial={{ y: "100%", opacity: 0 }}
               animate={inView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display font-bold text-white leading-[1.0]"
+              className="font-display font-bold text-foreground leading-[1.0]"
               style={{ fontSize: "clamp(2.4rem, 5.5vw, 4.5rem)" }}
             >
               The Future of Outsourcing
               <br />
               <span
                 style={{
-                  background: "linear-gradient(135deg, #2563EB 0%, #47A3FF 60%, #2563EB 100%)",
+                  background: "linear-gradient(135deg, #214ECF 0%, #214ECF 60%, #214ECF 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
@@ -199,7 +199,7 @@ export function AIBPOSection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
             className="mt-6 text-base max-w-2xl mx-auto"
-            style={{ color: "rgba(255,255,255,0.45)" }}
+            style={{ color: "#4B5563" }}
           >
             Human expertise, amplified by AI. Every solution combines trained professionals
             with intelligent automation to deliver measurable business outcomes.
@@ -216,15 +216,15 @@ export function AIBPOSection() {
           style={{
             height: "320px",
             background: "linear-gradient(135deg, #050510 0%, #080820 100%)",
-            border: "1px solid rgba(37,99,235,0.2)",
-            boxShadow: "0 0 32px rgba(37,99,235,0.08), inset 0 0 24px rgba(37,99,235,0.02)",
+            border: "1px solid rgba(33,78,207,0.15)",
+            boxShadow: "0 0 32px rgba(33,78,207,0.08), inset 0 0 24px rgba(37,99,235,0.02)",
           }}
         >
           <div className="absolute top-0 left-0 w-12 h-12 pointer-events-none" style={{
-            background: "linear-gradient(135deg, rgba(37,99,235,0.25) 0%, transparent 100%)"
+            background: "linear-gradient(135deg, rgba(33,78,207,0.18) 0%, transparent 100%)"
           }} />
           <div className="absolute bottom-0 right-0 w-12 h-12 pointer-events-none" style={{
-            background: "linear-gradient(315deg, rgba(37,99,235,0.25) 0%, transparent 100%)"
+            background: "linear-gradient(315deg, rgba(33,78,207,0.18) 0%, transparent 100%)"
           }} />
 
           <NetworkCanvas />
@@ -242,7 +242,7 @@ export function AIBPOSection() {
             </div>
           </div>
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10">
-            <span className="text-[9px] font-mono tracking-[0.3em] uppercase" style={{ color: "rgba(255,255,255,0.18)" }}>
+            <span className="text-[9px] font-mono tracking-[0.3em] uppercase" style={{ color: "rgba(33,78,207,0.14)" }}>
               THINKATIC AI WORKFLOW ENGINE
             </span>
           </div>

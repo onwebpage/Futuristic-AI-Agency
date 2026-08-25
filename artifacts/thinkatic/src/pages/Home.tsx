@@ -35,14 +35,14 @@ function FinalCTA() {
     <section
       ref={sectionRef}
       className="relative py-32 md:py-44 overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #060606 0%, #050d1a 50%, #060606 100%)" }}
+      style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #F5F8FF 50%, #FFFFFF 100%)" }}
     >
       {/* Top divider */}
-      <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(71,163,255,0.2) 50%, transparent)" }} />
+      <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.18) 50%, transparent)" }} />
 
       {/* Parallax background layer */}
       <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 60%, rgba(37,99,235,0.08) 0%, transparent 65%)" }} />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 60%, rgba(33,78,207,0.08) 0%, transparent 65%)" }} />
       </motion.div>
 
       {/* Glowing orbs */}
@@ -89,8 +89,8 @@ function FinalCTA() {
                 className="flex items-center gap-2 px-3 py-1.5 rounded-full border"
                 style={{ background: "rgba(37,99,235,0.1)", borderColor: "rgba(37,99,235,0.3)" }}
               >
-                <Sparkles size={12} style={{ color: "#47A3FF" }} />
-                <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em]" style={{ color: "rgba(71,163,255,0.8)" }}>
+                <Sparkles size={12} style={{ color: "#214ECF" }} />
+                <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em]" style={{ color: "rgba(33,78,207,0.72)" }}>
                   Start Your Engagement
                 </span>
               </div>
@@ -103,14 +103,14 @@ function FinalCTA() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
-                className="font-display font-bold text-white leading-[1.0]"
+                className="font-display font-bold text-foreground leading-[1.0]"
                 style={{ fontSize: "clamp(2.6rem, 5.5vw, 5rem)" }}
               >
                 Ready to build
                 <br />
                 <span
                   style={{
-                    background: "linear-gradient(135deg, #2563EB 0%, #47A3FF 60%, #93C5FD 100%)",
+                    background: "linear-gradient(135deg, #214ECF 0%, #214ECF 60%, #93C5FD 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
@@ -126,7 +126,7 @@ function FinalCTA() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.7, delay: 0.2 }}
               className="text-base md:text-lg leading-relaxed mb-10 max-w-lg"
-              style={{ color: "rgba(255,255,255,0.45)" }}
+              style={{ color: "#4B5563" }}
             >
               Book a discovery call, request a proposal, or send us a message. Our team responds within 24 hours — no sales pressure, just a real conversation.
             </motion.p>
@@ -149,7 +149,7 @@ function FinalCTA() {
                   className="flex items-center gap-1.5"
                 >
                   <CheckCircle2 size={13} style={{ color: "#34D399", flexShrink: 0 }} />
-                  <span className="text-xs font-medium" style={{ color: "rgba(255,255,255,0.45)" }}>{g}</span>
+                  <span className="text-xs font-medium" style={{ color: "#4B5563" }}>{g}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -166,10 +166,10 @@ function FinalCTA() {
                 <motion.button
                   whileHover={{ scale: 1.04, boxShadow: "0 0 60px rgba(37,99,235,0.55), 0 8px 32px rgba(0,0,0,0.5)" }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-white text-sm tracking-wide"
+                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-foreground text-sm tracking-wide"
                   style={{
-                    background: "linear-gradient(135deg, #2563EB 0%, #1d4ed8 100%)",
-                    boxShadow: "0 0 40px rgba(37,99,235,0.35), 0 4px 24px rgba(0,0,0,0.4)",
+                    background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)",
+                    boxShadow: "0 0 40px rgba(33,78,207,0.25), 0 4px 24px rgba(0,0,0,0.4)",
                     letterSpacing: "0.03em",
                   }}
                 >
@@ -179,13 +179,13 @@ function FinalCTA() {
               </Link>
               <Link href="/contact">
                 <motion.button
-                  whileHover={{ scale: 1.04, borderColor: "rgba(71,163,255,0.5)", background: "rgba(37,99,235,0.08)" }}
+                  whileHover={{ scale: 1.04, borderColor: "rgba(33,78,207,0.38)", background: "rgba(33,78,207,0.08)" }}
                   whileTap={{ scale: 0.97 }}
                   className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold border transition-all duration-300"
                   style={{
-                    borderColor: "rgba(255,255,255,0.12)",
+                    borderColor: "rgba(33,78,207,0.12)",
                     color: "rgba(255,255,255,0.65)",
-                    background: "rgba(255,255,255,0.02)",
+                    background: "rgba(33,78,207,0.02)",
                     fontSize: "0.875rem",
                     letterSpacing: "0.03em",
                   }}
@@ -209,7 +209,7 @@ function FinalCTA() {
             {/* Glow behind card */}
             <div
               className="absolute -inset-8 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse, rgba(37,99,235,0.12) 0%, transparent 70%)", filter: "blur(40px)" }}
+              style={{ background: "radial-gradient(ellipse, rgba(33,78,207,0.09) 0%, transparent 70%)", filter: "blur(40px)" }}
             />
 
             {/* Glass card */}
@@ -217,14 +217,14 @@ function FinalCTA() {
               className="relative rounded-3xl border p-8 md:p-10 overflow-hidden"
               style={{
                 background: "rgba(255,255,255,0.025)",
-                borderColor: "rgba(255,255,255,0.08)",
+                borderColor: "rgba(33,78,207,0.06)",
                 backdropFilter: "blur(20px)",
               }}
             >
               {/* Animated top border */}
               <div
                 className="absolute top-0 left-0 right-0 h-[1.5px]"
-                style={{ background: "linear-gradient(90deg, transparent, rgba(37,99,235,0.6) 30%, rgba(71,163,255,0.8) 50%, rgba(37,99,235,0.6) 70%, transparent)" }}
+                style={{ background: "linear-gradient(90deg, transparent, rgba(37,99,235,0.6) 30%, rgba(33,78,207,0.72) 50%, rgba(37,99,235,0.6) 70%, transparent)" }}
               />
 
               {/* Inner content */}
@@ -237,7 +237,7 @@ function FinalCTA() {
 
               <div className="grid grid-cols-2 gap-5 mb-8">
                 {[
-                  { value: "500+", label: "Enterprise Clients", color: "#47A3FF" },
+                  { value: "500+", label: "Enterprise Clients", color: "#214ECF" },
                   { value: "98.4%", label: "Accuracy Rate", color: "#34D399" },
                   { value: "2B+", label: "Ops / Year", color: "#A78BFA" },
                   { value: "24h", label: "Response Time", color: "#F59E0B" },
@@ -260,7 +260,7 @@ function FinalCTA() {
                     >
                       {stat.value}
                     </p>
-                    <p className="text-[10px] font-medium uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>
+                    <p className="text-[10px] font-medium uppercase tracking-wider" style={{ color: "rgba(33,78,207,0.22)" }}>
                       {stat.label}
                     </p>
                   </motion.div>
@@ -291,8 +291,8 @@ function FinalCTA() {
                     <p className="text-sm leading-relaxed italic mb-2" style={{ color: "rgba(255,255,255,0.65)" }}>
                       "They shipped our AI SaaS MVP in six weeks. Quality is genuinely world-class."
                     </p>
-                    <p className="text-xs font-semibold text-white">Samantha Brooks</p>
-                    <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>Co-founder & CEO · Stackline AI</p>
+                    <p className="text-xs font-semibold text-foreground">Samantha Brooks</p>
+                    <p className="text-[10px] mt-0.5" style={{ color: "rgba(33,78,207,0.22)" }}>Co-founder & CEO · Stackline AI</p>
                   </div>
                 </div>
               </motion.div>
@@ -302,7 +302,7 @@ function FinalCTA() {
       </div>
 
       {/* Bottom divider */}
-      <div className="absolute bottom-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent)" }} />
+      <div className="absolute bottom-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.04) 50%, transparent)" }} />
     </section>
   );
 }

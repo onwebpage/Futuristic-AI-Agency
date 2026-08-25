@@ -87,7 +87,7 @@ function SidebarPanel({ step }: { step: number }) {
   return (
     <div className="hidden lg:flex flex-col justify-between h-full py-2">
       <div>
-        <p className="text-[10px] font-mono uppercase tracking-[0.22em] mb-4" style={{ color: "#47A3FF" }}>
+        <p className="text-[10px] font-mono uppercase tracking-[0.22em] mb-4" style={{ color: "#214ECF" }}>
           Why Thinkatic
         </p>
         <div className="flex flex-col gap-3">
@@ -100,15 +100,15 @@ function SidebarPanel({ step }: { step: number }) {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 + i * 0.08, duration: 0.4, ease }}
                 className="flex items-start gap-3 p-3.5 rounded-2xl border"
-                style={{ background: "rgba(255,255,255,0.03)", borderColor: "rgba(255,255,255,0.07)" }}
+                style={{ background: "rgba(244,247,255,0.8)", borderColor: "rgba(255,255,255,0.07)" }}
               >
                 <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
                   style={{ background: "rgba(71,163,255,0.10)" }}>
-                  <Icon size={14} className="text-[#47A3FF]" />
+                  <Icon size={14} className="text-[#214ECF]" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white/85 leading-none mb-1">{h.label}</p>
-                  <p className="text-xs text-white/35">{h.desc}</p>
+                  <p className="text-sm font-semibold text-foreground/85 leading-none mb-1">{h.label}</p>
+                  <p className="text-xs text-muted-foreground">{h.desc}</p>
                 </div>
               </motion.div>
             );
@@ -118,20 +118,20 @@ function SidebarPanel({ step }: { step: number }) {
 
       {/* Progress visual */}
       <div className="mt-8">
-        <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/25 mb-3">Proposal Steps</p>
+        <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-3">Proposal Steps</p>
         {["Your Details", "Project Scope", "Final Review"].map((label, i) => (
           <div key={label} className="flex items-center gap-3 mb-2.5">
             <div
               className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 transition-all duration-300"
               style={{
-                background: i < step ? "linear-gradient(135deg,#47A3FF,#4040E8)" : i === step ? "rgba(71,163,255,0.15)" : "rgba(255,255,255,0.05)",
-                color: i < step ? "#fff" : i === step ? "#47A3FF" : "rgba(255,255,255,0.25)",
-                border: `1px solid ${i <= step ? "rgba(71,163,255,0.4)" : "rgba(255,255,255,0.08)"}`,
+                background: i < step ? "linear-gradient(135deg,#214ECF,#214ECF)" : i === step ? "rgba(33,78,207,0.12)" : "rgba(33,78,207,0.04)",
+                color: i < step ? "#fff" : i === step ? "#214ECF" : "rgba(33,78,207,0.16)",
+                border: `1px solid ${i <= step ? "rgba(71,163,255,0.4)" : "rgba(33,78,207,0.06)"}`,
               }}
             >
               {i < step ? "✓" : i + 1}
             </div>
-            <span className={`text-xs transition-colors ${i === step ? "text-white/80" : i < step ? "text-white/40" : "text-white/20"}`}>
+            <span className={`text-xs transition-colors ${i === step ? "text-muted-foreground" : i < step ? "text-muted-foreground" : "text-foreground/20"}`}>
               {label}
             </span>
           </div>
@@ -208,8 +208,8 @@ export default function RequestProposalPage() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative pt-40 pb-16 overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0 bg-[#050508]" />
+      <section className="relative pt-40 pb-16 overflow-hidden border-b border-border">
+        <div className="absolute inset-0 bg-[#FFFFFF]" />
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(71,163,255,0.09) 0%, transparent 65%)" }}
@@ -219,18 +219,18 @@ export default function RequestProposalPage() {
 
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
           <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
-            <motion.p variants={fadeUp} className="text-xs font-mono uppercase tracking-[0.22em] mb-5" style={{ color: "#47A3FF" }}>
+            <motion.p variants={fadeUp} className="text-xs font-mono uppercase tracking-[0.22em] mb-5" style={{ color: "#214ECF" }}>
               Request a Proposal
             </motion.p>
             <motion.h1
               variants={fadeUp}
-              className="font-display font-black text-white leading-[1.0] mb-5"
+              className="font-display font-black text-foreground leading-[1.0] mb-5"
               style={{ fontSize: "clamp(2.5rem,5vw,4rem)" }}
             >
               Get a Custom Proposal<br />
               <span className="text-gradient">Built for Your Business</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-white/45 text-base leading-relaxed max-w-xl mx-auto">
+            <motion.p variants={fadeUp} className="text-muted-foreground text-base leading-relaxed max-w-xl mx-auto">
               Tell us about your goals and we'll prepare a detailed scope, pricing breakdown, and implementation roadmap — no obligation.
             </motion.p>
           </motion.div>
@@ -238,7 +238,7 @@ export default function RequestProposalPage() {
       </section>
 
       {/* Form section */}
-      <section className="py-16 bg-[#050508]">
+      <section className="py-16 bg-[#FFFFFF]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12">
 
@@ -253,7 +253,7 @@ export default function RequestProposalPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.2, ease }}
               className="rounded-3xl border p-8 sm:p-10"
-              style={{ background: "rgba(255,255,255,0.025)", borderColor: "rgba(255,255,255,0.08)" }}
+              style={{ background: "rgba(255,255,255,0.025)", borderColor: "rgba(33,78,207,0.06)" }}
             >
               {/* Mobile step indicator */}
               <div className="lg:hidden mb-8">
@@ -274,8 +274,8 @@ export default function RequestProposalPage() {
 
                 ) : step === 0 ? (
                   <motion.div key="s1" {...slideIn}>
-                    <h2 className="font-display font-bold text-white text-2xl mb-1">About You</h2>
-                    <p className="text-white/40 text-sm mb-8">Step 1 of 3 — your contact information</p>
+                    <h2 className="font-display font-bold text-foreground text-2xl mb-1">About You</h2>
+                    <p className="text-muted-foreground text-sm mb-8">Step 1 of 3 — your contact information</p>
 
                     <form onSubmit={form1.handleSubmit(onStep1)} className="flex flex-col gap-5">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -309,8 +309,8 @@ export default function RequestProposalPage() {
 
                       <div className="flex justify-end pt-2">
                         <motion.button type="submit" whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
-                          className="flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-white"
-                          style={{ background: "linear-gradient(135deg,#47A3FF,#4040E8)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}>
+                          className="flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-foreground"
+                          style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}>
                           Next: Project Scope <ArrowRight size={14} />
                         </motion.button>
                       </div>
@@ -319,19 +319,19 @@ export default function RequestProposalPage() {
 
                 ) : step === 1 ? (
                   <motion.div key="s2" {...slideIn}>
-                    <h2 className="font-display font-bold text-white text-2xl mb-1">Project Scope</h2>
-                    <p className="text-white/40 text-sm mb-8">Step 2 of 3 — what do you need?</p>
+                    <h2 className="font-display font-bold text-foreground text-2xl mb-1">Project Scope</h2>
+                    <p className="text-muted-foreground text-sm mb-8">Step 2 of 3 — what do you need?</p>
 
                     <form onSubmit={form2.handleSubmit(onStep2)} className="flex flex-col gap-6">
 
                       {/* Service multi-select cards */}
                       <div>
-                        <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-white/40 mb-3">
-                          Services Needed <span className="text-[#47A3FF]">*</span>
+                        <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-3">
+                          Services Needed <span className="text-[#214ECF]">*</span>
                         </p>
                         {["BPO", "Tech"].map(group => (
                           <div key={group} className="mb-4">
-                            <p className="text-[10px] font-mono uppercase tracking-wider text-white/25 mb-2">{group}</p>
+                            <p className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground mb-2">{group}</p>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                               {SERVICE_OPTIONS.filter(s => s.group === group).map(svc => {
                                 const active = selectedServices.includes(svc.id);
@@ -343,14 +343,14 @@ export default function RequestProposalPage() {
                                     className="flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-medium transition-all duration-200 text-left"
                                     style={{
                                       background: active ? "rgba(71,163,255,0.10)" : "rgba(255,255,255,0.03)",
-                                      borderColor: active ? "rgba(71,163,255,0.40)" : "rgba(255,255,255,0.08)",
+                                      borderColor: active ? "rgba(71,163,255,0.40)" : "rgba(33,78,207,0.06)",
                                       color: active ? "#fff" : "rgba(255,255,255,0.45)",
                                     }}
                                   >
                                     <div className="w-3.5 h-3.5 rounded-[4px] border shrink-0 flex items-center justify-center transition-all"
                                       style={{
-                                        borderColor: active ? "#47A3FF" : "rgba(255,255,255,0.2)",
-                                        background: active ? "#47A3FF" : "transparent",
+                                        borderColor: active ? "#214ECF" : "rgba(255,255,255,0.2)",
+                                        background: active ? "#214ECF" : "transparent",
                                       }}>
                                       {active && <svg viewBox="0 0 8 6" fill="none" className="w-2 h-2"><path d="M1 3L3 5L7 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
                                     </div>
@@ -413,12 +413,12 @@ export default function RequestProposalPage() {
 
                       <div className="flex gap-3 pt-2">
                         <button type="button" onClick={() => setStep(0)}
-                          className="flex items-center gap-1.5 px-5 py-3.5 rounded-full text-sm font-medium text-white/50 hover:text-white border border-white/10 hover:border-white/25 transition-all">
+                          className="flex items-center gap-1.5 px-5 py-3.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground border border-border hover:border-white/25 transition-all">
                           ← Back
                         </button>
                         <motion.button type="submit" whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
-                          className="flex-1 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-white"
-                          style={{ background: "linear-gradient(135deg,#47A3FF,#4040E8)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}>
+                          className="flex-1 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-foreground"
+                          style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}>
                           Next: Review &amp; Submit <ArrowRight size={14} />
                         </motion.button>
                       </div>
@@ -427,13 +427,13 @@ export default function RequestProposalPage() {
 
                 ) : (
                   <motion.div key="s3" {...slideIn}>
-                    <h2 className="font-display font-bold text-white text-2xl mb-1">Review &amp; Submit</h2>
-                    <p className="text-white/40 text-sm mb-8">Step 3 of 3 — confirm and send your proposal request</p>
+                    <h2 className="font-display font-bold text-foreground text-2xl mb-1">Review &amp; Submit</h2>
+                    <p className="text-muted-foreground text-sm mb-8">Step 3 of 3 — confirm and send your proposal request</p>
 
                     {/* Review summary */}
                     <div className="rounded-2xl border p-5 mb-6 space-y-4"
                       style={{ background: "rgba(71,163,255,0.04)", borderColor: "rgba(71,163,255,0.14)" }}>
-                      <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/30">Summary</p>
+                      <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground">Summary</p>
                       <div className="grid grid-cols-2 gap-x-6 gap-y-3">
                         {[
                           ["Name", s1Data ? `${s1Data.firstName} ${s1Data.lastName}` : "—"],
@@ -446,8 +446,8 @@ export default function RequestProposalPage() {
                           ["Start Date", startDate?.toLocaleDateString() ?? "TBD"],
                         ].map(([k, v]) => (
                           <div key={k}>
-                            <p className="text-[10px] font-mono uppercase tracking-wider text-white/25 mb-0.5">{k}</p>
-                            <p className="text-sm text-white/70">{v}</p>
+                            <p className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground mb-0.5">{k}</p>
+                            <p className="text-sm text-muted-foreground">{v}</p>
                           </div>
                         ))}
                       </div>
@@ -460,7 +460,7 @@ export default function RequestProposalPage() {
                         {...form3.register("additionalNotes")} />
 
                       <FormCheckbox
-                        label={<>I agree to Thinkatic's <Link href="/terms" className="text-[#47A3FF] underline underline-offset-2">Terms of Service</Link> and <Link href="/privacy-policy" className="text-[#47A3FF] underline underline-offset-2">Privacy Policy</Link>, and consent to being contacted about my proposal.</>}
+                        label={<>I agree to Thinkatic's <Link href="/terms" className="text-[#214ECF] underline underline-offset-2">Terms of Service</Link> and <Link href="/privacy-policy" className="text-[#214ECF] underline underline-offset-2">Privacy Policy</Link>, and consent to being contacted about my proposal.</>}
                         checked={form3.watch("termsAgreed") === true}
                         onChange={e => form3.setValue("termsAgreed", e.target.checked as true, { shouldValidate: true })}
                         error={form3.formState.errors.termsAgreed?.message}
@@ -470,12 +470,12 @@ export default function RequestProposalPage() {
 
                       <div className="flex gap-3 pt-2">
                         <button type="button" onClick={() => setStep(1)}
-                          className="flex items-center gap-1.5 px-5 py-3.5 rounded-full text-sm font-medium text-white/50 hover:text-white border border-white/10 hover:border-white/25 transition-all">
+                          className="flex items-center gap-1.5 px-5 py-3.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground border border-border hover:border-white/25 transition-all">
                           ← Back
                         </button>
                         <motion.button type="submit" disabled={status === "submitting"} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
-                          className="flex-1 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-white disabled:opacity-60"
-                          style={{ background: "linear-gradient(135deg,#47A3FF,#4040E8)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}>
+                          className="flex-1 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-foreground disabled:opacity-60"
+                          style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}>
                           {status === "submitting"
                             ? <><Loader2 size={14} className="animate-spin" /> Submitting…</>
                             : <><FileText size={14} /> Submit Proposal Request</>}

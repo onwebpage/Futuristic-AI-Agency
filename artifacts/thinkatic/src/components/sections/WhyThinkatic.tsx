@@ -25,7 +25,7 @@ const FEATURES = [
     icon: Globe,
     title: "24×7 Global Delivery",
     desc: "Three regional hubs across Americas, EMEA, and APAC ensure round-the-clock coverage in every market.",
-    color: "#47A3FF",
+    color: "#214ECF",
   },
   {
     icon: Building2,
@@ -49,12 +49,12 @@ const FEATURES = [
     icon: TrendingUp,
     title: "Scalable Teams",
     desc: "Ramp from 5 to 500 agents in days. Our elastic capacity model scales with your business cycle.",
-    color: "#2563EB",
+    color: "#214ECF",
   },
 ];
 
 const COUNTERS = [
-  { end: 500, suffix: "+", label: "Enterprise Clients", color: "#47A3FF" },
+  { end: 500, suffix: "+", label: "Enterprise Clients", color: "#214ECF" },
   { end: 98.4, suffix: "%", label: "Accuracy Rate",     color: "#34D399", decimals: 1 },
   { end: 2,   suffix: "B+", label: "Operations / Year", color: "#A78BFA" },
 ];
@@ -167,8 +167,8 @@ function FeatureCard({ feature, index }: { feature: typeof FEATURES[0]; index: n
       </div>
 
       <div>
-        <h3 className="text-white font-bold text-sm mb-2">{feature.title}</h3>
-        <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
+        <h3 className="text-foreground font-bold text-sm mb-2">{feature.title}</h3>
+        <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
           {feature.desc}
         </p>
       </div>
@@ -187,9 +187,9 @@ export function WhyThinkatic() {
     <section
       ref={sectionRef}
       className="relative py-28 md:py-36 overflow-hidden"
-      style={{ background: "#060606" }}
+      style={{ background: "#FFFFFF" }}
     >
-      <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent)" }} />
+      <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.04) 50%, transparent)" }} />
 
       {/* Static ambient glow — no continuous animation */}
       <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 70% 50%, rgba(37,99,235,0.05) 0%, transparent 60%)" }} />
@@ -217,12 +217,12 @@ export function WhyThinkatic() {
                 initial={{ y: "100%", opacity: 0 }}
                 animate={inView ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.85, ease, delay: 0.05 }}
-                className="font-display font-bold text-white leading-[1.05]"
+                className="font-display font-bold text-foreground leading-[1.05]"
                 style={{ fontSize: "clamp(2rem, 4vw, 3.6rem)" }}
               >
                 Intelligence meets
                 <br />
-                <span style={{ background: "linear-gradient(135deg, #2563EB 0%, #47A3FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                <span style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                   human expertise.
                 </span>
               </motion.h2>
@@ -288,7 +288,7 @@ export function WhyThinkatic() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent)" }} />
+      <div className="absolute bottom-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.04) 50%, transparent)" }} />
     </section>
   );
 }

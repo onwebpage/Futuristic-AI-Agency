@@ -105,7 +105,7 @@ function apiCall(path: string, options: RequestInit = {}) {
 }
 
 function StatusBadge({ status }: { status: string }) {
-  const colors = STATUS_COLORS[status] ?? { bg: "rgba(255,255,255,0.08)", text: "rgba(255,255,255,0.5)" };
+  const colors = STATUS_COLORS[status] ?? { bg: "rgba(33,78,207,0.06)", text: "rgba(255,255,255,0.5)" };
   return (
     <span
       className="px-2.5 py-1 rounded-full text-xs font-semibold capitalize"
@@ -122,13 +122,13 @@ function StatCard({ label, value, sub }: { label: string; value: number | string
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       className="rounded-2xl p-6"
-      style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+      style={{ background: "rgba(244,247,255,0.8)", border: "1px solid rgba(255,255,255,0.07)" }}
     >
-      <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "rgba(255,255,255,0.35)" }}>
+      <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "rgba(33,78,207,0.22)" }}>
         {label}
       </div>
-      <div className="text-4xl font-bold text-white">{value}</div>
-      {sub && <div className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.35)" }}>{sub}</div>}
+      <div className="text-4xl font-bold text-foreground">{value}</div>
+      {sub && <div className="text-xs mt-1" style={{ color: "rgba(33,78,207,0.22)" }}>{sub}</div>}
     </motion.div>
   );
 }
@@ -159,8 +159,8 @@ function InputField({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={required}
-        className="w-full px-4 py-2.5 rounded-xl text-sm text-white focus:outline-none transition-all"
-        style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
+        className="w-full px-4 py-2.5 rounded-xl text-sm text-foreground focus:outline-none transition-all"
+        style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}
         onFocus={(e) => { e.currentTarget.style.border = "1px solid rgba(71,163,255,0.4)"; }}
         onBlur={(e) => { e.currentTarget.style.border = "1px solid rgba(255,255,255,0.1)"; }}
       />
@@ -431,23 +431,23 @@ export default function AdminDashboardPage() {
       {/* Sidebar */}
       <aside
         className="w-56 flex-shrink-0 flex flex-col py-8 px-4"
-        style={{ borderRight: "1px solid rgba(255,255,255,0.06)", background: "rgba(0,0,0,0.4)" }}
+        style={{ borderRight: "1px solid rgba(33,78,207,0.04)", background: "rgba(0,0,0,0.4)" }}
       >
         <div className="px-2 mb-8">
           <div className="flex items-center gap-2 mb-1">
             <svg viewBox="0 0 22 26" width="16" height="19" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="logoGradAdmin" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#47A3FF" />
-                  <stop offset="100%" stopColor="#4040E8" />
+                  <stop offset="0%" stopColor="#214ECF" />
+                  <stop offset="100%" stopColor="#214ECF" />
                 </linearGradient>
               </defs>
               <path d="M0 0 H13 V5 H6 V26 H0 Z" fill="url(#logoGradAdmin)" />
               <path d="M15 0 H22 V5 H15 Z" fill="url(#logoGradAdmin)" opacity="0.75" />
             </svg>
-            <span className="text-sm font-bold text-white tracking-tight">Thinkatic</span>
+            <span className="text-sm font-bold text-foreground tracking-tight">Thinkatic</span>
           </div>
-          <div className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>Admin Panel</div>
+          <div className="text-xs" style={{ color: "#4B5563" }}>Admin Panel</div>
         </div>
 
         <nav className="flex flex-col gap-1 flex-1">
@@ -457,9 +457,9 @@ export default function AdminDashboardPage() {
               onClick={() => setTab(id)}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left w-full"
               style={{
-                background: tab === id ? "rgba(71,163,255,0.1)" : "transparent",
-                color: tab === id ? "#47A3FF" : "rgba(255,255,255,0.45)",
-                border: tab === id ? "1px solid rgba(71,163,255,0.2)" : "1px solid transparent",
+                background: tab === id ? "rgba(33,78,207,0.08)" : "transparent",
+                color: tab === id ? "#214ECF" : "rgba(255,255,255,0.45)",
+                border: tab === id ? "1px solid rgba(33,78,207,0.18)" : "1px solid transparent",
               }}
             >
               <Icon size={16} />
@@ -467,7 +467,7 @@ export default function AdminDashboardPage() {
               {id === "leads" && submissions.filter((s) => s.status === "new").length > 0 && (
                 <span
                   className="ml-auto text-xs font-bold px-1.5 py-0.5 rounded-full"
-                  style={{ background: "#47A3FF", color: "#fff" }}
+                  style={{ background: "#214ECF", color: "#fff" }}
                 >
                   {submissions.filter((s) => s.status === "new").length}
                 </span>
@@ -476,16 +476,16 @@ export default function AdminDashboardPage() {
           ))}
         </nav>
 
-        <div className="pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-          <div className="px-3 py-2 text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
-            Signed in as <span className="text-white">{adminUsername}</span>
+        <div className="pt-4" style={{ borderTop: "1px solid rgba(33,78,207,0.04)" }}>
+          <div className="px-3 py-2 text-xs" style={{ color: "#4B5563" }}>
+            Signed in as <span className="text-foreground">{adminUsername}</span>
           </div>
           <button
             onClick={logout}
             className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm w-full transition-all"
-            style={{ color: "rgba(255,255,255,0.35)" }}
+            style={{ color: "rgba(33,78,207,0.22)" }}
             onMouseEnter={(e) => { e.currentTarget.style.color = "#f87171"; e.currentTarget.style.background = "rgba(239,68,68,0.08)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.35)"; e.currentTarget.style.background = "transparent"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(33,78,207,0.22)"; e.currentTarget.style.background = "transparent"; }}
           >
             <LogOut size={16} />
             Sign Out
@@ -498,16 +498,16 @@ export default function AdminDashboardPage() {
         {/* Header */}
         <div
           className="px-8 py-5 flex items-center justify-between sticky top-0 z-10"
-          style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(5,5,5,0.9)", backdropFilter: "blur(12px)" }}
+          style={{ borderBottom: "1px solid rgba(33,78,207,0.04)", background: "rgba(5,5,5,0.9)", backdropFilter: "blur(12px)" }}
         >
-          <h1 className="text-lg font-bold text-white capitalize">
+          <h1 className="text-lg font-bold text-foreground capitalize">
             {tab === "overview" ? "Dashboard Overview" : tab === "leads" ? "Lead Management" : tab === "analytics" ? "Analytics" : tab === "plans" ? "Plan Management" : "Settings"}
           </h1>
           <div className="flex items-center gap-3">
             <button
               onClick={refresh}
               className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm transition-all"
-              style={{ color: "rgba(255,255,255,0.4)", border: "1px solid rgba(255,255,255,0.08)" }}
+              style={{ color: "rgba(255,255,255,0.4)", border: "1px solid rgba(33,78,207,0.06)" }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "white"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.4)"; }}
             >
@@ -517,7 +517,7 @@ export default function AdminDashboardPage() {
               <button
                 onClick={exportCSV}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all"
-                style={{ background: "rgba(71,163,255,0.1)", color: "#47A3FF", border: "1px solid rgba(71,163,255,0.2)" }}
+                style={{ background: "rgba(33,78,207,0.08)", color: "#214ECF", border: "1px solid rgba(33,78,207,0.18)" }}
               >
                 <Download size={14} />
                 Export CSV
@@ -527,7 +527,7 @@ export default function AdminDashboardPage() {
               <button
                 onClick={openAddPlan}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all"
-                style={{ background: "rgba(71,163,255,0.1)", color: "#47A3FF", border: "1px solid rgba(71,163,255,0.2)" }}
+                style={{ background: "rgba(33,78,207,0.08)", color: "#214ECF", border: "1px solid rgba(33,78,207,0.18)" }}
               >
                 <Plus size={14} />
                 Add New Plan
@@ -539,7 +539,7 @@ export default function AdminDashboardPage() {
         <div className="p-8">
           {loading ? (
             <div className="flex items-center justify-center h-64">
-              <div className="animate-spin rounded-full border-2 border-white/10 border-t-blue-400 w-8 h-8" />
+              <div className="animate-spin rounded-full border-2 border-border border-t-blue-400 w-8 h-8" />
             </div>
           ) : (
             <>
@@ -558,7 +558,7 @@ export default function AdminDashboardPage() {
                   </div>
 
                   <div>
-                    <h2 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>
+                    <h2 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "rgba(33,78,207,0.22)" }}>
                       Recent Submissions
                     </h2>
                     <div
@@ -566,7 +566,7 @@ export default function AdminDashboardPage() {
                       style={{ border: "1px solid rgba(255,255,255,0.07)" }}
                     >
                       {submissions.slice(0, 5).length === 0 ? (
-                        <div className="py-16 text-center" style={{ color: "rgba(255,255,255,0.3)" }}>
+                        <div className="py-16 text-center" style={{ color: "#4B5563" }}>
                           No submissions yet. Share your contact form to start receiving leads.
                         </div>
                       ) : (
@@ -575,22 +575,22 @@ export default function AdminDashboardPage() {
                             key={s.id}
                             className="flex items-center justify-between px-6 py-4 cursor-pointer transition-all"
                             style={{
-                              borderBottom: i < 4 ? "1px solid rgba(255,255,255,0.05)" : "none",
-                              background: "rgba(255,255,255,0.02)",
+                              borderBottom: i < 4 ? "1px solid rgba(33,78,207,0.04)" : "none",
+                              background: "rgba(33,78,207,0.02)",
                             }}
                             onClick={() => { setSelected(s); setNoteText(s.notes ?? ""); setTab("leads"); }}
                             onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; }}
-                            onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.02)"; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(33,78,207,0.02)"; }}
                           >
                             <div className="flex items-center gap-4">
                               <div
                                 className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm"
-                                style={{ background: "rgba(71,163,255,0.12)", color: "#47A3FF" }}
+                                style={{ background: "rgba(33,78,207,0.1)", color: "#214ECF" }}
                               >
                                 {s.name.charAt(0).toUpperCase()}
                               </div>
                               <div>
-                                <div className="font-medium text-white text-sm">{s.name}</div>
+                                <div className="font-medium text-foreground text-sm">{s.name}</div>
                                 <div className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{s.email}</div>
                               </div>
                             </div>
@@ -599,7 +599,7 @@ export default function AdminDashboardPage() {
                                 <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{s.budget}</span>
                               )}
                               <StatusBadge status={s.status} />
-                              <span className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>
+                              <span className="text-xs" style={{ color: "rgba(33,78,207,0.16)" }}>
                                 {new Date(s.createdAt).toLocaleDateString()}
                               </span>
                             </div>
@@ -617,19 +617,19 @@ export default function AdminDashboardPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-5">
                       <div className="relative flex-1 max-w-sm">
-                        <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "rgba(255,255,255,0.3)" }} />
+                        <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "#4B5563" }} />
                         <input
                           type="text"
                           placeholder="Search by name, email, company..."
                           value={search}
                           onChange={(e) => setSearch(e.target.value)}
-                          className="w-full pl-9 pr-4 py-2.5 rounded-xl text-sm text-white focus:outline-none transition-all"
+                          className="w-full pl-9 pr-4 py-2.5 rounded-xl text-sm text-foreground focus:outline-none transition-all"
                           style={{
-                            background: "rgba(255,255,255,0.05)",
-                            border: "1px solid rgba(255,255,255,0.08)",
+                            background: "rgba(33,78,207,0.04)",
+                            border: "1px solid rgba(33,78,207,0.06)",
                           }}
                           onFocus={(e) => { e.currentTarget.style.border = "1px solid rgba(71,163,255,0.4)"; }}
-                          onBlur={(e) => { e.currentTarget.style.border = "1px solid rgba(255,255,255,0.08)"; }}
+                          onBlur={(e) => { e.currentTarget.style.border = "1px solid rgba(33,78,207,0.06)"; }}
                         />
                       </div>
 
@@ -639,9 +639,9 @@ export default function AdminDashboardPage() {
                           onChange={(e) => setFilterStatus(e.target.value)}
                           className="appearance-none pl-4 pr-8 py-2.5 rounded-xl text-sm font-medium focus:outline-none"
                           style={{
-                            background: "rgba(255,255,255,0.05)",
-                            border: "1px solid rgba(255,255,255,0.08)",
-                            color: "rgba(255,255,255,0.7)",
+                            background: "rgba(33,78,207,0.04)",
+                            border: "1px solid rgba(33,78,207,0.06)",
+                            color: "#4B5563",
                           }}
                         >
                           <option value="all">All Status</option>
@@ -649,17 +649,17 @@ export default function AdminDashboardPage() {
                             <option key={s} value={s}>{s.replace("_", " ")}</option>
                           ))}
                         </select>
-                        <ChevronDown size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "rgba(255,255,255,0.3)" }} />
+                        <ChevronDown size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "#4B5563" }} />
                       </div>
 
-                      <span className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
+                      <span className="text-xs" style={{ color: "#4B5563" }}>
                         {filteredSubmissions.length} lead{filteredSubmissions.length !== 1 ? "s" : ""}
                       </span>
                     </div>
 
                     <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
                       {filteredSubmissions.length === 0 ? (
-                        <div className="py-20 text-center" style={{ color: "rgba(255,255,255,0.3)" }}>
+                        <div className="py-20 text-center" style={{ color: "#4B5563" }}>
                           No leads match your filters.
                         </div>
                       ) : (
@@ -681,30 +681,30 @@ export default function AdminDashboardPage() {
                           >
                             <div
                               className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0"
-                              style={{ background: "rgba(71,163,255,0.1)", color: "#47A3FF" }}
+                              style={{ background: "rgba(33,78,207,0.08)", color: "#214ECF" }}
                             >
                               {s.name.charAt(0).toUpperCase()}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div className="font-medium text-white text-sm truncate">{s.name}</div>
+                              <div className="font-medium text-foreground text-sm truncate">{s.name}</div>
                               <div className="text-xs truncate" style={{ color: "rgba(255,255,255,0.4)" }}>
                                 {s.email}{s.company ? ` · ${s.company}` : ""}
                               </div>
                             </div>
                             <div className="flex items-center gap-3 flex-shrink-0">
                               {s.budget && (
-                                <span className="text-xs hidden lg:block" style={{ color: "rgba(255,255,255,0.35)" }}>{s.budget}</span>
+                                <span className="text-xs hidden lg:block" style={{ color: "rgba(33,78,207,0.22)" }}>{s.budget}</span>
                               )}
                               <StatusBadge status={s.status} />
-                              <span className="text-xs hidden md:block" style={{ color: "rgba(255,255,255,0.25)" }}>
+                              <span className="text-xs hidden md:block" style={{ color: "rgba(33,78,207,0.16)" }}>
                                 {new Date(s.createdAt).toLocaleDateString()}
                               </span>
                               <button
                                 onClick={(e) => { e.stopPropagation(); deleteSubmission(s.id); }}
                                 className="p-1.5 rounded-lg transition-all"
-                                style={{ color: "rgba(255,255,255,0.25)" }}
+                                style={{ color: "rgba(33,78,207,0.16)" }}
                                 onMouseEnter={(e) => { e.currentTarget.style.color = "#f87171"; e.currentTarget.style.background = "rgba(239,68,68,0.1)"; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.25)"; e.currentTarget.style.background = "transparent"; }}
+                                onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(33,78,207,0.16)"; e.currentTarget.style.background = "transparent"; }}
                               >
                                 <Trash2 size={13} />
                               </button>
@@ -724,7 +724,7 @@ export default function AdminDashboardPage() {
                         transition={{ duration: 0.25 }}
                         className="w-80 flex-shrink-0 rounded-2xl p-6 flex flex-col gap-5 overflow-y-auto"
                         style={{
-                          background: "rgba(255,255,255,0.03)",
+                          background: "rgba(244,247,255,0.8)",
                           border: "1px solid rgba(255,255,255,0.07)",
                           maxHeight: "calc(100vh - 140px)",
                           position: "sticky",
@@ -735,16 +735,16 @@ export default function AdminDashboardPage() {
                           <div className="flex items-center gap-3">
                             <div
                               className="w-10 h-10 rounded-full flex items-center justify-center font-bold"
-                              style={{ background: "rgba(71,163,255,0.12)", color: "#47A3FF" }}
+                              style={{ background: "rgba(33,78,207,0.1)", color: "#214ECF" }}
                             >
                               {selected.name.charAt(0).toUpperCase()}
                             </div>
                             <div>
-                              <div className="font-semibold text-white text-sm">{selected.name}</div>
+                              <div className="font-semibold text-foreground text-sm">{selected.name}</div>
                               <div className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{selected.email}</div>
                             </div>
                           </div>
-                          <button onClick={() => setSelected(null)} style={{ color: "rgba(255,255,255,0.3)" }}>
+                          <button onClick={() => setSelected(null)} style={{ color: "#4B5563" }}>
                             <X size={16} />
                           </button>
                         </div>
@@ -752,45 +752,45 @@ export default function AdminDashboardPage() {
                         <div className="space-y-3">
                           {selected.company && (
                             <div>
-                              <div className="text-xs uppercase tracking-widest mb-1" style={{ color: "rgba(255,255,255,0.3)" }}>Company</div>
-                              <div className="text-sm text-white">{selected.company}</div>
+                              <div className="text-xs uppercase tracking-widest mb-1" style={{ color: "#4B5563" }}>Company</div>
+                              <div className="text-sm text-foreground">{selected.company}</div>
                             </div>
                           )}
                           {selected.budget && (
                             <div>
-                              <div className="text-xs uppercase tracking-widest mb-1" style={{ color: "rgba(255,255,255,0.3)" }}>Budget</div>
-                              <div className="text-sm text-white">{selected.budget}</div>
+                              <div className="text-xs uppercase tracking-widest mb-1" style={{ color: "#4B5563" }}>Budget</div>
+                              <div className="text-sm text-foreground">{selected.budget}</div>
                             </div>
                           )}
                           <div>
-                            <div className="text-xs uppercase tracking-widest mb-1" style={{ color: "rgba(255,255,255,0.3)" }}>Source</div>
-                            <div className="text-sm text-white capitalize">{selected.source?.replace(/_/g, " ") ?? "contact form"}</div>
+                            <div className="text-xs uppercase tracking-widest mb-1" style={{ color: "#4B5563" }}>Source</div>
+                            <div className="text-sm text-foreground capitalize">{selected.source?.replace(/_/g, " ") ?? "contact form"}</div>
                           </div>
                           <div>
-                            <div className="text-xs uppercase tracking-widest mb-1" style={{ color: "rgba(255,255,255,0.3)" }}>Received</div>
-                            <div className="text-sm text-white">{new Date(selected.createdAt).toLocaleString()}</div>
+                            <div className="text-xs uppercase tracking-widest mb-1" style={{ color: "#4B5563" }}>Received</div>
+                            <div className="text-sm text-foreground">{new Date(selected.createdAt).toLocaleString()}</div>
                           </div>
                         </div>
 
                         <div>
-                          <div className="text-xs uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.3)" }}>Message</div>
+                          <div className="text-xs uppercase tracking-widest mb-2" style={{ color: "#4B5563" }}>Message</div>
                           <div
                             className="text-sm rounded-xl p-3"
-                            style={{ background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}
+                            style={{ background: "rgba(255,255,255,0.04)", color: "#4B5563", lineHeight: 1.6 }}
                           >
                             {selected.message}
                           </div>
                         </div>
 
                         <div>
-                          <div className="text-xs uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.3)" }}>Status</div>
+                          <div className="text-xs uppercase tracking-widest mb-2" style={{ color: "#4B5563" }}>Status</div>
                           <div className="relative">
                             <select
                               value={selected.status}
                               onChange={(e) => updateSubmission(selected.id, { status: e.target.value })}
                               className="w-full appearance-none px-4 py-2.5 rounded-xl text-sm font-medium focus:outline-none"
                               style={{
-                                background: "rgba(255,255,255,0.06)",
+                                background: "rgba(33,78,207,0.04)",
                                 border: "1px solid rgba(255,255,255,0.1)",
                                 color: "white",
                               }}
@@ -799,37 +799,37 @@ export default function AdminDashboardPage() {
                                 <option key={s} value={s}>{s.replace("_", " ")}</option>
                               ))}
                             </select>
-                            <ChevronDown size={12} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "rgba(255,255,255,0.3)" }} />
+                            <ChevronDown size={12} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "#4B5563" }} />
                           </div>
                         </div>
 
                         <div>
                           <div className="flex items-center gap-2 mb-2">
-                            <StickyNote size={13} style={{ color: "rgba(255,255,255,0.3)" }} />
-                            <div className="text-xs uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.3)" }}>Internal Notes</div>
+                            <StickyNote size={13} style={{ color: "#4B5563" }} />
+                            <div className="text-xs uppercase tracking-widest" style={{ color: "#4B5563" }}>Internal Notes</div>
                           </div>
                           <textarea
                             rows={4}
                             value={noteText}
                             onChange={(e) => setNoteText(e.target.value)}
                             placeholder="Add notes about this lead..."
-                            className="w-full px-4 py-3 rounded-xl text-sm text-white focus:outline-none resize-none transition-all"
+                            className="w-full px-4 py-3 rounded-xl text-sm text-foreground focus:outline-none resize-none transition-all"
                             style={{
                               background: "rgba(255,255,255,0.04)",
-                              border: "1px solid rgba(255,255,255,0.08)",
+                              border: "1px solid rgba(33,78,207,0.06)",
                               lineHeight: 1.6,
                             }}
                             onFocus={(e) => { e.currentTarget.style.border = "1px solid rgba(71,163,255,0.4)"; }}
-                            onBlur={(e) => { e.currentTarget.style.border = "1px solid rgba(255,255,255,0.08)"; }}
+                            onBlur={(e) => { e.currentTarget.style.border = "1px solid rgba(33,78,207,0.06)"; }}
                           />
                           <button
                             onClick={saveNote}
                             disabled={savingNote}
                             className="mt-2 w-full py-2 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2"
                             style={{
-                              background: "rgba(71,163,255,0.1)",
-                              color: "#47A3FF",
-                              border: "1px solid rgba(71,163,255,0.2)",
+                              background: "rgba(33,78,207,0.08)",
+                              color: "#214ECF",
+                              border: "1px solid rgba(33,78,207,0.18)",
                             }}
                           >
                             {savingNote ? <RefreshCw size={13} className="animate-spin" /> : <Check size={13} />}
@@ -837,14 +837,14 @@ export default function AdminDashboardPage() {
                           </button>
                         </div>
 
-                        <div className="flex gap-2 pt-2" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                        <div className="flex gap-2 pt-2" style={{ borderTop: "1px solid rgba(33,78,207,0.04)" }}>
                           <a
                             href={`mailto:${selected.email}`}
                             className="flex-1 py-2.5 rounded-xl text-sm font-medium text-center transition-all"
                             style={{
-                              background: "rgba(255,255,255,0.06)",
-                              color: "rgba(255,255,255,0.7)",
-                              border: "1px solid rgba(255,255,255,0.08)",
+                              background: "rgba(33,78,207,0.04)",
+                              color: "#4B5563",
+                              border: "1px solid rgba(33,78,207,0.06)",
                             }}
                           >
                             <Eye size={13} className="inline mr-1.5" />
@@ -870,7 +870,7 @@ export default function AdminDashboardPage() {
                   <div className="flex-1 min-w-0">
                     {plansLoading ? (
                       <div className="flex items-center justify-center h-48">
-                        <div className="animate-spin rounded-full border-2 border-white/10 border-t-blue-400 w-8 h-8" />
+                        <div className="animate-spin rounded-full border-2 border-border border-t-blue-400 w-8 h-8" />
                       </div>
                     ) : (
                       <div className="space-y-8">
@@ -881,8 +881,8 @@ export default function AdminDashboardPage() {
                                 <span className="font-mono text-xs" style={{ color: "rgba(71,163,255,0.6)" }}>
                                   / {group.number}
                                 </span>
-                                <h3 className="font-bold text-white text-base">{group.category}</h3>
-                                <span className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
+                                <h3 className="font-bold text-foreground text-base">{group.category}</h3>
+                                <span className="text-xs" style={{ color: "#4B5563" }}>
                                   {group.plans.length} plan{group.plans.length !== 1 ? "s" : ""}
                                 </span>
                               </div>
@@ -903,16 +903,16 @@ export default function AdminDashboardPage() {
                                 >
                                   <div
                                     className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                                    style={{ background: "rgba(71,163,255,0.1)", color: "#47A3FF" }}
+                                    style={{ background: "rgba(33,78,207,0.08)", color: "#214ECF" }}
                                   >
                                     <DollarSign size={14} />
                                   </div>
 
                                   <div className="flex-1 min-w-0">
                                     <div className="flex items-center gap-2">
-                                      <span className="font-medium text-white text-sm truncate">{plan.name}</span>
+                                      <span className="font-medium text-foreground text-sm truncate">{plan.name}</span>
                                       {plan.popular && (
-                                        <Star size={11} fill="#47A3FF" style={{ color: "#47A3FF", flexShrink: 0 }} />
+                                        <Star size={11} fill="#214ECF" style={{ color: "#214ECF", flexShrink: 0 }} />
                                       )}
                                     </div>
                                     <div className="text-xs truncate" style={{ color: "rgba(255,255,255,0.4)" }}>
@@ -921,16 +921,16 @@ export default function AdminDashboardPage() {
                                   </div>
 
                                   <div className="flex items-center gap-4 flex-shrink-0">
-                                    <span className="font-bold text-white text-sm">
+                                    <span className="font-bold text-foreground text-sm">
                                       ${plan.price.toLocaleString()}
                                     </span>
                                     <button
                                       onClick={() => openEditPlan(plan)}
                                       className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
                                       style={{
-                                        background: editingPlan?.id === plan.id ? "rgba(71,163,255,0.15)" : "rgba(255,255,255,0.06)",
-                                        color: editingPlan?.id === plan.id ? "#47A3FF" : "rgba(255,255,255,0.5)",
-                                        border: "1px solid rgba(255,255,255,0.08)",
+                                        background: editingPlan?.id === plan.id ? "rgba(33,78,207,0.12)" : "rgba(33,78,207,0.04)",
+                                        color: editingPlan?.id === plan.id ? "#214ECF" : "rgba(255,255,255,0.5)",
+                                        border: "1px solid rgba(33,78,207,0.06)",
                                       }}
                                     >
                                       <Pencil size={11} />
@@ -939,9 +939,9 @@ export default function AdminDashboardPage() {
                                     <button
                                       onClick={() => deletePlan(plan.id)}
                                       className="p-1.5 rounded-lg transition-all"
-                                      style={{ color: "rgba(255,255,255,0.25)" }}
+                                      style={{ color: "rgba(33,78,207,0.16)" }}
                                       onMouseEnter={(e) => { e.currentTarget.style.color = "#f87171"; e.currentTarget.style.background = "rgba(239,68,68,0.1)"; }}
-                                      onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.25)"; e.currentTarget.style.background = "transparent"; }}
+                                      onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(33,78,207,0.16)"; e.currentTarget.style.background = "transparent"; }}
                                     >
                                       <Trash2 size={13} />
                                     </button>
@@ -953,7 +953,7 @@ export default function AdminDashboardPage() {
                         ))}
 
                         {Object.values(groupedPlans).length === 0 && (
-                          <div className="text-center py-20" style={{ color: "rgba(255,255,255,0.3)" }}>
+                          <div className="text-center py-20" style={{ color: "#4B5563" }}>
                             No plans yet. Click "Add New Plan" to get started.
                           </div>
                         )}
@@ -971,7 +971,7 @@ export default function AdminDashboardPage() {
                         transition={{ duration: 0.25 }}
                         className="w-80 flex-shrink-0 rounded-2xl p-6 flex flex-col gap-4 overflow-y-auto"
                         style={{
-                          background: "rgba(255,255,255,0.03)",
+                          background: "rgba(244,247,255,0.8)",
                           border: "1px solid rgba(255,255,255,0.07)",
                           maxHeight: "calc(100vh - 140px)",
                           position: "sticky",
@@ -979,10 +979,10 @@ export default function AdminDashboardPage() {
                         }}
                       >
                         <div className="flex items-center justify-between">
-                          <h3 className="font-semibold text-white text-sm">
+                          <h3 className="font-semibold text-foreground text-sm">
                             {isAddingPlan ? "Add New Plan" : "Edit Plan"}
                           </h3>
-                          <button onClick={closePlanPanel} style={{ color: "rgba(255,255,255,0.3)" }}>
+                          <button onClick={closePlanPanel} style={{ color: "#4B5563" }}>
                             <X size={16} />
                           </button>
                         </div>
@@ -1033,9 +1033,9 @@ export default function AdminDashboardPage() {
                               value={planForm.features}
                               onChange={(e) => setPlanForm((f) => ({ ...f, features: e.target.value }))}
                               placeholder={"AI architecture planning\n2 custom workflows\nBasic dashboard"}
-                              className="w-full px-4 py-2.5 rounded-xl text-sm text-white focus:outline-none resize-none transition-all"
+                              className="w-full px-4 py-2.5 rounded-xl text-sm text-foreground focus:outline-none resize-none transition-all"
                               style={{
-                                background: "rgba(255,255,255,0.06)",
+                                background: "rgba(33,78,207,0.04)",
                                 border: "1px solid rgba(255,255,255,0.1)",
                                 lineHeight: 1.6,
                               }}
@@ -1044,7 +1044,7 @@ export default function AdminDashboardPage() {
                             />
                           </div>
 
-                          <div className="pt-1 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+                          <div className="pt-1 border-t" style={{ borderColor: "rgba(33,78,207,0.04)" }}>
                             <p className="text-xs font-medium uppercase tracking-widest mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>
                               Category
                             </p>
@@ -1078,8 +1078,8 @@ export default function AdminDashboardPage() {
 
                           <div className="flex items-center justify-between py-2 px-3 rounded-xl" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
                             <div className="flex items-center gap-2">
-                              <Star size={13} style={{ color: planForm.popular ? "#47A3FF" : "rgba(255,255,255,0.3)" }} />
-                              <span className="text-xs font-medium" style={{ color: "rgba(255,255,255,0.6)" }}>
+                              <Star size={13} style={{ color: planForm.popular ? "#214ECF" : "rgba(255,255,255,0.3)" }} />
+                              <span className="text-xs font-medium" style={{ color: "#4B5563" }}>
                                 Most Popular
                               </span>
                             </div>
@@ -1088,7 +1088,7 @@ export default function AdminDashboardPage() {
                               onClick={() => setPlanForm((f) => ({ ...f, popular: !f.popular }))}
                               className="relative w-9 h-5 rounded-full transition-all duration-200"
                               style={{
-                                background: planForm.popular ? "#47A3FF" : "rgba(255,255,255,0.12)",
+                                background: planForm.popular ? "#214ECF" : "rgba(33,78,207,0.12)",
                               }}
                             >
                               <span
@@ -1103,21 +1103,21 @@ export default function AdminDashboardPage() {
                           <div
                             className="px-4 py-3 rounded-xl text-xs font-medium"
                             style={{
-                              background: planMessage.type === "success" ? "rgba(71,163,255,0.08)" : "rgba(239,68,68,0.08)",
-                              color: planMessage.type === "success" ? "#47A3FF" : "#f87171",
-                              border: `1px solid ${planMessage.type === "success" ? "rgba(71,163,255,0.2)" : "rgba(239,68,68,0.2)"}`,
+                              background: planMessage.type === "success" ? "rgba(33,78,207,0.08)" : "rgba(239,68,68,0.08)",
+                              color: planMessage.type === "success" ? "#214ECF" : "#f87171",
+                              border: `1px solid ${planMessage.type === "success" ? "rgba(33,78,207,0.18)" : "rgba(239,68,68,0.2)"}`,
                             }}
                           >
                             {planMessage.text}
                           </div>
                         )}
 
-                        <div className="flex gap-2 pt-2" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                        <div className="flex gap-2 pt-2" style={{ borderTop: "1px solid rgba(33,78,207,0.04)" }}>
                           <button
                             onClick={savePlan}
                             disabled={savingPlan}
                             className="flex-1 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all"
-                            style={{ background: "linear-gradient(135deg, #47A3FF, #4040E8)", color: "white" }}
+                            style={{ background: "linear-gradient(135deg, #214ECF, #214ECF)", color: "white" }}
                           >
                             {savingPlan ? <RefreshCw size={13} className="animate-spin" /> : <Check size={13} />}
                             {savingPlan ? "Saving..." : isAddingPlan ? "Add Plan" : "Save Changes"}
@@ -1149,15 +1149,15 @@ export default function AdminDashboardPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div
                       className="rounded-2xl p-6"
-                      style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+                      style={{ background: "rgba(244,247,255,0.8)", border: "1px solid rgba(255,255,255,0.07)" }}
                     >
-                      <h3 className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "rgba(255,255,255,0.35)" }}>
+                      <h3 className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "rgba(33,78,207,0.22)" }}>
                         Leads by Status
                       </h3>
                       <div className="space-y-3">
                         {stats.byStatus.map(({ status, count: c }) => {
                           const pct = stats.total > 0 ? Math.round((Number(c) / stats.total) * 100) : 0;
-                          const colors = STATUS_COLORS[status] ?? { bg: "rgba(255,255,255,0.08)", text: "rgba(255,255,255,0.5)" };
+                          const colors = STATUS_COLORS[status] ?? { bg: "rgba(33,78,207,0.06)", text: "rgba(255,255,255,0.5)" };
                           return (
                             <div key={status}>
                               <div className="flex justify-between items-center mb-1.5">
@@ -1166,7 +1166,7 @@ export default function AdminDashboardPage() {
                                 </span>
                                 <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{c} ({pct}%)</span>
                               </div>
-                              <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+                              <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(33,78,207,0.04)" }}>
                                 <motion.div
                                   initial={{ width: 0 }}
                                   animate={{ width: `${pct}%` }}
@@ -1183,9 +1183,9 @@ export default function AdminDashboardPage() {
 
                     <div
                       className="rounded-2xl p-6"
-                      style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+                      style={{ background: "rgba(244,247,255,0.8)", border: "1px solid rgba(255,255,255,0.07)" }}
                     >
-                      <h3 className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "rgba(255,255,255,0.35)" }}>
+                      <h3 className="text-xs font-semibold uppercase tracking-widest mb-5" style={{ color: "rgba(33,78,207,0.22)" }}>
                         Leads by Budget
                       </h3>
                       <div className="space-y-3">
@@ -1194,23 +1194,23 @@ export default function AdminDashboardPage() {
                           return (
                             <div key={budget}>
                               <div className="flex justify-between items-center mb-1.5">
-                                <span className="text-xs font-medium text-white">{budget}</span>
+                                <span className="text-xs font-medium text-foreground">{budget}</span>
                                 <span className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{c} ({pct}%)</span>
                               </div>
-                              <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+                              <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(33,78,207,0.04)" }}>
                                 <motion.div
                                   initial={{ width: 0 }}
                                   animate={{ width: `${pct}%` }}
                                   transition={{ duration: 0.8, ease: "easeOut" }}
                                   className="h-full rounded-full"
-                                  style={{ background: "#47A3FF" }}
+                                  style={{ background: "#214ECF" }}
                                 />
                               </div>
                             </div>
                           );
                         })}
                         {stats.byBudget.filter((b) => b.budget).length === 0 && (
-                          <p className="text-sm" style={{ color: "rgba(255,255,255,0.3)" }}>No budget data yet.</p>
+                          <p className="text-sm" style={{ color: "#4B5563" }}>No budget data yet.</p>
                         )}
                       </div>
                     </div>
@@ -1223,9 +1223,9 @@ export default function AdminDashboardPage() {
                 <div className="max-w-md space-y-6">
                   <div
                     className="rounded-2xl p-6"
-                    style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+                    style={{ background: "rgba(244,247,255,0.8)", border: "1px solid rgba(255,255,255,0.07)" }}
                   >
-                    <h2 className="font-semibold text-white mb-5">Change Password</h2>
+                    <h2 className="font-semibold text-foreground mb-5">Change Password</h2>
                     <form onSubmit={changePassword} className="flex flex-col gap-4">
                       {["currentPassword", "newPassword", "confirmPassword"].map((field) => (
                         <div key={field} className="flex flex-col gap-1.5">
@@ -1241,9 +1241,9 @@ export default function AdminDashboardPage() {
                               else setConfirmPassword(e.target.value);
                             }}
                             required
-                            className="w-full px-4 py-2.5 rounded-xl text-sm text-white focus:outline-none transition-all"
+                            className="w-full px-4 py-2.5 rounded-xl text-sm text-foreground focus:outline-none transition-all"
                             style={{
-                              background: "rgba(255,255,255,0.06)",
+                              background: "rgba(33,78,207,0.04)",
                               border: "1px solid rgba(255,255,255,0.1)",
                             }}
                             onFocus={(e) => { e.currentTarget.style.border = "1px solid rgba(71,163,255,0.4)"; }}
@@ -1256,9 +1256,9 @@ export default function AdminDashboardPage() {
                         <div
                           className="px-4 py-3 rounded-xl text-sm font-medium"
                           style={{
-                            background: pwMessage.type === "success" ? "rgba(71,163,255,0.08)" : "rgba(239,68,68,0.08)",
-                            color: pwMessage.type === "success" ? "#47A3FF" : "#f87171",
-                            border: `1px solid ${pwMessage.type === "success" ? "rgba(71,163,255,0.2)" : "rgba(239,68,68,0.2)"}`,
+                            background: pwMessage.type === "success" ? "rgba(33,78,207,0.08)" : "rgba(239,68,68,0.08)",
+                            color: pwMessage.type === "success" ? "#214ECF" : "#f87171",
+                            border: `1px solid ${pwMessage.type === "success" ? "rgba(33,78,207,0.18)" : "rgba(239,68,68,0.2)"}`,
                           }}
                         >
                           {pwMessage.text}
@@ -1267,8 +1267,8 @@ export default function AdminDashboardPage() {
 
                       <button
                         type="submit"
-                        className="py-2.5 rounded-xl text-sm font-bold text-white transition-all"
-                        style={{ background: "linear-gradient(135deg, #47A3FF, #4040E8)" }}
+                        className="py-2.5 rounded-xl text-sm font-bold text-foreground transition-all"
+                        style={{ background: "linear-gradient(135deg, #214ECF, #214ECF)" }}
                       >
                         Update Password
                       </button>
@@ -1277,16 +1277,16 @@ export default function AdminDashboardPage() {
 
                   <div
                     className="rounded-2xl p-6"
-                    style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+                    style={{ background: "rgba(244,247,255,0.8)", border: "1px solid rgba(255,255,255,0.07)" }}
                   >
-                    <h2 className="font-semibold text-white mb-2">Export Data</h2>
+                    <h2 className="font-semibold text-foreground mb-2">Export Data</h2>
                     <p className="text-sm mb-4" style={{ color: "rgba(255,255,255,0.4)" }}>
                       Download all leads as a CSV file for use in CRMs or spreadsheets.
                     </p>
                     <button
                       onClick={exportCSV}
                       className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all"
-                      style={{ background: "rgba(71,163,255,0.1)", color: "#47A3FF", border: "1px solid rgba(71,163,255,0.2)" }}
+                      style={{ background: "rgba(33,78,207,0.08)", color: "#214ECF", border: "1px solid rgba(33,78,207,0.18)" }}
                     >
                       <Download size={14} />
                       Export All Leads (CSV)
@@ -1295,11 +1295,11 @@ export default function AdminDashboardPage() {
 
                   <div
                     className="rounded-2xl p-6"
-                    style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+                    style={{ background: "rgba(244,247,255,0.8)", border: "1px solid rgba(255,255,255,0.07)" }}
                   >
-                    <h2 className="font-semibold text-white mb-2">Session</h2>
+                    <h2 className="font-semibold text-foreground mb-2">Session</h2>
                     <p className="text-sm mb-4" style={{ color: "rgba(255,255,255,0.4)" }}>
-                      Signed in as <strong className="text-white">{adminUsername}</strong>. Tokens expire after 7 days.
+                      Signed in as <strong className="text-foreground">{adminUsername}</strong>. Tokens expire after 7 days.
                     </p>
                     <button
                       onClick={logout}

@@ -3,9 +3,9 @@ import { motion, useInView } from "framer-motion";
 import Layout from "@/components/layout/Layout";
 import { Link } from "wouter";
 
-const BLUE = "#47A3FF";
-const BLUE_DIM = "rgba(71,163,255,0.12)";
-const BLUE_BORDER = "rgba(71,163,255,0.18)";
+const BLUE = "#214ECF";
+const BLUE_DIM = "rgba(33,78,207,0.1)";
+const BLUE_BORDER = "rgba(33,78,207,0.14)";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -150,7 +150,7 @@ function ServicePillar({ pillar, index }: { pillar: typeof servicePillars[0]; in
       variants={fadeUp}
       transition={{ delay: 0.05 * index }}
       className="rounded-3xl overflow-hidden"
-      style={{ background: "#111", border: "1px solid rgba(255,255,255,0.07)" }}
+      style={{ background: "#FFFFFF", border: "1px solid rgba(255,255,255,0.07)" }}
     >
       {/* Header */}
       <div
@@ -166,20 +166,20 @@ function ServicePillar({ pillar, index }: { pillar: typeof servicePillars[0]; in
               <div className="h-px flex-1 max-w-[40px]" style={{ background: BLUE_BORDER }} />
             </div>
             <h2
-              className="font-display font-bold text-white mb-3 leading-[1.1]"
+              className="font-display font-bold text-foreground mb-3 leading-[1.1]"
               style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)" }}
             >
               {pillar.title}
             </h2>
-            <p className="text-white/55 text-base leading-relaxed max-w-2xl">{pillar.description}</p>
+            <p className="text-muted-foreground text-base leading-relaxed max-w-2xl">{pillar.description}</p>
           </div>
           <div className="flex-shrink-0">
             <Link href="/contact">
               <motion.button
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-6 py-3 rounded-full font-bold text-white text-xs tracking-wider"
-                style={{ background: "linear-gradient(135deg, #47A3FF 0%, #4040E8 100%)" }}
+                className="flex items-center gap-2 px-6 py-3 rounded-full font-bold text-foreground text-xs tracking-wider"
+                style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)" }}
               >
                 GET STARTED
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -193,19 +193,19 @@ function ServicePillar({ pillar, index }: { pillar: typeof servicePillars[0]; in
 
       {/* Services grid */}
       <div className="px-8 md:px-12 py-10">
-        <p className="text-white/30 text-xs font-mono uppercase tracking-[0.2em] mb-6">Services</p>
+        <p className="text-muted-foreground text-xs font-mono uppercase tracking-[0.2em] mb-6">Services</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {pillar.items.map((item) => (
             <div
               key={item.title}
-              className="rounded-2xl p-5 flex flex-col gap-2 hover:border-white/15 transition-colors"
-              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+              className="rounded-2xl p-5 flex flex-col gap-2 hover:border-border transition-colors"
+              style={{ background: "rgba(244,247,255,0.8)", border: "1px solid rgba(255,255,255,0.07)" }}
             >
               <div className="flex items-center gap-2 mb-1">
                 <div className="w-1 h-4 rounded-full flex-shrink-0" style={{ background: BLUE }} />
-                <p className="text-white font-semibold text-sm leading-snug">{item.title}</p>
+                <p className="text-foreground font-semibold text-sm leading-snug">{item.title}</p>
               </div>
-              <p className="text-white/45 text-xs leading-relaxed pl-3">{item.desc}</p>
+              <p className="text-muted-foreground text-xs leading-relaxed pl-3">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -216,7 +216,7 @@ function ServicePillar({ pillar, index }: { pillar: typeof servicePillars[0]; in
 
 function FrameworkTimeline() {
   return (
-    <section className="py-24 bg-[#080808] border-t border-white/5">
+    <section className="py-24 bg-[#FFFFFF] border-t border-border">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -229,7 +229,7 @@ function FrameworkTimeline() {
             Our Methodology
           </p>
           <h2
-            className="font-display font-bold text-white leading-[1.1]"
+            className="font-display font-bold text-foreground leading-[1.1]"
             style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}
           >
             AI Transformation Framework
@@ -241,7 +241,7 @@ function FrameworkTimeline() {
           {/* Connecting line */}
           <div
             className="absolute top-8 left-0 right-0 h-px hidden lg:block"
-            style={{ background: "linear-gradient(90deg, transparent, rgba(71,163,255,0.3) 15%, rgba(71,163,255,0.3) 85%, transparent)" }}
+            style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.24) 15%, rgba(33,78,207,0.24) 85%, transparent)" }}
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
@@ -259,16 +259,16 @@ function FrameworkTimeline() {
                 <div
                   className="relative z-10 w-16 h-16 rounded-2xl flex flex-col items-center justify-center mb-5 flex-shrink-0"
                   style={{
-                    background: "linear-gradient(135deg, rgba(37,99,235,0.15) 0%, rgba(71,163,255,0.08) 100%)",
+                    background: "linear-gradient(135deg, rgba(33,78,207,0.12) 0%, rgba(33,78,207,0.08) 100%)",
                     border: "1px solid rgba(71,163,255,0.25)",
-                    boxShadow: "0 0 20px rgba(37,99,235,0.12)",
+                    boxShadow: "0 0 20px rgba(33,78,207,0.09)",
                   }}
                 >
                   <span className="text-[9px] font-mono font-bold" style={{ color: BLUE }}>{stage.step}</span>
-                  <span className="text-xs font-bold text-white mt-0.5">{stage.label}</span>
+                  <span className="text-xs font-bold text-foreground mt-0.5">{stage.label}</span>
                 </div>
 
-                <p className="text-white/45 text-xs leading-relaxed">{stage.desc}</p>
+                <p className="text-muted-foreground text-xs leading-relaxed">{stage.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -280,7 +280,7 @@ function FrameworkTimeline() {
 
 function IndustriesSection() {
   return (
-    <section className="py-20 bg-black border-t border-white/5">
+    <section className="py-20 bg-background border-t border-border">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -293,7 +293,7 @@ function IndustriesSection() {
             Industries We Serve
           </p>
           <h2
-            className="font-display font-bold text-white"
+            className="font-display font-bold text-foreground"
             style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}
           >
             Technology for Every Sector
@@ -309,11 +309,11 @@ function IndustriesSection() {
               viewport={{ once: true }}
               variants={fadeUp}
               transition={{ delay: i * 0.05 }}
-              className="px-5 py-2.5 rounded-full text-sm font-medium transition-all hover:border-white/20 hover:text-white cursor-default"
+              className="px-5 py-2.5 rounded-full text-sm font-medium transition-all hover:border-[#DCE5FF] hover:text-foreground cursor-default"
               style={{
                 background: "rgba(255,255,255,0.04)",
                 border: "1px solid rgba(255,255,255,0.09)",
-                color: "rgba(255,255,255,0.6)",
+                color: "#4B5563",
               }}
             >
               {ind}
@@ -327,7 +327,7 @@ function IndustriesSection() {
 
 function EngagementModelsSection() {
   return (
-    <section className="py-24 bg-[#0a0a0a] border-t border-white/5">
+    <section className="py-24 bg-[#FFFFFF] border-t border-border">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -340,12 +340,12 @@ function EngagementModelsSection() {
             How We Work
           </p>
           <h2
-            className="font-display font-bold text-white"
+            className="font-display font-bold text-foreground"
             style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}
           >
             Engagement Models
           </h2>
-          <p className="text-white/45 text-base mt-4 max-w-xl mx-auto leading-relaxed">
+          <p className="text-muted-foreground text-base mt-4 max-w-xl mx-auto leading-relaxed">
             We adapt to how you work — choose the model that fits your timeline, team, and objectives.
           </p>
         </motion.div>
@@ -362,14 +362,14 @@ function EngagementModelsSection() {
               whileHover={{ y: -4, transition: { duration: 0.22 } }}
               className="rounded-2xl p-7 flex flex-col gap-4 cursor-default"
               style={{
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.08)",
+                background: "rgba(244,247,255,0.8)",
+                border: "1px solid rgba(33,78,207,0.06)",
               }}
             >
               <span className="text-2xl">{model.icon}</span>
               <div>
-                <h3 className="font-display font-bold text-white text-lg mb-2">{model.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{model.desc}</p>
+                <h3 className="font-display font-bold text-foreground text-lg mb-2">{model.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{model.desc}</p>
               </div>
             </motion.div>
           ))}
@@ -385,35 +385,35 @@ export default function TechnologyPage() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative pt-48 pb-24 overflow-hidden border-b border-white/5"
-        style={{ background: "linear-gradient(160deg, #050d1a 0%, #030b16 50%, #040810 100%)" }}
+      <section className="relative pt-48 pb-24 overflow-hidden border-b border-border"
+        style={{ background: "linear-gradient(160deg, #F5F8FF 0%, #F5F8FF 50%, #F5F8FF 100%)" }}
       >
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#47A3FF05_1px,transparent_1px),linear-gradient(to_bottom,#47A3FF05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#214ECF05_1px,transparent_1px),linear-gradient(to_bottom,#214ECF05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 70% 55% at 30% 0%, rgba(37,99,235,0.12) 0%, transparent 65%)" }}
+          style={{ background: "radial-gradient(ellipse 70% 55% at 30% 0%, rgba(33,78,207,0.09) 0%, transparent 65%)" }}
         />
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <div
               className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border mb-8"
-              style={{ background: "rgba(37,99,235,0.06)", borderColor: "rgba(71,163,255,0.2)" }}
+              style={{ background: "rgba(37,99,235,0.06)", borderColor: "rgba(33,78,207,0.18)" }}
             >
               <span className="text-[10px] font-mono tracking-[0.22em] uppercase" style={{ color: BLUE }}>
                 Technology &amp; IT Services
               </span>
             </div>
             <h1
-              className="font-display font-bold text-white leading-[1.05] mb-6"
+              className="font-display font-bold text-foreground leading-[1.05] mb-6"
               style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)" }}
             >
               Build Intelligent Digital<br />
-              <span style={{ background: "linear-gradient(135deg,#2563EB 0%,#47A3FF 60%,#93c5fd 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span style={{ background: "linear-gradient(135deg,#214ECF 0%,#214ECF 60%,#93c5fd 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 Products
               </span>{" "}
               That Solve Real<br />Business Problems.
             </h1>
-            <p className="text-white/50 text-lg leading-relaxed max-w-2xl mb-10">
+            <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mb-10">
               Thinkatic's technology division builds intelligent digital products that solve real business problems — from custom AI systems and enterprise software to cloud infrastructure and data analytics.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -421,8 +421,8 @@ export default function TechnologyPage() {
                 <motion.button
                   whileHover={{ scale: 1.04, boxShadow: "0 0 32px rgba(37,99,235,0.5)" }}
                   whileTap={{ scale: 0.97 }}
-                  className="px-8 py-4 rounded-full font-bold text-white text-sm tracking-wider"
-                  style={{ background: "linear-gradient(135deg,#1d4ed8 0%,#2563EB 50%,#3b82f6 100%)", boxShadow: "0 0 24px rgba(37,99,235,0.3)" }}
+                  className="px-8 py-4 rounded-full font-bold text-foreground text-sm tracking-wider"
+                  style={{ background: "linear-gradient(135deg,#214ECF 0%,#214ECF 50%,#3b82f6 100%)", boxShadow: "0 0 24px rgba(37,99,235,0.3)" }}
                 >
                   Book a Consultation
                 </motion.button>
@@ -432,7 +432,7 @@ export default function TechnologyPage() {
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
                   className="px-8 py-4 rounded-full font-bold text-sm tracking-wider transition-all hover:bg-white/8"
-                  style={{ border: "1px solid rgba(71,163,255,0.2)", color: "rgba(255,255,255,0.7)", background: "rgba(71,163,255,0.05)" }}
+                  style={{ border: "1px solid rgba(33,78,207,0.18)", color: "#4B5563", background: "rgba(71,163,255,0.05)" }}
                 >
                   Explore BPO Services →
                 </motion.button>
@@ -443,14 +443,14 @@ export default function TechnologyPage() {
       </section>
 
       {/* Intro strip */}
-      <section className="py-14 bg-[#0a0a0a] border-b border-white/5">
+      <section className="py-14 bg-[#FFFFFF] border-b border-border">
         <div className="max-w-6xl mx-auto px-6">
           <motion.p
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="text-white/40 text-base leading-relaxed max-w-3xl"
+            className="text-muted-foreground text-base leading-relaxed max-w-3xl"
           >
             Visually distinct from our BPO practice, our technology services share the same commitment: measurable outcomes. We don't build technology for its own sake — every system we ship maps to a real business problem.
           </motion.p>
@@ -458,7 +458,7 @@ export default function TechnologyPage() {
       </section>
 
       {/* Service pillars */}
-      <section className="py-20 bg-[#0a0a0a]">
+      <section className="py-20 bg-[#FFFFFF]">
         <div className="max-w-6xl mx-auto px-6 flex flex-col gap-8">
           {servicePillars.map((pillar, i) => (
             <ServicePillar key={pillar.id} pillar={pillar} index={i} />
@@ -476,10 +476,10 @@ export default function TechnologyPage() {
       <EngagementModelsSection />
 
       {/* CTA */}
-      <section className="py-32 bg-black border-t border-white/5 relative overflow-hidden">
+      <section className="py-32 bg-background border-t border-border relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(71,163,255,0.08) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(33,78,207,0.08) 0%, transparent 70%)" }}
         />
         <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
           <motion.p
@@ -498,7 +498,7 @@ export default function TechnologyPage() {
             viewport={{ once: true }}
             variants={fadeUp}
             transition={{ delay: 0.05 }}
-            className="font-display font-bold text-white leading-[1.05] mb-6"
+            className="font-display font-bold text-foreground leading-[1.05] mb-6"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}
           >
             Let's Build Smarter Business Together.
@@ -509,7 +509,7 @@ export default function TechnologyPage() {
             viewport={{ once: true }}
             variants={fadeUp}
             transition={{ delay: 0.1 }}
-            className="text-white/50 text-lg leading-relaxed mb-10"
+            className="text-muted-foreground text-lg leading-relaxed mb-10"
           >
             Scalable platforms, next-generation AI products, and world-class digital experiences that drive real business growth.
           </motion.p>
@@ -525,8 +525,8 @@ export default function TechnologyPage() {
               <motion.button
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="px-8 py-4 rounded-full font-bold text-white text-sm tracking-wider"
-                style={{ background: "linear-gradient(135deg, #47A3FF 0%, #4040E8 100%)", boxShadow: "0 0 30px rgba(71,163,255,0.25)" }}
+                className="px-8 py-4 rounded-full font-bold text-foreground text-sm tracking-wider"
+                style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)", boxShadow: "0 0 30px rgba(71,163,255,0.25)" }}
               >
                 START YOUR PROJECT
               </motion.button>
@@ -536,7 +536,7 @@ export default function TechnologyPage() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 className="px-8 py-4 rounded-full font-bold text-sm tracking-wider transition-all hover:bg-white/10"
-                style={{ border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.65)" }}
+                style={{ border: "1px solid rgba(33,78,207,0.12)", color: "rgba(255,255,255,0.65)" }}
               >
                 BOOK A CONSULTATION
               </motion.button>

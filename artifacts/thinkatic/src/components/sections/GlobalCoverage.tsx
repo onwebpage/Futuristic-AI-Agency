@@ -5,8 +5,8 @@ import { Globe, Clock, Languages, Shield, Wifi } from "lucide-react";
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const STATS = [
-  { icon: Globe,     value: "25+",   label: "Countries",         color: "#2563EB" },
-  { icon: Clock,     value: "24/7",  label: "Global Coverage",   color: "#47A3FF" },
+  { icon: Globe,     value: "25+",   label: "Countries",         color: "#214ECF" },
+  { icon: Clock,     value: "24/7",  label: "Global Coverage",   color: "#214ECF" },
   { icon: Languages, value: "14",    label: "Languages",          color: "#34D399" },
   { icon: Wifi,      value: "99.9%", label: "Uptime SLA",        color: "#A78BFA" },
   { icon: Shield,    value: "ISO",   label: "27001 Certified",   color: "#F59E0B" },
@@ -14,18 +14,18 @@ const STATS = [
 
 // Hub locations: { label, x %, y %, desc, size }
 const HUBS = [
-  { label: "New York",     x: 22, y: 36, desc: "Americas HQ",       size: "lg", color: "#47A3FF" },
-  { label: "London",       x: 47, y: 27, desc: "EMEA HQ",           size: "lg", color: "#2563EB" },
+  { label: "New York",     x: 22, y: 36, desc: "Americas HQ",       size: "lg", color: "#214ECF" },
+  { label: "London",       x: 47, y: 27, desc: "EMEA HQ",           size: "lg", color: "#214ECF" },
   { label: "Dubai",        x: 59, y: 40, desc: "Middle East Hub",   size: "md", color: "#34D399" },
   { label: "Mumbai",       x: 65, y: 43, desc: "South Asia Hub",    size: "md", color: "#F59E0B" },
   { label: "Manila",       x: 78, y: 46, desc: "APAC Operations",   size: "lg", color: "#A78BFA" },
-  { label: "Bangalore",    x: 64, y: 47, desc: "Tech & AI Center",  size: "md", color: "#2563EB" },
-  { label: "Sydney",       x: 81, y: 66, desc: "ANZ Hub",           size: "sm", color: "#47A3FF" },
+  { label: "Bangalore",    x: 64, y: 47, desc: "Tech & AI Center",  size: "md", color: "#214ECF" },
+  { label: "Sydney",       x: 81, y: 66, desc: "ANZ Hub",           size: "sm", color: "#214ECF" },
   { label: "Toronto",      x: 23, y: 31, desc: "Canada Hub",        size: "sm", color: "#34D399" },
   { label: "São Paulo",    x: 29, y: 63, desc: "LATAM Hub",         size: "md", color: "#F59E0B" },
   { label: "Singapore",    x: 77, y: 51, desc: "SE Asia Hub",       size: "md", color: "#A78BFA" },
-  { label: "Frankfurt",    x: 50, y: 26, desc: "EU Data Center",    size: "sm", color: "#2563EB" },
-  { label: "Cairo",        x: 53, y: 41, desc: "MENA Hub",          size: "sm", color: "#47A3FF" },
+  { label: "Frankfurt",    x: 50, y: 26, desc: "EU Data Center",    size: "sm", color: "#214ECF" },
+  { label: "Cairo",        x: 53, y: 41, desc: "MENA Hub",          size: "sm", color: "#214ECF" },
 ];
 
 const REGIONS = [
@@ -35,7 +35,7 @@ const REGIONS = [
     offices: ["New York", "Toronto", "São Paulo"],
     timezone: "UTC−8 to UTC−3",
     languages: ["English", "Spanish", "Portuguese"],
-    accent: "#2563EB",
+    accent: "#214ECF",
   },
   {
     name: "EMEA",
@@ -43,7 +43,7 @@ const REGIONS = [
     offices: ["London", "Frankfurt", "Dubai", "Cairo"],
     timezone: "UTC+0 to UTC+4",
     languages: ["English", "German", "Arabic", "French"],
-    accent: "#47A3FF",
+    accent: "#214ECF",
   },
   {
     name: "APAC",
@@ -130,7 +130,7 @@ function AnimatedTooltip({ hub, visible }: { hub: typeof HUBS[0]; visible: boole
           boxShadow: `0 8px 32px rgba(0,0,0,0.6), 0 0 16px ${hub.color}20`,
         }}
       >
-        <p className="text-white font-bold text-xs whitespace-nowrap">{hub.label}</p>
+        <p className="text-foreground font-bold text-xs whitespace-nowrap">{hub.label}</p>
         <p className="text-[10px] whitespace-nowrap mt-0.5" style={{ color: hub.color }}>
           {hub.desc}
         </p>
@@ -156,9 +156,9 @@ function RegionCard({ region, index }: { region: typeof REGIONS[0]; index: numbe
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, ease, delay: index * 0.12 }}
-      className="rounded-2xl border p-6 hover:border-white/15 transition-all duration-400 group"
+      className="rounded-2xl border p-6 hover:border-border transition-all duration-400 group"
       style={{
-        background: "rgba(255,255,255,0.02)",
+        background: "rgba(33,78,207,0.02)",
         borderColor: "rgba(255,255,255,0.07)",
       }}
     >
@@ -166,8 +166,8 @@ function RegionCard({ region, index }: { region: typeof REGIONS[0]; index: numbe
       <div className="flex items-center gap-3 mb-5">
         <span className="text-2xl">{region.flag}</span>
         <div>
-          <h3 className="text-white font-bold text-base">{region.name}</h3>
-          <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>{region.timezone}</p>
+          <h3 className="text-foreground font-bold text-base">{region.name}</h3>
+          <p className="text-xs mt-0.5" style={{ color: "rgba(33,78,207,0.22)" }}>{region.timezone}</p>
         </div>
         <div
           className="ml-auto px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider"
@@ -217,9 +217,9 @@ export function GlobalCoverage() {
   return (
     <section
       className="relative py-28 md:py-36 overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #0a0a0a 0%, #06080f 50%, #0a0a0a 100%)" }}
+      style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #F5F8FF 50%, #FFFFFF 100%)" }}
     >
-      <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 50%, transparent)" }} />
+      <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.06) 50%, transparent)" }} />
 
       {/* Ambient */}
       <div
@@ -246,12 +246,12 @@ export function GlobalCoverage() {
               initial={{ y: "100%", opacity: 0 }}
               animate={inView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.85, ease, delay: 0.05 }}
-              className="font-display font-bold text-white leading-[1.05]"
+              className="font-display font-bold text-foreground leading-[1.05]"
               style={{ fontSize: "clamp(2.2rem, 4.5vw, 4rem)" }}
             >
               Wherever you operate,
               <br />
-              <span style={{ background: "linear-gradient(135deg, #2563EB 0%, #47A3FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 we're already there.
               </span>
             </motion.h2>
@@ -290,7 +290,7 @@ export function GlobalCoverage() {
                 }}
               >
                 <Icon size={16} style={{ color: stat.color }} />
-                <span className="font-display font-black text-white text-lg leading-none">{stat.value}</span>
+                <span className="font-display font-black text-foreground text-lg leading-none">{stat.value}</span>
                 <span className="text-xs font-medium" style={{ color: "rgba(255,255,255,0.4)" }}>{stat.label}</span>
               </motion.div>
             );
@@ -340,7 +340,7 @@ export function GlobalCoverage() {
           {/* Glowing scan line */}
           <motion.div
             className="absolute top-0 bottom-0 w-[1px] pointer-events-none"
-            style={{ background: "linear-gradient(180deg, transparent, rgba(71,163,255,0.3) 30%, rgba(71,163,255,0.6) 50%, rgba(71,163,255,0.3) 70%, transparent)" }}
+            style={{ background: "linear-gradient(180deg, transparent, rgba(33,78,207,0.24) 30%, rgba(71,163,255,0.6) 50%, rgba(33,78,207,0.24) 70%, transparent)" }}
             animate={{ left: ["0%", "100%"] }}
             transition={{ duration: 10, ease: "linear", repeat: Infinity }}
           />
@@ -370,7 +370,7 @@ export function GlobalCoverage() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 50%, transparent)" }} />
+      <div className="absolute bottom-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.06) 50%, transparent)" }} />
     </section>
   );
 }

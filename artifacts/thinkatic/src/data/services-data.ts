@@ -1,6 +1,6 @@
-export const BLUE = "#47A3FF";
-export const BLUE_DIM = "rgba(71,163,255,0.12)";
-export const BLUE_BORDER = "rgba(71,163,255,0.18)";
+export const BLUE = "#214ECF";
+export const BLUE_DIM = "rgba(33,78,207,0.1)";
+export const BLUE_BORDER = "rgba(33,78,207,0.14)";
 
 export type ServiceItem = {
   id: string;

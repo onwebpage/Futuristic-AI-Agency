@@ -15,7 +15,7 @@ const TESTIMONIALS = [
     photo: "https://randomuser.me/api/portraits/men/32.jpg",
     metric: "68%",
     metricLabel: "reduction in support tickets",
-    accent: "#2563EB",
+    accent: "#214ECF",
   },
   {
     index: "02",
@@ -27,7 +27,7 @@ const TESTIMONIALS = [
     photo: "https://randomuser.me/api/portraits/women/44.jpg",
     metric: "6 wks",
     metricLabel: "from kickoff to launch",
-    accent: "#47A3FF",
+    accent: "#214ECF",
   },
   {
     index: "03",
@@ -118,7 +118,7 @@ function Slide({ t, direction }: { t: typeof TESTIMONIALS[0]; direction: number 
             loading="lazy"
           />
           <div>
-            <p className="text-white font-bold text-sm">{t.name}</p>
+            <p className="text-foreground font-bold text-sm">{t.name}</p>
             <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>
               {t.title} · {t.company}
             </p>
@@ -141,7 +141,7 @@ function Slide({ t, direction }: { t: typeof TESTIMONIALS[0]; direction: number 
         >
           {t.metric}
         </p>
-        <p className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.45)" }}>
+        <p className="text-sm font-medium" style={{ color: "#4B5563" }}>
           {t.metricLabel}
         </p>
         <div
@@ -188,12 +188,12 @@ export function Testimonials() {
   return (
     <section
       className="relative py-28 md:py-36 overflow-hidden"
-      style={{ background: "#0a0a0a" }}
+      style={{ background: "#FFFFFF" }}
       data-testid="section-testimonials"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 50%, transparent)" }} />
+      <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.06) 50%, transparent)" }} />
 
       {/* Ambient glow tracks the active accent */}
       <motion.div
@@ -222,12 +222,12 @@ export function Testimonials() {
                 initial={{ y: "100%", opacity: 0 }}
                 animate={inView ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.85, ease, delay: 0.05 }}
-                className="font-display font-bold text-white leading-[1.05]"
+                className="font-display font-bold text-foreground leading-[1.05]"
                 style={{ fontSize: "clamp(2rem, 4.5vw, 3.8rem)" }}
               >
                 What our clients
                 <br />
-                <span style={{ background: "linear-gradient(135deg, #2563EB 0%, #47A3FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                <span style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                   say about us.
                 </span>
               </motion.h2>
@@ -245,17 +245,17 @@ export function Testimonials() {
               onClick={prev}
               aria-label="Previous testimonial"
               className="w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 hover:border-white/30 hover:bg-white/5"
-              style={{ borderColor: "rgba(255,255,255,0.12)" }}
+              style={{ borderColor: "rgba(33,78,207,0.12)" }}
             >
-              <ChevronLeft size={18} style={{ color: "rgba(255,255,255,0.6)" }} />
+              <ChevronLeft size={18} style={{ color: "#4B5563" }} />
             </button>
             <button
               onClick={next}
               aria-label="Next testimonial"
               className="w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 hover:border-white/30 hover:bg-white/5"
-              style={{ borderColor: "rgba(255,255,255,0.12)" }}
+              style={{ borderColor: "rgba(33,78,207,0.12)" }}
             >
-              <ChevronRight size={18} style={{ color: "rgba(255,255,255,0.6)" }} />
+              <ChevronRight size={18} style={{ color: "#4B5563" }} />
             </button>
           </motion.div>
         </div>
@@ -268,7 +268,7 @@ export function Testimonials() {
           className="relative rounded-2xl border p-8 md:p-14 overflow-hidden"
           style={{
             background: "rgba(255,255,255,0.025)",
-            borderColor: "rgba(255,255,255,0.08)",
+            borderColor: "rgba(33,78,207,0.06)",
             minHeight: "340px",
           }}
         >
@@ -298,7 +298,7 @@ export function Testimonials() {
                 className="relative h-1.5 rounded-full transition-all duration-400 overflow-hidden"
                 style={{
                   width: i === index ? "32px" : "8px",
-                  background: i === index ? t.accent : "rgba(255,255,255,0.15)",
+                  background: i === index ? t.accent : "rgba(33,78,207,0.12)",
                 }}
               >
                 {i === index && !paused && !shouldReduce && (
@@ -316,7 +316,7 @@ export function Testimonials() {
           </div>
 
           {/* Counter */}
-          <p className="text-xs font-mono" style={{ color: "rgba(255,255,255,0.25)" }}>
+          <p className="text-xs font-mono" style={{ color: "rgba(33,78,207,0.16)" }}>
             {String(index + 1).padStart(2, "0")} / {String(TESTIMONIALS.length).padStart(2, "0")}
           </p>
         </div>
@@ -329,7 +329,7 @@ export function Testimonials() {
               onClick={() => goTo(i)}
               className="flex items-center gap-3 px-4 py-2.5 rounded-xl border transition-all duration-300"
               style={{
-                borderColor: i === index ? `${t.accent}40` : "rgba(255,255,255,0.06)",
+                borderColor: i === index ? `${t.accent}40` : "rgba(33,78,207,0.04)",
                 background: i === index ? `${t.accent}0e` : "transparent",
                 opacity: i === index ? 1 : 0.5,
               }}
@@ -342,15 +342,15 @@ export function Testimonials() {
                 loading="lazy"
               />
               <div className="text-left">
-                <p className="text-xs font-semibold text-white leading-tight">{t.name}</p>
-                <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.35)" }}>{t.company}</p>
+                <p className="text-xs font-semibold text-foreground leading-tight">{t.name}</p>
+                <p className="text-[10px]" style={{ color: "rgba(33,78,207,0.22)" }}>{t.company}</p>
               </div>
             </button>
           ))}
         </div>
       </div>
 
-      <div className="absolute bottom-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08) 50%, transparent)" }} />
+      <div className="absolute bottom-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.06) 50%, transparent)" }} />
     </section>
   );
 }

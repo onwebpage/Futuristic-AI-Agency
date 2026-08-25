@@ -24,7 +24,7 @@ function WhiteBadge({ text }: { text: string }) {
   return (
     <span
       className="px-3 py-1.5 rounded-full text-xs font-medium"
-      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.65)" }}
+      style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.65)" }}
     >
       {text}
     </span>
@@ -42,7 +42,7 @@ function CheckItem({ text }: { text: string }) {
           <path d="M2 5l2.5 2.5L8 3" stroke={BLUE} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </span>
-      <span className="text-sm text-white/65 leading-snug">{text}</span>
+      <span className="text-sm text-muted-foreground leading-snug">{text}</span>
     </div>
   );
 }
@@ -58,8 +58,8 @@ export default function ServiceDetailPage() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative pt-44 pb-24 bg-black overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#47A3FF05_1px,transparent_1px),linear-gradient(to_bottom,#47A3FF05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      <section className="relative pt-44 pb-24 bg-background overflow-hidden border-b border-border">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#214ECF05_1px,transparent_1px),linear-gradient(to_bottom,#214ECF05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ background: "radial-gradient(ellipse 70% 55% at 60% 0%, rgba(71,163,255,0.10) 0%, transparent 65%)" }}
@@ -71,7 +71,7 @@ export default function ServiceDetailPage() {
             initial="hidden" animate="visible" variants={fadeUp}
             className="flex items-center gap-2 mb-10 text-xs font-mono"
           >
-            <Link href="/services" className="text-white/35 hover:text-white/70 transition-colors">Services</Link>
+            <Link href="/services" className="text-muted-foreground hover:text-muted-foreground transition-colors">Services</Link>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6" /></svg>
             <span style={{ color: BLUE }}>{svc.title}</span>
           </motion.div>
@@ -81,13 +81,13 @@ export default function ServiceDetailPage() {
               <motion.div initial="hidden" animate="visible" variants={fadeUp} className="flex items-center gap-3 mb-6">
                 <span className="text-xs font-mono font-bold tracking-[0.25em]" style={{ color: BLUE }}>{svc.number}</span>
                 <div className="h-px w-10" style={{ background: BLUE_BORDER }} />
-                <span className="text-xs font-mono uppercase tracking-widest text-white/30">Service</span>
+                <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">Service</span>
               </motion.div>
 
               <motion.h1
                 initial="hidden" animate="visible" variants={fadeUp}
                 transition={{ delay: 0.05 }}
-                className="font-display font-bold text-white leading-[1.05] mb-5"
+                className="font-display font-bold text-foreground leading-[1.05] mb-5"
                 style={{ fontSize: "clamp(2.2rem, 5vw, 3.8rem)" }}
               >
                 {svc.title}
@@ -105,7 +105,7 @@ export default function ServiceDetailPage() {
               <motion.p
                 initial="hidden" animate="visible" variants={fadeUp}
                 transition={{ delay: 0.15 }}
-                className="text-white/55 text-base leading-relaxed mb-10 max-w-xl"
+                className="text-muted-foreground text-base leading-relaxed mb-10 max-w-xl"
               >
                 {svc.description}
               </motion.p>
@@ -118,8 +118,8 @@ export default function ServiceDetailPage() {
                 <Link href="/contact">
                   <motion.button
                     whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                    className="flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-white text-sm tracking-wide"
-                    style={{ background: "linear-gradient(135deg, #47A3FF 0%, #4040E8 100%)" }}
+                    className="flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-foreground text-sm tracking-wide"
+                    style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)" }}
                   >
                     Start a Project
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
@@ -129,7 +129,7 @@ export default function ServiceDetailPage() {
                   <motion.button
                     whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
                     className="flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm"
-                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.75)" }}
+                    style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.75)" }}
                   >
                     View Pricing
                   </motion.button>
@@ -147,11 +147,11 @@ export default function ServiceDetailPage() {
                 className="w-64 h-64 rounded-3xl flex items-center justify-center relative"
                 style={{ background: BLUE_DIM, border: `1px solid ${BLUE_BORDER}` }}
               >
-                <div className="absolute inset-0 rounded-3xl" style={{ background: "radial-gradient(circle at center, rgba(71,163,255,0.15) 0%, transparent 70%)" }} />
+                <div className="absolute inset-0 rounded-3xl" style={{ background: "radial-gradient(circle at center, rgba(33,78,207,0.12) 0%, transparent 70%)" }} />
                 <svg width="96" height="96" viewBox="0 0 24 24" fill="none" stroke={BLUE} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d={svc.icon} />
                 </svg>
-                <div className="absolute top-5 right-5 text-4xl font-mono font-bold" style={{ color: "rgba(71,163,255,0.15)" }}>{svc.number}</div>
+                <div className="absolute top-5 right-5 text-4xl font-mono font-bold" style={{ color: "rgba(33,78,207,0.12)" }}>{svc.number}</div>
               </div>
             </motion.div>
           </div>
@@ -160,7 +160,7 @@ export default function ServiceDetailPage() {
 
       {/* Healthcare BPO — Compliance Trust Badges */}
       {svc.trustBadges && (
-        <section className="py-10 bg-[#0a0a0a] border-b border-white/5">
+        <section className="py-10 bg-[#FFFFFF] border-b border-border">
           <div className="max-w-6xl mx-auto px-6">
             <motion.div
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
@@ -194,8 +194,8 @@ export default function ServiceDetailPage() {
                     )}
                   </div>
                   <div>
-                    <p className="font-semibold text-sm text-white mb-1.5">{badge.label}</p>
-                    <p className="text-xs text-white/40 leading-relaxed">{badge.description}</p>
+                    <p className="font-semibold text-sm text-foreground mb-1.5">{badge.label}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{badge.description}</p>
                   </div>
                 </div>
               ))}
@@ -205,7 +205,7 @@ export default function ServiceDetailPage() {
       )}
 
       {/* What We Build */}
-      <section className="py-24 bg-[#0a0a0a]">
+      <section className="py-24 bg-[#FFFFFF]">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
@@ -214,7 +214,7 @@ export default function ServiceDetailPage() {
             <p className="text-xs font-mono uppercase tracking-[0.25em] mb-3" style={{ color: BLUE }}>
               {svc.id === "ai-consulting" ? "Our Services" : "What We Build"}
             </p>
-            <h2 className="font-display font-bold text-white leading-[1.05]" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
+            <h2 className="font-display font-bold text-foreground leading-[1.05]" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
               {svc.id === "ai-consulting" ? "Consulting Services We Provide" : "Solutions We Deliver"}
             </h2>
           </motion.div>
@@ -228,8 +228,8 @@ export default function ServiceDetailPage() {
                 viewport={{ once: true, margin: "-60px" }}
                 variants={fadeUp}
                 transition={{ delay: i * 0.06 }}
-                className="rounded-2xl p-6 flex flex-col gap-3 group hover:border-white/15 transition-colors"
-                style={{ background: "#111", border: "1px solid rgba(255,255,255,0.07)" }}
+                className="rounded-2xl p-6 flex flex-col gap-3 group hover:border-border transition-colors"
+                style={{ background: "#FFFFFF", border: "1px solid rgba(255,255,255,0.07)" }}
               >
                 <div
                   className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -239,8 +239,8 @@ export default function ServiceDetailPage() {
                     <path d="M2 5l2.5 2.5L8 3" stroke={BLUE} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-                <p className="text-white font-semibold text-sm leading-snug">{item.title}</p>
-                <p className="text-white/45 text-xs leading-relaxed">{item.desc}</p>
+                <p className="text-foreground font-semibold text-sm leading-snug">{item.title}</p>
+                <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -249,13 +249,13 @@ export default function ServiceDetailPage() {
 
       {/* Process / Technologies / Benefits / etc. */}
       {(svc.process || svc.technologies || svc.benefits || svc.whyUs || svc.industries || svc.principles || svc.fullServices) && (
-        <section className="py-24 bg-black border-t border-white/5">
+        <section className="py-24 bg-background border-t border-border">
           <div className="max-w-6xl mx-auto px-6 flex flex-col gap-16">
 
             {svc.process && (
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-                <p className="text-xs font-mono uppercase tracking-[0.25em] mb-4 text-white/30">Development Process</p>
-                <h3 className="font-display font-bold text-white mb-8" style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)" }}>
+                <p className="text-xs font-mono uppercase tracking-[0.25em] mb-4 text-muted-foreground">Development Process</p>
+                <h3 className="font-display font-bold text-foreground mb-8" style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)" }}>
                   How We Work
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -268,7 +268,7 @@ export default function ServiceDetailPage() {
                       variants={fadeUp}
                       transition={{ delay: i * 0.07 }}
                       className="flex items-start gap-4 p-5 rounded-2xl"
-                      style={{ background: "#111", border: "1px solid rgba(255,255,255,0.07)" }}
+                      style={{ background: "#FFFFFF", border: "1px solid rgba(255,255,255,0.07)" }}
                     >
                       <span
                         className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-mono font-bold"
@@ -276,7 +276,7 @@ export default function ServiceDetailPage() {
                       >
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span className="text-white/70 text-sm font-medium leading-snug pt-1">{step}</span>
+                      <span className="text-muted-foreground text-sm font-medium leading-snug pt-1">{step}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -285,7 +285,7 @@ export default function ServiceDetailPage() {
 
             {svc.fullServices && (
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-                <p className="text-white/30 text-xs font-mono uppercase tracking-[0.25em] mb-4">Full Development Services</p>
+                <p className="text-muted-foreground text-xs font-mono uppercase tracking-[0.25em] mb-4">Full Development Services</p>
                 <div className="flex flex-wrap gap-2">
                   {svc.fullServices.map((t) => <WhiteBadge key={t} text={t} />)}
                 </div>
@@ -294,7 +294,7 @@ export default function ServiceDetailPage() {
 
             {svc.technologies && (
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-                <p className="text-white/30 text-xs font-mono uppercase tracking-[0.25em] mb-4">Technologies We Use</p>
+                <p className="text-muted-foreground text-xs font-mono uppercase tracking-[0.25em] mb-4">Technologies We Use</p>
                 <div className="flex flex-wrap gap-2">
                   {svc.technologies.map((t) => <WhiteBadge key={t} text={t} />)}
                 </div>
@@ -303,7 +303,7 @@ export default function ServiceDetailPage() {
 
             {svc.principles && (
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-                <p className="text-white/30 text-xs font-mono uppercase tracking-[0.25em] mb-4">Design Principles</p>
+                <p className="text-muted-foreground text-xs font-mono uppercase tracking-[0.25em] mb-4">Design Principles</p>
                 <div className="flex flex-wrap gap-2">
                   {svc.principles.map((t) => <Badge key={t} text={t} />)}
                 </div>
@@ -312,8 +312,8 @@ export default function ServiceDetailPage() {
 
             {svc.benefits && (
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-                <p className="text-white/30 text-xs font-mono uppercase tracking-[0.25em] mb-6">Key Benefits</p>
-                <h3 className="font-display font-bold text-white mb-8" style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)" }}>
+                <p className="text-muted-foreground text-xs font-mono uppercase tracking-[0.25em] mb-6">Key Benefits</p>
+                <h3 className="font-display font-bold text-foreground mb-8" style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)" }}>
                   Why It Matters for Your Business
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -323,7 +323,7 @@ export default function ServiceDetailPage() {
                       initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
                       transition={{ delay: i * 0.05 }}
                       className="p-5 rounded-2xl"
-                      style={{ background: "#111", border: "1px solid rgba(255,255,255,0.07)" }}
+                      style={{ background: "#FFFFFF", border: "1px solid rgba(255,255,255,0.07)" }}
                     >
                       <CheckItem text={b} />
                     </motion.div>
@@ -334,8 +334,8 @@ export default function ServiceDetailPage() {
 
             {svc.whyUs && (
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-                <p className="text-white/30 text-xs font-mono uppercase tracking-[0.25em] mb-6">Why Choose Thinkatic</p>
-                <h3 className="font-display font-bold text-white mb-8" style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)" }}>
+                <p className="text-muted-foreground text-xs font-mono uppercase tracking-[0.25em] mb-6">Why Choose Thinkatic</p>
+                <h3 className="font-display font-bold text-foreground mb-8" style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)" }}>
                   What Sets Us Apart
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -345,7 +345,7 @@ export default function ServiceDetailPage() {
                       initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
                       transition={{ delay: i * 0.05 }}
                       className="p-5 rounded-2xl"
-                      style={{ background: "#111", border: "1px solid rgba(255,255,255,0.07)" }}
+                      style={{ background: "#FFFFFF", border: "1px solid rgba(255,255,255,0.07)" }}
                     >
                       <CheckItem text={b} />
                     </motion.div>
@@ -356,7 +356,7 @@ export default function ServiceDetailPage() {
 
             {svc.industries && (
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-                <p className="text-white/30 text-xs font-mono uppercase tracking-[0.25em] mb-4">Industries We Serve</p>
+                <p className="text-muted-foreground text-xs font-mono uppercase tracking-[0.25em] mb-4">Industries We Serve</p>
                 <div className="flex flex-wrap gap-2">
                   {svc.industries.map((ind) => <WhiteBadge key={ind} text={ind} />)}
                 </div>
@@ -367,14 +367,14 @@ export default function ServiceDetailPage() {
       )}
 
       {/* Related Services */}
-      <section className="py-24 bg-[#0a0a0a] border-t border-white/5">
+      <section className="py-24 bg-[#FFFFFF] border-t border-border">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}
             className="mb-10"
           >
             <p className="text-xs font-mono uppercase tracking-[0.25em] mb-3" style={{ color: BLUE }}>Explore More</p>
-            <h2 className="font-display font-bold text-white" style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}>
+            <h2 className="font-display font-bold text-foreground" style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}>
               Related Services
             </h2>
           </motion.div>
@@ -391,22 +391,22 @@ export default function ServiceDetailPage() {
               >
                 <Link href={`/services/${rel.id}`}>
                   <div
-                    className="group p-7 rounded-2xl flex flex-col gap-4 h-full cursor-pointer hover:border-white/15 transition-all duration-300"
-                    style={{ background: "#111", border: "1px solid rgba(255,255,255,0.07)" }}
+                    className="group p-7 rounded-2xl flex flex-col gap-4 h-full cursor-pointer hover:border-border transition-all duration-300"
+                    style={{ background: "#FFFFFF", border: "1px solid rgba(255,255,255,0.07)" }}
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-mono font-bold tracking-[0.2em]" style={{ color: BLUE }}>{rel.number}</span>
                       <svg
                         width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="rgba(255,255,255,0.25)" strokeWidth="2" strokeLinecap="round"
+                        stroke="rgba(33,78,207,0.16)" strokeWidth="2" strokeLinecap="round"
                         className="group-hover:stroke-white/60 transition-colors"
                       >
                         <path d="M7 17L17 7M17 7H7M17 7v10" />
                       </svg>
                     </div>
                     <div>
-                      <p className="text-white font-bold text-base mb-2 leading-snug group-hover:text-white transition-colors">{rel.title}</p>
-                      <p className="text-white/40 text-xs leading-relaxed line-clamp-2">{rel.tagline}</p>
+                      <p className="text-foreground font-bold text-base mb-2 leading-snug group-hover:text-foreground transition-colors">{rel.title}</p>
+                      <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">{rel.tagline}</p>
                     </div>
                   </div>
                 </Link>
@@ -423,7 +423,7 @@ export default function ServiceDetailPage() {
               <motion.button
                 whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
                 className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-colors"
-                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.65)" }}
+                style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.65)" }}
               >
                 View All Services
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
@@ -434,10 +434,10 @@ export default function ServiceDetailPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-32 bg-black border-t border-white/5 relative overflow-hidden">
+      <section className="py-32 bg-background border-t border-border relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(71,163,255,0.08) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(33,78,207,0.08) 0%, transparent 70%)" }}
         />
         <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
           <motion.p
@@ -450,7 +450,7 @@ export default function ServiceDetailPage() {
           <motion.h2
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             transition={{ delay: 0.05 }}
-            className="font-display font-bold text-white leading-[1.05] mb-6"
+            className="font-display font-bold text-foreground leading-[1.05] mb-6"
             style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
           >
             Let's Build Your<br />{svc.title} Solution
@@ -458,7 +458,7 @@ export default function ServiceDetailPage() {
           <motion.p
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             transition={{ delay: 0.1 }}
-            className="text-white/50 text-lg mb-10"
+            className="text-muted-foreground text-lg mb-10"
           >
             Talk to our team and get a custom proposal tailored to your goals.
           </motion.p>
@@ -470,8 +470,8 @@ export default function ServiceDetailPage() {
             <Link href="/contact">
               <motion.button
                 whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-8 py-4 rounded-full font-bold text-white text-sm tracking-wide"
-                style={{ background: "linear-gradient(135deg, #47A3FF 0%, #4040E8 100%)" }}
+                className="flex items-center gap-2 px-8 py-4 rounded-full font-bold text-foreground text-sm tracking-wide"
+                style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)" }}
               >
                 Book a Free Consultation
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M7 17L17 7M17 7H7M17 7v10" /></svg>
@@ -481,7 +481,7 @@ export default function ServiceDetailPage() {
               <motion.button
                 whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
                 className="px-8 py-4 rounded-full font-bold text-sm"
-                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.75)" }}
+                style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(33,78,207,0.12)", color: "rgba(255,255,255,0.75)" }}
               >
                 See Pricing
               </motion.button>

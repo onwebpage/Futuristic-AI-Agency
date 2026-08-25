@@ -27,9 +27,9 @@ export function FieldWrapper({ label, error, hint, required, children, className
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
       {label && (
-        <label className="text-[11px] font-mono uppercase tracking-[0.18em] text-white/40 select-none">
+        <label className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground select-none">
           {label}
-          {required && <span className="text-[#47A3FF] ml-1">*</span>}
+          {required && <span className="text-[#214ECF] ml-1">*</span>}
         </label>
       )}
       {children}
@@ -52,7 +52,7 @@ export function FieldWrapper({ label, error, hint, required, children, className
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="text-[11px] text-white/25"
+            className="text-[11px] text-muted-foreground"
           >
             {hint}
           </motion.p>
@@ -65,11 +65,11 @@ export function FieldWrapper({ label, error, hint, required, children, className
 // ─── Shared input style ───────────────────────────────────────────────────────
 
 const inputBase = [
-  "w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3",
-  "text-sm text-white placeholder:text-white/25",
+  "w-full bg-white/[0.04] border border-border rounded-xl px-4 py-3",
+  "text-sm text-foreground placeholder:text-muted-foreground",
   "transition-all duration-200",
-  "focus:outline-none focus:border-[#47A3FF]/60 focus:bg-white/[0.06] focus:ring-1 focus:ring-[#47A3FF]/20",
-  "hover:border-white/20 hover:bg-white/[0.05]",
+  "focus:outline-none focus:border-[#214ECF]/60 focus:bg-white/[0.06] focus:ring-1 focus:ring-[#214ECF]/20",
+  "hover:border-[#DCE5FF] hover:bg-white/[0.05]",
   "disabled:opacity-40 disabled:cursor-not-allowed",
 ].join(" ");
 
@@ -93,7 +93,7 @@ export const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
       <FieldWrapper label={label} error={error} hint={hint} required={props.required} className={wrapperClassName}>
         <div className="relative group">
           {icon && (
-            <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-[#47A3FF]/70 transition-colors pointer-events-none">
+            <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-[#214ECF]/70 transition-colors pointer-events-none">
               {icon}
             </div>
           )}
@@ -113,14 +113,14 @@ export const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
             <button
               type="button"
               onClick={() => setShowPw(v => !v)}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-muted-foreground transition-colors"
             >
               {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
             </button>
           )}
           {/* Animated focus glow */}
           <div className="absolute inset-0 rounded-xl pointer-events-none opacity-0 group-focus-within:opacity-100 transition-opacity duration-300"
-            style={{ boxShadow: "0 0 0 1px rgba(71,163,255,0.15), 0 0 16px rgba(71,163,255,0.06)" }} />
+            style={{ boxShadow: "0 0 0 1px rgba(33,78,207,0.12), 0 0 16px rgba(71,163,255,0.06)" }} />
         </div>
       </FieldWrapper>
     );
@@ -152,7 +152,7 @@ export const FormTextarea = React.forwardRef<HTMLTextAreaElement, FormTextareaPr
           {...props}
         />
         <div className="absolute inset-0 rounded-xl pointer-events-none opacity-0 group-focus-within:opacity-100 transition-opacity duration-300"
-          style={{ boxShadow: "0 0 0 1px rgba(71,163,255,0.15), 0 0 16px rgba(71,163,255,0.06)" }} />
+          style={{ boxShadow: "0 0 0 1px rgba(33,78,207,0.12), 0 0 16px rgba(71,163,255,0.06)" }} />
       </div>
     </FieldWrapper>
   )
@@ -180,7 +180,7 @@ export const FormSelect = React.forwardRef<HTMLSelectElement, FormSelectProps>(
             "appearance-none cursor-pointer pr-10",
             "text-sm",
             // If empty / first option selected, show muted
-            "[&:invalid]:text-white/25",
+            "[&:invalid]:text-muted-foreground",
             error && "border-red-500/50",
             className
           )}
@@ -190,13 +190,13 @@ export const FormSelect = React.forwardRef<HTMLSelectElement, FormSelectProps>(
           {children}
         </select>
         {/* Custom arrow */}
-        <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-white/30 group-focus-within:text-[#47A3FF]/70 transition-colors">
+        <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground group-focus-within:text-[#214ECF]/70 transition-colors">
           <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
             <path d="M1 1L6 7L11 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
         <div className="absolute inset-0 rounded-xl pointer-events-none opacity-0 group-focus-within:opacity-100 transition-opacity duration-300"
-          style={{ boxShadow: "0 0 0 1px rgba(71,163,255,0.15), 0 0 16px rgba(71,163,255,0.06)" }} />
+          style={{ boxShadow: "0 0 0 1px rgba(33,78,207,0.12), 0 0 16px rgba(71,163,255,0.06)" }} />
       </div>
     </FieldWrapper>
   )
@@ -222,9 +222,9 @@ export function FormCheckbox({ label, error, wrapperClassName, className, ...pro
             {...props}
           />
           <div className={cn(
-            "w-4.5 h-4.5 w-[18px] h-[18px] rounded-[5px] border border-white/20 bg-white/[0.04]",
-            "peer-checked:bg-[#47A3FF] peer-checked:border-[#47A3FF]",
-            "peer-focus-visible:ring-2 peer-focus-visible:ring-[#47A3FF]/30",
+            "w-4.5 h-4.5 w-[18px] h-[18px] rounded-[5px] border border-[#DCE5FF] bg-white/[0.04]",
+            "peer-checked:bg-[#214ECF] peer-checked:border-[#214ECF]",
+            "peer-focus-visible:ring-2 peer-focus-visible:ring-[#214ECF]/30",
             "transition-all duration-150 group-hover:border-white/40",
             error && "border-red-500/60",
           )}>
@@ -244,7 +244,7 @@ export function FormCheckbox({ label, error, wrapperClassName, className, ...pro
             </AnimatePresence>
           </div>
         </div>
-        <span className="text-sm text-white/60 leading-relaxed group-hover:text-white/80 transition-colors">
+        <span className="text-sm text-muted-foreground leading-relaxed group-hover:text-muted-foreground transition-colors">
           {label}
         </span>
       </label>
@@ -280,18 +280,18 @@ export function SuccessState({ title, message, onReset, resetLabel = "Send anoth
         animate={{ scale: 1 }}
         transition={{ delay: 0.15, duration: 0.4, type: "spring", stiffness: 200 }}
         className="w-16 h-16 rounded-full flex items-center justify-center"
-        style={{ background: "rgba(71,163,255,0.12)", border: "1px solid rgba(71,163,255,0.25)" }}
+        style={{ background: "rgba(33,78,207,0.1)", border: "1px solid rgba(71,163,255,0.25)" }}
       >
-        <CheckCircle2 size={32} className="text-[#47A3FF]" />
+        <CheckCircle2 size={32} className="text-[#214ECF]" />
       </motion.div>
       <div>
-        <h3 className="font-display font-bold text-white text-2xl mb-2">{title}</h3>
-        <p className="text-white/50 text-sm leading-relaxed max-w-sm">{message}</p>
+        <h3 className="font-display font-bold text-foreground text-2xl mb-2">{title}</h3>
+        <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">{message}</p>
       </div>
       {onReset && (
         <button
           onClick={onReset}
-          className="mt-2 text-sm text-white/40 hover:text-white/70 transition-colors underline underline-offset-4"
+          className="mt-2 text-sm text-muted-foreground hover:text-muted-foreground transition-colors underline underline-offset-4"
         >
           {resetLabel}
         </button>
@@ -328,16 +328,16 @@ export function StepIndicator({ step, total, labels }: { step: number; total: nu
             <motion.div
               animate={{
                 background: i < step
-                  ? "linear-gradient(135deg,#47A3FF,#4040E8)"
+                  ? "linear-gradient(135deg,#214ECF,#214ECF)"
                   : i === step
-                    ? "rgba(71,163,255,0.15)"
-                    : "rgba(255,255,255,0.06)",
-                borderColor: i <= step ? "#47A3FF" : "rgba(255,255,255,0.12)",
+                    ? "rgba(33,78,207,0.12)"
+                    : "rgba(33,78,207,0.04)",
+                borderColor: i <= step ? "#214ECF" : "rgba(33,78,207,0.12)",
                 scale: i === step ? 1.1 : 1,
               }}
               transition={{ duration: 0.3, ease }}
               className="w-7 h-7 rounded-full border flex items-center justify-center text-xs font-mono font-bold"
-              style={{ color: i < step ? "#fff" : i === step ? "#47A3FF" : "rgba(255,255,255,0.3)" }}
+              style={{ color: i < step ? "#fff" : i === step ? "#214ECF" : "rgba(255,255,255,0.3)" }}
             >
               {i < step ? (
                 <svg viewBox="0 0 10 8" fill="none" className="w-3 h-3">
@@ -347,14 +347,14 @@ export function StepIndicator({ step, total, labels }: { step: number; total: nu
             </motion.div>
             {labels?.[i] && (
               <span className={cn("text-[10px] font-mono uppercase tracking-wider hidden sm:block",
-                i === step ? "text-[#47A3FF]" : i < step ? "text-white/40" : "text-white/20")}>
+                i === step ? "text-[#214ECF]" : i < step ? "text-muted-foreground" : "text-foreground/20")}>
                 {labels[i]}
               </span>
             )}
           </div>
           {i < total - 1 && (
             <motion.div
-              animate={{ background: i < step ? "linear-gradient(90deg,#47A3FF,#4040E8)" : "rgba(255,255,255,0.08)" }}
+              animate={{ background: i < step ? "linear-gradient(90deg,#214ECF,#214ECF)" : "rgba(33,78,207,0.06)" }}
               transition={{ duration: 0.4 }}
               className="flex-1 h-px mx-2"
             />

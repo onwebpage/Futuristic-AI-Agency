@@ -66,24 +66,24 @@ export default function BlogPage() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative pt-44 pb-24 bg-black border-b border-white/5 overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#47A3FF05_1px,transparent_1px),linear-gradient(to_bottom,#47A3FF05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      <section className="relative pt-44 pb-24 bg-background border-b border-border overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#214ECF05_1px,transparent_1px),linear-gradient(to_bottom,#214ECF05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
         <div
           className="absolute inset-0 pointer-events-none"
           style={{ background: "radial-gradient(ellipse 70% 55% at 50% 0%, rgba(71,163,255,0.09) 0%, transparent 65%)" }}
         />
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-            <p className="text-xs font-mono uppercase tracking-[0.25em] mb-5" style={{ color: "#47A3FF" }}>
+            <p className="text-xs font-mono uppercase tracking-[0.25em] mb-5" style={{ color: "#214ECF" }}>
               Thinkatic Insights
             </p>
             <h1
-              className="font-display font-bold text-white leading-[1.0] mb-6"
+              className="font-display font-bold text-foreground leading-[1.0] mb-6"
               style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)" }}
             >
               Intelligence Meets<br />Practical Operations
             </h1>
-            <p className="text-white/50 text-base leading-relaxed max-w-xl">
+            <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
               Perspectives on AI, BPO, and the future of enterprise operations — written by the team building it.
             </p>
           </motion.div>
@@ -91,7 +91,7 @@ export default function BlogPage() {
       </section>
 
       {/* Posts */}
-      <section className="py-24 bg-[#0a0a0a]">
+      <section className="py-24 bg-[#FFFFFF]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col gap-10">
             {posts.map((post, index) => (
@@ -103,38 +103,38 @@ export default function BlogPage() {
                 variants={fadeUp}
                 transition={{ delay: index * 0.06 }}
                 className="rounded-2xl p-10 group"
-                style={{ background: "#111", border: "1px solid rgba(255,255,255,0.07)" }}
+                style={{ background: "#FFFFFF", border: "1px solid rgba(255,255,255,0.07)" }}
               >
                 {/* Meta */}
                 <div className="flex flex-wrap items-center gap-3 mb-6">
                   <span
                     className="px-3 py-1 rounded-full text-xs font-medium"
-                    style={{ background: "rgba(71,163,255,0.10)", border: "1px solid rgba(71,163,255,0.2)", color: "#47A3FF" }}
+                    style={{ background: "rgba(71,163,255,0.10)", border: "1px solid rgba(33,78,207,0.18)", color: "#214ECF" }}
                   >
                     {post.tag}
                   </span>
-                  <span className="text-white/25 text-xs">{post.date}</span>
-                  <span className="text-white/25 text-xs">·</span>
-                  <span className="text-white/25 text-xs">{post.readTime}</span>
+                  <span className="text-muted-foreground text-xs">{post.date}</span>
+                  <span className="text-muted-foreground text-xs">·</span>
+                  <span className="text-muted-foreground text-xs">{post.readTime}</span>
                 </div>
 
                 {/* Title */}
-                <h2 className="font-display font-bold text-white text-2xl md:text-3xl leading-snug mb-6">
+                <h2 className="font-display font-bold text-foreground text-2xl md:text-3xl leading-snug mb-6">
                   {post.title}
                 </h2>
 
                 {/* Intro */}
-                <p className="text-white/50 text-sm leading-relaxed mb-8 max-w-3xl">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-8 max-w-3xl">
                   {post.intro}
                 </p>
 
                 {/* Outline */}
                 <div>
-                  <p className="text-xs font-mono uppercase tracking-[0.2em] text-white/25 mb-4">In this article</p>
+                  <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground mb-4">In this article</p>
                   <ul className="flex flex-col gap-2.5">
                     {post.outline.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-sm text-white/45">
-                        <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#47A3FF]/50" />
+                      <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
+                        <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-[#214ECF]/50" />
                         {item}
                       </li>
                     ))}
@@ -142,8 +142,8 @@ export default function BlogPage() {
                 </div>
 
                 {/* CTA — coming soon state */}
-                <div className="mt-8 pt-6 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-                  <span className="text-xs text-white/20 font-mono">Full article coming soon — subscribe for updates</span>
+                <div className="mt-8 pt-6 border-t" style={{ borderColor: "rgba(33,78,207,0.04)" }}>
+                  <span className="text-xs text-foreground/20 font-mono">Full article coming soon — subscribe for updates</span>
                 </div>
               </motion.article>
             ))}

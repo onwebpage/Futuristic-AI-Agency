@@ -99,7 +99,7 @@ export function NeuralLines({ opacity = 0.06 }: { opacity?: number }) {
         <path
           key={i}
           d={d}
-          stroke="#47A3FF"
+          stroke="#214ECF"
           strokeWidth="0.15"
           fill="none"
           strokeDasharray="3 5"
@@ -112,7 +112,7 @@ export function NeuralLines({ opacity = 0.06 }: { opacity?: number }) {
           cx={cx}
           cy={cy}
           r="0.6"
-          fill="#47A3FF"
+          fill="#214ECF"
           opacity={0.7}
         />
       ))}

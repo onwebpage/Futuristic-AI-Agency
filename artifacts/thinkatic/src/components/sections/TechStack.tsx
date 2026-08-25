@@ -6,18 +6,18 @@ export function TechStack() {
   ];
 
   return (
-    <section className="py-24 overflow-hidden border-t border-white/5 bg-background">
+    <section className="py-24 overflow-hidden border-t border-border bg-background">
       <div className="flex w-[200%] animate-[marquee_20s_linear_infinite]">
         <div className="flex w-1/2 justify-around items-center">
           {techs.map((tech, i) => (
-            <span key={i} className="text-2xl md:text-4xl font-display font-bold text-white/10 mx-8 uppercase tracking-wider">
+            <span key={i} className="text-2xl md:text-4xl font-display font-bold text-foreground/10 mx-8 uppercase tracking-wider">
               {tech}
             </span>
           ))}
         </div>
         <div className="flex w-1/2 justify-around items-center">
           {techs.map((tech, i) => (
-            <span key={`dup-${i}`} className="text-2xl md:text-4xl font-display font-bold text-white/10 mx-8 uppercase tracking-wider">
+            <span key={`dup-${i}`} className="text-2xl md:text-4xl font-display font-bold text-foreground/10 mx-8 uppercase tracking-wider">
               {tech}
             </span>
           ))}

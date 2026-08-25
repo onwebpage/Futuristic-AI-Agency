@@ -165,33 +165,33 @@ export default function ApplyOnlinePage() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative pt-40 pb-16 overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0 bg-[#050508]" />
+      <section className="relative pt-40 pb-16 overflow-hidden border-b border-border">
+        <div className="absolute inset-0 bg-[#FFFFFF]" />
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(71,163,255,0.08) 0%, transparent 65%)" }} />
+          style={{ background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(33,78,207,0.08) 0%, transparent 65%)" }} />
 
         <div className="max-w-4xl mx-auto px-6 relative z-10">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-1.5 text-white/35 text-xs font-mono mb-10">
-            <Link href="/" className="hover:text-white/60 transition-colors">Home</Link>
+          <nav className="flex items-center gap-1.5 text-muted-foreground text-xs font-mono mb-10">
+            <Link href="/" className="hover:text-muted-foreground transition-colors">Home</Link>
             <ChevronRight size={11} />
-            <Link href="/careers" className="hover:text-white/60 transition-colors">Careers</Link>
+            <Link href="/careers" className="hover:text-muted-foreground transition-colors">Careers</Link>
             <ChevronRight size={11} />
-            <span className="text-white/55">Apply</span>
+            <span className="text-muted-foreground">Apply</span>
           </nav>
 
           <motion.div initial="hidden" animate="visible" variants={{ visible: { transition: { staggerChildren: 0.1 } } }}>
-            <motion.p variants={fadeUp} className="text-xs font-mono uppercase tracking-[0.22em] mb-5" style={{ color: "#47A3FF" }}>
+            <motion.p variants={fadeUp} className="text-xs font-mono uppercase tracking-[0.22em] mb-5" style={{ color: "#214ECF" }}>
               Apply Online
             </motion.p>
             <motion.h1
               variants={fadeUp}
-              className="font-display font-black text-white leading-[1.0] mb-5"
+              className="font-display font-black text-foreground leading-[1.0] mb-5"
               style={{ fontSize: "clamp(2.2rem,4.5vw,3.5rem)" }}
             >
               Join the Thinkatic Team
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-white/45 text-base leading-relaxed max-w-xl">
+            <motion.p variants={fadeUp} className="text-muted-foreground text-base leading-relaxed max-w-xl">
               We're building the future of AI-powered operations. Apply below and our team will review your application within 3–5 business days.
             </motion.p>
           </motion.div>
@@ -199,7 +199,7 @@ export default function ApplyOnlinePage() {
       </section>
 
       {/* Form */}
-      <section className="py-16 bg-[#050508]">
+      <section className="py-16 bg-[#FFFFFF]">
         <div className="max-w-3xl mx-auto px-6">
 
           {/* Step indicator */}
@@ -210,16 +210,16 @@ export default function ApplyOnlinePage() {
                 <div key={s.label} className="flex items-center">
                   <div className="flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300"
                     style={{
-                      background: i === step ? "rgba(71,163,255,0.12)" : "transparent",
+                      background: i === step ? "rgba(33,78,207,0.1)" : "transparent",
                       border: `1px solid ${i === step ? "rgba(71,163,255,0.35)" : "transparent"}`,
                     }}>
-                    <s.icon size={13} className={i === step ? "text-[#47A3FF]" : i < step ? "text-white/40" : "text-white/20"} />
-                    <span className={`text-xs font-medium ${i === step ? "text-white/80" : i < step ? "text-white/35" : "text-white/20"}`}>
+                    <s.icon size={13} className={i === step ? "text-[#214ECF]" : i < step ? "text-muted-foreground" : "text-foreground/20"} />
+                    <span className={`text-xs font-medium ${i === step ? "text-muted-foreground" : i < step ? "text-muted-foreground" : "text-foreground/20"}`}>
                       {s.label}
                     </span>
                   </div>
                   {i < stepMeta.length - 1 && (
-                    <div className="w-8 h-px mx-1" style={{ background: i < step ? "rgba(71,163,255,0.4)" : "rgba(255,255,255,0.08)" }} />
+                    <div className="w-8 h-px mx-1" style={{ background: i < step ? "rgba(71,163,255,0.4)" : "rgba(33,78,207,0.06)" }} />
                   )}
                 </div>
               ))}
@@ -235,7 +235,7 @@ export default function ApplyOnlinePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease }}
             className="rounded-3xl border p-7 sm:p-10"
-            style={{ background: "rgba(255,255,255,0.025)", borderColor: "rgba(255,255,255,0.08)" }}
+            style={{ background: "rgba(255,255,255,0.025)", borderColor: "rgba(33,78,207,0.06)" }}
           >
             <AnimatePresence mode="wait">
 
@@ -252,8 +252,8 @@ export default function ApplyOnlinePage() {
               ) : step === 0 ? (
                 /* ── Step 1: Personal Info ── */
                 <motion.div key="s1" {...slideIn}>
-                  <h2 className="font-display font-bold text-white text-2xl mb-1">Personal Information</h2>
-                  <p className="text-white/40 text-sm mb-8">Step 1 of 3 — your contact details</p>
+                  <h2 className="font-display font-bold text-foreground text-2xl mb-1">Personal Information</h2>
+                  <p className="text-muted-foreground text-sm mb-8">Step 1 of 3 — your contact details</p>
 
                   <form onSubmit={form1.handleSubmit(onStep1)} className="flex flex-col gap-5">
                     <div className="grid grid-cols-2 gap-4">
@@ -291,8 +291,8 @@ export default function ApplyOnlinePage() {
 
                     <div className="flex justify-end pt-2">
                       <motion.button type="submit" whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
-                        className="flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-white"
-                        style={{ background: "linear-gradient(135deg,#47A3FF,#4040E8)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}>
+                        className="flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-foreground"
+                        style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}>
                         Next: Experience <ArrowRight size={14} />
                       </motion.button>
                     </div>
@@ -302,8 +302,8 @@ export default function ApplyOnlinePage() {
               ) : step === 1 ? (
                 /* ── Step 2: Experience ── */
                 <motion.div key="s2" {...slideIn}>
-                  <h2 className="font-display font-bold text-white text-2xl mb-1">Experience & Role</h2>
-                  <p className="text-white/40 text-sm mb-8">Step 2 of 3 — tell us about your background</p>
+                  <h2 className="font-display font-bold text-foreground text-2xl mb-1">Experience & Role</h2>
+                  <p className="text-muted-foreground text-sm mb-8">Step 2 of 3 — tell us about your background</p>
 
                   <form onSubmit={form2.handleSubmit(onStep2)} className="flex flex-col gap-5">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -369,12 +369,12 @@ export default function ApplyOnlinePage() {
 
                     <div className="flex gap-3 pt-2">
                       <button type="button" onClick={() => setStep(0)}
-                        className="flex items-center gap-1.5 px-5 py-3.5 rounded-full text-sm font-medium text-white/50 hover:text-white border border-white/10 hover:border-white/25 transition-all">
+                        className="flex items-center gap-1.5 px-5 py-3.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground border border-border hover:border-white/25 transition-all">
                         ← Back
                       </button>
                       <motion.button type="submit" whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
-                        className="flex-1 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-white"
-                        style={{ background: "linear-gradient(135deg,#47A3FF,#4040E8)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}>
+                        className="flex-1 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-foreground"
+                        style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}>
                         Next: Final Details <ArrowRight size={14} />
                       </motion.button>
                     </div>
@@ -384,13 +384,13 @@ export default function ApplyOnlinePage() {
               ) : (
                 /* ── Step 3: Final Details ── */
                 <motion.div key="s3" {...slideIn}>
-                  <h2 className="font-display font-bold text-white text-2xl mb-1">Final Details</h2>
-                  <p className="text-white/40 text-sm mb-8">Step 3 of 3 — almost done!</p>
+                  <h2 className="font-display font-bold text-foreground text-2xl mb-1">Final Details</h2>
+                  <p className="text-muted-foreground text-sm mb-8">Step 3 of 3 — almost done!</p>
 
                   {/* Application summary */}
                   <div className="rounded-2xl border p-5 mb-6"
                     style={{ background: "rgba(71,163,255,0.04)", borderColor: "rgba(71,163,255,0.14)" }}>
-                    <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/30 mb-3">Your Application</p>
+                    <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-3">Your Application</p>
                     <div className="grid grid-cols-2 gap-3">
                       {[
                         ["Name", s1Data ? `${s1Data.firstName} ${s1Data.lastName}` : "—"],
@@ -401,8 +401,8 @@ export default function ApplyOnlinePage() {
                         ["Availability", availability?.toLocaleDateString() ?? "ASAP"],
                       ].map(([k, v]) => (
                         <div key={k}>
-                          <p className="text-[10px] font-mono uppercase tracking-wider text-white/25 mb-0.5">{k}</p>
-                          <p className="text-sm text-white/70 truncate">{v}</p>
+                          <p className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground mb-0.5">{k}</p>
+                          <p className="text-sm text-muted-foreground truncate">{v}</p>
                         </div>
                       ))}
                     </div>
@@ -439,7 +439,7 @@ export default function ApplyOnlinePage() {
                     </FormSelect>
 
                     <FormCheckbox
-                      label={<>I certify that the information provided is accurate and agree to Thinkatic's <Link href="/privacy-policy" className="text-[#47A3FF] underline underline-offset-2">Privacy Policy</Link>.</>}
+                      label={<>I certify that the information provided is accurate and agree to Thinkatic's <Link href="/privacy-policy" className="text-[#214ECF] underline underline-offset-2">Privacy Policy</Link>.</>}
                       checked={form3.watch("termsAgreed") === true}
                       onChange={e => form3.setValue("termsAgreed", e.target.checked as true, { shouldValidate: true })}
                       error={form3.formState.errors.termsAgreed?.message}
@@ -449,12 +449,12 @@ export default function ApplyOnlinePage() {
 
                     <div className="flex gap-3 pt-2">
                       <button type="button" onClick={() => setStep(1)}
-                        className="flex items-center gap-1.5 px-5 py-3.5 rounded-full text-sm font-medium text-white/50 hover:text-white border border-white/10 hover:border-white/25 transition-all">
+                        className="flex items-center gap-1.5 px-5 py-3.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground border border-border hover:border-white/25 transition-all">
                         ← Back
                       </button>
                       <motion.button type="submit" disabled={status === "submitting"} whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
-                        className="flex-1 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-white disabled:opacity-60"
-                        style={{ background: "linear-gradient(135deg,#47A3FF,#4040E8)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}>
+                        className="flex-1 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-foreground disabled:opacity-60"
+                        style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 24px rgba(71,163,255,0.22)" }}>
                         {status === "submitting"
                           ? <><Loader2 size={14} className="animate-spin" /> Submitting…</>
                           : <><Send size={14} /> Submit Application</>}
@@ -468,7 +468,7 @@ export default function ApplyOnlinePage() {
 
           {/* Back to careers */}
           <div className="mt-8 text-center">
-            <Link href="/careers" className="inline-flex items-center gap-1.5 text-sm text-white/30 hover:text-white/60 transition-colors">
+            <Link href="/careers" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-muted-foreground transition-colors">
               <ChevronRight size={13} className="rotate-180" />
               View all open positions
             </Link>

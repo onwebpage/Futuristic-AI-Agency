@@ -64,7 +64,7 @@ export default function CaseStudiesPage() {
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
             <div className="text-primary font-bold tracking-widest text-sm uppercase mb-6">CASE STUDIES</div>
-            <h1 className="text-5xl md:text-8xl font-display font-bold text-white mb-12 leading-[1.0]">
+            <h1 className="text-5xl md:text-8xl font-display font-bold text-foreground mb-12 leading-[1.0]">
               Work That Speaks for Itself
             </h1>
 
@@ -79,7 +79,7 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      <section className="py-32 bg-[#0a0a0a]">
+      <section className="py-32 bg-[#FFFFFF]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="columns-1 md:columns-2 gap-8 space-y-8">
             {projects.map((project, index) => (
@@ -89,7 +89,7 @@ export default function CaseStudiesPage() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={fadeUp}
-                className="break-inside-avoid bg-card border border-border rounded-[24px] overflow-hidden group hover:border-primary/50 transition-all hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(71,163,255,0.1)]"
+                className="break-inside-avoid bg-card border border-border rounded-[24px] overflow-hidden group hover:border-primary/50 transition-all hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(33,78,207,0.08)]"
               >
                 <div className="h-64 overflow-hidden">
                   <img
@@ -102,19 +102,19 @@ export default function CaseStudiesPage() {
                   <div className="inline-block px-4 py-1.5 bg-primary/10 text-primary text-xs font-bold rounded-full mb-6 border border-primary/20">
                     {project.tag}
                   </div>
-                  <h2 className="text-3xl font-display font-bold text-white mb-4">{project.title}</h2>
+                  <h2 className="text-3xl font-display font-bold text-foreground mb-4">{project.title}</h2>
                   <p className="text-muted-foreground mb-6 text-base leading-relaxed">{project.desc}</p>
 
                   <div className="flex flex-wrap gap-3 mb-8">
                     {project.metrics.map((m, i) => (
-                      <div key={i} className="bg-background px-4 py-2 rounded-lg border border-border text-white text-sm font-medium">
+                      <div key={i} className="bg-background px-4 py-2 rounded-lg border border-border text-foreground text-sm font-medium">
                         {m}
                       </div>
                     ))}
                   </div>
 
                   {/* Problem / Approach / Result */}
-                  <div className="flex flex-col gap-4 mb-8 rounded-2xl p-6 bg-[#0d0d0d] border border-white/5">
+                  <div className="flex flex-col gap-4 mb-8 rounded-2xl p-6 bg-[#FFFFFF] border border-border">
                     {[
                       { label: "Problem", text: project.problem },
                       { label: "Approach", text: project.approach },
@@ -122,14 +122,14 @@ export default function CaseStudiesPage() {
                     ].map(({ label, text }) => (
                       <div key={label}>
                         <p className="text-xs font-mono uppercase tracking-[0.18em] text-primary/70 mb-1.5">{label}</p>
-                        <p className="text-sm text-white/55 leading-relaxed">{text}</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{text}</p>
                       </div>
                     ))}
                   </div>
 
                   <Link
                     href={`/contact?project=${encodeURIComponent(project.title)}`}
-                    className="text-primary font-medium hover:text-white transition-colors"
+                    className="text-primary font-medium hover:text-foreground transition-colors"
                   >
                     Start a Similar Project →
                   </Link>

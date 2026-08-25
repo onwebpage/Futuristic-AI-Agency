@@ -82,10 +82,10 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
     >
       <div className="flex items-center justify-between py-6 gap-6">
         <div className="flex items-start gap-5">
-          <span className="text-[10px] font-mono pt-1 flex-shrink-0" style={{ color: "rgba(255,255,255,0.25)" }}>
+          <span className="text-[10px] font-mono pt-1 flex-shrink-0" style={{ color: "rgba(33,78,207,0.16)" }}>
             / {String(index + 1).padStart(2, "0")}
           </span>
-          <h3 className="text-white font-semibold text-base leading-snug group-hover:text-[#47A3FF] transition-colors">
+          <h3 className="text-foreground font-semibold text-base leading-snug group-hover:text-[#214ECF] transition-colors">
             {q}
           </h3>
         </div>
@@ -94,7 +94,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
           transition={{ duration: 0.2 }}
           className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center"
           style={{
-            background: open ? "#47A3FF" : "rgba(255,255,255,0.06)",
+            background: open ? "#214ECF" : "rgba(33,78,207,0.04)",
             border: "1px solid rgba(255,255,255,0.1)",
           }}
         >
@@ -113,7 +113,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <p className="text-white/50 leading-relaxed pb-7 pl-9 pr-12 whitespace-pre-line text-sm">{a}</p>
+            <p className="text-muted-foreground leading-relaxed pb-7 pl-9 pr-12 whitespace-pre-line text-sm">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -124,19 +124,19 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
 export default function FAQPage() {
   return (
     <Layout>
-      <section className="pt-40 pb-24 bg-black">
+      <section className="pt-40 pb-24 bg-background">
         <div className="max-w-4xl mx-auto px-6">
           <motion.p initial="hidden" animate="visible" variants={fadeUp}
-            className="text-xs font-mono uppercase tracking-[0.25em] mb-4" style={{ color: "#47A3FF" }}>
+            className="text-xs font-mono uppercase tracking-[0.25em] mb-4" style={{ color: "#214ECF" }}>
             Help Center
           </motion.p>
           <motion.h1 initial="hidden" animate="visible" variants={fadeUp} transition={{ delay: 0.05 }}
-            className="font-display font-bold text-white mb-6 leading-[1.05]"
+            className="font-display font-bold text-foreground mb-6 leading-[1.05]"
             style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}>
             Frequently Asked<br />Questions
           </motion.h1>
           <motion.p initial="hidden" animate="visible" variants={fadeUp} transition={{ delay: 0.1 }}
-            className="text-white/50 text-lg leading-relaxed mb-16 max-w-xl">
+            className="text-muted-foreground text-lg leading-relaxed mb-16 max-w-xl">
             Everything you need to know about Thinkatic — services, pricing, process, and how to work with us.
           </motion.p>
 
@@ -150,31 +150,31 @@ export default function FAQPage() {
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
             className="mt-20 rounded-2xl p-10 text-center"
-            style={{ background: "#111", border: "1px solid rgba(255,255,255,0.07)" }}
+            style={{ background: "#FFFFFF", border: "1px solid rgba(255,255,255,0.07)" }}
           >
             <div
               className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-6"
-              style={{ background: "rgba(71,163,255,0.12)", border: "1px solid rgba(71,163,255,0.2)" }}
+              style={{ background: "rgba(33,78,207,0.1)", border: "1px solid rgba(33,78,207,0.18)" }}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#47A3FF" strokeWidth="2" strokeLinecap="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#214ECF" strokeWidth="2" strokeLinecap="round">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               </svg>
             </div>
-            <h3 className="text-white font-bold text-xl mb-3">Still have questions?</h3>
-            <p className="text-white/50 mb-8 max-w-sm mx-auto">
+            <h3 className="text-foreground font-bold text-xl mb-3">Still have questions?</h3>
+            <p className="text-muted-foreground mb-8 max-w-sm mx-auto">
               Our team is happy to help. Send us a message and we'll get back to you within 24 hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/contact">
                 <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                  className="px-7 py-3.5 rounded-full font-bold text-white text-sm"
-                  style={{ background: "linear-gradient(135deg, #47A3FF 0%, #4040E8 100%)" }}>
+                  className="px-7 py-3.5 rounded-full font-bold text-foreground text-sm"
+                  style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)" }}>
                   Contact Us
                 </motion.button>
               </Link>
               <a href="mailto:thinkaticai@gmail.com"
                 className="px-7 py-3.5 rounded-full font-bold text-sm transition-all hover:bg-white/10"
-                style={{ border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.6)" }}>
+                style={{ border: "1px solid rgba(33,78,207,0.12)", color: "#4B5563" }}>
                 thinkaticai@gmail.com
               </a>
             </div>

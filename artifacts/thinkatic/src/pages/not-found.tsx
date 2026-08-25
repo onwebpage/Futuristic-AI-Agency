@@ -23,7 +23,7 @@ export default function NotFound() {
   return (
     <div
       className="min-h-[100dvh] flex flex-col items-center justify-center p-6 relative overflow-hidden"
-      style={{ background: "#050508" }}
+      style={{ background: "#FFFFFF" }}
     >
       {/* Background glow */}
       <div
@@ -48,7 +48,7 @@ export default function NotFound() {
           transition={{ duration: 0.6, ease }}
         >
           <p
-            className="font-display font-black text-white/[0.06] select-none leading-none mb-2"
+            className="font-display font-black text-foreground/[0.06] select-none leading-none mb-2"
             style={{ fontSize: "clamp(7rem,20vw,14rem)" }}
             aria-hidden="true"
           >
@@ -63,14 +63,14 @@ export default function NotFound() {
           transition={{ duration: 0.5, delay: 0.15, ease }}
           className="-mt-8 sm:-mt-12"
         >
-          <p className="text-xs font-mono uppercase tracking-[0.22em] mb-4" style={{ color: "#47A3FF" }}>
+          <p className="text-xs font-mono uppercase tracking-[0.22em] mb-4" style={{ color: "#214ECF" }}>
             Page not found
           </p>
-          <h1 className="font-display font-black text-white leading-tight mb-4"
+          <h1 className="font-display font-black text-foreground leading-tight mb-4"
             style={{ fontSize: "clamp(1.8rem,4vw,2.5rem)" }}>
             This page doesn't exist
           </h1>
-          <p className="text-white/45 text-sm leading-relaxed mb-10 max-w-sm mx-auto">
+          <p className="text-muted-foreground text-sm leading-relaxed mb-10 max-w-sm mx-auto">
             The URL may have changed, or the page was removed. Try navigating from the home page or one of the links below.
           </p>
 
@@ -85,15 +85,15 @@ export default function NotFound() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-white"
-                style={{ background: "linear-gradient(135deg,#47A3FF,#4040E8)", boxShadow: "0 0 24px rgba(71,163,255,0.25)" }}
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm text-foreground"
+                style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 24px rgba(71,163,255,0.25)" }}
               >
                 <Home size={14} aria-hidden="true" />
                 Back to Home
               </motion.button>
             </Link>
             <Link href="/contact">
-              <button className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm text-white/60 hover:text-white border border-white/10 hover:border-white/25 transition-all">
+              <button className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm text-muted-foreground hover:text-foreground border border-border hover:border-white/25 transition-all">
                 <Search size={14} aria-hidden="true" />
                 Contact Support
               </button>
@@ -106,7 +106,7 @@ export default function NotFound() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.45, ease }}
           >
-            <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/25 mb-4 flex items-center justify-center gap-2">
+            <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-4 flex items-center justify-center gap-2">
               <LayoutGrid size={10} aria-hidden="true" />
               Quick Links
             </p>
@@ -118,15 +118,15 @@ export default function NotFound() {
                     className="flex flex-col items-center gap-1 p-3 rounded-xl border text-center cursor-pointer transition-all duration-200 group"
                     style={{ background: "rgba(255,255,255,0.025)", borderColor: "rgba(255,255,255,0.07)" }}
                   >
-                    <span className="text-sm font-medium text-white/70 group-hover:text-white transition-colors">
+                    <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                       {link.label}
                     </span>
-                    <span className="text-[11px] text-white/30 group-hover:text-white/50 transition-colors">
+                    <span className="text-[11px] text-muted-foreground group-hover:text-muted-foreground transition-colors">
                       {link.desc}
                     </span>
                     <ArrowRight
                       size={11}
-                      className="text-white/20 group-hover:text-[#47A3FF] mt-0.5 transition-colors"
+                      className="text-foreground/20 group-hover:text-[#214ECF] mt-0.5 transition-colors"
                       aria-hidden="true"
                     />
                   </motion.div>

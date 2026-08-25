@@ -124,24 +124,24 @@ export function CountrySelector({
             "w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-sm transition-all duration-200",
             "bg-white/[0.04] hover:bg-white/[0.06]",
             open
-              ? "border-[#47A3FF]/60 ring-1 ring-[#47A3FF]/20"
+              ? "border-[#214ECF]/60 ring-1 ring-[#214ECF]/20"
               : error
                 ? "border-red-500/50"
-                : "border-white/10 hover:border-white/20",
+                : "border-border hover:border-[#DCE5FF]",
           )}
         >
           {selected ? (
             <>
               <span className="text-xl leading-none">{selected.flag}</span>
-              <span className="text-white flex-1 text-left">{selected.name}</span>
-              <span className="text-white/30 text-xs font-mono">{selected.dialCode}</span>
+              <span className="text-foreground flex-1 text-left">{selected.name}</span>
+              <span className="text-muted-foreground text-xs font-mono">{selected.dialCode}</span>
             </>
           ) : (
-            <span className="text-white/25 flex-1 text-left">{placeholder}</span>
+            <span className="text-muted-foreground flex-1 text-left">{placeholder}</span>
           )}
           <ChevronDown
             size={14}
-            className={cn("text-white/30 transition-transform duration-200 shrink-0", open && "rotate-180")}
+            className={cn("text-muted-foreground transition-transform duration-200 shrink-0", open && "rotate-180")}
           />
         </button>
 
@@ -156,23 +156,23 @@ export function CountrySelector({
               style={{
                 background: "rgba(10,10,15,0.97)",
                 backdropFilter: "blur(24px)",
-                borderColor: "rgba(255,255,255,0.10)",
+                borderColor: "rgba(33,78,207,0.08)",
                 boxShadow: "0 24px 60px rgba(0,0,0,0.5)",
               }}
             >
               {/* Search */}
               <div className="p-2 border-b" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
                 <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.04]">
-                  <Search size={13} className="text-white/30 shrink-0" />
+                  <Search size={13} className="text-muted-foreground shrink-0" />
                   <input
                     ref={searchRef}
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                     placeholder="Search countries..."
-                    className="bg-transparent text-sm text-white placeholder:text-white/25 flex-1 outline-none"
+                    className="bg-transparent text-sm text-foreground placeholder:text-muted-foreground flex-1 outline-none"
                   />
                   {search && (
-                    <button onClick={() => setSearch("")} className="text-white/30 hover:text-white/60">
+                    <button onClick={() => setSearch("")} className="text-muted-foreground hover:text-muted-foreground">
                       <X size={12} />
                     </button>
                   )}
@@ -182,7 +182,7 @@ export function CountrySelector({
               {/* List */}
               <div className="max-h-52 overflow-y-auto p-1.5">
                 {filtered.length === 0 ? (
-                  <div className="py-6 text-center text-sm text-white/30">No countries found</div>
+                  <div className="py-6 text-center text-sm text-muted-foreground">No countries found</div>
                 ) : (
                   filtered.map(country => (
                     <button
@@ -196,16 +196,16 @@ export function CountrySelector({
                       className={cn(
                         "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors text-left",
                         country.code === value
-                          ? "bg-[#47A3FF]/15 text-white"
-                          : "hover:bg-white/[0.05] text-white/70 hover:text-white",
+                          ? "bg-[#214ECF]/15 text-foreground"
+                          : "hover:bg-white/[0.05] text-muted-foreground hover:text-foreground",
                       )}
                     >
                       <span className="text-lg leading-none">{country.flag}</span>
                       <span className="flex-1">{country.name}</span>
-                      <span className="text-white/30 text-xs font-mono">{country.dialCode}</span>
+                      <span className="text-muted-foreground text-xs font-mono">{country.dialCode}</span>
                       {country.code === value && (
                         <svg viewBox="0 0 10 8" fill="none" className="w-3 h-3 shrink-0">
-                          <path d="M1 4L3.5 6.5L9 1" stroke="#47A3FF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M1 4L3.5 6.5L9 1" stroke="#214ECF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       )}
                     </button>

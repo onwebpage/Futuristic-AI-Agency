@@ -117,7 +117,7 @@ export default function CookieBanner() {
             style={{
               background: "rgba(8,8,14,0.97)",
               backdropFilter: "blur(24px)",
-              borderColor: "rgba(255,255,255,0.10)",
+              borderColor: "rgba(33,78,207,0.08)",
               boxShadow: "0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(71,163,255,0.06)",
             }}
           >
@@ -125,14 +125,14 @@ export default function CookieBanner() {
             <div className="flex items-start justify-between gap-3 mb-3">
               <div className="flex items-center gap-2.5">
                 <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                  style={{ background: "rgba(71,163,255,0.12)" }}>
-                  <Cookie size={13} className="text-[#47A3FF]" aria-hidden="true" />
+                  style={{ background: "rgba(33,78,207,0.1)" }}>
+                  <Cookie size={13} className="text-[#214ECF]" aria-hidden="true" />
                 </div>
-                <span className="text-sm font-semibold text-white">Cookie Preferences</span>
+                <span className="text-sm font-semibold text-foreground">Cookie Preferences</span>
               </div>
               <button
                 onClick={handleDecline}
-                className="text-white/30 hover:text-white/60 transition-colors shrink-0 -mt-0.5"
+                className="text-muted-foreground hover:text-muted-foreground transition-colors shrink-0 -mt-0.5"
                 aria-label="Close cookie banner"
               >
                 <X size={15} />
@@ -140,9 +140,9 @@ export default function CookieBanner() {
             </div>
 
             {/* Description */}
-            <p id="cookie-desc" className="text-xs text-white/45 leading-relaxed mb-4">
+            <p id="cookie-desc" className="text-xs text-muted-foreground leading-relaxed mb-4">
               We use cookies to improve your experience. Essential cookies are always active.{" "}
-              <Link href="/cookie-policy" className="text-[#47A3FF] underline underline-offset-2 hover:text-[#47A3FF]/80">
+              <Link href="/cookie-policy" className="text-[#214ECF] underline underline-offset-2 hover:text-[#214ECF]/80">
                 Learn more
               </Link>
             </p>
@@ -174,7 +174,7 @@ export default function CookieBanner() {
                           aria-label={`${label} cookies`}
                           className="relative shrink-0 mt-0.5 w-8 h-4 rounded-full transition-all duration-200 disabled:opacity-60"
                           style={{
-                            background: prefs[key] ? "#47A3FF" : "rgba(255,255,255,0.10)",
+                            background: prefs[key] ? "#214ECF" : "rgba(33,78,207,0.08)",
                           }}
                         >
                           <span
@@ -183,8 +183,8 @@ export default function CookieBanner() {
                           />
                         </button>
                         <div>
-                          <p className="text-xs font-medium text-white/80">{label}{locked && " (Required)"}</p>
-                          <p className="text-[11px] text-white/30">{desc}</p>
+                          <p className="text-xs font-medium text-muted-foreground">{label}{locked && " (Required)"}</p>
+                          <p className="text-[11px] text-muted-foreground">{desc}</p>
                         </div>
                       </div>
                     ))}
@@ -198,14 +198,14 @@ export default function CookieBanner() {
               <div className="flex gap-2">
                 <button
                   onClick={() => setShowDetails(v => !v)}
-                  className="flex-1 px-3 py-2 rounded-xl text-xs font-medium text-white/50 hover:text-white border border-white/10 hover:border-white/20 transition-all"
+                  className="flex-1 px-3 py-2 rounded-xl text-xs font-medium text-muted-foreground hover:text-foreground border border-border hover:border-[#DCE5FF] transition-all"
                 >
                   {showDetails ? "Hide" : "Preferences"}
                 </button>
                 {showDetails ? (
                   <button
                     onClick={handleSavePrefs}
-                    className="flex-1 px-3 py-2 rounded-xl text-xs font-semibold text-white border border-[#47A3FF]/40 hover:border-[#47A3FF]/70 transition-all"
+                    className="flex-1 px-3 py-2 rounded-xl text-xs font-semibold text-foreground border border-[#214ECF]/40 hover:border-[#214ECF]/70 transition-all"
                     style={{ background: "rgba(71,163,255,0.10)" }}
                   >
                     Save Choices
@@ -213,7 +213,7 @@ export default function CookieBanner() {
                 ) : (
                   <button
                     onClick={handleDecline}
-                    className="flex-1 px-3 py-2 rounded-xl text-xs font-medium text-white/50 hover:text-white border border-white/10 hover:border-white/20 transition-all"
+                    className="flex-1 px-3 py-2 rounded-xl text-xs font-medium text-muted-foreground hover:text-foreground border border-border hover:border-[#DCE5FF] transition-all"
                   >
                     Decline
                   </button>
@@ -221,15 +221,15 @@ export default function CookieBanner() {
               </div>
               <button
                 onClick={handleAcceptAll}
-                className="w-full px-4 py-2.5 rounded-xl text-xs font-bold text-white transition-all hover:opacity-90"
-                style={{ background: "linear-gradient(135deg,#47A3FF,#4040E8)", boxShadow: "0 0 16px rgba(71,163,255,0.2)" }}
+                className="w-full px-4 py-2.5 rounded-xl text-xs font-bold text-foreground transition-all hover:opacity-90"
+                style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 16px rgba(33,78,207,0.18)" }}
               >
                 Accept All
               </button>
             </div>
 
             {/* Trust note */}
-            <p className="flex items-center gap-1.5 mt-3 text-[10px] text-white/20">
+            <p className="flex items-center gap-1.5 mt-3 text-[10px] text-foreground/20">
               <Shield size={9} aria-hidden="true" />
               GDPR compliant · Data never sold
             </p>

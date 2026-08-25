@@ -42,7 +42,7 @@ export function IndustryCard({
       className={cn(
         'group relative flex flex-col gap-4 p-6 h-full',
         'transition-all duration-300',
-        'hover:border-primary/20 hover:shadow-[0_0_32px_rgba(71,163,255,0.12)]',
+        'hover:border-primary/20 hover:shadow-[0_0_32px_rgba(33,78,207,0.1)]',
         onClick && 'cursor-pointer',
         className,
       )}

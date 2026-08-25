@@ -234,7 +234,7 @@ export function Eyebrow({ children, className, as: Tag = 'span', dot, variant = 
         <span
           className={cn(
             'inline-block w-1.5 h-1.5 rounded-full shrink-0',
-            variant === 'primary' ? 'bg-primary shadow-[0_0_6px_rgba(71,163,255,0.8)]' : 'bg-muted-foreground',
+            variant === 'primary' ? 'bg-primary shadow-[0_0_6px_rgba(33,78,207,0.72)]' : 'bg-muted-foreground',
           )}
           aria-hidden="true"
         />

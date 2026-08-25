@@ -88,7 +88,7 @@ function FooterLinkList({
       transition={{ duration: 0.6, ease, delay }}
     >
       <p className="text-[10px] font-mono tracking-[0.24em] uppercase mb-5 flex items-center gap-2"
-        style={{ color: "rgba(255,255,255,0.2)" }}>
+        style={{ color: "#6B7280" }}>
         {title}
       </p>
       <ul className="flex flex-col gap-1.5" role="list">
@@ -103,8 +103,8 @@ function FooterLinkList({
             >
               <Link
                 href={s.href}
-                className="group flex items-center gap-2 text-[13px] transition-all duration-200 hover:text-white"
-                style={{ color: "rgba(255,255,255,0.42)" }}
+                className="group flex items-center gap-2 text-[13px] transition-all duration-200 hover:text-foreground"
+                style={{ color: "#4B5563" }}
               >
                 {Icon && (
                   <Icon
@@ -147,23 +147,23 @@ function Newsletter({ inView }: { inView: boolean }) {
       transition={{ duration: 0.6, ease, delay: 0.25 }}
       className="rounded-2xl p-6"
       style={{
-        background: "rgba(255,255,255,0.018)",
-        border: "1px solid rgba(71,163,255,0.08)",
+        background: "rgba(244,247,255,0.85)",
+        border: "1px solid rgba(33,78,207,0.08)",
       }}
     >
       <div className="flex items-start gap-3 mb-4">
         <div
           className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
-          style={{ background: "rgba(37,99,235,0.12)" }}
+          style={{ background: "rgba(33,78,207,0.08)" }}
           aria-hidden="true"
         >
           <Send size={13} className="text-primary" />
         </div>
         <div>
-          <p className="text-[13px] font-semibold text-white mb-0.5">
+          <p className="text-[13px] font-semibold text-slate-900 mb-0.5">
             Enterprise AI Insights
           </p>
-          <p className="text-[11px]" style={{ color: "rgba(255,255,255,0.35)" }}>
+          <p className="text-[11px]" style={{ color: "#4B5563" }}>
             Strategy, benchmarks &amp; case studies. No spam.
           </p>
         </div>
@@ -192,12 +192,12 @@ function Newsletter({ inView }: { inView: boolean }) {
             <div
               className="flex-1 flex items-center gap-2 rounded-lg px-3 h-9 transition-all duration-200"
               style={{
-                background: "rgba(255,255,255,0.05)",
-                border: `1px solid ${focused ? "rgba(71,163,255,0.3)" : "rgba(255,255,255,0.07)"}`,
-                boxShadow: focused ? "0 0 16px rgba(37,99,235,0.12)" : "none",
+                background: "rgba(244,247,255,0.9)",
+                border: `1px solid ${focused ? "rgba(33,78,207,0.3)" : "rgba(33,78,207,0.12)"}`,
+                boxShadow: focused ? "0 0 16px rgba(33,78,207,0.12)" : "none",
               }}
             >
-              <Mail size={12} className="text-white/25 shrink-0" aria-hidden="true" />
+              <Mail size={12} className="text-muted-foreground shrink-0" aria-hidden="true" />
               <input
                 id="newsletter-email"
                 type="email"
@@ -208,17 +208,17 @@ function Newsletter({ inView }: { inView: boolean }) {
                 placeholder="you@company.com"
                 aria-label="Email address for newsletter"
                 required
-                className="flex-1 bg-transparent text-[12px] text-white placeholder-white/25 outline-none min-w-0"
+                className="flex-1 bg-transparent text-[12px] text-foreground placeholder-white/25 outline-none min-w-0"
               />
             </div>
             <motion.button
               type="submit"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="px-4 h-9 rounded-lg font-semibold text-white text-[11px] tracking-wide shrink-0 flex items-center gap-1.5 transition-all"
+              className="px-4 h-9 rounded-lg font-semibold text-foreground text-[11px] tracking-wide shrink-0 flex items-center gap-1.5 transition-all"
               style={{
-                background: "linear-gradient(135deg,#1d4ed8,#2563EB)",
-                boxShadow: "0 0 14px rgba(37,99,235,0.3)",
+                background: "linear-gradient(135deg,#214ECF,#214ECF)",
+                boxShadow: "0 0 14px rgba(33,78,207,0.18)",
               }}
               aria-label="Subscribe to newsletter"
             >
@@ -228,7 +228,7 @@ function Newsletter({ inView }: { inView: boolean }) {
         )}
       </AnimatePresence>
 
-      <p className="text-[10px] mt-2.5" style={{ color: "rgba(255,255,255,0.18)" }}>
+      <p className="text-[10px] mt-2.5" style={{ color: "rgba(33,78,207,0.14)" }}>
         Join 4,200+ enterprise leaders. Unsubscribe anytime.
       </p>
     </motion.div>
@@ -247,14 +247,14 @@ export default function Footer() {
     <footer
       ref={footerRef}
       className="relative overflow-hidden border-t"
-      style={{ background: "#020408", borderColor: "rgba(255,255,255,0.055)" }}
+      style={{ background: "linear-gradient(180deg, #f8faff 0%, #edf3ff 100%)", borderColor: "rgba(33,78,207,0.10)" }}
     >
       {/* Atmosphere */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: "linear-gradient(rgba(71,163,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(71,163,255,1) 1px, transparent 1px)",
+            backgroundImage: "linear-gradient(rgba(33,78,207,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(33,78,207,0.18) 1px, transparent 1px)",
             backgroundSize: "52px 52px",
           }}
         />
@@ -275,7 +275,7 @@ export default function Footer() {
         aria-hidden="true"
       >
         <span
-          className="font-display font-black text-white/[0.012] uppercase tracking-tighter"
+          className="font-display font-black text-[#214ECF]/[0.05] uppercase tracking-tighter"
           style={{ fontSize: "clamp(8rem,22vw,22rem)", lineHeight: 0.85 }}
         >
           THINKATIC
@@ -302,7 +302,7 @@ export default function Footer() {
                 style={{ height: "60px", width: "auto", objectFit: "contain" }}
               />
             </Link>
-            <p className="text-[13px] leading-relaxed max-w-sm" style={{ color: "rgba(255,255,255,0.38)" }}>
+            <p className="text-[13px] leading-relaxed max-w-sm" style={{ color: "#4B5563" }}>
               AI-Powered Business Process Outsourcing &amp; Enterprise Technology Solutions. Your long-term growth partner across 15+ industries.
             </p>
 
@@ -331,8 +331,8 @@ export default function Footer() {
                       className="shrink-0 mt-0.5 text-primary/50 group-hover:text-primary/80 transition-colors"
                       aria-hidden="true"
                     />
-                    <span className="text-[12px] leading-relaxed transition-colors group-hover:text-white/70"
-                      style={{ color: "rgba(255,255,255,0.35)" }}>
+                    <span className="text-[12px] leading-relaxed transition-colors group-hover:text-muted-foreground"
+                      style={{ color: "rgba(33,78,207,0.22)" }}>
                       {c.text}
                     </span>
                   </div>
@@ -351,13 +351,13 @@ export default function Footer() {
                 <motion.a
                   key={s.label}
                   href={s.href}
-                  whileHover={shouldReduce ? {} : { scale: 1.04, backgroundColor: "rgba(37,99,235,0.12)" }}
+                  whileHover={shouldReduce ? {} : { scale: 1.04, backgroundColor: "rgba(33,78,207,0.09)" }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.18 }}
                   className="w-8 h-8 rounded-full border border-white/[0.08] flex items-center justify-center transition-colors duration-200"
                   aria-label={s.label}
                 >
-                  <s.icon size={13} className="text-white/45" aria-hidden="true" />
+                  <s.icon size={13} className="text-muted-foreground" aria-hidden="true" />
                 </motion.a>
               ))}
             </div>
@@ -395,8 +395,8 @@ export default function Footer() {
                 >
                   <Link
                     href={s.href}
-                    className="text-[13px] transition-all duration-200 hover:text-white hover:translate-x-0.5 inline-block"
-                    style={{ color: "rgba(255,255,255,0.35)" }}
+                    className="text-[13px] transition-all duration-200 hover:text-foreground hover:translate-x-0.5 inline-block"
+                    style={{ color: "rgba(33,78,207,0.22)" }}
                   >
                     {s.label}
                   </Link>
@@ -410,18 +410,18 @@ export default function Footer() {
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, ease, delay: 0.5 }}
               className="mt-8 rounded-xl p-4"
-              style={{ background: "rgba(37,99,235,0.07)", border: "1px solid rgba(71,163,255,0.12)" }}
+              style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(33,78,207,0.12)" }}
             >
-              <p className="text-[11px] font-semibold text-white mb-1">Ready to scale?</p>
-              <p className="text-[10px] mb-3" style={{ color: "rgba(255,255,255,0.35)" }}>
+              <p className="text-[11px] font-semibold text-foreground mb-1">Ready to scale?</p>
+              <p className="text-[10px] mb-3" style={{ color: "rgba(33,78,207,0.22)" }}>
                 Free 30-min strategy call with our BPO experts.
               </p>
               <Link href="/contact">
                 <motion.span
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white text-[11px] font-semibold cursor-pointer transition-all"
-                  style={{ background: "linear-gradient(135deg,#1d4ed8,#2563EB)", boxShadow: "0 0 12px rgba(37,99,235,0.3)" }}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-foreground text-[11px] font-semibold cursor-pointer transition-all"
+                  style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 12px rgba(37,99,235,0.3)" }}
                 >
                   Book Free Call
                   <ArrowRight size={10} aria-hidden="true" />
@@ -439,7 +439,7 @@ export default function Footer() {
           className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-7 border-t"
           style={{ borderColor: "rgba(255,255,255,0.045)" }}
         >
-          <p className="text-[11px] order-2 sm:order-1" style={{ color: "rgba(255,255,255,0.18)" }}>
+          <p className="text-[11px] order-2 sm:order-1" style={{ color: "rgba(33,78,207,0.14)" }}>
             © {new Date().getFullYear()} Thinkatic Private Limited. All rights reserved.
           </p>
 
@@ -448,7 +448,7 @@ export default function Footer() {
               <span key={l.label} className="flex items-center gap-4">
                 <Link
                   href={l.href}
-                  className="text-[10px] transition-colors hover:text-white/60"
+                  className="text-[10px] transition-colors hover:text-muted-foreground"
                   style={{ color: "rgba(255,255,255,0.2)" }}
                 >
                   {l.label}

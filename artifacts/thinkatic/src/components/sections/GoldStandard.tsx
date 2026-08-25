@@ -193,7 +193,7 @@ export function GoldStandard() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display font-bold text-white leading-[1.05] mb-8"
+          className="font-display font-bold text-foreground leading-[1.05] mb-8"
           style={{ fontSize: "clamp(2.8rem, 6.5vw, 6rem)" }}
           data-testid="gold-standard-heading"
         >
@@ -231,7 +231,7 @@ export function GoldStandard() {
         >
           <Link href="/case-studies" data-testid="button-ux-ai-innovations">
             <button
-              className="group relative flex items-center gap-3 px-8 py-4 rounded-full border border-white/30 bg-white/5 backdrop-blur-sm text-white text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:border-white/60 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+              className="group relative flex items-center gap-3 px-8 py-4 rounded-full border border-white/30 bg-white/5 backdrop-blur-sm text-foreground text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:border-white/60 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]"
             >
               Check Our UX + AI Innovations Here
               <span className="text-base transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">

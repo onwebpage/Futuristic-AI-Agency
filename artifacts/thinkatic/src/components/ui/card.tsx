@@ -27,7 +27,7 @@ const cardVariants = cva(
         surface:
           'bg-[var(--surface-2)] border border-white/[0.06] text-card-foreground',
         glow:
-          'glass-card gradient-border text-card-foreground hover:shadow-[0_0_40px_rgba(71,163,255,0.18)] hover:border-primary/30',
+          'glass-card gradient-border text-card-foreground hover:shadow-[0_0_40px_rgba(33,78,207,0.14)] hover:border-primary/30',
         outline:
           'bg-transparent border border-border text-card-foreground hover:border-primary/40',
       },
