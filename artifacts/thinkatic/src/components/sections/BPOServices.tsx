@@ -20,7 +20,7 @@ const pillars = [
     services: ["Medical Call Transfer", "Patient Outreach", "Appointment Scheduling", "Revenue Cycle Assistance"],
     stat: { value: "62%", label: "Fewer claim denials" },
     accent: "#214ECF",
-    gradient: "from-[#0B1E3D] to-[#0a1628]",
+    gradient: "from-[#F4F7FF] to-white",
     featured: false,
   },
   {
@@ -32,7 +32,7 @@ const pillars = [
     services: ["Voice Support", "Live Chat", "WhatsApp Support", "Technical Support"],
     stat: { value: "92%", label: "CSAT score" },
     accent: "#214ECF",
-    gradient: "from-[#0a1830] to-[#0a0f1e]",
+    gradient: "from-[#EEF3FF] to-white",
     featured: false,
   },
   {
@@ -44,7 +44,7 @@ const pillars = [
     services: ["Outbound Calling", "Appointment Setting", "Lead Qualification", "Sales Development"],
     stat: { value: "3.2×", label: "Pipeline velocity" },
     accent: "#214ECF",
-    gradient: "from-[#0B1E3D] to-[#0a1628]",
+    gradient: "from-[#F4F7FF] to-white",
     featured: false,
   },
   {
@@ -56,7 +56,7 @@ const pillars = [
     services: ["Data Entry", "CRM Management", "Document Processing", "Quality Assurance"],
     stat: { value: "45%", label: "Cost reduction" },
     accent: "#214ECF",
-    gradient: "from-[#0a1830] to-[#0a0f1e]",
+    gradient: "from-[#EEF3FF] to-white",
     featured: false,
   },
   {

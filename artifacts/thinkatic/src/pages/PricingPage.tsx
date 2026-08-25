@@ -229,7 +229,7 @@ export default function PricingPage() {
                         key={pkg.id}
                         className={`relative rounded-3xl p-7 md:p-8 border flex flex-col justify-between transition-all duration-200 ${
                           pkg.isRecommended
-                            ? "bg-gradient-to-b from-[#11244A]/90 to-[#08132B]/90 border-blue-500/40 shadow-[0_12px_40px_rgba(33,78,207,0.18)]"
+                            ? "bg-gradient-to-b from-[#F4F7FF] to-[#EEF3FF] border-blue-500/40 shadow-[0_12px_40px_rgba(33,78,207,0.18)]"
                             : "bg-white/[0.025] border-border hover:border-[#DCE5FF]"
                         }`}
                       >
@@ -510,7 +510,7 @@ export default function PricingPage() {
               transition={{ duration: 0.25, ease: smoothEase }}
             >
               {/* Cover Banner */}
-              <div className="relative rounded-3xl border border-blue-500/20 bg-gradient-to-br from-[#07132B]/90 via-[#050C1B] to-[#03060C] p-7 md:p-10 mb-14 overflow-hidden shadow-2xl">
+              <div className="relative rounded-3xl border border-blue-500/20 bg-gradient-to-br from-[#F4F7FF] via-white to-[#EEF3FF] p-7 md:p-10 mb-14 overflow-hidden shadow-[0_16px_48px_rgba(33,78,207,0.08)]">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-[radial-gradient(circle,rgba(33,78,207,0.12),transparent_70%)] pointer-events-none" />
                 <div className="max-w-3xl relative z-10">
                   <div className="flex items-center gap-2 text-xs font-mono text-[#214ECF] mb-2 uppercase tracking-widest">
@@ -591,7 +591,7 @@ export default function PricingPage() {
                       key={tier.id}
                       className={`relative rounded-3xl p-7 border flex flex-col justify-between transition-all duration-200 ${
                         tier.isMostPopular
-                          ? "bg-gradient-to-b from-[#11244A]/95 to-[#07132B]/95 border-[#214ECF]/50 shadow-[0_12px_45px_rgba(37,99,235,0.3)]"
+                          ? "bg-gradient-to-b from-[#F4F7FF] to-[#EEF3FF] border-[#214ECF]/50 shadow-[0_12px_45px_rgba(37,99,235,0.3)]"
                           : "bg-white/[0.025] border-border hover:border-[#DCE5FF]"
                       }`}
                     >

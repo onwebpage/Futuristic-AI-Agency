@@ -1,7 +1,6 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
-  motion, AnimatePresence, useInView, useMotionValue, useTransform,
-  useScroll, useTransform as useScrollTransform, useReducedMotion, animate,
+  motion, AnimatePresence, useInView, animate,
 } from "framer-motion";
 import { useLocation } from "wouter";
 
@@ -258,27 +257,12 @@ interface IndustryCardProps {
   index: number;
   isActive: boolean;
   onActivate: (id: string) => void;
-  shouldReduce: boolean;
 }
 
-function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: IndustryCardProps) {
+function IndustryCard({ industry, index, isActive, onActivate }: IndustryCardProps) {
   const [, setLocation] = useLocation();
   const cardRef   = useRef<HTMLDivElement>(null);
   const inView    = useInView(cardRef, { once: true, margin: "-60px" });
-  const mouseX    = useMotionValue(0);
-  const mouseY    = useMotionValue(0);
-  const [hovered, setHovered] = useState(false);
-
-  const highlightX = useTransform(mouseX, (v) => v - 200);
-  const highlightY = useTransform(mouseY, (v) => v - 200);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (shouldReduce) return;
-    const rect = cardRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
-  }, [mouseX, mouseY, shouldReduce]);
 
   const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -288,9 +272,6 @@ function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: I
       initial={{ opacity: 0, y: 44 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: index * 0.07, duration: 0.65, ease }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => { setHovered(true); onActivate(industry.id); }}
-      onMouseLeave={() => setHovered(false)}
       onClick={() => onActivate(industry.id)}
       className="relative overflow-hidden cursor-pointer select-none"
       style={{ borderRadius: 16 }}
@@ -298,68 +279,12 @@ function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: I
       {/* Glass base */}
       <motion.div
         className="absolute inset-0"
-        animate={{
-          background: isActive
-            ? "linear-gradient(135deg,rgba(10,24,54,0.92) 0%,rgba(6,16,38,0.88) 100%)"
-            : "linear-gradient(135deg,rgba(8,14,28,0.72) 0%,rgba(5,10,22,0.65) 100%)",
-          borderColor: isActive
-            ? "rgba(71,163,255,0.28)"
-            : hovered
-              ? "rgba(33,78,207,0.12)"
-              : "rgba(255,255,255,0.07)",
-          boxShadow: isActive
-            ? `0 24px 64px rgba(0,0,0,0.35), 0 0 0 1px rgba(33,78,207,0.1), 0 0 60px ${industry.glowColor}`
-            : hovered
-              ? "0 8px 32px rgba(0,0,0,0.25)"
-              : "0 2px 12px rgba(0,0,0,0.15)",
-        }}
-        transition={{ duration: 0.38 }}
         style={{
           borderRadius: 16,
           border: "1px solid",
-          backdropFilter: "blur(20px)",
-        }}
-      />
-
-      {/* Mouse-follow radial highlight */}
-      <motion.div
-        className="absolute pointer-events-none"
-        style={{
-          width: 400,
-          height: 400,
-          x: highlightX,
-          y: highlightY,
-          background: `radial-gradient(circle, ${industry.accentColor} 0%, transparent 65%)`,
-          opacity: hovered && !shouldReduce ? 1 : 0,
-          transition: "opacity 0.3s",
-        }}
-      />
-
-      {/* Active glow pulse */}
-      {isActive && (
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          style={{ borderRadius: 16 }}
-          animate={{ opacity: [0.4, 0.7, 0.4] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <div
-            className="absolute inset-0"
-            style={{
-              borderRadius: 16,
-              boxShadow: `inset 0 0 40px ${industry.accentColor}`,
-            }}
-          />
-        </motion.div>
-      )}
-
-      {/* Top shimmer line */}
-      <motion.div
-        className="absolute top-0 left-6 right-6 h-px pointer-events-none"
-        animate={{ opacity: isActive ? 1 : 0 }}
-        transition={{ duration: 0.4 }}
-        style={{
-          background: "linear-gradient(90deg,transparent,rgba(33,78,207,0.38),transparent)",
+          background: isActive ? "#F4F7FF" : "#FFFFFF",
+          borderColor: isActive ? "rgba(33,78,207,0.28)" : "#DCE5FF",
+          boxShadow: isActive ? "0 8px 24px rgba(33,78,207,0.08)" : "none",
         }}
       />
 
@@ -367,38 +292,25 @@ function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: I
         {/* ── Collapsed header — always visible ── */}
         <div className="flex items-center gap-5 px-6 md:px-8 min-h-[76px] py-4">
           {/* Icon container */}
-          <motion.div
-            animate={{
-              background: isActive
-                ? "rgba(33,78,207,0.15)"
-                : hovered ? "rgba(33,78,207,0.09)" : "rgba(33,78,207,0.04)",
-              borderColor: isActive
-                ? "rgba(71,163,255,0.4)"
-                : hovered ? "rgba(33,78,207,0.18)" : "rgba(255,255,255,0.1)",
-              color: isActive ? "rgba(71,163,255,1)" : hovered ? "rgba(33,78,207,0.72)" : "rgba(255,255,255,0.45)",
+          <div
+            style={{
+              background: isActive ? "rgba(33,78,207,0.12)" : "rgba(33,78,207,0.04)",
+              borderColor: isActive ? "rgba(33,78,207,0.28)" : "#DCE5FF",
+              color: isActive ? "#214ECF" : "#4B5563",
             }}
-            transition={{ duration: 0.3 }}
             className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center border"
           >
             {industry.icon}
-          </motion.div>
+          </div>
 
           {/* Title + category */}
           <div className="flex-1 min-w-0">
-            <motion.h3
-              animate={{ color: isActive ? "rgba(255,255,255,1)" : hovered ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.6)" }}
-              transition={{ duration: 0.25 }}
-              className="font-display font-semibold text-base md:text-lg leading-snug truncate"
-            >
+            <h3 className="font-display font-semibold text-base md:text-lg leading-snug truncate text-[#111827]">
               {industry.title}
-            </motion.h3>
-            <motion.span
-              animate={{ opacity: isActive ? 0.55 : 0.35 }}
-              transition={{ duration: 0.25 }}
-              className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#214ECF]"
-            >
+            </h3>
+            <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#214ECF] opacity-70">
               {industry.category}
-            </motion.span>
+            </span>
           </div>
 
           {/* Expand chevron */}
@@ -442,7 +354,7 @@ function IndustryCard({ industry, index, isActive, onActivate, shouldReduce }: I
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.08, duration: 0.5, ease }}
                       className="text-sm md:text-base leading-relaxed mb-5"
-                      style={{ color: "rgba(255,255,255,0.55)" }}
+                      style={{ color: "#4B5563" }}
                     >
                       {industry.description}
                     </motion.p>
@@ -542,19 +454,14 @@ function ReasonCard({ reason, index }: { reason: string; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: row * 0.1 + col * 0.06 }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="group flex items-start gap-4 rounded-xl p-5 border border-white/6 cursor-default overflow-hidden relative"
+      className="group flex items-start gap-4 rounded-xl p-5 border border-[#DCE5FF] bg-white cursor-default overflow-hidden relative"
       style={{
-        transition: "border-color 0.3s, background 0.3s, transform 0.3s",
-        borderColor: hovered ? "rgba(37,99,235,0.3)" : "rgba(33,78,207,0.04)",
-        background: hovered ? "rgba(8,27,58,0.3)" : "rgba(8,14,28,0.5)",
-        transform: hovered ? "translateX(4px)" : "translateX(0)",
+        transition: "border-color 0.2s",
       }}
     >
       <motion.div
         className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center mt-0.5"
-        animate={{ background: hovered ? "rgba(33,78,207,0.18)" : "rgba(33,78,207,0.09)" }}
+        animate={{ background: "rgba(33,78,207,0.09)" }}
         style={{ border: "1px solid rgba(33,78,207,0.18)" }}
       >
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
@@ -563,7 +470,7 @@ function ReasonCard({ reason, index }: { reason: string; index: number }) {
       </motion.div>
       <motion.span
         className="text-sm font-medium"
-        animate={{ color: hovered ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.65)" }}
+        animate={{ color: "#111827" }}
         transition={{ duration: 0.25 }}
       >
         {reason}
@@ -579,12 +486,6 @@ export function IndustriesSection() {
   const sectionRef  = useRef<HTMLElement>(null);
   const headingRef  = useRef<HTMLDivElement>(null);
   const inView      = useInView(headingRef, { once: true, margin: "-80px" });
-  const shouldReduce = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const bgY = useScrollTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px", "0px"] : ["60px", "-60px"]);
-  const cardsY = useScrollTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px", "0px"] : ["20px", "-20px"]);
-
   const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
   return (
@@ -592,11 +493,11 @@ export function IndustriesSection() {
       style={{ background: "linear-gradient(180deg,#FFFFFF 0%,#F5F8FF 50%,#FFFFFF 100%)" }}>
 
       {/* Background depth layer */}
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full"
-          style={{ background: "radial-gradient(ellipse,rgba(37,99,235,0.05) 0%,transparent 70%)", filter: "blur(80px)" }} />
+          style={{ background: "radial-gradient(ellipse,rgba(37,99,235,0.05) 0%,transparent 70%)" }} />
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[300px] rounded-full"
-          style={{ background: "radial-gradient(ellipse,rgba(37,99,235,0.04) 0%,transparent 70%)", filter: "blur(60px)" }} />
+          style={{ background: "radial-gradient(ellipse,rgba(37,99,235,0.04) 0%,transparent 70%)" }} />
         {/* Fine grid */}
         <div className="absolute inset-0"
           style={{
@@ -604,7 +505,7 @@ export function IndustriesSection() {
             backgroundSize: "55px 55px",
             maskImage: "radial-gradient(ellipse 70% 70% at 50% 50%,black 30%,transparent 100%)",
           }} />
-      </motion.div>
+      </div>
 
       <div className="max-w-5xl mx-auto px-6 relative z-10">
 
@@ -642,10 +543,7 @@ export function IndustriesSection() {
         </div>
 
         {/* ── Interactive industry accordion ── */}
-        <motion.div
-          style={{ y: cardsY }}
-          className="flex flex-col gap-2.5 mb-28"
-        >
+        <div className="flex flex-col gap-2.5 mb-28">
           {INDUSTRIES.map((industry, i) => (
             <IndustryCard
               key={industry.id}
@@ -653,10 +551,9 @@ export function IndustriesSection() {
               index={i}
               isActive={activeId === industry.id}
               onActivate={setActiveId}
-              shouldReduce={!!shouldReduce}
             />
           ))}
-        </motion.div>
+        </div>
 
         {/* ── Divider ── */}
         <motion.div

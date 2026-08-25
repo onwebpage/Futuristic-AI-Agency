@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { TiltCard } from "@/components/ui/TiltCard";
-import { MovingGrid, GlowOrb, AmbientParticles } from "@/components/ui/ParallaxLayers";
 
 const cases = [
   {
@@ -73,22 +72,8 @@ function CaseCard({ study, index }: { study: (typeof cases)[0]; index: number })
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const count = useCountUp(study.result, inView, 1.8);
   const [hovered, setHovered] = useState(false);
-  const shouldReduce = useReducedMotion();
-
-  // Per-card parallax translateY on scroll (on top of whileInView reveal)
-  const cardRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: cardScroll } = useScroll({
-    target: cardRef,
-    offset: ["start end", "end start"],
-  });
-  const cardParallaxY = useTransform(
-    cardScroll,
-    [0, 1],
-    shouldReduce ? ["0px", "0px"] : [`${20 + index * 5}px`, `${-(20 + index * 5)}px`]
-  );
-
   return (
-    <motion.div ref={cardRef} style={{ y: cardParallaxY }}>
+    <div>
       <TiltCard maxTilt={5} liftY={0} disabled={hovered}>
         <motion.div
           ref={ref}
@@ -205,47 +190,21 @@ function CaseCard({ study, index }: { study: (typeof cases)[0]; index: number })
           </div>
         </motion.div>
       </TiltCard>
-    </motion.div>
+    </div>
   );
 }
 
 export function CaseStudiesSection() {
-  const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const inView = useInView(headingRef, { once: true, margin: "-80px" });
-  const shouldReduce = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const bgY   = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px", "0px"] : ["50px",  "-50px"]);
-  const midY  = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px", "0px"] : ["90px",  "-90px"]);
-  const deepY = useTransform(scrollYProgress, [0, 1], shouldReduce ? ["0px", "0px"] : ["130px", "-130px"]);
 
   return (
-    <section ref={sectionRef} className="py-32 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
+    <section className="py-32 relative overflow-hidden" style={{ background: "#FFFFFF" }}>
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{ background: "linear-gradient(90deg, transparent, rgba(33,78,207,0.04) 50%, transparent)" }}
       />
 
-      {/* Deep grid */}
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: deepY }}>
-        <MovingGrid opacity={0.03} size={50} duration={28} />
-      </motion.div>
-
-      {/* Mid glow orbs */}
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: midY }}>
-        <GlowOrb x="15%" y="25%" size={600} color="rgba(37,99,235,0.055)" blur={90} duration={9}  delay={1} />
-        <GlowOrb x="85%" y="70%" size={500} color="rgba(71,163,255,0.04)" blur={80} duration={11} delay={3} />
-      </motion.div>
-
-      {/* Foreground glow */}
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full"
-          style={{ background: "radial-gradient(ellipse, rgba(37,99,235,0.05) 0%, transparent 70%)", filter: "blur(80px)" }}
-        />
-      </motion.div>
-      <AmbientParticles count={16} color="rgba(71,163,255,0.25)" seed={7} />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">

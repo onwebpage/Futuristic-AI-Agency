@@ -361,15 +361,6 @@ img[loading="lazy"] {
   background-color: rgba(255, 255, 255, 0.04);
 }
 
-/* ── Scroll behaviour ────────────────────────────────────────────────────────
-   Native smooth scroll as fallback when Lenis is not active.
-   ────────────────────────────────────────────────────────────────────────── */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
-
 /* ── Print styles ────────────────────────────────────────────────────────────
    Make printed pages readable by switching to a light background.
    ────────────────────────────────────────────────────────────────────────── */

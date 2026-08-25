@@ -451,7 +451,7 @@ export default function Navbar() {
             exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
             transition={{ duration: 0.4, ease }}
             className="fixed inset-0 z-40 flex flex-col"
-            style={{ background: "rgba(3,5,14,0.99)", backdropFilter: "blur(32px)" }}
+                style={{ background: "rgba(255,255,255,0.98)", backdropFilter: "blur(12px)" }}
           >
             {/* Top bar — logo + close */}
             <div

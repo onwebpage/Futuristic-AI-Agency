@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowUpRight, Star, TrendingUp, Users, Globe, Zap } from "lucide-react";
 
@@ -95,15 +95,12 @@ const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 // ─── Marquee strip ─────────────────────────────────────────────────────────────
 
 function MarqueeStrip() {
-  const shouldReduce = useReducedMotion();
-  const doubled = [...LOGOS, ...LOGOS];
+  const doubled = LOGOS;
 
   return (
-    <div className="relative overflow-hidden py-6" style={{ maskImage: "linear-gradient(90deg, transparent, black 12%, black 88%, transparent)" }}>
-      <motion.div
-        className="flex items-center gap-12 whitespace-nowrap"
-        animate={shouldReduce ? {} : { x: ["0%", "-50%"] }}
-        transition={{ duration: 28, ease: "linear", repeat: Infinity }}
+    <div className="relative py-6">
+      <div
+        className="flex flex-wrap items-center justify-center gap-x-12 gap-y-5"
       >
         {doubled.map((logo, i) => (
           <div
@@ -124,7 +121,7 @@ function MarqueeStrip() {
             </span>
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

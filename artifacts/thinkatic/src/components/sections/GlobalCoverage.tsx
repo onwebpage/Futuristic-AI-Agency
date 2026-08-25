@@ -337,14 +337,6 @@ export function GlobalCoverage() {
             <div className="absolute" style={{ left: "74%", top: "56%", width: "14%", height: "22%", background: "radial-gradient(ellipse, rgba(37,99,235,0.05) 0%, transparent 70%)", borderRadius: "50% 50% 50% 50% / 40% 50% 40% 50%" }} />
           </div>
 
-          {/* Glowing scan line */}
-          <motion.div
-            className="absolute top-0 bottom-0 w-[1px] pointer-events-none"
-            style={{ background: "linear-gradient(180deg, transparent, rgba(33,78,207,0.24) 30%, rgba(71,163,255,0.6) 50%, rgba(33,78,207,0.24) 70%, transparent)" }}
-            animate={{ left: ["0%", "100%"] }}
-            transition={{ duration: 10, ease: "linear", repeat: Infinity }}
-          />
-
           {/* Hub pins */}
           {HUBS.map((hub, i) => (
             <MapPin key={hub.label} hub={hub} index={i} mapInView={mapInView} />

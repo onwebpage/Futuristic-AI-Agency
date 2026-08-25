@@ -130,24 +130,6 @@ function PanelBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       <div className="absolute inset-0" style={{ background: "#FFFFFF" }} />
-      <motion.div
-        animate={{ x: [0, 30, -15, 0], y: [0, -20, 15, 0], scale: [1, 1.12, 0.95, 1] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full"
-        style={{
-          background: "radial-gradient(circle at 40% 40%, rgba(30,80,160,0.75) 0%, rgba(10,30,80,0.4) 45%, transparent 70%)",
-          filter: "blur(70px)",
-        }}
-      />
-      <motion.div
-        animate={{ x: [0, -40, 25, 0], y: [0, 35, -15, 0] }}
-        transition={{ duration: 26, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-        className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full"
-        style={{
-          background: "radial-gradient(circle at 60% 60%, rgba(60,30,130,0.65) 0%, rgba(30,10,70,0.35) 45%, transparent 70%)",
-          filter: "blur(65px)",
-        }}
-      />
       <div
         className="absolute inset-0 opacity-[0.025]"
         style={{

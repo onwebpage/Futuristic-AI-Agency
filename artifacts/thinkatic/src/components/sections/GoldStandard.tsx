@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "wouter";
 
 function Shape3DRing({ className, style }: { className?: string; style?: React.CSSProperties }) {
@@ -13,7 +12,7 @@ function Shape3DRing({ className, style }: { className?: string; style?: React.C
           background: "transparent",
           border: "28px solid transparent",
           backgroundImage:
-            "linear-gradient(#0d1b2a, #0d1b2a), linear-gradient(135deg, #1de9b6 0%, #00bcd4 30%, #0d47a1 60%, #1a0845 100%)",
+            "linear-gradient(#FFFFFF, #FFFFFF), linear-gradient(135deg, #214ECF 0%, #4A7BFF 45%, #93C5FD 100%)",
           backgroundOrigin: "border-box",
           backgroundClip: "padding-box, border-box",
           boxShadow: "0 0 60px rgba(29,233,182,0.15), inset 0 0 40px rgba(0,0,0,0.5)",
@@ -32,7 +31,7 @@ function Shape3DBlob({ className, style }: { className?: string; style?: React.C
         ...style,
         borderRadius: "60% 40% 70% 30% / 50% 60% 40% 50%",
         background:
-          "linear-gradient(135deg, #1de9b6 0%, #00acc1 20%, #1565c0 50%, #4527a0 75%, #1a0845 100%)",
+          "linear-gradient(135deg, #214ECF 0%, #4A7BFF 55%, #93C5FD 100%)",
         boxShadow:
           "0 20px 80px rgba(29,233,182,0.2), 0 0 120px rgba(69,39,160,0.3), inset 0 0 60px rgba(0,0,0,0.4)",
         filter: "brightness(1.1)",
@@ -50,7 +49,7 @@ function Shape3DPetal({ className, style, rotate = 0 }: { className?: string; st
         transform: `rotate(${rotate}deg)`,
         borderRadius: "70% 30% 70% 30% / 30% 70% 30% 70%",
         background:
-          "linear-gradient(160deg, #26c6da 0%, #00acc1 15%, #006064 35%, #1a237e 65%, #0d0826 100%)",
+          "linear-gradient(160deg, #93C5FD 0%, #4A7BFF 35%, #214ECF 100%)",
         boxShadow: "0 10px 60px rgba(0,172,193,0.3), inset 0 0 40px rgba(0,0,0,0.5)",
         filter: "brightness(1.05)",
       }}
@@ -66,7 +65,7 @@ function Shape3DInnerOrb({ className, style }: { className?: string; style?: Rea
         ...style,
         borderRadius: "50%",
         background:
-          "radial-gradient(circle at 35% 35%, #4dd0e1 0%, #00838f 25%, #1565c0 55%, #0d0826 80%, #000 100%)",
+          "radial-gradient(circle at 35% 35%, #FFFFFF 0%, #93C5FD 25%, #4A7BFF 55%, #214ECF 100%)",
         boxShadow: "0 0 80px rgba(77,208,225,0.25), inset 0 0 50px rgba(0,0,0,0.6)",
       }}
     />
@@ -74,26 +73,12 @@ function Shape3DInnerOrb({ className, style }: { className?: string; style?: Rea
 }
 
 export function GoldStandard() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  // Parallax: fewer transforms for better performance
-  const topLeftY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
-  const topRightY = useTransform(scrollYProgress, [0, 1], ["-15%", "8%"]);
-  const centerY = useTransform(scrollYProgress, [0, 1], ["6%", "-6%"]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.1, 0.85, 1], [0, 1, 1, 0.7]);
-
   return (
     <section
-      ref={sectionRef}
       className="relative min-h-[100vh] flex items-center justify-center overflow-hidden"
       style={{
         background:
-          "linear-gradient(150deg, #03001e 0%, #0a0050 20%, #1a0878 40%, #2d1090 55%, #1a0878 70%, #060030 85%, #000010 100%)",
+          "linear-gradient(150deg, #FFFFFF 0%, #F4F7FF 45%, #EEF3FF 100%)",
       }}
     >
       {/* Subtle radial glow behind shapes */}
@@ -109,7 +94,6 @@ export function GoldStandard() {
       <motion.div
         className="absolute pointer-events-none"
         style={{
-          y: topLeftY,
           willChange: "transform",
           top: "-8%",
           left: "-4%",
@@ -124,7 +108,6 @@ export function GoldStandard() {
       <motion.div
         className="absolute pointer-events-none"
         style={{
-          y: topRightY,
           willChange: "transform",
           top: "-12%",
           right: "-2%",
@@ -139,7 +122,6 @@ export function GoldStandard() {
       <motion.div
         className="absolute pointer-events-none"
         style={{
-          y: centerY,
           willChange: "transform",
           right: "clamp(-60px, -3%, 0px)",
           bottom: "-5%",
@@ -186,7 +168,7 @@ export function GoldStandard() {
       {/* ─── Text Content ─── */}
       <motion.div
         className="relative z-10 max-w-7xl mx-auto px-8 md:px-16 flex flex-col items-center justify-center text-center"
-        style={{ opacity: textOpacity }}
+        style={{ opacity: 1 }}
       >
         <motion.h2
           initial={{ opacity: 0, y: 50 }}

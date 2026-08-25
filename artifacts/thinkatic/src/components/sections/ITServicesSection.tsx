@@ -188,13 +188,6 @@ function AIFramework() {
               background: "linear-gradient(90deg, #214ECF 0%, #214ECF 60%, rgba(33,78,207,0.24) 100%)",
             }}
           />
-          {/* Moving pulse on line */}
-          <motion.div
-            animate={{ x: ["0%", "100%"] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
-            className="absolute top-0 h-full w-20"
-            style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)" }}
-          />
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -225,13 +218,6 @@ function AIFramework() {
                   transition: "all 0.3s ease",
                 }}
               >
-                {activeStep === i && (
-                  <motion.div
-                    className="absolute inset-0 rounded-full border border-[#214ECF]/40"
-                    animate={{ scale: [1, 1.6], opacity: [0.8, 0] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
-                  />
-                )}
                 <span className="text-xs font-bold text-foreground font-mono">0{i + 1}</span>
               </motion.div>
 
