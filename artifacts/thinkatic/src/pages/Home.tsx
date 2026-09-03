@@ -147,22 +147,19 @@ function FinalCTA() {
             >
               <Link href="/contact">
                 <button
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold text-white text-sm tracking-wide shadow-md hover:shadow-lg transition-all cursor-pointer"
-                  style={{
-                    background: "linear-gradient(135deg, #214ECF 0%, #1A43C8 100%)",
-                  }}
+                  className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl font-bold text-white text-xs tracking-wider uppercase bg-[#1E40AF] hover:bg-[#1D4ED8] shadow-xs hover:shadow-sm transition-all cursor-pointer"
                 >
-                  <Calendar size={16} />
+                  <Calendar size={15} />
                   Book Architectural Consultation
                 </button>
               </Link>
               <Link href="/request-proposal">
                 <button
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold border transition-all duration-300 bg-white hover:bg-slate-50 text-[#214ECF] border-[#214ECF]/30 text-sm tracking-wide cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl font-bold border transition-all duration-200 bg-white hover:bg-slate-50 text-slate-800 border-slate-200 hover:border-slate-300 text-xs tracking-wider uppercase cursor-pointer shadow-2xs"
                 >
-                  <FileText size={16} />
+                  <FileText size={15} className="text-slate-500" />
                   Request a Proposal
-                  <ArrowRight size={14} />
+                  <ArrowRight size={14} className="text-[#1E40AF]" />
                 </button>
               </Link>
             </motion.div>
@@ -177,31 +174,27 @@ function FinalCTA() {
             className="relative"
           >
             <div
-              className="relative rounded-3xl border border-[#DCE5FF] p-8 md:p-10 overflow-hidden bg-white shadow-xl"
+              className="relative rounded-xl border border-slate-200 p-8 md:p-10 overflow-hidden bg-white shadow-lg"
             >
               <div
                 className="absolute top-0 left-0 right-0 h-[2px]"
-                style={{ background: "linear-gradient(90deg, transparent, rgba(37,99,235,0.6) 30%, rgba(33,78,207,0.72) 50%, rgba(37,99,235,0.6) 70%, transparent)" }}
+                style={{ background: "linear-gradient(90deg, transparent, rgba(30,64,175,0.6) 30%, rgba(30,64,175,0.9) 50%, rgba(30,64,175,0.6) 70%, transparent)" }}
               />
 
-              <p className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] mb-8 text-[#214ECF]">
+              <p className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] mb-8 text-[#1E40AF]">
                 Enterprise Partnership Benchmarks
               </p>
 
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {[
-                  { value: "500+", label: "Enterprise Clients", color: "#214ECF" },
-                  { value: "99.99%", label: "Cloud Uptime SLA", color: "#10B981" },
-                  { value: "2B+", label: "Ops / Year", color: "#8B5CF6" },
-                  { value: "<24h", label: "Consultation SLA", color: "#F59E0B" },
-                ].map((stat, i) => (
+                  { value: "500+", label: "Enterprise Clients", color: "#1E40AF" },
+                  { value: "99.99%", label: "Cloud Uptime SLA", color: "#059669" },
+                  { value: "2B+", label: "Ops / Year", color: "#7C3AED" },
+                  { value: "<24h", label: "Consultation SLA", color: "#D97706" },
+                ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="rounded-2xl p-5 border text-center"
-                    style={{
-                      background: `${stat.color}08`,
-                      borderColor: `${stat.color}22`,
-                    }}
+                    className="rounded-xl p-5 border border-slate-200 bg-slate-50/70 text-center"
                   >
                     <p
                       className="font-display font-black text-3xl md:text-4xl leading-none mb-2"
@@ -209,7 +202,7 @@ function FinalCTA() {
                     >
                       {stat.value}
                     </p>
-                    <p className="text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                    <p className="text-[10px] font-mono uppercase tracking-wider text-slate-600 font-semibold">
                       {stat.label}
                     </p>
                   </div>
@@ -218,18 +211,18 @@ function FinalCTA() {
 
               {/* Verified Enterprise Endorsement */}
               <div
-                className="rounded-2xl border p-5 bg-slate-50 border-slate-200"
+                className="rounded-xl border p-5 bg-slate-50/80 border-slate-200"
               >
                 <div className="flex items-start gap-3.5">
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs bg-[#214ECF]/10 border border-[#214ECF]/30 text-[#214ECF] shrink-0">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-xs bg-[#1E40AF]/10 border border-[#1E40AF]/30 text-[#1E40AF] shrink-0">
                     CTO
                   </div>
                   <div>
-                    <p className="text-xs sm:text-sm leading-relaxed italic mb-2 text-slate-700">
+                    <p className="text-xs sm:text-sm leading-relaxed italic mb-2 text-slate-800 font-medium">
                       "Thinkatic modernized our monolithic applications into cloud-native microservices and deployed private AI agents with zero downtime. Exceptional delivery."
                     </p>
                     <p className="text-xs font-bold text-slate-900">Chief Information Officer</p>
-                    <p className="text-[10px] text-slate-500 font-mono">U.S. Enterprise Healthcare &amp; Technology Network</p>
+                    <p className="text-[10px] text-slate-600 font-mono font-medium">U.S. Enterprise Healthcare &amp; Technology Network</p>
                   </div>
                 </div>
               </div>

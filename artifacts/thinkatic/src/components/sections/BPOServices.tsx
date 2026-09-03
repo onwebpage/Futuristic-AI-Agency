@@ -76,15 +76,10 @@ const capabilities = [
 function ServiceChip({ label, accent }: { label: string; accent: string }) {
   return (
     <div
-      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
-      style={{
-        background: `${accent}10`,
-        border: `1px solid ${accent}28`,
-        color: `${accent}cc`,
-      }}
+      className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium border border-slate-200 bg-white text-slate-700 shadow-2xs"
     >
-      <CheckCheck size={10} style={{ color: accent, flexShrink: 0 }} />
-      {label}
+      <CheckCheck size={11} className="text-[#1E40AF] shrink-0" />
+      <span>{label}</span>
     </div>
   );
 }
@@ -100,26 +95,19 @@ function CapabilityCard({ capability, index }: { capability: (typeof capabilitie
       initial={{ opacity: 0, y: 32 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease, delay: index * 0.08 }}
-      className={`group relative rounded-3xl p-8 flex flex-col justify-between border cursor-default overflow-hidden h-full bg-gradient-to-br ${capability.gradient} transition-all duration-300`}
+      className="group relative rounded-xl p-6 md:p-7 flex flex-col justify-between border cursor-default overflow-hidden h-full bg-white transition-all duration-300"
       style={{
-        borderColor: capability.featured ? "rgba(33,78,207,0.35)" : "rgba(33,78,207,0.12)",
-        boxShadow: capability.featured ? "0 12px 36px rgba(33,78,207,0.08)" : "none",
+        borderColor: capability.featured ? "#93C5FD" : "#E2E8F0",
+        boxShadow: capability.featured ? "0 8px 24px -4px rgba(30, 64, 175, 0.08)" : "0 1px 3px rgba(15, 23, 42, 0.03)",
       }}
     >
-      {/* Ambient hover glow */}
-      <div
-        className="absolute inset-0 pointer-events-none rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-        style={{ background: `radial-gradient(ellipse at 10% 0%, ${capability.accent}12 0%, transparent 55%)` }}
-      />
-
-      {/* Featured badge */}
+      {/* Featured indicator */}
       {capability.featured && (
         <div
-          className="absolute top-6 right-6 flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold"
-          style={{ background: "rgba(33,78,207,0.12)", border: "1px solid rgba(33,78,207,0.3)" }}
+          className="absolute top-5 right-5 flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-bold bg-blue-50 border border-blue-200"
         >
-          <Star size={11} fill="#214ECF" color="#214ECF" />
-          <span className="text-[10px] uppercase tracking-wider text-[#214ECF]">
+          <Star size={11} fill="#1E40AF" color="#1E40AF" />
+          <span className="text-[10px] uppercase tracking-wider text-[#1E40AF]">
             Front Door Capability
           </span>
         </div>
@@ -127,32 +115,28 @@ function CapabilityCard({ capability, index }: { capability: (typeof capabilitie
 
       {/* Top Header */}
       <div>
-        <div className="flex items-center gap-3 mb-5">
+        <div className="flex items-center gap-3.5 mb-5">
           <div
-            className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
-            style={{
-              background: `${capability.accent}15`,
-              border: `1px solid ${capability.accent}30`,
-            }}
+            className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0 border bg-blue-50/60 border-blue-200/80"
           >
-            <Icon size={22} style={{ color: capability.accent }} />
+            <Icon size={20} className="text-[#1E40AF]" />
           </div>
           <div>
-            <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#214ECF] uppercase">
+            <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#1E40AF] uppercase">
               CAPABILITY {capability.id}
             </span>
-            <h3 className="font-display font-bold text-slate-900 text-xl leading-tight">
+            <h3 className="font-display font-bold text-slate-900 text-lg md:text-xl leading-tight">
               {capability.title}
             </h3>
           </div>
         </div>
 
-        <p className="text-sm leading-relaxed text-slate-600 mb-6 min-h-[44px]">
+        <p className="text-sm leading-relaxed text-slate-700 mb-6 font-normal min-h-[44px]">
           {capability.desc}
         </p>
 
         {/* Deliverables chips */}
-        <div className="flex flex-wrap gap-2 mb-6">
+        <div className="flex flex-wrap gap-1.5 mb-6">
           {capability.services.map((s) => (
             <ServiceChip key={s} label={s} accent={capability.accent} />
           ))}
@@ -160,19 +144,19 @@ function CapabilityCard({ capability, index }: { capability: (typeof capabilitie
       </div>
 
       {/* Metric & CTA Footer */}
-      <div className="flex items-center justify-between pt-5 border-t border-[#DCE5FF]">
+      <div className="flex items-center justify-between pt-5 border-t border-slate-100">
         <div>
           <p className="font-display font-black text-2xl leading-none text-slate-900">
             {capability.stat.value}
           </p>
-          <p className="text-[10px] font-mono uppercase tracking-wider text-slate-500 mt-1">
+          <p className="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-semibold mt-1">
             {capability.stat.label}
           </p>
         </div>
 
         <Link href={`/services/${capability.slug}`}>
           <div
-            className="flex items-center gap-1.5 text-xs font-bold text-[#214ECF] group-hover:translate-x-1 transition-transform cursor-pointer"
+            className="flex items-center gap-1.5 text-xs font-bold text-[#1E40AF] group-hover:translate-x-0.5 transition-transform cursor-pointer"
           >
             <span>Architecture details</span>
             <ArrowRight size={13} />
@@ -277,19 +261,19 @@ export function BPOServices() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease }}
-          className="flex flex-col sm:flex-row items-center justify-between gap-6 rounded-3xl border border-[#DCE5FF] p-7 bg-gradient-to-r from-white via-[#F8FAFF] to-[#EEF4FF]"
+          className="flex flex-col sm:flex-row items-center justify-between gap-6 rounded-xl border border-slate-200 p-7 bg-white shadow-2xs"
         >
           <div>
             <h4 className="text-slate-900 font-bold text-base mb-1">
               Have a complex multi-disciplinary technology challenge?
             </h4>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-slate-700 font-normal">
               Our principal enterprise architects will assess your systems, tech stack, and transformation roadmap.
             </p>
           </div>
           <Link href="/contact">
             <button
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-xs tracking-wider uppercase text-white bg-[#214ECF] hover:bg-[#1A43C8] shadow-md hover:shadow-lg transition-all shrink-0 cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs tracking-wider uppercase text-white bg-[#1E40AF] hover:bg-[#1D4ED8] shadow-xs hover:shadow-sm transition-all shrink-0 cursor-pointer"
             >
               Consult an Architect
               <ArrowRight size={14} />

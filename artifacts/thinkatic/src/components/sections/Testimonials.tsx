@@ -141,14 +141,14 @@ function Slide({ t, direction }: { t: typeof TESTIMONIALS[0]; direction: number 
         >
           {t.metric}
         </p>
-        <p className="text-sm font-medium" style={{ color: "#4B5563" }}>
+        <p className="text-xs font-mono uppercase tracking-wider text-slate-600 font-semibold">
           {t.metricLabel}
         </p>
         <div
           className="mt-5 h-px w-12 mx-auto"
           style={{ background: `linear-gradient(90deg, transparent, ${t.accent}60, transparent)` }}
         />
-        <p className="text-xs mt-4 font-semibold uppercase tracking-wider" style={{ color: `${t.accent}80` }}>
+        <p className="text-xs mt-4 font-mono font-bold uppercase tracking-wider text-[#1E40AF]">
           {t.company}
         </p>
       </div>
@@ -316,7 +316,7 @@ export function Testimonials() {
           </div>
 
           {/* Counter */}
-          <p className="text-xs font-mono" style={{ color: "rgba(33,78,207,0.16)" }}>
+          <p className="text-xs font-mono font-semibold text-slate-600">
             {String(index + 1).padStart(2, "0")} / {String(TESTIMONIALS.length).padStart(2, "0")}
           </p>
         </div>
@@ -342,8 +342,8 @@ export function Testimonials() {
                 loading="lazy"
               />
               <div className="text-left">
-                <p className="text-xs font-semibold text-foreground leading-tight">{t.name}</p>
-                <p className="text-[10px]" style={{ color: "rgba(33,78,207,0.22)" }}>{t.company}</p>
+                <p className="text-xs font-semibold text-slate-900 leading-tight">{t.name}</p>
+                <p className="text-[10px] font-mono text-slate-500 font-medium">{t.company}</p>
               </div>
             </button>
           ))}

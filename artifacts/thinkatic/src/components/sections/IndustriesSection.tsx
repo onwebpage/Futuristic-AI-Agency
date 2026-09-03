@@ -276,15 +276,15 @@ function IndustryCard({ industry, index, isActive, onActivate }: IndustryCardPro
       className="relative overflow-hidden cursor-pointer select-none"
       style={{ borderRadius: 16 }}
     >
-      {/* Glass base */}
+      {/* Card base */}
       <motion.div
         className="absolute inset-0"
         style={{
-          borderRadius: 16,
+          borderRadius: 12,
           border: "1px solid",
-          background: isActive ? "#F4F7FF" : "#FFFFFF",
-          borderColor: isActive ? "rgba(33,78,207,0.28)" : "#DCE5FF",
-          boxShadow: isActive ? "0 8px 24px rgba(33,78,207,0.08)" : "none",
+          background: isActive ? "#F8FAFC" : "#FFFFFF",
+          borderColor: isActive ? "#93C5FD" : "#E2E8F0",
+          boxShadow: isActive ? "0 10px 25px -5px rgba(15, 23, 42, 0.06)" : "0 1px 3px rgba(15, 23, 42, 0.03)",
         }}
       />
 
@@ -294,33 +294,33 @@ function IndustryCard({ industry, index, isActive, onActivate }: IndustryCardPro
           {/* Icon container */}
           <div
             style={{
-              background: isActive ? "rgba(33,78,207,0.12)" : "rgba(33,78,207,0.04)",
-              borderColor: isActive ? "rgba(33,78,207,0.28)" : "#DCE5FF",
-              color: isActive ? "#214ECF" : "#4B5563",
+              background: isActive ? "rgba(30,64,175,0.08)" : "rgba(30,64,175,0.03)",
+              borderColor: isActive ? "#93C5FD" : "#E2E8F0",
+              color: isActive ? "#1E40AF" : "#334155",
             }}
-            className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center border"
+            className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center border"
           >
             {industry.icon}
           </div>
 
           {/* Title + category */}
           <div className="flex-1 min-w-0">
-            <h3 className="font-display font-semibold text-base md:text-lg leading-snug truncate text-[#111827]">
+            <h3 className="font-display font-semibold text-base md:text-lg leading-snug truncate text-slate-900">
               {industry.title}
             </h3>
-            <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#214ECF] opacity-70">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-[#1E40AF]">
               {industry.category}
             </span>
           </div>
 
           {/* Expand chevron */}
           <motion.div
-            animate={{ rotate: isActive ? 45 : 0, opacity: isActive ? 1 : 0.3 }}
+            animate={{ rotate: isActive ? 45 : 0, opacity: isActive ? 1 : 0.6 }}
             transition={{ duration: 0.35, ease }}
-            className="flex-shrink-0 w-7 h-7 rounded-lg border flex items-center justify-center"
+            className="flex-shrink-0 w-7 h-7 rounded-md border flex items-center justify-center border-slate-200"
             style={{
-              borderColor: isActive ? "rgba(33,78,207,0.24)" : "rgba(255,255,255,0.1)",
-              background: isActive ? "rgba(33,78,207,0.12)" : "transparent",
+              background: isActive ? "rgba(30,64,175,0.08)" : "transparent",
+              color: isActive ? "#1E40AF" : "#475569",
             }}
           >
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -343,8 +343,7 @@ function IndustryCard({ industry, index, isActive, onActivate }: IndustryCardPro
             >
               <div className="px-6 md:px-8 pb-8 pt-1">
                 {/* Divider */}
-                <div className="mb-6 h-px"
-                  style={{ background: "linear-gradient(90deg,rgba(33,78,207,0.18),rgba(71,163,255,0.06),transparent)" }} />
+                <div className="mb-6 h-px bg-slate-200" />
 
                 <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-start">
                   {/* Left — text content */}
@@ -353,8 +352,7 @@ function IndustryCard({ industry, index, isActive, onActivate }: IndustryCardPro
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.08, duration: 0.5, ease }}
-                      className="text-sm md:text-base leading-relaxed mb-5"
-                      style={{ color: "#4B5563" }}
+                      className="text-sm md:text-base leading-relaxed mb-5 text-slate-700 font-normal"
                     >
                       {industry.description}
                     </motion.p>
@@ -364,17 +362,10 @@ function IndustryCard({ industry, index, isActive, onActivate }: IndustryCardPro
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.14, duration: 0.5, ease }}
-                      className="relative rounded-xl px-4 py-3.5 mb-7"
-                      style={{
-                        background: "rgba(37,99,235,0.07)",
-                        border: "1px solid rgba(33,78,207,0.12)",
-                      }}
+                      className="relative rounded-xl px-4 py-3.5 mb-7 bg-slate-50 border border-slate-200"
                     >
-                      <div className="absolute top-0 left-3 right-3 h-px"
-                        style={{ background: "linear-gradient(90deg,transparent,rgba(71,163,255,0.35),transparent)" }} />
-                      <p className="text-[13px] leading-relaxed font-medium"
-                        style={{ color: "#4B5563" }}>
-                        <span style={{ color: "#214ECF", fontFamily: "monospace", fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", marginRight: 8 }}>
+                      <p className="text-[13px] leading-relaxed font-normal text-slate-800">
+                        <span style={{ color: "#1E40AF", fontFamily: "monospace", fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", marginRight: 8, fontWeight: 700 }}>
                           Business Impact
                         </span>
                         <br className="sm:hidden" />
@@ -387,14 +378,10 @@ function IndustryCard({ industry, index, isActive, onActivate }: IndustryCardPro
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.22, duration: 0.45, ease }}
-                      whileHover={{ scale: 1.03, boxShadow: "0 0 30px rgba(37,99,235,0.4)" }}
-                      whileTap={{ scale: 0.97 }}
+                      whileHover={{ y: -1 }}
+                      whileTap={{ y: 0 }}
                       onClick={(e) => { e.stopPropagation(); setLocation("/contact"); }}
-                      className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full font-semibold text-[13px] text-foreground tracking-wide"
-                      style={{
-                        background: "linear-gradient(135deg,#214ECF 0%,#214ECF 60%,#3b82f6 100%)",
-                        boxShadow: "0 0 24px rgba(37,99,235,0.3)",
-                      }}
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs tracking-wider uppercase text-white bg-[#1E40AF] hover:bg-[#1D4ED8] transition-all shadow-xs cursor-pointer"
                     >
                       {industry.cta}
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

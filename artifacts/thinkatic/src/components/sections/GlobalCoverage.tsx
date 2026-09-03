@@ -156,22 +156,17 @@ function RegionCard({ region, index }: { region: typeof REGIONS[0]; index: numbe
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, ease, delay: index * 0.12 }}
-      className="rounded-2xl border p-6 hover:border-border transition-all duration-400 group"
-      style={{
-        background: "rgba(33,78,207,0.02)",
-        borderColor: "rgba(255,255,255,0.07)",
-      }}
+      className="rounded-xl border border-slate-200 bg-white p-6 shadow-2xs hover:border-slate-300 hover:shadow-xs transition-all duration-300 group"
     >
       {/* Header */}
       <div className="flex items-center gap-3 mb-5">
         <span className="text-2xl">{region.flag}</span>
         <div>
-          <h3 className="text-foreground font-bold text-base">{region.name}</h3>
-          <p className="text-xs mt-0.5" style={{ color: "rgba(33,78,207,0.22)" }}>{region.timezone}</p>
+          <h3 className="text-slate-900 font-bold text-base">{region.name}</h3>
+          <p className="text-xs font-mono text-slate-500 mt-0.5">{region.timezone}</p>
         </div>
         <div
-          className="ml-auto px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider"
-          style={{ background: `${region.accent}15`, color: region.accent, border: `1px solid ${region.accent}25` }}
+          className="ml-auto px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider bg-blue-50 text-[#1E40AF] border border-blue-200/80"
         >
           {region.offices.length} offices
         </div>
@@ -182,8 +177,7 @@ function RegionCard({ region, index }: { region: typeof REGIONS[0]; index: numbe
         {region.offices.map((office) => (
           <span
             key={office}
-            className="px-2.5 py-1 rounded-lg text-xs font-medium"
-            style={{ background: "rgba(33,78,207,0.08)", color: "#4B5563", border: "1px solid rgba(33,78,207,0.15)" }}
+            className="px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-slate-50 text-slate-700 border border-slate-200"
           >
             {office}
           </span>
@@ -195,8 +189,7 @@ function RegionCard({ region, index }: { region: typeof REGIONS[0]; index: numbe
         {region.languages.map((lang) => (
           <span
             key={lang}
-            className="px-2.5 py-1 rounded-lg text-xs font-medium"
-            style={{ background: `${region.accent}10`, color: `${region.accent}cc`, border: `1px solid ${region.accent}20` }}
+            className="px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-blue-50/60 text-[#1E40AF] border border-blue-200/50"
           >
             {lang}
           </span>
@@ -343,12 +336,12 @@ export function GlobalCoverage() {
           ))}
 
           {/* Region labels */}
-          <div className="absolute top-3 left-3 text-[10px] font-mono uppercase tracking-widest" style={{ color: "rgba(71,163,255,0.35)" }}>
+          <div className="absolute top-3 left-3 text-[11px] font-mono uppercase tracking-widest text-slate-300 font-semibold">
             Americas · EMEA · APAC
           </div>
           <div className="absolute bottom-3 right-3 flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-            <span className="text-[10px] font-mono" style={{ color: "rgba(255,255,255,0.2)" }}>
+            <span className="text-[11px] font-mono text-slate-300 font-medium">
               {HUBS.length} active hubs
             </span>
           </div>

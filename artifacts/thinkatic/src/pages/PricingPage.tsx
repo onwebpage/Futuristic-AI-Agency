@@ -215,31 +215,31 @@ export default function PricingPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, ease: smoothEase }}
-                    className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 bg-white border ${
+                    className={`relative rounded-xl p-7 flex flex-col justify-between transition-all duration-300 bg-white border ${
                       isPopular
-                        ? "border-2 border-[#214ECF] shadow-[0_16px_40px_rgba(33,78,207,0.12)] ring-4 ring-[#214ECF]/5"
-                        : "border-[#DCE5FF] shadow-[0_8px_24px_rgba(17,24,39,0.04)] hover:border-[#214ECF]/40 hover:shadow-md"
+                        ? "border-2 border-[#1E40AF] shadow-lg ring-4 ring-blue-500/10"
+                        : "border-slate-200 shadow-xs hover:border-slate-300 hover:shadow-md"
                     }`}
                   >
                     {/* Top Row: Plan number & Badges */}
                     <div className="flex items-center justify-between gap-2 mb-5">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-slate-400">
+                        <span className="text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-slate-500">
                           {plan.planNumber}
                         </span>
                         <span className="text-[10px] font-medium text-slate-400">·</span>
-                        <span className="text-[10px] font-mono font-semibold text-[#214ECF] uppercase">
+                        <span className="text-[10px] font-mono font-semibold text-[#1E40AF] uppercase">
                           {plan.categoryLabel}
                         </span>
                       </div>
 
                       {isPopular ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#214ECF] text-white shadow-xs">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-mono font-bold bg-[#1E40AF] text-white shadow-2xs">
                           <Star size={10} className="fill-white" />
                           Most Popular
                         </span>
                       ) : (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                           {plan.tag}
                         </span>
                       )}
@@ -247,23 +247,23 @@ export default function PricingPage() {
 
                     {/* Title & Investment */}
                     <div className="mb-5">
-                      <h3 className="font-display font-black text-2xl text-slate-900 tracking-tight mb-2">
+                      <h3 className="font-display font-bold text-2xl text-slate-900 tracking-tight mb-2">
                         {plan.name}
                       </h3>
                       <div className="flex items-baseline gap-2 mb-3">
-                        <span className="text-xs font-mono uppercase tracking-wider text-slate-500">Starting at</span>
-                        <span className="font-display font-black text-3xl text-[#214ECF] tracking-tight">
+                        <span className="text-xs font-mono uppercase tracking-wider text-slate-600 font-semibold">Starting at</span>
+                        <span className="font-display font-black text-3xl text-[#1E40AF] tracking-tight">
                           {plan.startingPriceFormatted}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-600 leading-relaxed min-h-[36px]">
+                      <p className="text-xs text-slate-700 leading-relaxed font-normal min-h-[36px]">
                         {plan.shortPositioning}
                       </p>
                     </div>
 
                     {/* Ideal Customer Box */}
-                    <div className="p-3.5 rounded-2xl bg-[#F8FAFF] border border-[#E2ECFF] mb-5">
-                      <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                    <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 mb-5">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 block mb-1">
                         Target Enterprise Environment
                       </span>
                       <p className="text-xs font-medium text-slate-800 leading-snug">
@@ -273,13 +273,13 @@ export default function PricingPage() {
 
                     {/* Key Business Outcomes */}
                     <div className="mb-5">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-2.5">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 block mb-2.5">
                         Strategic Business Outcomes
                       </span>
                       <ul className="space-y-2">
                         {plan.keyOutcomes.map((outcome, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-xs text-slate-700">
-                            <CheckCircle2 size={14} className="text-[#214ECF] shrink-0 mt-0.5" />
+                          <li key={idx} className="flex items-start gap-2 text-xs text-slate-800 font-medium">
+                            <CheckCircle2 size={14} className="text-[#1E40AF] shrink-0 mt-0.5" />
                             <span className="leading-snug">{outcome}</span>
                           </li>
                         ))}
@@ -289,12 +289,12 @@ export default function PricingPage() {
                     {/* Included Deliverables (Expandable) */}
                     <div className="pt-4 border-t border-slate-100 mb-6 flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">
                           Included Capabilities ({plan.includes.length})
                         </span>
                         <button
                           onClick={() => toggleExpand(plan.id)}
-                          className="text-[11px] font-semibold text-[#214ECF] flex items-center gap-1 hover:underline cursor-pointer"
+                          className="text-[11px] font-semibold text-[#1E40AF] flex items-center gap-1 hover:underline cursor-pointer"
                         >
                           {isExpanded ? (
                             <>Hide details <ChevronUp size={12} /></>
@@ -306,13 +306,13 @@ export default function PricingPage() {
 
                       <ul className="space-y-1.5">
                         {(isExpanded ? plan.includes : plan.includes.slice(0, 4)).map((item, i) => (
-                          <li key={i} className="flex items-start gap-2 text-[11px] text-slate-600">
-                            <span className="text-[#214ECF] font-bold text-xs leading-none">•</span>
+                          <li key={i} className="flex items-start gap-2 text-[11px] text-slate-700">
+                            <span className="text-[#1E40AF] font-bold text-xs leading-none">•</span>
                             <span className="leading-snug">{item}</span>
                           </li>
                         ))}
                         {!isExpanded && plan.includes.length > 4 && (
-                          <li className="text-[10px] font-mono text-[#214ECF] pt-1">
+                          <li className="text-[10px] font-mono text-[#1E40AF] pt-1 font-semibold">
                             + {plan.includes.length - 4} more deliverables
                           </li>
                         )}
@@ -323,10 +323,10 @@ export default function PricingPage() {
                     <div className="flex flex-col gap-2 pt-2">
                       <Link href={plan.ctaRoute || `/contact?plan=${plan.id}`}>
                         <button
-                          className={`w-full py-3.5 px-5 rounded-2xl font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer ${
+                          className={`w-full h-11 px-5 rounded-xl font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer ${
                             isPopular
-                              ? "bg-[#214ECF] text-white shadow-md hover:bg-[#1A43C8] hover:shadow-lg"
-                              : "bg-slate-900 text-white hover:bg-[#214ECF]"
+                              ? "bg-[#1E40AF] text-white shadow-xs hover:bg-[#1D4ED8]"
+                              : "bg-slate-900 text-white hover:bg-slate-800 shadow-xs"
                           }`}
                         >
                           <span>{plan.ctaLabel}</span>
@@ -335,7 +335,7 @@ export default function PricingPage() {
                       </Link>
 
                       <Link href={`/services/${plan.id}`}>
-                        <button className="w-full py-2 px-4 rounded-xl text-[11px] font-semibold text-slate-500 hover:text-[#214ECF] hover:bg-blue-50/50 transition-colors flex items-center justify-center gap-1 cursor-pointer">
+                        <button className="w-full py-2 px-4 rounded-lg text-[11px] font-semibold text-slate-600 hover:text-[#1E40AF] hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 cursor-pointer">
                           <span>Review technical architecture</span>
                           <ArrowUpRight size={12} />
                         </button>
@@ -348,36 +348,34 @@ export default function PricingPage() {
           )}
 
           {/* ── Section 6: Mandatory Pricing Disclaimer ── */}
-          <div className="relative rounded-3xl p-8 sm:p-12 border border-[#DCE5FF] bg-gradient-to-br from-[#FFFFFF] via-[#F8FAFF] to-[#EEF4FF] shadow-sm overflow-hidden">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
-
+          <div className="relative rounded-xl p-8 sm:p-12 border border-slate-200 bg-white shadow-2xs overflow-hidden">
             <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
-              <div className="w-12 h-12 rounded-2xl bg-[#214ECF]/10 border border-[#214ECF]/20 flex items-center justify-center text-[#214ECF] mb-5">
-                <HelpCircle size={24} />
+              <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#1E40AF] mb-5">
+                <HelpCircle size={22} />
               </div>
 
               <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-900 mb-3 tracking-tight">
                 Every enterprise is different.
               </h3>
 
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-4 max-w-2xl">
+              <p className="text-sm sm:text-base text-slate-700 leading-relaxed mb-4 max-w-2xl font-normal">
                 Our plans provide a starting point. Final investment depends on your technology environment, business requirements, integrations, scale and transformation goals.
               </p>
 
-              <p className="text-sm font-semibold text-[#214ECF] mb-8">
+              <p className="text-sm font-semibold text-[#1E40AF] mb-8">
                 Have a complex technology challenge? Let's build the right solution together.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-4">
                 <Link href="/contact">
-                  <button className="w-full sm:w-auto px-8 py-4 rounded-full font-bold text-white text-xs tracking-wider uppercase bg-[#214ECF] hover:bg-[#1A43C8] shadow-[0_8px_24px_rgba(33,78,207,0.28)] transition-all flex items-center justify-center gap-2 cursor-pointer">
+                  <button className="w-full sm:w-auto h-12 px-7 rounded-xl font-bold text-white text-xs tracking-wider uppercase bg-[#1E40AF] hover:bg-[#1D4ED8] shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer">
                     <MessageSquare size={15} />
                     Discuss Your Project
                   </button>
                 </Link>
 
                 <Link href="/request-proposal">
-                  <button className="w-full sm:w-auto px-8 py-4 rounded-full font-bold text-slate-700 text-xs tracking-wider uppercase bg-white border border-slate-300 hover:border-[#214ECF] hover:text-[#214ECF] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs">
+                  <button className="w-full sm:w-auto h-12 px-7 rounded-xl font-bold text-slate-800 text-xs tracking-wider uppercase bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs">
                     Request a Proposal
                     <ArrowRight size={14} />
                   </button>

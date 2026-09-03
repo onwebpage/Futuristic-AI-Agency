@@ -264,33 +264,33 @@ export default function Navbar() {
         transition={{ duration: 0.28, ease: "easeInOut" }}
         className="fixed top-0 left-0 right-0 z-50"
         style={{
-          background: scrolled ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.68)",
-          backdropFilter: `blur(${scrolled ? "28px" : "14px"})`,
+          background: scrolled ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.85)",
+          backdropFilter: "blur(20px)",
           borderBottom: scrolled
-            ? "1px solid rgba(33,78,207,0.10)"
-            : "1px solid rgba(33,78,207,0.04)",
+            ? "1px solid rgba(226, 232, 240, 0.9)"
+            : "1px solid rgba(226, 232, 240, 0.5)",
           boxShadow: scrolled
-            ? "0 10px 30px rgba(17,24,39,0.08), 0 1px 0 rgba(33,78,207,0.06)"
+            ? "0 4px 20px -2px rgba(15, 23, 42, 0.05)"
             : "none",
         }}
         role="navigation"
         aria-label="Main navigation"
       >
         <div
-          className="w-full px-5 md:px-8 flex items-center justify-between gap-4 transition-all duration-300"
+          className="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between gap-4 transition-all duration-300"
           style={{ height: scrolled ? "58px" : "68px" }}
         >
           {/* Logo */}
           <Link
             href="/"
-            className="flex-shrink-0 hover:opacity-80 transition-opacity duration-200"
+            className="flex-shrink-0 hover:opacity-85 transition-opacity duration-200"
             aria-label="Thinkatic – Home"
           >
             <ThinkaticLogo compact={scrolled} />
           </Link>
 
           {/* Desktop nav links */}
-          <div className="hidden lg:flex items-center gap-0.5 flex-1 justify-center">
+          <div className="hidden lg:flex items-center gap-1 flex-1 justify-center">
             {navItems.map((item) => {
               const isActive = item.href === location || location.startsWith(item.href + "/");
 
@@ -306,19 +306,19 @@ export default function Navbar() {
                       href={item.href}
                       aria-expanded={megaOpen}
                       aria-haspopup="true"
-                      className="flex items-center gap-1 px-3 py-2 rounded-lg transition-colors duration-150 group"
+                      className="flex items-center gap-1 px-3 py-2 rounded-md transition-colors duration-150 hover:bg-slate-100/60"
                       style={{
                         fontSize: "11px",
-                        letterSpacing: "0.12em",
-                        fontWeight: 500,
-                        color: isActive ? "#214ECF" : "#111827",
+                        letterSpacing: "0.1em",
+                        fontWeight: 600,
+                        color: isActive ? "#1E40AF" : "#0F172A",
                       }}
                     >
                       {item.label}
                       <motion.span
                         animate={{ rotate: megaOpen ? 180 : 0 }}
                         transition={{ duration: 0.2 }}
-                        className="inline-flex"
+                        className="inline-flex opacity-60"
                         aria-hidden="true"
                       >
                         <ChevronDown size={10} strokeWidth={2.5} />
@@ -327,7 +327,7 @@ export default function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="activeUnderline"
-                        className="absolute bottom-0 left-3 right-3 h-px bg-primary"
+                        className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#1E40AF] rounded-full"
                         transition={{ duration: 0.3, ease }}
                       />
                     )}
@@ -340,12 +340,12 @@ export default function Navbar() {
                 <div key={item.label} className="relative">
                   <Link
                     href={item.href}
-                    className="px-3 py-2 rounded-lg transition-colors duration-150 block hover:text-[#214ECF]"
+                    className="px-3 py-2 rounded-md transition-colors duration-150 block hover:bg-slate-100/60 hover:text-[#1E40AF]"
                     style={{
                       fontSize: "11px",
-                      letterSpacing: "0.12em",
-                      fontWeight: item.isSecondary ? 400 : 500,
-                      color: isActive ? "#214ECF" : "#111827",
+                      letterSpacing: "0.1em",
+                      fontWeight: 600,
+                      color: isActive ? "#1E40AF" : "#0F172A",
                     }}
                   >
                     {item.label}
@@ -353,7 +353,7 @@ export default function Navbar() {
                   {isActive && (
                     <motion.div
                       layoutId="activeUnderline"
-                      className="absolute bottom-0 left-3 right-3 h-px bg-primary"
+                      className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#1E40AF] rounded-full"
                       transition={{ duration: 0.3, ease }}
                     />
                   )}
@@ -371,7 +371,7 @@ export default function Navbar() {
                 <button
                   onClick={() => setSearchOpen(true)}
                   aria-label="Open search"
-                  className="hidden lg:flex w-8 h-8 items-center justify-center rounded-lg transition-colors duration-150 hover:bg-white/[0.06] text-muted-foreground hover:text-muted-foreground"
+                  className="hidden lg:flex w-8 h-8 items-center justify-center rounded-lg transition-colors duration-150 hover:bg-slate-100 text-slate-600 hover:text-slate-900"
                 >
                   <Search size={14} />
                 </button>
@@ -381,19 +381,12 @@ export default function Navbar() {
             {/* Request Proposal — desktop only */}
             <Link href="/request-proposal" className="hidden lg:block">
               <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-full transition-all duration-200 hover:border-[#214ECF]/40"
-                style={{
-                  fontSize: "11px",
-                  letterSpacing: "0.12em",
-                  border: "1px solid rgba(33,78,207,0.15)",
-                  background: "#FFFFFF",
-                  color: "#214ECF",
-                }}
+                whileHover={{ y: -1 }}
+                whileTap={{ y: 0 }}
+                className="h-9 flex items-center gap-1.5 px-3.5 rounded-lg transition-all duration-200 border border-slate-200 bg-white text-slate-800 hover:border-slate-300 hover:bg-slate-50 shadow-2xs font-semibold text-[11px] tracking-wider"
                 aria-label="Request a proposal"
               >
-                <FileText size={11} aria-hidden="true" />
+                <FileText size={11} className="text-slate-500" aria-hidden="true" />
                 REQUEST PROPOSAL
               </motion.button>
             </Link>
@@ -401,15 +394,9 @@ export default function Navbar() {
             {/* Book Consultation — primary CTA */}
             <Link href="/contact" className="hidden md:block">
               <motion.button
-                whileHover={{ scale: 1.04, boxShadow: "0 0 32px rgba(37,99,235,0.6)" }}
-                whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-5 py-2 rounded-full font-bold text-white transition-all duration-200"
-                style={{
-                  fontSize: "11px",
-                  letterSpacing: "0.13em",
-                  background: "linear-gradient(135deg,#214ECF 0%,#173db6 100%)",
-                  boxShadow: "0 12px 24px rgba(33,78,207,0.18)",
-                }}
+                whileHover={{ y: -1, boxShadow: "0 4px 12px rgba(30,64,175,0.2)" }}
+                whileTap={{ y: 0 }}
+                className="h-9 flex items-center gap-2 px-4 rounded-lg font-bold text-white transition-all duration-200 bg-[#1E40AF] hover:bg-[#1D4ED8] text-[11px] tracking-wider shadow-xs"
                 data-testid="button-book-consultation"
               >
                 <CalendarDays size={11} aria-hidden="true" />

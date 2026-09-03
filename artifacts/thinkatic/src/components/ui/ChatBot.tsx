@@ -322,23 +322,23 @@ export default function ChatBot() {
       {/* Floating button */}
       <motion.button
         onClick={() => setOpen((o) => !o)}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.93 }}
-        className="fixed bottom-6 right-6 z-[998] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed bottom-6 right-6 z-[998] w-13 h-13 rounded-xl flex items-center justify-center shadow-lg border cursor-pointer transition-colors"
         style={{
-          background: open ? "#F4F7FF" : "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)",
-          boxShadow: open ? "0 4px 24px rgba(0,0,0,0.5)" : "0 0 40px rgba(71,163,255,0.45), 0 4px 24px rgba(0,0,0,0.4)",
-          border: open ? "1px solid rgba(33,78,207,0.12)" : "none",
+          background: open ? "#FFFFFF" : "#1E40AF",
+          borderColor: open ? "#CBD5E1" : "#1D4ED8",
+          boxShadow: "0 10px 25px -5px rgba(30, 64, 175, 0.25), 0 8px 10px -6px rgba(30, 64, 175, 0.2)",
         }}
         aria-label="Open chat"
       >
         <AnimatePresence mode="wait">
           {open ? (
-            <motion.svg key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.18 }} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round">
+            <motion.svg key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.18 }} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F172A" strokeWidth="2.5" strokeLinecap="round">
               <path d="M18 6L6 18M6 6l12 12" />
             </motion.svg>
           ) : (
-            <motion.svg key="chat" initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.7, opacity: 0 }} transition={{ duration: 0.18 }} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <motion.svg key="chat" initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.7, opacity: 0 }} transition={{ duration: 0.18 }} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             </motion.svg>
           )}
@@ -353,34 +353,31 @@ export default function ChatBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.95 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-24 right-6 z-[997] flex flex-col rounded-2xl overflow-hidden shadow-2xl"
+            className="fixed bottom-22 right-6 z-[997] flex flex-col rounded-xl overflow-hidden shadow-2xl border border-slate-200"
             style={{
               width: "min(400px, calc(100vw - 24px))",
               height: "min(580px, calc(100vh - 120px))",
               background: "#FFFFFF",
-              border: "1px solid rgba(33,78,207,0.14)",
-              boxShadow: "0 24px 60px rgba(17,24,39,0.18), 0 0 0 1px rgba(33,78,207,0.06)",
+              boxShadow: "0 20px 50px rgba(15, 23, 42, 0.15)",
             }}
           >
             {/* Header */}
             <div
-              className="flex items-center gap-3 px-5 py-4 flex-shrink-0"
-              style={{ borderBottom: "1px solid rgba(33,78,207,0.12)", background: "#FFFFFF" }}
+              className="flex items-center gap-3 px-5 py-4 flex-shrink-0 border-b border-slate-100 bg-white"
             >
               <div
-                className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                style={{ background: "#3B82F6" }}
+                className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 bg-[#1E40AF]"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="3" />
                   <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
                 </svg>
               </div>
               <div>
-                <p className="text-foreground font-bold text-sm leading-tight">Thinkatic Guide</p>
+                <p className="text-slate-900 font-bold text-sm leading-tight">Thinkatic Guide</p>
                 <div className="flex items-center gap-1.5 mt-0.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6] animate-pulse" />
-                  <span className="text-[11px]" style={{ color: "#111827" }}>Online now</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <span className="text-[11px] font-mono text-slate-600 font-medium">Online now</span>
                 </div>
               </div>
               <button
@@ -401,8 +398,8 @@ export default function ChatBot() {
                     className="px-4 py-3 rounded-2xl text-sm leading-relaxed max-w-[85%] whitespace-pre-wrap"
                     style={
                       msg.role === "user"
-                        ? { background: "#3B82F6", color: "#fff", fontWeight: 500, borderBottomRightRadius: 6 }
-                        : { background: "#F4F7FF", color: "#111827", borderBottomLeftRadius: 6, border: "1px solid rgba(33,78,207,0.12)" }
+                        ? { background: "#1E40AF", color: "#fff", fontWeight: 500, borderBottomRightRadius: 6 }
+                        : { background: "#F8FAFC", color: "#0F172A", borderBottomLeftRadius: 6, border: "1px solid #E2E8F0" }
                     }
                     dangerouslySetInnerHTML={{
                       __html: msg.text

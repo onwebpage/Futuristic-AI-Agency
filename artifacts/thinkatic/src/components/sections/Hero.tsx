@@ -141,11 +141,7 @@ export function Hero() {
           >
             <Link href="/contact">
               <button
-                className="w-full sm:w-auto px-8 py-4 rounded-full font-bold text-white text-[13px] tracking-wide border-0 flex items-center justify-center gap-2 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(33,78,207,0.35)] cursor-pointer"
-                style={{
-                  background: 'linear-gradient(135deg,#214ECF 0%,#1a43c8 100%)',
-                  boxShadow: '0 12px 24px rgba(33,78,207,0.2)',
-                }}
+                className="w-full sm:w-auto h-12 px-7 rounded-xl font-bold text-white text-[13px] tracking-wider border-0 flex items-center justify-center gap-2 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#1D4ED8] bg-[#1E40AF] cursor-pointer shadow-sm"
               >
                 <CalendarDays size={15} aria-hidden="true" />
                 Plan Your Transformation
@@ -153,11 +149,10 @@ export function Hero() {
             </Link>
             <Link href="/pricing">
               <button
-                className="w-full sm:w-auto px-8 py-4 rounded-full font-bold text-[#214ECF] text-[13px] tracking-wide flex items-center justify-center gap-2 transition-all duration-200 hover:bg-[#214ECF]/5 cursor-pointer"
-                style={{ border: '1px solid rgba(33,78,207,0.25)', background: '#FFFFFF' }}
+                className="w-full sm:w-auto h-12 px-7 rounded-xl font-bold text-slate-900 text-[13px] tracking-wider flex items-center justify-center gap-2 transition-all duration-200 hover:bg-slate-50 hover:border-slate-300 border border-slate-200 bg-white cursor-pointer shadow-2xs"
               >
                 View Enterprise Plans
-                <ArrowRight size={15} aria-hidden="true" />
+                <ArrowRight size={15} className="text-[#1E40AF]" aria-hidden="true" />
               </button>
             </Link>
           </motion.div>
@@ -244,7 +239,7 @@ export function Hero() {
                     <div className="flex items-center gap-3">
                       <span className="text-lg leading-none">{item.icon}</span>
                       <div>
-                        <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-medium">
+                        <div className="text-[10px] font-mono uppercase tracking-wider text-slate-600 font-semibold">
                           {item.label}
                         </div>
                         <div className="text-xs font-bold text-slate-900">
@@ -252,7 +247,7 @@ export function Hero() {
                         </div>
                       </div>
                     </div>
-                    <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-md bg-blue-50 text-[#214ECF] border border-blue-100">
+                    <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-md bg-blue-50 text-[#1E40AF] border border-blue-200/80">
                       {item.status}
                     </span>
                   </div>
@@ -261,19 +256,18 @@ export function Hero() {
 
               {/* Executive Testimonial Quote */}
               <div
-                className="rounded-2xl border p-4.5"
-                style={{ background: 'rgba(37,99,235,0.05)', borderColor: 'rgba(37,99,235,0.18)' }}
+                className="rounded-xl border p-4.5 bg-slate-50/80 border-slate-200"
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs border border-[#214ECF]/30 bg-[#214ECF]/10 text-[#214ECF] shrink-0">
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center font-bold text-xs border border-[#1E40AF]/30 bg-[#1E40AF]/10 text-[#1E40AF] shrink-0">
                     CTO
                   </div>
                   <div>
-                    <p className="text-xs sm:text-sm leading-relaxed italic text-slate-700 mb-1.5">
+                    <p className="text-xs sm:text-sm leading-relaxed italic text-slate-800 mb-1.5 font-medium">
                       "Thinkatic re-architected our core technology infrastructure and deployed enterprise AI pipelines with zero disruption. World-class technical acumen."
                     </p>
                     <p className="text-xs font-bold text-slate-900">Enterprise Vice President of Engineering</p>
-                    <p className="text-[10px] text-slate-500 font-mono">Fortune 500 Financial &amp; Logistics Group</p>
+                    <p className="text-[10px] text-slate-600 font-mono font-medium">Fortune 500 Financial &amp; Logistics Group</p>
                   </div>
                 </div>
               </div>

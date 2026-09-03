@@ -106,7 +106,7 @@ function AnimatedCounter({
           {suffix}
         </span>
       </div>
-      <span className="text-xs font-medium uppercase tracking-wider text-center" style={{ color: "#4B5563" }}>
+      <span className="text-xs font-mono font-semibold uppercase tracking-wider text-center text-slate-600">
         {label}
       </span>
     </div>

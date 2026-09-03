@@ -86,26 +86,26 @@ export function FlagshipPricingSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.6, ease, delay: 0.15 * idx }}
-                whileHover={{ y: -6 }}
-                className={`relative rounded-3xl p-8 sm:p-9 flex flex-col justify-between transition-all duration-300 ${
+                whileHover={{ y: -4 }}
+                className={`relative rounded-xl p-8 sm:p-9 flex flex-col justify-between transition-all duration-300 ${
                   isPopular
-                    ? "bg-[#FFFFFF] border-2 border-[#214ECF] shadow-[0_20px_50px_rgba(33,78,207,0.14)] ring-4 ring-[#214ECF]/10"
-                    : "bg-[#FFFFFF] border border-[#DCE5FF] shadow-[0_12px_36px_rgba(17,24,39,0.06)] hover:border-[#214ECF]/40"
+                    ? "bg-[#FFFFFF] border-2 border-[#1E40AF] shadow-lg ring-4 ring-blue-500/10"
+                    : "bg-[#FFFFFF] border border-slate-200 shadow-xs hover:border-slate-300 hover:shadow-md"
                 }`}
               >
                 {/* Top Badge */}
                 <div className="flex items-center justify-between gap-3 mb-6">
-                  <span className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-slate-400">
+                  <span className="text-[11px] font-mono font-bold tracking-[0.25em] uppercase text-slate-500">
                     {plan.planNumber}
                   </span>
 
                   {isPopular ? (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#214ECF] text-white shadow-sm">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-bold bg-[#1E40AF] text-white shadow-2xs">
                       <Star size={11} className="fill-white" />
                       Most Popular
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-md text-xs font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                       {plan.tag}
                     </span>
                   )}
@@ -113,16 +113,16 @@ export function FlagshipPricingSection() {
 
                 {/* Plan Title & Investment */}
                 <div className="mb-6">
-                  <h3 className="font-display font-black text-2xl sm:text-3xl text-slate-900 tracking-tight mb-2">
+                  <h3 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 tracking-tight mb-2">
                     {plan.name}
                   </h3>
                   <div className="flex items-baseline gap-2 mb-4">
-                    <span className="text-xs font-mono uppercase tracking-wider text-slate-500">Starting at</span>
-                    <span className="font-display font-black text-3xl sm:text-4xl text-[#214ECF] tracking-tight">
+                    <span className="text-xs font-mono uppercase tracking-wider text-slate-600 font-semibold">Starting at</span>
+                    <span className="font-display font-black text-3xl sm:text-4xl text-[#1E40AF] tracking-tight">
                       {plan.startingPriceFormatted}
                     </span>
                   </div>
-                  <p className="text-sm text-slate-600 leading-relaxed min-h-[44px]">
+                  <p className="text-sm text-slate-700 leading-relaxed font-normal min-h-[44px]">
                     {plan.shortPositioning}
                   </p>
                 </div>
@@ -130,26 +130,26 @@ export function FlagshipPricingSection() {
                 {/* Target & Outcomes */}
                 <div className="pt-6 border-t border-slate-100 mb-8 flex-1">
                   <div className="mb-5">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 block mb-1">
                       Ideal For
                     </span>
-                    <p className="text-xs font-medium text-slate-700">
+                    <p className="text-xs font-medium text-slate-800">
                       {plan.idealCustomer}
                     </p>
                   </div>
 
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-3">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 block mb-3">
                     Core Capabilities Included
                   </span>
                   <ul className="space-y-2.5">
                     {plan.includes.slice(0, 6).map((item, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-xs text-slate-700">
-                        <CheckCircle2 size={15} className="text-[#214ECF] shrink-0 mt-0.5" />
+                      <li key={i} className="flex items-start gap-2.5 text-xs text-slate-800 font-medium">
+                        <CheckCircle2 size={15} className="text-[#1E40AF] shrink-0 mt-0.5" />
                         <span className="leading-snug">{item}</span>
                       </li>
                     ))}
                     {plan.includes.length > 6 && (
-                      <li className="text-[11px] font-mono text-[#214ECF] pl-6 pt-1 font-semibold">
+                      <li className="text-[11px] font-mono text-[#1E40AF] pl-6 pt-1 font-semibold">
                         + {plan.includes.length - 6} more enterprise deliverables
                       </li>
                     )}
@@ -160,10 +160,10 @@ export function FlagshipPricingSection() {
                 <div className="pt-2">
                   <Link href={plan.ctaRoute || "/contact"}>
                     <button
-                      className={`w-full py-4 px-6 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer ${
+                      className={`w-full h-12 px-6 rounded-xl font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer ${
                         isPopular
-                          ? "bg-[#214ECF] text-white shadow-[0_8px_24px_rgba(33,78,207,0.3)] hover:bg-[#1A43C8] hover:shadow-[0_12px_28px_rgba(33,78,207,0.4)]"
-                          : "bg-slate-900 text-white hover:bg-[#214ECF] shadow-sm hover:shadow-[0_8px_20px_rgba(33,78,207,0.25)]"
+                          ? "bg-[#1E40AF] text-white shadow-xs hover:bg-[#1D4ED8]"
+                          : "bg-slate-900 text-white hover:bg-slate-800 shadow-xs"
                       }`}
                     >
                       <span>{plan.ctaLabel}</span>
@@ -182,17 +182,17 @@ export function FlagshipPricingSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease, delay: 0.3 }}
-          className="rounded-3xl border border-[#DCE5FF] p-6 sm:p-8 bg-gradient-to-r from-white via-[#F8FAFF] to-[#EEF4FF] flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm"
+          className="rounded-xl border border-slate-200 p-6 sm:p-8 bg-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xs"
         >
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#214ECF]/10 border border-[#214ECF]/20 flex items-center justify-center text-[#214ECF] shrink-0">
-              <Layers size={24} />
+            <div className="w-12 h-12 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-[#1E40AF] shrink-0">
+              <Layers size={22} />
             </div>
             <div>
               <h4 className="font-display font-bold text-lg text-slate-900 mb-1">
                 Explore All 16 Enterprise Transformation Plans
               </h4>
-              <p className="text-xs sm:text-sm text-slate-600">
+              <p className="text-xs sm:text-sm text-slate-700 font-normal">
                 Browse detailed architectures across AI & Automation, Cloud & Modernization, Cybersecurity, Data Platforms, Product Engineering, and 24/7 Managed Services.
               </p>
             </div>
@@ -200,9 +200,9 @@ export function FlagshipPricingSection() {
 
           <div className="shrink-0 w-full md:w-auto">
             <Link href="/pricing">
-              <button className="w-full md:w-auto px-6 py-3.5 rounded-full font-bold text-xs tracking-wider uppercase bg-white border border-[#214ECF]/30 text-[#214ECF] hover:bg-[#214ECF] hover:text-white transition-all duration-200 flex items-center justify-center gap-2 shadow-sm cursor-pointer">
+              <button className="w-full md:w-auto h-11 px-5 rounded-xl font-bold text-xs tracking-wider uppercase bg-white border border-slate-200 text-slate-900 hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 flex items-center justify-center gap-2 shadow-2xs cursor-pointer">
                 View Full Pricing & Plans
-                <ArrowUpRight size={14} />
+                <ArrowUpRight size={14} className="text-[#1E40AF]" />
               </button>
             </Link>
           </div>

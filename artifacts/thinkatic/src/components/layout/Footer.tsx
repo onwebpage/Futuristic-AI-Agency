@@ -103,8 +103,7 @@ function FooterLinkList({
             >
               <Link
                 href={s.href}
-                className="group flex items-center gap-2 text-[13px] transition-all duration-200 hover:text-foreground"
-                style={{ color: "#4B5563" }}
+                className="group flex items-center gap-2 text-[13px] transition-all duration-200 text-slate-600 hover:text-slate-900"
               >
                 {Icon && (
                   <Icon
@@ -420,7 +419,7 @@ export default function Footer() {
                 <motion.span
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-foreground text-[11px] font-semibold cursor-pointer transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white text-[11px] font-bold cursor-pointer transition-all bg-[#1E40AF] hover:bg-[#1D4ED8]"
                   style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 12px rgba(37,99,235,0.3)" }}
                 >
                   Book Free Call
@@ -439,7 +438,7 @@ export default function Footer() {
           className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-7 border-t"
           style={{ borderColor: "rgba(255,255,255,0.045)" }}
         >
-          <p className="text-[11px] order-2 sm:order-1" style={{ color: "rgba(33,78,207,0.14)" }}>
+          <p className="text-xs order-2 sm:order-1 text-slate-500 font-medium">
             © {new Date().getFullYear()} Thinkatic Private Limited. All rights reserved.
           </p>
 
@@ -448,22 +447,21 @@ export default function Footer() {
               <span key={l.label} className="flex items-center gap-4">
                 <Link
                   href={l.href}
-                  className="text-[10px] transition-colors hover:text-muted-foreground"
-                  style={{ color: "rgba(255,255,255,0.2)" }}
+                  className="text-xs transition-colors text-slate-500 hover:text-slate-800 font-medium"
                 >
                   {l.label}
                 </Link>
                 {i < footerLegal.length - 1 && (
-                  <span className="w-px h-3" style={{ background: "rgba(255,255,255,0.1)" }} aria-hidden="true" />
+                  <span className="w-px h-3 bg-slate-300" aria-hidden="true" />
                 )}
               </span>
             ))}
           </div>
 
           <div className="flex items-center gap-1.5 order-3 hidden sm:flex">
-            <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.14)" }}>Built with</span>
-            <span className="text-[10px] font-semibold" style={{ color: "rgba(37,99,235,0.7)" }}>AI</span>
-            <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.14)" }}>by Thinkatic</span>
+            <span className="text-xs text-slate-500">Built with</span>
+            <span className="text-xs font-bold text-[#1E40AF]">AI</span>
+            <span className="text-xs text-slate-500">by Thinkatic</span>
           </div>
         </motion.div>
       </div>

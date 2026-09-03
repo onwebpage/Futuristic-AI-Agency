@@ -10,12 +10,12 @@ const LOGOS = [
   { name: "Netflix",    symbol: "N—",  color: "#E50914" },
   { name: "Airbnb",     symbol: "⌂",   color: "#FF5A5F" },
   { name: "Salesforce", symbol: "SF",  color: "#00A1E0" },
-  { name: "Notion",     symbol: "N□",  color: "#FFFFFF" },
+  { name: "Notion",     symbol: "N□",  color: "#0F172A" },
   { name: "Figma",      symbol: "F◆",  color: "#F24E1E" },
   { name: "HubSpot",    symbol: "H{",  color: "#FF7A59" },
   { name: "Shopify",    symbol: "◈",   color: "#96BF48" },
   { name: "Linear",     symbol: "◯—",  color: "#5E6AD2" },
-  { name: "Vercel",     symbol: "▲",   color: "#FFFFFF" },
+  { name: "Vercel",     symbol: "▲",   color: "#0F172A" },
   { name: "Loom",       symbol: "◉",   color: "#625DF5" },
   { name: "Intercom",   symbol: "◌",   color: "#1F8EED" },
 ];
@@ -109,13 +109,13 @@ function MarqueeStrip() {
           >
             <span
               className="text-xl font-display font-black select-none transition-all duration-300 group-hover:opacity-100"
-              style={{ color: logo.color, opacity: 0.45, letterSpacing: "-0.02em" }}
+              style={{ color: logo.color, opacity: 0.85, letterSpacing: "-0.02em" }}
             >
               {logo.symbol}
             </span>
             <span
               className="text-sm font-bold uppercase tracking-[0.15em] transition-all duration-300 group-hover:opacity-60"
-              style={{ color: "rgba(33,78,207,0.16)", letterSpacing: "0.12em" }}
+              style={{ color: "#334155", letterSpacing: "0.12em" }}
             >
               {logo.name}
             </span>
@@ -141,11 +141,11 @@ function CaseCard({ cs, index }: { cs: typeof CASE_STUDIES[0]; index: number }) 
       transition={{ duration: 0.7, ease, delay: (index % 3) * 0.1 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group relative rounded-2xl border p-7 flex flex-col gap-5 overflow-hidden cursor-default transition-all duration-400"
+      className="group relative rounded-2xl border p-6 md:p-7 flex flex-col gap-5 overflow-hidden cursor-default transition-all duration-300 bg-white"
       style={{
-        background: hovered ? "rgba(255,255,255,0.04)" : "rgba(33,78,207,0.02)",
-        borderColor: hovered ? "rgba(33,78,207,0.12)" : "rgba(255,255,255,0.07)",
-        boxShadow: hovered ? `0 20px 60px rgba(0,0,0,0.3), 0 0 40px ${cs.color}12` : "none",
+        background: "#FFFFFF",
+        borderColor: hovered ? "#CBD5E1" : "#E2E8F0",
+        boxShadow: hovered ? "0 12px 28px -6px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.03)" : "0 1px 3px rgba(15, 23, 42, 0.03)",
         transition: "background 0.3s, border-color 0.3s, box-shadow 0.4s",
       }}
     >
@@ -176,7 +176,7 @@ function CaseCard({ cs, index }: { cs: typeof CASE_STUDIES[0]; index: number }) 
           </div>
           <div>
             <p className="text-foreground font-bold text-sm leading-tight">{cs.name}</p>
-            <p className="text-xs mt-0.5" style={{ color: "rgba(33,78,207,0.22)" }}>{cs.category}</p>
+            <p className="text-[11px] font-mono uppercase tracking-wider text-slate-500 font-medium">{cs.category}</p>
           </div>
         </div>
 
@@ -196,11 +196,11 @@ function CaseCard({ cs, index }: { cs: typeof CASE_STUDIES[0]; index: number }) 
         >
           {cs.metric}
         </span>
-        <span className="text-sm" style={{ color: "#4B5563" }}>{cs.metricLabel}</span>
+        <span className="text-xs font-mono uppercase tracking-wider text-slate-600 font-semibold">{cs.metricLabel}</span>
       </div>
 
       {/* Result */}
-      <p className="text-sm leading-relaxed flex-1" style={{ color: "#4B5563" }}>
+      <p className="text-sm leading-relaxed flex-1 text-slate-700 font-normal">
         {cs.result}
       </p>
 
@@ -274,8 +274,7 @@ export function OurClients() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease, delay: 0.2 }}
-            className="text-base md:text-lg leading-relaxed"
-            style={{ color: "#4B5563", maxWidth: "60ch" }}
+            className="text-base md:text-lg leading-relaxed text-slate-700 font-normal max-w-2xl"
           >
             From high-growth startups to Fortune 500 enterprises — our AI-powered BPO operations drive measurable outcomes across every industry we touch.
           </motion.p>
@@ -309,7 +308,7 @@ export function OurClients() {
               <span className="font-display font-black text-[#214ECF] text-3xl md:text-4xl leading-none">
                 {stat.value}
               </span>
-              <span className="text-xs font-medium tracking-wide text-center text-[#4B5563]">
+              <span className="text-xs font-mono uppercase tracking-wider text-center text-slate-600 font-semibold">
                 {stat.label}
               </span>
             </div>
@@ -342,7 +341,7 @@ export function OurClients() {
               <ArrowUpRight size={16} />
             </motion.button>
           </Link>
-          <p className="text-sm" style={{ color: "#4B5563" }}>
+          <p className="text-xs font-mono uppercase tracking-wider text-slate-600 font-medium">
             40+ detailed outcomes across every major industry
           </p>
         </motion.div>

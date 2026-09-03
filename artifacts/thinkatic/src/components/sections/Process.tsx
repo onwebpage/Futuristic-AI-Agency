@@ -135,7 +135,7 @@ function StepCard({ step, index, isLast }: { step: typeof STEPS[0]; index: numbe
             initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease, delay: 0.15 }}
-            className="font-display font-bold text-foreground text-xl md:text-2xl leading-tight mt-1.5"
+            className="font-display font-bold text-slate-900 text-lg md:text-xl leading-tight mt-1"
           >
             {step.title}
           </motion.h3>
@@ -264,7 +264,7 @@ export function Process() {
               style={{ background: "rgba(33,78,207,0.08)", borderColor: "rgba(33,78,207,0.15)" }}
             >
               <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-              <span className="text-xs font-medium" style={{ color: "rgba(33,78,207,0.72)" }}>
+              <span className="text-xs font-mono font-semibold text-[#1E40AF]">
                 MVP delivery in 4–8 weeks
               </span>
             </motion.div>

@@ -108,7 +108,7 @@ function FAQItem({ faq, index }: { faq: typeof FAQS[0]; index: number }) {
             transition: "background 0.3s, border-color 0.3s",
           }}
         >
-          <ChevronDown size={14} style={{ color: open ? "#214ECF" : "rgba(255,255,255,0.4)" }} />
+          <ChevronDown size={14} style={{ color: open ? "#1E40AF" : "#64748B" }} />
         </motion.div>
       </button>
 
@@ -200,7 +200,7 @@ export function FAQ() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className="relative px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300"
+              className="relative px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all duration-200 cursor-pointer"
               style={{
                 background: activeCategory === cat ? "rgba(33,78,207,0.08)" : "#F8FAFF",
                 border: `1px solid ${activeCategory === cat ? "rgba(33,78,207,0.25)" : "rgba(33,78,207,0.12)"}`,
