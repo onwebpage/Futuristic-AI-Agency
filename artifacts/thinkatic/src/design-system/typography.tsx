@@ -1,8 +1,10 @@
 /**
  * Thinkatic Design System — Typography
  *
- * A strict type scale built on Satoshi. Use these components everywhere
- * instead of raw Tailwind classes so the scale stays consistent.
+ * An enterprise-grade type scale built on:
+ *   - Plus Jakarta Sans → Headings & Display moments (geometric, bold, commanding)
+ *   - Inter             → Body prose & UI interface (clean, open, hyper-readable)
+ *   - JetBrains Mono    → Telemetry numbers, status badges, code & metadata
  *
  * Scale:
  *   Display    → hero / massive brand moments
@@ -33,9 +35,9 @@ export function Display({ children, className, as: Tag = 'h1', gradient, gradien
   return (
     <Tag
       className={cn(
-        'font-display font-black tracking-tight leading-[1.0]',
-        'text-[clamp(2.75rem,6vw,5rem)]',
-        muted && 'text-muted-foreground',
+        'font-display font-extrabold tracking-[-0.038em] leading-[0.98]',
+        'text-[clamp(2.75rem,6vw,5rem)] text-slate-900',
+        muted && 'text-slate-500',
         gradient && 'text-gradient',
         gradientBlue && 'text-gradient-blue',
         className,
@@ -52,9 +54,9 @@ export function DisplaySm({ children, className, as: Tag = 'h1', gradient, gradi
   return (
     <Tag
       className={cn(
-        'font-display font-black tracking-tight leading-[1.0]',
-        'text-[clamp(2rem,4.5vw,3.75rem)]',
-        muted && 'text-muted-foreground',
+        'font-display font-extrabold tracking-[-0.032em] leading-[1.02]',
+        'text-[clamp(2rem,4.5vw,3.75rem)] text-slate-900',
+        muted && 'text-slate-500',
         gradient && 'text-gradient',
         gradientBlue && 'text-gradient-blue',
         className,
@@ -71,9 +73,9 @@ export function H1({ children, className, as: Tag = 'h1', gradient, gradientBlue
   return (
     <Tag
       className={cn(
-        'font-display font-bold tracking-tight leading-[1.05]',
-        'text-[clamp(1.875rem,3.5vw,3rem)]',
-        muted && 'text-muted-foreground',
+        'font-display font-bold tracking-[-0.03em] leading-[1.05]',
+        'text-[clamp(1.875rem,3.5vw,3rem)] text-slate-900',
+        muted && 'text-slate-500',
         gradient && 'text-gradient',
         gradientBlue && 'text-gradient-blue',
         className,
@@ -90,9 +92,9 @@ export function H2({ children, className, as: Tag = 'h2', gradient, gradientBlue
   return (
     <Tag
       className={cn(
-        'font-display font-bold tracking-tight leading-[1.1]',
-        'text-[clamp(1.5rem,2.5vw,2.5rem)]',
-        muted && 'text-muted-foreground',
+        'font-display font-bold tracking-[-0.028em] leading-[1.08]',
+        'text-[clamp(1.5rem,2.5vw,2.5rem)] text-slate-900',
+        muted && 'text-slate-500',
         gradient && 'text-gradient',
         gradientBlue && 'text-gradient-blue',
         className,
@@ -109,9 +111,9 @@ export function H3({ children, className, as: Tag = 'h3', gradient, gradientBlue
   return (
     <Tag
       className={cn(
-        'font-display font-semibold tracking-tight leading-[1.15]',
-        'text-[clamp(1.125rem,1.75vw,1.625rem)]',
-        muted && 'text-muted-foreground',
+        'font-display font-bold tracking-[-0.02em] leading-[1.18]',
+        'text-[clamp(1.125rem,1.75vw,1.625rem)] text-slate-900',
+        muted && 'text-slate-500',
         gradient && 'text-gradient',
         gradientBlue && 'text-gradient-blue',
         className,
@@ -128,9 +130,9 @@ export function H4({ children, className, as: Tag = 'h4', gradient, gradientBlue
   return (
     <Tag
       className={cn(
-        'font-display font-semibold leading-[1.2]',
-        'text-[clamp(1rem,1.5vw,1.25rem)]',
-        muted && 'text-muted-foreground',
+        'font-display font-semibold tracking-[-0.015em] leading-[1.28]',
+        'text-[clamp(1rem,1.5vw,1.25rem)] text-slate-900',
+        muted && 'text-slate-500',
         gradient && 'text-gradient',
         gradientBlue && 'text-gradient-blue',
         className,
@@ -147,8 +149,8 @@ export function BodyLg({ children, className, as: Tag = 'p', muted }: Omit<Typog
   return (
     <Tag
       className={cn(
-        'text-lg leading-relaxed font-normal',
-        muted ? 'text-muted-foreground' : 'text-foreground/80',
+        'font-sans text-lg md:text-xl leading-relaxed font-normal tracking-[-0.01em]',
+        muted ? 'text-slate-500' : 'text-slate-600',
         className,
       )}
     >
@@ -163,8 +165,8 @@ export function Body({ children, className, as: Tag = 'p', muted }: Omit<Typogra
   return (
     <Tag
       className={cn(
-        'text-base leading-relaxed font-normal',
-        muted ? 'text-muted-foreground' : 'text-foreground/80',
+        'font-sans text-base leading-relaxed font-normal tracking-[-0.008em]',
+        muted ? 'text-slate-500' : 'text-slate-600',
         className,
       )}
     >
@@ -179,8 +181,8 @@ export function BodySm({ children, className, as: Tag = 'p', muted }: Omit<Typog
   return (
     <Tag
       className={cn(
-        'text-sm leading-relaxed font-normal',
-        muted ? 'text-muted-foreground' : 'text-foreground/80',
+        'font-sans text-sm leading-relaxed font-normal',
+        muted ? 'text-slate-500' : 'text-slate-600',
         className,
       )}
     >
@@ -200,9 +202,9 @@ export function LabelText({ children, className, as: Tag = 'span', size = 'xs', 
   return (
     <Tag
       className={cn(
-        'font-semibold uppercase tracking-widest',
+        'font-mono font-bold uppercase tracking-[0.2em]',
         size === 'xs' ? 'text-xs' : 'text-sm',
-        muted ? 'text-muted-foreground' : 'text-foreground/60',
+        muted ? 'text-slate-500' : 'text-slate-700',
         className,
       )}
     >
@@ -219,14 +221,14 @@ interface EyebrowProps extends TypographyProps {
   variant?: 'default' | 'primary' | 'secondary';
 }
 
-export function Eyebrow({ children, className, as: Tag = 'span', dot, variant = 'default' }: EyebrowProps) {
+export function Eyebrow({ children, className, as: Tag = 'span', dot, variant = 'primary' }: EyebrowProps) {
   return (
     <Tag
       className={cn(
-        'inline-flex items-center gap-2 font-mono text-xs font-medium uppercase tracking-[0.18em]',
-        variant === 'default' && 'text-muted-foreground',
-        variant === 'primary' && 'text-primary',
-        variant === 'secondary' && 'text-secondary',
+        'inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.22em]',
+        variant === 'default' && 'text-slate-600',
+        variant === 'primary' && 'text-[#1E40AF]',
+        variant === 'secondary' && 'text-[#059669]',
         className,
       )}
     >
@@ -234,7 +236,7 @@ export function Eyebrow({ children, className, as: Tag = 'span', dot, variant = 
         <span
           className={cn(
             'inline-block w-1.5 h-1.5 rounded-full shrink-0',
-            variant === 'primary' ? 'bg-primary shadow-[0_0_6px_rgba(33,78,207,0.72)]' : 'bg-muted-foreground',
+            variant === 'primary' ? 'bg-[#1E40AF] shadow-[0_0_6px_rgba(30,64,175,0.6)]' : 'bg-slate-400',
           )}
           aria-hidden="true"
         />
@@ -251,8 +253,8 @@ export function MonoText({ children, className, as: Tag = 'span', muted }: Omit<
   return (
     <Tag
       className={cn(
-        'font-mono text-sm tracking-tight',
-        muted ? 'text-muted-foreground' : 'text-foreground',
+        'font-mono text-sm tracking-tight tabular-nums',
+        muted ? 'text-slate-500' : 'text-slate-800',
         className,
       )}
     >

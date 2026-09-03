@@ -227,7 +227,7 @@ function Newsletter({ inView }: { inView: boolean }) {
         )}
       </AnimatePresence>
 
-      <p className="text-[10px] mt-2.5" style={{ color: "rgba(33,78,207,0.14)" }}>
+      <p className="text-[10px] mt-2.5" style={{ color: "#64748B" }}>
         Join 4,200+ enterprise leaders. Unsubscribe anytime.
       </p>
     </motion.div>
@@ -285,7 +285,7 @@ export default function Footer() {
 
         {/* ── Newsletter + contact band ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-14 pb-14"
-          style={{ borderBottom: "1px solid rgba(255,255,255,0.045)" }}>
+          style={{ borderBottom: "1px solid rgba(226, 232, 240, 0.8)" }}>
 
           {/* Left — brand intro */}
           <motion.div
@@ -311,7 +311,7 @@ export default function Footer() {
                 <span
                   key={cert}
                   className="inline-flex items-center gap-1 text-[9px] font-mono uppercase tracking-widest px-2 py-1 rounded-md"
-                  style={{ background: "rgba(37,99,235,0.07)", border: "1px solid rgba(37,99,235,0.14)", color: "rgba(71,163,255,0.6)" }}
+                  style={{ background: "rgba(37,99,235,0.07)", border: "1px solid rgba(37,99,235,0.14)", color: "#1E40AF" }}
                 >
                   <CheckCircle2 size={8} aria-hidden="true" />
                   {cert}
@@ -394,8 +394,7 @@ export default function Footer() {
                 >
                   <Link
                     href={s.href}
-                    className="text-[13px] transition-all duration-200 hover:text-foreground hover:translate-x-0.5 inline-block"
-                    style={{ color: "rgba(33,78,207,0.22)" }}
+                    className="text-[13px] transition-all duration-200 text-slate-600 hover:text-slate-900 hover:translate-x-0.5 inline-block"
                   >
                     {s.label}
                   </Link>
@@ -436,7 +435,7 @@ export default function Footer() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.55, ease }}
           className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-7 border-t"
-          style={{ borderColor: "rgba(255,255,255,0.045)" }}
+          style={{ borderColor: "rgba(226, 232, 240, 0.8)" }}
         >
           <p className="text-xs order-2 sm:order-1 text-slate-500 font-medium">
             © {new Date().getFullYear()} Thinkatic Private Limited. All rights reserved.

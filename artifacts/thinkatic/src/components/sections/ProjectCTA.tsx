@@ -67,7 +67,7 @@ export function ProjectCTA() {
               >
                 {s.value}
               </span>
-              <span className="text-xs font-medium uppercase tracking-wider" style={{ color: "#4B5563" }}>
+              <span className="text-xs font-medium uppercase tracking-wider text-slate-600">
                 {s.label}
               </span>
             </motion.div>
@@ -92,7 +92,7 @@ export function ProjectCTA() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, ease }}
             className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] mb-6"
-            style={{ color: "rgba(71,163,255,0.7)" }}
+            style={{ color: "#1E40AF" }}
           >
             Get Started · No Commitment
           </motion.p>
@@ -121,8 +121,7 @@ export function ProjectCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.7, delay: 0.25 }}
-            className="text-base md:text-lg max-w-xl mx-auto mb-10"
-            style={{ color: "#4B5563" }}
+            className="text-base md:text-lg max-w-xl mx-auto mb-10 text-slate-600 leading-relaxed font-normal"
           >
             Book a discovery call, request a proposal, or send us a message. Our team responds within 24 hours.
           </motion.p>
@@ -185,7 +184,7 @@ export function ProjectCTA() {
             {TRUST_POINTS.map((point) => (
               <div key={point} className="flex items-center gap-2">
                 <CheckCircle2 size={14} style={{ color: "#34D399", flexShrink: 0 }} />
-                <span className="text-sm" style={{ color: "#4B5563" }}>{point}</span>
+                <span className="text-sm text-slate-700 font-medium">{point}</span>
               </div>
             ))}
           </motion.div>
@@ -212,7 +211,7 @@ export function ProjectCTA() {
             </div>
             <div>
               <h3 className="text-foreground font-bold text-lg mb-2">Book a Free Consultation</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
+              <p className="text-sm leading-relaxed text-slate-600">
                 45-minute strategy session with a BPO expert. We'll map your current operations and identify the highest-ROI automation opportunities.
               </p>
             </div>
@@ -237,11 +236,11 @@ export function ProjectCTA() {
               className="w-12 h-12 rounded-xl flex items-center justify-center"
               style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(33,78,207,0.12)" }}
             >
-              <FileText size={22} style={{ color: "#4B5563" }} />
+              <FileText size={22} className="text-[#214ECF]" />
             </div>
             <div>
               <h3 className="text-foreground font-bold text-lg mb-2">Request a Custom Proposal</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#4B5563" }}>
+              <p className="text-sm leading-relaxed text-slate-600">
                 Tell us your volume, industry, and goals. We'll send a detailed scope, staffing plan, and pricing within 24 hours — no generic templates.
               </p>
             </div>
@@ -250,7 +249,7 @@ export function ProjectCTA() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2 text-sm font-bold transition-colors"
-                style={{ color: "rgba(255,255,255,0.55)" }}
+                style={{ color: "#214ECF" }}
               >
                 Get Proposal <ArrowRight size={15} />
               </motion.button>

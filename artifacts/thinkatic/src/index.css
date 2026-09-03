@@ -1,4 +1,4 @@
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,300..800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -56,10 +56,10 @@
   --color-glow-primary: var(--glow-primary);
   --color-glow-primary-md: var(--glow-primary-md);
 
-  --font-sans: var(--app-font-sans);
+  --font-sans: 'Inter', var(--app-font-sans);
+  --font-display: 'Plus Jakarta Sans', var(--app-font-display);
+  --font-mono: 'JetBrains Mono', var(--app-font-mono);
   --font-serif: var(--app-font-serif);
-  --font-mono: var(--app-font-mono);
-  --font-display: 'Satoshi', sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -116,9 +116,10 @@
   --sidebar-accent-foreground: 222 47% 11%;
   --sidebar-ring: 223 78% 46%;
 
-  --app-font-sans: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --app-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --app-font-display: 'Plus Jakarta Sans', 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --app-font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --app-font-serif: Georgia, serif;
-  --app-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --radius: 0.75rem;
 
   /* ── Extended Design System Tokens ──────────────────────────────────────── */
@@ -194,12 +195,75 @@
 @layer base {
   * {
     @apply border-border;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  html {
+    font-feature-settings: 'cv02' 1, 'cv03' 1, 'cv04' 1, 'cv11' 1, 'ss01' 1;
   }
 
   body {
     @apply font-sans antialiased bg-background text-foreground overflow-x-hidden;
+    font-feature-settings: 'cv02' 1, 'cv03' 1, 'cv04' 1, 'cv11' 1, 'ss01' 1;
+    letter-spacing: -0.011em;
+    line-height: 1.6;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
     background-attachment: fixed;
+  }
+
+  /* Architectural Enterprise Heading Hierarchy */
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    color: #0F172A;
+  }
+
+  h2 {
+    font-weight: 700;
+    letter-spacing: -0.028em;
+    line-height: 1.08;
+    color: #0F172A;
+  }
+
+  h3 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.18;
+    color: #0F172A;
+  }
+
+  h4 {
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.28;
+    color: #0F172A;
+  }
+
+  h5, h6 {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    color: #0F172A;
+  }
+
+  p {
+    line-height: 1.65;
+    letter-spacing: -0.008em;
+  }
+
+  /* Monospace Telemetry & Figures */
+  code, kbd, samp, pre, .font-mono {
+    font-family: var(--font-mono);
+    font-feature-settings: 'zero' 1, 'tnum' 1;
+    letter-spacing: -0.01em;
   }
 }
 
@@ -394,6 +458,67 @@ img[loading="lazy"] {
   overflow: visible;
   clip: auto;
   white-space: normal;
+}
+
+
+/* ── Modern Enterprise Typography Utilities ─────────────────────────────────── */
+
+.editorial-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: #1E40AF;
+}
+
+.editorial-headline-hero {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.038em;
+  line-height: 0.98;
+  color: #0F172A;
+}
+
+.editorial-headline-section {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: #0F172A;
+}
+
+.editorial-headline-card {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.018em;
+  line-height: 1.25;
+  color: #0F172A;
+}
+
+.editorial-body-lead {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #334155;
+  letter-spacing: -0.01em;
+}
+
+.editorial-body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #475569;
+  letter-spacing: -0.008em;
+}
+
+.editorial-metric {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #0F172A;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ── hover-elevate utilities (used by Button component) ──────────────────── */

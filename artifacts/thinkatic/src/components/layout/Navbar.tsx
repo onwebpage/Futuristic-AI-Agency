@@ -175,7 +175,7 @@ function MegaMenu({ visible }: { visible: boolean }) {
             </Link>
             <div className="flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
-              <span className="text-[9px] font-mono uppercase tracking-widest" style={{ color: "rgba(33,78,207,0.16)" }}>
+              <span className="text-[9px] font-mono uppercase tracking-widest" style={{ color: "#475569" }}>
                 Accepting New Clients
               </span>
             </div>

@@ -38,22 +38,24 @@
     <meta name="twitter:image" content="https://thinkatic.com/opengraph.jpg" />
     <meta name="twitter:image:alt" content="Thinkatic — Enterprise Technology Transformation Partner" />
 
-    <!-- Resource hints -->
-    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-    <link rel="dns-prefetch" href="https://api.fontshare.com" />
+    <!-- Resource hints for high-performance typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://maps.googleapis.com" />
 
-    <!-- Preload critical font -->
+    <!-- Enterprise Typography System: Plus Jakarta Sans (Display) + Inter (Sans/Body) + JetBrains Mono (Technical) -->
     <link
-      rel="preload"
-      as="style"
-      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
     />
-    <noscript>
-      <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" />
-    </noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,300..800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    />
 
     <!-- Inline critical CSS: prevent flash of unstyled background -->
     <style>

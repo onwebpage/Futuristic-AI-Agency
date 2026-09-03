@@ -600,7 +600,7 @@ export function IndustriesSection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease }}
             className="text-[10px] font-mono uppercase tracking-[0.28em] mb-5 text-center"
-            style={{ color: "rgba(71,163,255,0.7)" }}
+            style={{ color: "#1E40AF" }}
           >
             Industries We Serve
           </motion.p>
