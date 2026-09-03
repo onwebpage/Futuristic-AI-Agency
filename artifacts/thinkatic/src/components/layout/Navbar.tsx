@@ -7,6 +7,7 @@ import {
   Check, Search, X, ArrowRight, FileText,
   HeadphonesIcon, Activity, Briefcase, Cpu, Users,
   ChevronDown, CalendarDays, Building2, Globe, Zap,
+  Sparkles, Cloud, ShieldCheck, Database,
 } from "lucide-react";
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
@@ -23,18 +24,26 @@ function ThinkaticLogo({ compact }: { compact?: boolean }) {
 
 // ─── Nav data ─────────────────────────────────────────────────────────────────
 
-const bpoLinks = [
-  { label: "Healthcare BPO",    slug: "healthcare-bpo",       desc: "Patient-focused outsourcing at scale",  icon: Activity },
-  { label: "Customer Support",  slug: "customer-support",     desc: "AI-assisted 24×7 support operations",  icon: HeadphonesIcon },
-  { label: "Sales & Lead Gen",  slug: "sales-lead-generation",desc: "Intelligent outbound & growth ops",     icon: Users },
-  { label: "Back Office",       slug: "back-office",          desc: "Efficiency, compliance & cost reduction",icon: Briefcase },
-  { label: "AI-Powered BPO",   slug: "ai-powered-bpo",       desc: "Automation-first intelligent outsourcing",icon: Cpu },
-  { label: "Technology",        slug: "",                     desc: "Custom AI software & digital products", icon: Zap, href: "/technology" },
+interface NavLinkItem {
+  label: string;
+  slug: string;
+  desc: string;
+  icon: any;
+  href?: string;
+}
+
+const bpoLinks: NavLinkItem[] = [
+  { label: "AI & Automation",     slug: "ai-transformation",          desc: "Sovereign LLMs, RAG & agent swarms", icon: Sparkles },
+  { label: "Cloud Modernization", slug: "cloud-modernization",        desc: "Multi-cloud architecture & DevOps IaC", icon: Cloud },
+  { label: "Cybersecurity",       slug: "enterprise-security",        desc: "Zero Trust defense & 24/7 SOC",      icon: ShieldCheck },
+  { label: "Data Platforms",      slug: "enterprise-data-platform",   desc: "Real-time streaming lakehouse & BI", icon: Database },
+  { label: "Product Engineering", slug: "enterprise-product-engineering", desc: "Mission-critical systems & squads", icon: Cpu },
+  { label: "Managed Services",    slug: "managed-ai",                 desc: "24/7 SLA-backed operational governance", icon: Activity },
 ];
 
 const navItems = [
-  { label: "BPO SERVICES", href: "/services", hasMega: true },
-  { label: "PACKAGES",     href: "/pricing" },
+  { label: "CAPABILITIES", href: "/services", hasMega: true },
+  { label: "PLANS & PRICING", href: "/pricing" },
   { label: "TECHNOLOGY",   href: "/technology", isSecondary: true },
   { label: "CASES",        href: "/case-studies" },
   { label: "ABOUT",        href: "/about" },
@@ -69,11 +78,11 @@ function MegaMenu({ visible }: { visible: boolean }) {
             className="px-6 py-2.5 border-b flex items-center justify-between"
             style={{ borderColor: "rgba(33,78,207,0.10)", background: "rgba(33,78,207,0.03)" }}
           >
-            <span className="text-[9px] font-mono tracking-[0.28em] uppercase" style={{ color: "rgba(71,163,255,0.55)" }}>
-              BPO &amp; Technology Services
+            <span className="text-[9px] font-mono tracking-[0.28em] uppercase" style={{ color: "#214ECF" }}>
+              Enterprise Technology Capabilities
             </span>
-            <span className="text-[9px] font-mono tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.2)" }}>
-              70% Cost Savings Guaranteed
+            <span className="text-[9px] font-mono tracking-widest uppercase text-slate-400">
+              Mission-Critical Systems
             </span>
           </div>
 
@@ -93,7 +102,7 @@ function MegaMenu({ visible }: { visible: boolean }) {
                   >
                     <Link
                       href={href}
-                      className="group flex items-center gap-3 rounded-xl px-3.5 py-2.5 hover:bg-white/[0.045] transition-colors duration-150"
+                      className="group flex items-center gap-3 rounded-xl px-3.5 py-2.5 hover:bg-slate-50 transition-colors duration-150"
                     >
                       <div
                         className="flex items-center justify-center w-7 h-7 rounded-lg shrink-0 transition-colors duration-200 group-hover:bg-primary/15"
@@ -121,7 +130,7 @@ function MegaMenu({ visible }: { visible: boolean }) {
 
             {/* Right — featured card */}
             <div
-              className="w-[210px] shrink-0 p-4 flex flex-col justify-between border-l"
+              className="w-[220px] shrink-0 p-4 flex flex-col justify-between border-l"
               style={{ borderColor: "rgba(33,78,207,0.10)", background: "rgba(33,78,207,0.025)" }}
             >
               <div>
@@ -131,23 +140,22 @@ function MegaMenu({ visible }: { visible: boolean }) {
                 >
                   <Globe size={14} className="text-primary" />
                 </div>
-                <p className="text-[11px] font-mono uppercase tracking-[0.18em] mb-1.5" style={{ color: "#214ECF" }}>
-                  Enterprise BPO
+                <p className="text-[10px] font-mono uppercase tracking-[0.18em] mb-1.5" style={{ color: "#214ECF" }}>
+                  Flagship Engagements
                 </p>
-                <p className="text-[13px] font-semibold text-slate-900 leading-snug mb-2">
-                  AI-First Operations at Global Scale
+                <p className="text-[13px] font-bold text-slate-900 leading-snug mb-2">
+                  Enterprise Technology Transformation
                 </p>
-                <p className="text-[11px] leading-relaxed" style={{ color: "#4B5563" }}>
-                  500+ enterprise clients. 15+ industries. 2B+ ops/year.
+                <p className="text-[11px] leading-relaxed text-slate-600 mb-3">
+                  16 structured plans across AI, Cloud, Cybersecurity, Data, and Engineering.
                 </p>
               </div>
               <Link
-                href="/request-proposal"
-                className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-semibold rounded-lg px-3 py-2 text-foreground transition-all duration-200"
-                style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 16px rgba(33,78,207,0.25)" }}
+                href="/pricing"
+                className="mt-2 inline-flex items-center justify-center gap-1.5 text-[11px] font-bold rounded-lg px-3 py-2 text-white transition-all duration-200 bg-[#214ECF] hover:bg-[#1A43C8] shadow-xs"
               >
                 <FileText size={11} />
-                Get a Proposal
+                Explore 16 Plans
               </Link>
             </div>
           </div>

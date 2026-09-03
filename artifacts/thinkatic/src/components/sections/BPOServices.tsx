@@ -1,79 +1,77 @@
-import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Link } from "wouter";
 import {
-  HeartPulse, Headphones, TrendingUp, Database, Bot,
-  ArrowRight, CheckCheck, Zap, Star,
+  Bot, Cloud, Lock, Database, Cpu,
+  ArrowRight, CheckCheck, Zap, Star, ShieldCheck, Layers,
 } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+// ─── 5 Core Enterprise Capabilities ──────────────────────────────────────────
 
-const pillars = [
+const capabilities = [
   {
     id: "01",
-    title: "Healthcare BPO",
-    slug: "healthcare-bpo",
-    icon: HeartPulse,
-    desc: "HIPAA-compliant outsourcing for healthcare organizations — from patient outreach to revenue cycle management.",
-    services: ["Medical Call Transfer", "Patient Outreach", "Appointment Scheduling", "Revenue Cycle Assistance"],
-    stat: { value: "62%", label: "Fewer claim denials" },
+    title: "AI & Automation",
+    slug: "ai-transformation",
+    icon: Bot,
+    desc: "From targeted single-workflow AI launches to autonomous multi-agent systems and sovereign private AI environments.",
+    services: ["AI Launch", "AI Transformation", "Enterprise AI", "Custom Agent Swarms"],
+    stat: { value: "99.8%", label: "Accuracy & Verification" },
     accent: "#214ECF",
     gradient: "from-[#F4F7FF] to-white",
-    featured: false,
+    featured: true,
   },
   {
     id: "02",
-    title: "Customer Support",
-    slug: "customer-support",
-    icon: Headphones,
-    desc: "AI-assisted support teams delivering exceptional customer experiences at scale, 24×7 across every channel.",
-    services: ["Voice Support", "Live Chat", "WhatsApp Support", "Technical Support"],
-    stat: { value: "92%", label: "CSAT score" },
+    title: "Cloud & Modernization",
+    slug: "cloud-modernization",
+    icon: Cloud,
+    desc: "Deconstruct legacy monoliths, architect multi-cloud infrastructure, and automate CI/CD release pipelines.",
+    services: ["Cloud Modernization", "Legacy Transformation", "Enterprise Transformation", "Multi-Cloud IaC"],
+    stat: { value: "99.99%", label: "Uptime SLA Commitment" },
     accent: "#214ECF",
     gradient: "from-[#EEF3FF] to-white",
     featured: false,
   },
   {
     id: "03",
-    title: "Sales & Lead Gen",
-    slug: "sales-lead-generation",
-    icon: TrendingUp,
-    desc: "Generate qualified opportunities with intelligent outbound operations built to fill your pipeline at speed.",
-    services: ["Outbound Calling", "Appointment Setting", "Lead Qualification", "Sales Development"],
-    stat: { value: "3.2×", label: "Pipeline velocity" },
+    title: "Cybersecurity & Zero Trust",
+    slug: "enterprise-security",
+    icon: Lock,
+    desc: "Defend mission-critical infrastructure with Zero Trust architectures, 24/7 SIEM monitoring, and LLM prompt defense.",
+    services: ["Cybersecurity Foundation", "Enterprise Security", "AI Security", "24/7 SOC Surveillance"],
+    stat: { value: "Zero Trust", label: "Defensible Perimeter" },
     accent: "#214ECF",
     gradient: "from-[#F4F7FF] to-white",
     featured: false,
   },
   {
     id: "04",
-    title: "Back Office Ops",
-    slug: "back-office",
+    title: "Enterprise Data Platforms",
+    slug: "enterprise-data-platform",
     icon: Database,
-    desc: "Streamlined back-office processes that improve efficiency, reduce errors, and cut operational overhead.",
-    services: ["Data Entry", "CRM Management", "Document Processing", "Quality Assurance"],
-    stat: { value: "45%", label: "Cost reduction" },
+    desc: "Unify fragmented data into automated real-time lakehouses, automated ETL pipelines, and AI-ready feature stores.",
+    services: ["Data Foundation", "Enterprise Data Platform", "Real-Time Streaming", "Executive BI"],
+    stat: { value: "<25ms", label: "Streaming Latency" },
     accent: "#214ECF",
     gradient: "from-[#EEF3FF] to-white",
     featured: false,
   },
   {
     id: "05",
-    title: "AI-Powered BPO",
-    slug: "ai-powered-bpo",
-    icon: Bot,
-    desc: "The future of outsourcing — human expertise combined with intelligent automation for measurable, guaranteed outcomes.",
-    services: ["AI Voice Agents", "AI Chatbots", "Workflow Automation", "AI Quality Monitoring"],
-    stat: { value: "2B+", label: "Operations / year" },
+    title: "Product Engineering",
+    slug: "enterprise-product-engineering",
+    icon: Cpu,
+    desc: "Full-lifecycle digital product development and dedicated senior engineering squads for high-concurrency systems.",
+    services: ["Digital Product Development", "Enterprise Product Engineering", "Dedicated Squads", "QA Automation"],
+    stat: { value: "2B+", label: "Operations / Year" },
     accent: "#214ECF",
     gradient: "from-[#F4F8FF] to-[#E9F1FF]",
-    featured: true,
+    featured: false,
   },
 ];
-
-// ─── Service chip ─────────────────────────────────────────────────────────────
 
 function ServiceChip({ label, accent }: { label: string; accent: string }) {
   return (
@@ -91,12 +89,10 @@ function ServiceChip({ label, accent }: { label: string; accent: string }) {
   );
 }
 
-// ─── Pillar card ──────────────────────────────────────────────────────────────
-
-function PillarCard({ pillar, index }: { pillar: (typeof pillars)[0]; index: number }) {
+function CapabilityCard({ capability, index }: { capability: (typeof capabilities)[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const Icon = pillar.icon;
+  const Icon = capability.icon;
 
   return (
     <motion.div
@@ -104,92 +100,81 @@ function PillarCard({ pillar, index }: { pillar: (typeof pillars)[0]; index: num
       initial={{ opacity: 0, y: 32 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease, delay: index * 0.08 }}
-      className={`group relative rounded-2xl p-8 flex flex-col gap-6 border cursor-default overflow-hidden h-full bg-gradient-to-br ${pillar.gradient} transition-all duration-300`}
+      className={`group relative rounded-3xl p-8 flex flex-col justify-between border cursor-default overflow-hidden h-full bg-gradient-to-br ${capability.gradient} transition-all duration-300`}
       style={{
-        borderColor: pillar.featured ? "rgba(37,99,235,0.4)" : "rgba(33,78,207,0.06)",
+        borderColor: capability.featured ? "rgba(33,78,207,0.35)" : "rgba(33,78,207,0.12)",
+        boxShadow: capability.featured ? "0 12px 36px rgba(33,78,207,0.08)" : "none",
       }}
     >
-      {/* Subtle hover glow via CSS group-hover */}
+      {/* Ambient hover glow */}
       <div
-        className="absolute inset-0 pointer-events-none rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-        style={{ background: `radial-gradient(ellipse at 10% 0%, ${pillar.accent}12 0%, transparent 55%)` }}
+        className="absolute inset-0 pointer-events-none rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+        style={{ background: `radial-gradient(ellipse at 10% 0%, ${capability.accent}12 0%, transparent 55%)` }}
       />
 
       {/* Featured badge */}
-      {pillar.featured && (
-        <motion.div
-          className="absolute top-5 right-5 flex items-center gap-1.5 px-2.5 py-1 rounded-full"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={inView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.5, ease, delay: index * 0.08 + 0.25 }}
-          style={{ background: "rgba(33,78,207,0.15)", border: "1px solid rgba(37,99,235,0.4)" }}
+      {capability.featured && (
+        <div
+          className="absolute top-6 right-6 flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold"
+          style={{ background: "rgba(33,78,207,0.12)", border: "1px solid rgba(33,78,207,0.3)" }}
         >
-          <Star size={10} fill="#214ECF" color="#214ECF" />
-          <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#214ECF" }}>
-            Featured
+          <Star size={11} fill="#214ECF" color="#214ECF" />
+          <span className="text-[10px] uppercase tracking-wider text-[#214ECF]">
+            Front Door Capability
           </span>
-        </motion.div>
+        </div>
       )}
 
-      {/* Icon */}
-      <div
-        className="relative w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-105"
-        style={{
-          background: `${pillar.accent}18`,
-          border: `1px solid ${pillar.accent}35`,
-        }}
-      >
-        <Icon size={22} style={{ color: pillar.accent }} />
-      </div>
-
-      {/* Number tag */}
-      <div className="absolute top-8 right-8">
-        <span
-          className="font-display font-black text-5xl leading-none select-none"
-          style={{ color: `${pillar.accent}10`, letterSpacing: "-0.04em" }}
-        >
-          {pillar.id}
-        </span>
-      </div>
-
-      {/* Content */}
-      <div className="flex-1 flex flex-col gap-4">
-        <div>
-          <h3 className="font-display font-bold text-foreground text-xl leading-tight mb-2">
-            {pillar.title}
-          </h3>
-          <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
-            {pillar.desc}
-          </p>
+      {/* Top Header */}
+      <div>
+        <div className="flex items-center gap-3 mb-5">
+          <div
+            className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+            style={{
+              background: `${capability.accent}15`,
+              border: `1px solid ${capability.accent}30`,
+            }}
+          >
+            <Icon size={22} style={{ color: capability.accent }} />
+          </div>
+          <div>
+            <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#214ECF] uppercase">
+              CAPABILITY {capability.id}
+            </span>
+            <h3 className="font-display font-bold text-slate-900 text-xl leading-tight">
+              {capability.title}
+            </h3>
+          </div>
         </div>
 
-        {/* Services */}
-        <div className="flex flex-wrap gap-2">
-          {pillar.services.map((s) => (
-            <ServiceChip key={s} label={s} accent={pillar.accent} />
+        <p className="text-sm leading-relaxed text-slate-600 mb-6 min-h-[44px]">
+          {capability.desc}
+        </p>
+
+        {/* Deliverables chips */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          {capability.services.map((s) => (
+            <ServiceChip key={s} label={s} accent={capability.accent} />
           ))}
         </div>
       </div>
 
-      {/* Stat + CTA row */}
-      <div className="flex items-end justify-between gap-4 pt-2 border-t" style={{ borderColor: "rgba(33,78,207,0.04)" }}>
-        {/* Key metric */}
+      {/* Metric & CTA Footer */}
+      <div className="flex items-center justify-between pt-5 border-t border-[#DCE5FF]">
         <div>
-          <p className="font-display font-black text-2xl leading-none" style={{ color: pillar.accent }}>
-            {pillar.stat.value}
+          <p className="font-display font-black text-2xl leading-none text-slate-900">
+            {capability.stat.value}
           </p>
-          <p className="text-[10px] font-medium mt-1" style={{ color: "#4B5563" }}>
-            {pillar.stat.label}
+          <p className="text-[10px] font-mono uppercase tracking-wider text-slate-500 mt-1">
+            {capability.stat.label}
           </p>
         </div>
 
-        {/* Learn more link */}
-        <Link href={`/services/${pillar.slug}`}>
+        <Link href={`/services/${capability.slug}`}>
           <div
-            className="flex items-center gap-1.5 text-xs font-bold transition-transform duration-200 group-hover:translate-x-1"
-            style={{ color: pillar.accent }}
+            className="flex items-center gap-1.5 text-xs font-bold text-[#214ECF] group-hover:translate-x-1 transition-transform cursor-pointer"
           >
-            Learn more
+            <span>Architecture details</span>
             <ArrowRight size={13} />
           </div>
         </Link>
@@ -198,67 +183,55 @@ function PillarCard({ pillar, index }: { pillar: (typeof pillars)[0]; index: num
   );
 }
 
-// ─── Section ───────────────────────────────────────────────────────────────────
-
 export function BPOServices() {
   const headingRef = useRef<HTMLDivElement>(null);
   const inView = useInView(headingRef, { once: true, margin: "-80px" });
 
   return (
     <section
-      className="relative py-28 md:py-40 overflow-hidden"
+      className="relative py-28 md:py-36 overflow-hidden"
       style={{ background: "#FFFFFF" }}
+      aria-label="Enterprise Capabilities"
     >
-      {/* Top divider */}
-      <div className="absolute top-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.07) 50%, transparent)" }} />
-
-      {/* Static ambient glow */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 85% 20%, rgba(37,99,235,0.05) 0%, transparent 50%)" }} />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 10% 70%, rgba(71,163,255,0.04) 0%, transparent 50%)" }} />
-
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
-        {/* ── Header ── */}
-        <div ref={headingRef} className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end mb-16">
-          {/* Left */}
+        {/* ── Section Header ── */}
+        <div ref={headingRef} className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-end mb-16">
           <div>
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, ease }}
-              className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] mb-5"
-              style={{ color: "rgba(71,163,255,0.7)" }}
+              transition={{ duration: 0.5, ease }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/10 mb-4"
             >
-              BPO Services
-            </motion.p>
+              <Layers size={13} className="text-[#214ECF]" />
+              <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#214ECF]">
+                Enterprise Technology Transformation
+              </span>
+            </motion.div>
 
-            <div className="overflow-hidden mb-4">
-              <motion.h2
-                initial={{ y: "100%", opacity: 0 }}
-                animate={inView ? { y: 0, opacity: 1 } : {}}
-                transition={{ duration: 0.88, ease, delay: 0.05 }}
-                className="font-display font-bold text-foreground leading-[1.0]"
-                style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)" }}
-              >
-                Every operation,
-                <br />
-                <span style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                  AI-powered.
-                </span>
-              </motion.h2>
-            </div>
+            <motion.h2
+              initial={{ y: 20, opacity: 0 }}
+              animate={inView ? { y: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.7, ease, delay: 0.05 }}
+              className="font-display font-black text-slate-900 leading-[1.05]"
+              style={{ fontSize: "clamp(2.3rem, 4.5vw, 4rem)" }}
+            >
+              Mission-Critical <br />
+              <span className="bg-gradient-to-r from-[#1E40AF] via-[#214ECF] to-[#60A5FA] bg-clip-text text-transparent">
+                Capabilities at Scale.
+              </span>
+            </motion.h2>
           </div>
 
-          {/* Right: description + badge row */}
           <div>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease, delay: 0.2 }}
-              className="text-base md:text-lg leading-relaxed mb-6"
-              style={{ color: "#4B5563" }}
+              className="text-base md:text-lg leading-relaxed text-slate-600 mb-6"
             >
-              Five core pillars of AI-enabled outsourcing — each combining trained human professionals with intelligent automation to deliver measurable business outcomes.
+              AI is the front door, but transformation is comprehensive. We unify AI, Cloud, Cybersecurity, Data, and Engineering into one integrated enterprise transformation capability.
             </motion.p>
 
             <motion.div
@@ -268,20 +241,16 @@ export function BPOServices() {
               className="flex flex-wrap gap-2"
             >
               {[
-                { icon: Zap, label: "AI-First" },
-                { icon: CheckCheck, label: "Outcome-Guaranteed" },
-                { icon: HeartPulse, label: "HIPAA Compliant" },
+                { icon: Zap, label: "AI & Automation" },
+                { icon: Cloud, label: "Cloud Modernization" },
+                { icon: ShieldCheck, label: "Zero Trust Security" },
+                { icon: Database, label: "Data Intelligence" },
               ].map(({ icon: Icon, label }) => (
                 <div
                   key={label}
-                  className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-semibold"
-                  style={{
-                    background: "rgba(33,78,207,0.08)",
-                    borderColor: "rgba(37,99,235,0.22)",
-                    color: "rgba(33,78,207,0.72)",
-                  }}
+                  className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#DCE5FF] bg-blue-50/50 text-xs font-semibold text-slate-700"
                 >
-                  <Icon size={12} />
+                  <Icon size={12} className="text-[#214ECF]" />
                   {label}
                 </div>
               ))}
@@ -289,57 +258,45 @@ export function BPOServices() {
           </div>
         </div>
 
-        {/* ── Cards grid ── */}
-        {/* Top row: 2 cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-          {pillars.slice(0, 2).map((p, i) => (
-            <PillarCard key={p.id} pillar={p} index={i} />
+        {/* ── Cards Grid ── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          {capabilities.slice(0, 3).map((cap, i) => (
+            <CapabilityCard key={cap.id} capability={cap} index={i} />
           ))}
         </div>
 
-        {/* Middle row: 2 cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-          {pillars.slice(2, 4).map((p, i) => (
-            <PillarCard key={p.id} pillar={p} index={i + 2} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14">
+          {capabilities.slice(3, 5).map((cap, i) => (
+            <CapabilityCard key={cap.id} capability={cap} index={i + 3} />
           ))}
         </div>
 
-        {/* Bottom: featured card full width */}
-        <div className="grid grid-cols-1 gap-4">
-          <PillarCard pillar={pillars[4]} index={4} />
-        </div>
-
-        {/* ── Bottom CTA strip ── */}
+        {/* ── Consultation Bar ── */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7, ease }}
-          className="flex flex-col sm:flex-row items-center justify-between gap-6 mt-14 rounded-2xl border p-7"
-          style={{ background: "rgba(37,99,235,0.05)", borderColor: "rgba(37,99,235,0.18)" }}
+          transition={{ duration: 0.6, ease }}
+          className="flex flex-col sm:flex-row items-center justify-between gap-6 rounded-3xl border border-[#DCE5FF] p-7 bg-gradient-to-r from-white via-[#F8FAFF] to-[#EEF4FF]"
         >
           <div>
-            <p className="text-foreground font-bold text-base mb-1">Not sure which service fits your needs?</p>
-            <p className="text-sm" style={{ color: "#4B5563" }}>
-              Our team will assess your operations and recommend the right BPO solution — free of charge.
+            <h4 className="text-slate-900 font-bold text-base mb-1">
+              Have a complex multi-disciplinary technology challenge?
+            </h4>
+            <p className="text-sm text-slate-600">
+              Our principal enterprise architects will assess your systems, tech stack, and transformation roadmap.
             </p>
           </div>
           <Link href="/contact">
-            <motion.button
-              whileHover={{ scale: 1.04, boxShadow: "0 0 50px rgba(37,99,235,0.4)" }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-bold text-sm text-foreground flex-shrink-0"
-              style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)", boxShadow: "0 0 28px rgba(33,78,207,0.18)" }}
+            <button
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-xs tracking-wider uppercase text-white bg-[#214ECF] hover:bg-[#1A43C8] shadow-md hover:shadow-lg transition-all shrink-0 cursor-pointer"
             >
-              Get a Free Consultation
-              <ArrowRight size={15} />
-            </motion.button>
+              Consult an Architect
+              <ArrowRight size={14} />
+            </button>
           </Link>
         </motion.div>
       </div>
-
-      {/* Bottom divider */}
-      <div className="absolute bottom-0 inset-x-0 h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.07) 50%, transparent)" }} />
     </section>
   );
 }

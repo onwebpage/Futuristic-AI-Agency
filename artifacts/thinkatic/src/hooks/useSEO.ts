@@ -82,7 +82,7 @@ export function useSEO({
   articleModifiedTime,
 }: SEOProps = {}) {
   useEffect(() => {
-    const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — AI-Powered BPO & Enterprise Technology Solutions`;
+    const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — Enterprise Technology Transformation Partner`;
     const canonical = `${BASE_URL}${path === "/" ? "" : path}`;
     const absOgImage = ogImage.startsWith("http") ? ogImage : `${BASE_URL}${ogImage}`;
 
@@ -105,7 +105,7 @@ export function useSEO({
     setMeta("og:image", absOgImage, "property");
     setMeta("og:image:width", "1200", "property");
     setMeta("og:image:height", "630", "property");
-    setMeta("og:image:alt", `${SITE_NAME} — ${title ?? "AI-Powered BPO"}`, "property");
+    setMeta("og:image:alt", `${SITE_NAME} — ${title ?? "Enterprise Technology Transformation"}`, "property");
     setMeta("og:locale", "en_US", "property");
 
     if (articlePublishedTime) setMeta("article:published_time", articlePublishedTime, "property");

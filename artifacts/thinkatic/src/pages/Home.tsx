@@ -6,27 +6,29 @@ import Layout from "@/components/layout/Layout";
 import { Hero } from "@/components/sections/Hero";
 import { OurClients } from "@/components/sections/OurClients";
 import { BPOServices } from "@/components/sections/BPOServices";
+import { FlagshipPricingSection } from "@/components/sections/FlagshipPricingSection";
 import { WhyThinkatic } from "@/components/sections/WhyThinkatic";
 import { IndustriesSection } from "@/components/sections/IndustriesSection";
 import { GlobalCoverage } from "@/components/sections/GlobalCoverage";
 import { Process } from "@/components/sections/Process";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
+import { useSEO } from "@/hooks/useSEO";
 
 // ─── Guarantees strip ─────────────────────────────────────────────────────────
 const GUARANTEES = [
   "ISO 27001 Certified",
   "SOC 2 Type II Audited",
   "HIPAA Compliant",
-  "24/7 Global Coverage",
-  "99.9% Uptime SLA",
+  "Zero Trust Architecture",
+  "99.99% Uptime SLA",
 ];
 
 // ─── Final CTA ────────────────────────────────────────────────────────────────
 function FinalCTA() {
   return (
     <section
-      className="relative py-32 md:py-44 overflow-hidden"
+      className="relative py-32 md:py-40 overflow-hidden"
       style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #F5F8FF 50%, #FFFFFF 100%)" }}
     >
       {/* Top divider */}
@@ -55,15 +57,6 @@ function FinalCTA() {
         }}
       />
 
-      {/* Animated mesh grid */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.025]"
-        style={{
-          backgroundImage: "linear-gradient(rgba(71,163,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(71,163,255,1) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
-
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
@@ -78,36 +71,35 @@ function FinalCTA() {
               className="flex items-center gap-2.5 mb-8"
             >
               <div
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full border"
-                style={{ background: "rgba(37,99,235,0.1)", borderColor: "rgba(37,99,235,0.3)" }}
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/10"
               >
                 <Sparkles size={12} style={{ color: "#214ECF" }} />
-                <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em]" style={{ color: "rgba(33,78,207,0.72)" }}>
-                  Start Your Engagement
+                <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#214ECF]">
+                  Start Your Strategic Transformation
                 </span>
               </div>
             </motion.div>
 
             {/* Headline */}
-            <div className="overflow-hidden mb-4">
+            <div className="overflow-hidden mb-5">
               <motion.h2
                 initial={{ y: "100%", opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
-                className="font-display font-bold text-foreground leading-[1.0]"
-                style={{ fontSize: "clamp(2.6rem, 5.5vw, 5rem)" }}
+                className="font-display font-black text-slate-900 leading-[1.04]"
+                style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
               >
-                Ready to build
+                Ready to engineer
                 <br />
                 <span
                   style={{
-                    background: "linear-gradient(135deg, #214ECF 0%, #214ECF 60%, #93C5FD 100%)",
+                    background: "linear-gradient(135deg, #1E40AF 0%, #214ECF 60%, #60A5FA 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
                 >
-                  smarter operations?
+                  mission-critical scale?
                 </span>
               </motion.h2>
             </div>
@@ -117,10 +109,9 @@ function FinalCTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-base md:text-lg leading-relaxed mb-10 max-w-lg"
-              style={{ color: "#4B5563" }}
+              className="text-base md:text-lg leading-relaxed mb-10 max-w-lg text-slate-600"
             >
-              Book a discovery call, request a proposal, or send us a message. Our team responds within 24 hours — no sales pressure, just a real conversation.
+              Schedule an architectural consultation or request a transformation proposal. Our principal architects respond within 24 hours to discuss system requirements, timeline, and measurable outcomes.
             </motion.p>
 
             {/* Guarantees list */}
@@ -140,8 +131,8 @@ function FinalCTA() {
                   transition={{ duration: 0.5, delay: 0.35 + i * 0.07 }}
                   className="flex items-center gap-1.5"
                 >
-                  <CheckCircle2 size={13} style={{ color: "#34D399", flexShrink: 0 }} />
-                  <span className="text-xs font-medium" style={{ color: "#4B5563" }}>{g}</span>
+                  <CheckCircle2 size={14} className="text-emerald-500 shrink-0" />
+                  <span className="text-xs font-semibold text-slate-700">{g}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -155,37 +146,24 @@ function FinalCTA() {
               className="flex flex-col sm:flex-row gap-4"
             >
               <Link href="/contact">
-                <motion.button
-                  whileHover={{ scale: 1.04, boxShadow: "0 0 60px rgba(37,99,235,0.55), 0 8px 32px rgba(0,0,0,0.5)" }}
-                  whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-foreground text-sm tracking-wide"
+                <button
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold text-white text-sm tracking-wide shadow-md hover:shadow-lg transition-all cursor-pointer"
                   style={{
-                    background: "linear-gradient(135deg, #214ECF 0%, #214ECF 100%)",
-                    boxShadow: "0 0 40px rgba(33,78,207,0.25), 0 4px 24px rgba(0,0,0,0.4)",
-                    letterSpacing: "0.03em",
+                    background: "linear-gradient(135deg, #214ECF 0%, #1A43C8 100%)",
                   }}
                 >
                   <Calendar size={16} />
-                  Book a Discovery Call
-                </motion.button>
+                  Book Architectural Consultation
+                </button>
               </Link>
-              <Link href="/contact">
-                <motion.button
-                  whileHover={{ scale: 1.04, borderColor: "rgba(33,78,207,0.38)", background: "rgba(33,78,207,0.04)" }}
-                  whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold border transition-all duration-300"
-                  style={{
-                    borderColor: "rgba(33,78,207,0.2)",
-                    color: "#214ECF",
-                    background: "#FFFFFF",
-                    fontSize: "0.875rem",
-                    letterSpacing: "0.03em",
-                  }}
+              <Link href="/request-proposal">
+                <button
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold border transition-all duration-300 bg-white hover:bg-slate-50 text-[#214ECF] border-[#214ECF]/30 text-sm tracking-wide cursor-pointer"
                 >
                   <FileText size={16} />
                   Request a Proposal
                   <ArrowRight size={14} />
-                </motion.button>
+                </button>
               </Link>
             </motion.div>
           </div>
@@ -198,52 +176,31 @@ function FinalCTA() {
             transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
             className="relative"
           >
-            {/* Glow behind card */}
             <div
-              className="absolute -inset-8 pointer-events-none"
-              style={{ background: "radial-gradient(ellipse, rgba(33,78,207,0.09) 0%, transparent 70%)", filter: "blur(40px)" }}
-            />
-
-            {/* Glass card */}
-            <div
-              className="relative rounded-3xl border p-8 md:p-10 overflow-hidden"
-              style={{
-                background: "rgba(255,255,255,0.025)",
-                borderColor: "rgba(33,78,207,0.06)",
-                backdropFilter: "blur(20px)",
-              }}
+              className="relative rounded-3xl border border-[#DCE5FF] p-8 md:p-10 overflow-hidden bg-white shadow-xl"
             >
-              {/* Animated top border */}
               <div
-                className="absolute top-0 left-0 right-0 h-[1.5px]"
+                className="absolute top-0 left-0 right-0 h-[2px]"
                 style={{ background: "linear-gradient(90deg, transparent, rgba(37,99,235,0.6) 30%, rgba(33,78,207,0.72) 50%, rgba(37,99,235,0.6) 70%, transparent)" }}
               />
 
-              {/* Inner content */}
-              <p
-                className="text-[10px] font-mono font-bold uppercase tracking-[0.28em] mb-8"
-                style={{ color: "rgba(71,163,255,0.65)" }}
-              >
-                Why teams choose us
+              <p className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] mb-8 text-[#214ECF]">
+                Enterprise Partnership Benchmarks
               </p>
 
-              <div className="grid grid-cols-2 gap-5 mb-8">
+              <div className="grid grid-cols-2 gap-4 mb-8">
                 {[
                   { value: "500+", label: "Enterprise Clients", color: "#214ECF" },
-                  { value: "98.4%", label: "Accuracy Rate", color: "#34D399" },
-                  { value: "2B+", label: "Ops / Year", color: "#A78BFA" },
-                  { value: "24h", label: "Response Time", color: "#F59E0B" },
+                  { value: "99.99%", label: "Cloud Uptime SLA", color: "#10B981" },
+                  { value: "2B+", label: "Ops / Year", color: "#8B5CF6" },
+                  { value: "<24h", label: "Consultation SLA", color: "#F59E0B" },
                 ].map((stat, i) => (
-                  <motion.div
+                  <div
                     key={stat.label}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-60px" }}
-                    transition={{ duration: 0.55, delay: 0.3 + i * 0.1 }}
                     className="rounded-2xl p-5 border text-center"
                     style={{
                       background: `${stat.color}08`,
-                      borderColor: `${stat.color}20`,
+                      borderColor: `${stat.color}22`,
                     }}
                   >
                     <p
@@ -252,42 +209,30 @@ function FinalCTA() {
                     >
                       {stat.value}
                     </p>
-                    <p className="text-[10px] font-medium uppercase tracking-wider" style={{ color: "rgba(33,78,207,0.22)" }}>
+                    <p className="text-[10px] font-mono uppercase tracking-wider text-slate-500">
                       {stat.label}
                     </p>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
 
-              {/* Testimonial snippet */}
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.7, delay: 0.6 }}
-                className="rounded-2xl border p-5"
-                style={{
-                  background: "rgba(37,99,235,0.06)",
-                  borderColor: "rgba(37,99,235,0.18)",
-                }}
+              {/* Verified Enterprise Endorsement */}
+              <div
+                className="rounded-2xl border p-5 bg-slate-50 border-slate-200"
               >
-                <div className="flex items-start gap-3">
-                  <img
-                    src="https://randomuser.me/api/portraits/women/44.jpg"
-                    alt="Samantha Brooks"
-                    className="w-9 h-9 rounded-full object-cover flex-shrink-0"
-                    style={{ border: "2px solid rgba(71,163,255,0.4)" }}
-                    loading="lazy"
-                  />
+                <div className="flex items-start gap-3.5">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs bg-[#214ECF]/10 border border-[#214ECF]/30 text-[#214ECF] shrink-0">
+                    CTO
+                  </div>
                   <div>
-                    <p className="text-sm leading-relaxed italic mb-2" style={{ color: "rgba(255,255,255,0.65)" }}>
-                      "They shipped our AI SaaS MVP in six weeks. Quality is genuinely world-class."
+                    <p className="text-xs sm:text-sm leading-relaxed italic mb-2 text-slate-700">
+                      "Thinkatic modernized our monolithic applications into cloud-native microservices and deployed private AI agents with zero downtime. Exceptional delivery."
                     </p>
-                    <p className="text-xs font-semibold text-foreground">Samantha Brooks</p>
-                    <p className="text-[10px] mt-0.5" style={{ color: "rgba(33,78,207,0.22)" }}>Co-founder & CEO · Stackline AI</p>
+                    <p className="text-xs font-bold text-slate-900">Chief Information Officer</p>
+                    <p className="text-[10px] text-slate-500 font-mono">U.S. Enterprise Healthcare &amp; Technology Network</p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -301,6 +246,12 @@ function FinalCTA() {
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function Home() {
+  useSEO({
+    title: "Thinkatic — Enterprise Technology Transformation Partner",
+    description: "Thinkatic helps US enterprises build, modernize, secure and operate mission-critical technology systems across AI, Cloud, Cybersecurity, Data, and Engineering.",
+    path: "/",
+  });
+
   return (
     <Layout>
       {/* 1 · Hero */}
@@ -309,28 +260,31 @@ export default function Home() {
       {/* 2 · Trusted Companies */}
       <OurClients />
 
-      {/* 3 · Services */}
+      {/* 3 · Enterprise Capabilities */}
       <BPOServices />
 
-      {/* 4 · Why Choose Us */}
+      {/* 4 · Why Choose Thinkatic */}
       <WhyThinkatic />
 
-      {/* 5 · Industries */}
+      {/* 5 · Flagship Strategic Pricing Engagements */}
+      <FlagshipPricingSection />
+
+      {/* 6 · Industries */}
       <IndustriesSection />
 
-      {/* 6 · Global Coverage */}
+      {/* 7 · Global Coverage */}
       <GlobalCoverage />
 
-      {/* 7 · Process */}
+      {/* 8 · Transformation Process */}
       <Process />
 
-      {/* 8 · Testimonials */}
+      {/* 9 · Testimonials */}
       <Testimonials />
 
-      {/* 9 · FAQ */}
+      {/* 10 · Enterprise FAQ */}
       <FAQ />
 
-      {/* 10 · Final CTA */}
+      {/* 11 · Final Strategic CTA */}
       <FinalCTA />
     </Layout>
   );

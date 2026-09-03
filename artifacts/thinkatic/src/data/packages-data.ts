@@ -1,37 +1,653 @@
-// Exact 99.99% data model matching PDF 1 (AI Development Packages) & PDF 2 (Thinkatic ScaleOS)
+// Thinkatic Enterprise Technology Transformation Service Packages & Pricing Catalog
 
-export interface AIPackage {
+export interface EnterprisePlan {
   id: string;
-  packageNumber: string;
+  category: "ai-automation" | "cloud-modernization" | "cybersecurity" | "data" | "product-engineering" | "managed-services";
+  categoryLabel: string;
+  planNumber: string;
   name: string;
-  subtitle: string;
-  setupPrice: number;
-  monthlyPrice: number;
-  setupPriceFormatted: string;
-  monthlyPriceFormatted: string;
-  isRecommended?: boolean;
+  startingPriceFormatted: string;
+  priceNumeric: number;
+  billingPeriod?: "one-time" | "monthly";
   tag?: string;
-  description: string;
-  includes: string[];
-  exampleAgents?: string[];
-  exampleWorkflow?: string[];
-  useCases?: string[];
-  connectsTo?: string[];
-  exampleQuery?: string;
-  workflowSteps?: string[];
-  idealCustomer: string;
-  bestOutcome?: string;
-  recommendedPlanBadge?: string;
-}
-
-export interface EngagementTier {
-  id: string;
-  name: string;
-  startingPrice: string;
-  description: string;
   isPopular?: boolean;
+  isFlagship?: boolean;
+  shortPositioning: string;
+  idealCustomer: string;
+  keyOutcomes: string[];
+  includes: string[];
+  ctaLabel: string;
+  ctaRoute?: string;
 }
 
+export interface ServiceCategoryMeta {
+  id: EnterprisePlan["category"];
+  title: string;
+  shortTitle: string;
+  badge: string;
+  description: string;
+  iconName: string;
+}
+
+export const SERVICE_CATEGORIES: ServiceCategoryMeta[] = [
+  {
+    id: "ai-automation",
+    title: "AI & Automation",
+    shortTitle: "AI & Automation",
+    badge: "Intelligent Systems",
+    description: "From targeted AI workflow launches to full enterprise-scale multi-agent autonomous ecosystems.",
+    iconName: "Bot",
+  },
+  {
+    id: "cloud-modernization",
+    title: "Cloud & Modernization",
+    shortTitle: "Cloud & Infra",
+    badge: "Cloud-Native Scale",
+    description: "Architecting resilient multi-cloud foundations, microservices transitions, and legacy modernization.",
+    iconName: "Cloud",
+  },
+  {
+    id: "cybersecurity",
+    title: "Cybersecurity",
+    shortTitle: "Cybersecurity",
+    badge: "Zero Trust Defense",
+    description: "Enterprise threat mitigation, Zero Trust architectures, and specialized defense for generative AI pipelines.",
+    iconName: "ShieldCheck",
+  },
+  {
+    id: "data",
+    title: "Data & Analytics",
+    shortTitle: "Data & BI",
+    badge: "Data Intelligence",
+    description: "Modern data warehouses, real-time streaming lakehouses, and AI-ready data infrastructure.",
+    iconName: "Database",
+  },
+  {
+    id: "product-engineering",
+    title: "Product Engineering",
+    shortTitle: "Engineering",
+    badge: "Mission-Critical Systems",
+    description: "Production-grade digital products and large-scale software platforms engineered with dedicated teams.",
+    iconName: "Cpu",
+  },
+  {
+    id: "managed-services",
+    title: "Managed Services",
+    shortTitle: "Managed Ops",
+    badge: "24/7 Operations",
+    description: "Around-the-clock operational governance, proactive optimization, and continuous SLA guarantees.",
+    iconName: "Activity",
+  },
+];
+
+export const ENTERPRISE_PLANS: EnterprisePlan[] = [
+  // ─── A. AI & AUTOMATION ───────────────────────────────────────────────────────
+  {
+    id: "ai-launch",
+    category: "ai-automation",
+    categoryLabel: "AI & Automation",
+    planNumber: "PLAN 01",
+    name: "AI Launch",
+    startingPriceFormatted: "$25,000",
+    priceNumeric: 25000,
+    billingPeriod: "one-time",
+    tag: "Targeted Entry",
+    isFlagship: true,
+    shortPositioning: "For companies ready to introduce AI into one important business function.",
+    idealCustomer: "SMBs and mid-market companies starting their AI journey.",
+    keyOutcomes: [
+      "Rapid operational AI integration with validated ROI within 30 days",
+      "Eliminate repetitive manual task hours in high-friction workflows",
+      "Production-grade security baseline and isolated enterprise data boundary",
+      "Executive visibility through automated analytics dashboard",
+    ],
+    includes: [
+      "AI readiness assessment",
+      "AI strategy & roadmap",
+      "1 AI-powered workflow",
+      "Custom AI application/agent",
+      "LLM integration",
+      "Knowledge base / RAG",
+      "Business system integration",
+      "Security baseline",
+      "Analytics dashboard",
+      "Deployment",
+      "30 days post-launch support",
+    ],
+    ctaLabel: "Start Your AI Transformation",
+    ctaRoute: "/contact?plan=ai-launch",
+  },
+  {
+    id: "ai-transformation",
+    category: "ai-automation",
+    categoryLabel: "AI & Automation",
+    planNumber: "PLAN 02",
+    name: "AI Transformation",
+    startingPriceFormatted: "$75,000",
+    priceNumeric: 75000,
+    billingPeriod: "one-time",
+    tag: "Most Popular",
+    isPopular: true,
+    isFlagship: true,
+    shortPositioning: "For companies looking to automate multiple business processes with AI.",
+    idealCustomer: "Growing US businesses with multiple AI use cases across operations, sales, and support.",
+    keyOutcomes: [
+      "End-to-end automation across customer service, sales, and document ops",
+      "Custom internal AI copilot accelerating employee output across teams",
+      "Deep bidirectional CRM and ERP integrations with role-based permissions",
+      "Formalized AI governance framework ensuring compliance and quality",
+    ],
+    includes: [
+      "Everything in AI Launch",
+      "3–5 AI agents/workflows",
+      "CRM/ERP integrations",
+      "Advanced automation",
+      "Document intelligence",
+      "Customer-service automation",
+      "Sales automation",
+      "Internal AI copilot",
+      "Advanced analytics",
+      "Role-based access",
+      "AI governance framework",
+      "Production infrastructure",
+      "90 days optimization & support",
+    ],
+    ctaLabel: "Build an AI-Powered Business",
+    ctaRoute: "/contact?plan=ai-transformation",
+  },
+  {
+    id: "enterprise-ai",
+    category: "ai-automation",
+    categoryLabel: "AI & Automation",
+    planNumber: "PLAN 03",
+    name: "Enterprise AI",
+    startingPriceFormatted: "$150,000",
+    priceNumeric: 150000,
+    billingPeriod: "one-time",
+    tag: "Enterprise Scale",
+    shortPositioning: "For enterprises and organizations with complex technology environments.",
+    idealCustomer: "Enterprises requiring sovereign AI environments, multi-agent systems, and dedicated teams.",
+    keyOutcomes: [
+      "Private, sovereign AI cloud environment with absolute data privacy",
+      "Autonomous multi-agent orchestration handling complex business logic",
+      "Continuous model evaluation, fine-tuning pipelines, and drift defense",
+      "Dedicated senior engineering squad for 6 months of active optimization",
+    ],
+    includes: [
+      "Enterprise AI strategy",
+      "AI architecture",
+      "Multi-agent AI systems",
+      "Private AI environment",
+      "Enterprise RAG",
+      "Multiple business integrations",
+      "Custom AI applications",
+      "AI governance",
+      "Security architecture",
+      "Data pipelines",
+      "Model evaluation",
+      "Monitoring",
+      "Compliance-ready architecture",
+      "Cloud deployment",
+      "Dedicated engineering team",
+      "6 months optimization",
+    ],
+    ctaLabel: "Talk to an AI Architect",
+    ctaRoute: "/contact?plan=enterprise-ai",
+  },
+
+  // ─── B. CLOUD & MODERNIZATION ────────────────────────────────────────────────
+  {
+    id: "cloud-modernization",
+    category: "cloud-modernization",
+    categoryLabel: "Cloud & Modernization",
+    planNumber: "PLAN 04",
+    name: "Cloud Modernization",
+    startingPriceFormatted: "$100,000",
+    priceNumeric: 100000,
+    billingPeriod: "one-time",
+    tag: "Infrastructure Scale",
+    shortPositioning: "Migrate, re-architect, and optimize infrastructure across AWS, Azure, and Google Cloud.",
+    idealCustomer: "Organizations transitioning from legacy on-prem or optimizing multi-cloud environments.",
+    keyOutcomes: [
+      "Resilient cloud-native architecture backed by 99.99% uptime guarantees",
+      "Modern CI/CD and infrastructure-as-code accelerating shipping velocity",
+      "Comprehensive cloud security hardening and cost optimization",
+      "Automated multi-region disaster recovery and failover pipelines",
+    ],
+    includes: [
+      "Infrastructure assessment",
+      "Cloud strategy",
+      "AWS / Azure / Google Cloud architecture",
+      "Application migration",
+      "Database migration",
+      "API modernization",
+      "DevOps implementation",
+      "CI/CD",
+      "Infrastructure automation",
+      "Security hardening",
+      "Monitoring",
+      "Disaster recovery",
+      "Performance optimization",
+    ],
+    ctaLabel: "Modernize Our Infrastructure",
+    ctaRoute: "/contact?plan=cloud-modernization",
+  },
+  {
+    id: "legacy-transformation",
+    category: "cloud-modernization",
+    categoryLabel: "Cloud & Modernization",
+    planNumber: "PLAN 05",
+    name: "Legacy Transformation",
+    startingPriceFormatted: "$150,000",
+    priceNumeric: 150000,
+    billingPeriod: "one-time",
+    tag: "System Modernization",
+    shortPositioning: "Deconstruct monoliths, modernize legacy codebases, and eliminate critical technical debt.",
+    idealCustomer: "Enterprises whose agility and scale are bottlenecked by dated core systems.",
+    keyOutcomes: [
+      "Zero-downtime transition from legacy monoliths to modular microservices",
+      "Modernized responsive UI/UX and high-performance database tier",
+      "Full API enablement connecting legacy data with modern digital tools",
+      "Comprehensive knowledge transfer and long-term maintainability",
+    ],
+    includes: [
+      "Legacy application audit",
+      "Architecture redesign",
+      "Code modernization",
+      "Database modernization",
+      "API development",
+      "Cloud migration",
+      "UI modernization",
+      "Testing automation",
+      "Security modernization",
+      "AI integration",
+      "Deployment",
+      "Knowledge transfer",
+      "Long-term support",
+    ],
+    ctaLabel: "Modernize Our Technology",
+    ctaRoute: "/contact?plan=legacy-transformation",
+  },
+  {
+    id: "enterprise-transformation",
+    category: "cloud-modernization",
+    categoryLabel: "Cloud & Modernization",
+    planNumber: "PLAN 06",
+    name: "Enterprise Transformation",
+    startingPriceFormatted: "$300,000+",
+    priceNumeric: 300000,
+    billingPeriod: "one-time",
+    tag: "Flagship Strategic Engagement",
+    isFlagship: true,
+    shortPositioning: "For organizations requiring a complete technology transformation.",
+    idealCustomer: "Enterprises seeking a single, strategic transformation partner across all technology layers.",
+    keyOutcomes: [
+      "Holistic reinvention across cloud, AI, data platforms, and cybersecurity",
+      "Dedicated multi-disciplinary transformation squad embedded for 12 months",
+      "Elimination of siloed systems and radical acceleration of digital agility",
+      "Milestone-based delivery aligned with board-level enterprise objectives",
+    ],
+    includes: [
+      "Technology assessment",
+      "Digital transformation strategy",
+      "Legacy modernization",
+      "Cloud transformation",
+      "AI implementation",
+      "Data modernization",
+      "Cybersecurity",
+      "Enterprise integrations",
+      "DevOps",
+      "Custom software engineering",
+      "Technology governance",
+      "Dedicated transformation team",
+      "12-month roadmap",
+    ],
+    ctaLabel: "Plan Our Transformation",
+    ctaRoute: "/contact?plan=enterprise-transformation",
+  },
+
+  // ─── C. CYBERSECURITY ────────────────────────────────────────────────────────
+  {
+    id: "cybersecurity-foundation",
+    category: "cybersecurity",
+    categoryLabel: "Cybersecurity",
+    planNumber: "PLAN 07",
+    name: "Cybersecurity Foundation",
+    startingPriceFormatted: "$50,000",
+    priceNumeric: 50000,
+    billingPeriod: "one-time",
+    tag: "Essential Defense",
+    shortPositioning: "Establish formal enterprise security controls, IAM, and risk mitigation baseline.",
+    idealCustomer: "Mid-market businesses needing formal compliance baselines and security audits.",
+    keyOutcomes: [
+      "Identification and structured remediation of critical vulnerability gaps",
+      "Hardened IAM, cloud posture, and endpoint security perimeter",
+      "Executive risk assessment and multi-quarter security roadmap",
+      "Audit preparation for SOC 2, HIPAA, and ISO 27001 compliance",
+    ],
+    includes: [
+      "Security assessment",
+      "Vulnerability assessment",
+      "IAM",
+      "Endpoint security",
+      "Network security",
+      "Cloud security",
+      "Security policies",
+      "Risk assessment",
+      "Security roadmap",
+    ],
+    ctaLabel: "Secure Our Baseline",
+    ctaRoute: "/contact?plan=cybersecurity-foundation",
+  },
+  {
+    id: "enterprise-security",
+    category: "cybersecurity",
+    categoryLabel: "Cybersecurity",
+    planNumber: "PLAN 08",
+    name: "Enterprise Security",
+    startingPriceFormatted: "$125,000",
+    priceNumeric: 125000,
+    billingPeriod: "one-time",
+    tag: "Zero Trust Architecture",
+    shortPositioning: "Implement complete Zero Trust architecture, SIEM integration, and incident response.",
+    idealCustomer: "Regulated enterprises requiring end-to-end security orchestration and continuous protection.",
+    keyOutcomes: [
+      "Validated Zero Trust architecture enforced across users, devices, and cloud",
+      "Centralized SIEM telemetry with automated threat containment workflows",
+      "Comprehensive incident response playbooks and security automation",
+      "Continuous compliance support for strict regulatory frameworks",
+    ],
+    includes: [
+      "Zero Trust architecture",
+      "Cloud security",
+      "Identity & access management",
+      "SIEM",
+      "Security monitoring",
+      "Vulnerability management",
+      "Incident response",
+      "Security automation",
+      "Compliance support",
+      "Security operations",
+    ],
+    ctaLabel: "Architect Zero Trust",
+    ctaRoute: "/contact?plan=enterprise-security",
+  },
+  {
+    id: "ai-security",
+    category: "cybersecurity",
+    categoryLabel: "Cybersecurity",
+    planNumber: "PLAN 09",
+    name: "AI Security",
+    startingPriceFormatted: "$100,000",
+    priceNumeric: 100000,
+    billingPeriod: "one-time",
+    tag: "LLM & GenAI Defense",
+    shortPositioning: "Harden LLMs, agents, and generative systems against prompt injection and data leaks.",
+    idealCustomer: "Enterprises deploying AI assistants, RAG pipelines, or autonomous agent frameworks.",
+    keyOutcomes: [
+      "Defense against prompt injection, model jailbreaking, and data poisoning",
+      "Strict data-leakage prevention ensuring proprietary enterprise data remains safe",
+      "Granular AI model access controls, telemetry, and output auditing",
+      "Enterprise AI security architecture aligned with NIST AI RMF",
+    ],
+    includes: [
+      "AI security assessment",
+      "LLM security",
+      "Data-leakage prevention",
+      "Prompt-injection protection",
+      "AI access controls",
+      "Model security",
+      "AI monitoring",
+      "AI governance",
+      "Security testing",
+      "Enterprise AI security architecture",
+    ],
+    ctaLabel: "Protect Our AI Systems",
+    ctaRoute: "/contact?plan=ai-security",
+  },
+
+  // ─── D. DATA & ANALYTICS ──────────────────────────────────────────────────────
+  {
+    id: "data-foundation",
+    category: "data",
+    categoryLabel: "Data & Analytics",
+    planNumber: "PLAN 10",
+    name: "Data Foundation",
+    startingPriceFormatted: "$75,000",
+    priceNumeric: 75000,
+    billingPeriod: "one-time",
+    tag: "Single Source of Truth",
+    shortPositioning: "Unify fragmented data sources into a modern data warehouse with automated ETL.",
+    idealCustomer: "Organizations struggling with siloed business data and manual reporting cycles.",
+    keyOutcomes: [
+      "Automated ETL/ELT pipelines replacing manual reporting spreadsheets",
+      "Centralized cloud data warehouse providing accurate single source of truth",
+      "Executive and operational BI dashboards updating in real time",
+      "Data validation rules ensuring high integrity and reliability",
+    ],
+    includes: [
+      "Data architecture",
+      "Data warehouse",
+      "Data pipelines",
+      "ETL/ELT",
+      "Data integration",
+      "Data quality",
+      "Business dashboards",
+      "Reporting",
+    ],
+    ctaLabel: "Build Our Data Foundation",
+    ctaRoute: "/contact?plan=data-foundation",
+  },
+  {
+    id: "enterprise-data-platform",
+    category: "data",
+    categoryLabel: "Data & Analytics",
+    planNumber: "PLAN 11",
+    name: "Enterprise Data Platform",
+    startingPriceFormatted: "$150,000",
+    priceNumeric: 150000,
+    billingPeriod: "one-time",
+    tag: "Lakehouse & Real-Time",
+    shortPositioning: "Build an AI-ready data lakehouse capable of real-time analytics and predictive ML pipelines.",
+    idealCustomer: "Enterprises with high data velocity, complex governance, or advanced analytics needs.",
+    keyOutcomes: [
+      "Scalable lakehouse architecture processing real-time streaming data",
+      "AI-ready data pipelines and feature stores ready for predictive ML",
+      "Enterprise data governance and automated access policy enforcement",
+      "High-throughput query performance across terabyte-to-petabyte datasets",
+    ],
+    includes: [
+      "Data lake/lakehouse",
+      "Real-time data",
+      "Enterprise data warehouse",
+      "Data governance",
+      "Data engineering",
+      "Advanced analytics",
+      "BI",
+      "AI-ready data architecture",
+      "Cloud data infrastructure",
+    ],
+    ctaLabel: "Engineer Our Data Platform",
+    ctaRoute: "/contact?plan=enterprise-data-platform",
+  },
+
+  // ─── E. PRODUCT ENGINEERING ──────────────────────────────────────────────────
+  {
+    id: "digital-product-development",
+    category: "product-engineering",
+    categoryLabel: "Product Engineering",
+    planNumber: "PLAN 12",
+    name: "Digital Product Development",
+    startingPriceFormatted: "$50,000",
+    priceNumeric: 50000,
+    billingPeriod: "one-time",
+    tag: "Full-Lifecycle Build",
+    shortPositioning: "Engineer mission-critical digital products from architecture through production deployment.",
+    idealCustomer: "Companies launching new SaaS platforms, mobile applications, or digital portals.",
+    keyOutcomes: [
+      "Modern, responsive web and mobile digital application with intuitive UX",
+      "Scalable, documented backend APIs with automated CI/CD and QA",
+      "Cloud-native deployment ready for rapid enterprise user adoption",
+      "Robust security architecture and automated test coverage",
+    ],
+    includes: [
+      "Product strategy",
+      "UX/UI",
+      "Architecture",
+      "Web application",
+      "Mobile application",
+      "Backend",
+      "APIs",
+      "Cloud infrastructure",
+      "QA",
+      "Security",
+      "Deployment",
+    ],
+    ctaLabel: "Build Our Digital Product",
+    ctaRoute: "/contact?plan=digital-product-development",
+  },
+  {
+    id: "enterprise-product-engineering",
+    category: "product-engineering",
+    categoryLabel: "Product Engineering",
+    planNumber: "PLAN 13",
+    name: "Enterprise Product Engineering",
+    startingPriceFormatted: "$150,000",
+    priceNumeric: 150000,
+    billingPeriod: "one-time",
+    tag: "Dedicated Squad",
+    shortPositioning: "Deploy a dedicated senior engineering team to architect and build complex systems.",
+    idealCustomer: "Enterprises requiring sustained, high-velocity engineering for multi-tiered platforms.",
+    keyOutcomes: [
+      "Dedicated multi-disciplinary engineering squad integrated with internal teams",
+      "Enterprise API ecosystem bridging modern and core legacy platforms",
+      "Native AI integration, microservices architecture, and DevOps automation",
+      "Automated QA framework guaranteeing 99.9% release stability",
+    ],
+    includes: [
+      "Product discovery",
+      "Enterprise architecture",
+      "UX/UI",
+      "Web & mobile",
+      "Backend systems",
+      "API ecosystem",
+      "Cloud",
+      "Data",
+      "AI integration",
+      "Cybersecurity",
+      "DevOps",
+      "QA automation",
+      "Dedicated engineering team",
+    ],
+    ctaLabel: "Assemble Engineering Team",
+    ctaRoute: "/contact?plan=enterprise-product-engineering",
+  },
+
+  // ─── F. MANAGED SERVICES ─────────────────────────────────────────────────────
+  {
+    id: "managed-ai",
+    category: "managed-services",
+    categoryLabel: "Managed Services",
+    planNumber: "PLAN 14",
+    name: "Managed AI",
+    startingPriceFormatted: "$10,000/month",
+    priceNumeric: 10000,
+    billingPeriod: "monthly",
+    tag: "Continuous AI Ops",
+    shortPositioning: "Ongoing AI agent optimization, model management, infrastructure, and latency monitoring.",
+    idealCustomer: "Organizations operating production AI systems that require continuous oversight.",
+    keyOutcomes: [
+      "Guaranteed model accuracy, latency SLAs, and automated drift detection",
+      "Compute cost optimization preventing token overspend and latency spikes",
+      "Immediate incident triage and automated fallback model routing",
+      "Continuous prompt enhancements and model version upgrades",
+    ],
+    includes: [
+      "AI monitoring",
+      "Agent optimization",
+      "Model management",
+      "AI infrastructure",
+      "Performance monitoring",
+      "Security monitoring",
+      "Continuous improvements",
+      "Support",
+    ],
+    ctaLabel: "Manage Our AI Operations",
+    ctaRoute: "/contact?plan=managed-ai",
+  },
+  {
+    id: "managed-cloud",
+    category: "managed-services",
+    categoryLabel: "Managed Services",
+    planNumber: "PLAN 15",
+    name: "Managed Cloud",
+    startingPriceFormatted: "$10,000/month",
+    priceNumeric: 10000,
+    billingPeriod: "monthly",
+    tag: "24/7 Cloud Operations",
+    shortPositioning: "24/7 cloud monitoring, infrastructure management, disaster recovery, and cost governance.",
+    idealCustomer: "Enterprises wanting SLA-backed cloud operations without expanding internal headcount.",
+    keyOutcomes: [
+      "24/7 cloud surveillance with 99.99% uptime SLA commitments",
+      "20–35% average reduction in monthly cloud infrastructure spend",
+      "Automated daily backups and validated disaster recovery failover",
+      "Proactive security patching and automated DevOps pipelines",
+    ],
+    includes: [
+      "Cloud monitoring",
+      "Infrastructure management",
+      "DevOps",
+      "Security",
+      "Backup",
+      "Disaster recovery",
+      "Cost optimization",
+      "24/7 monitoring",
+    ],
+    ctaLabel: "Operate Our Cloud",
+    ctaRoute: "/contact?plan=managed-cloud",
+  },
+  {
+    id: "managed-cybersecurity",
+    category: "managed-services",
+    categoryLabel: "Managed Services",
+    planNumber: "PLAN 16",
+    name: "Managed Cybersecurity",
+    startingPriceFormatted: "$15,000/month",
+    priceNumeric: 15000,
+    billingPeriod: "monthly",
+    tag: "SOC & Threat Hunting",
+    shortPositioning: "Continuous security monitoring, threat detection, vulnerability management, and incident response.",
+    idealCustomer: "Enterprises demanding continuous SOC surveillance and dedicated security operations.",
+    keyOutcomes: [
+      "Round-the-clock threat detection with sub-15 minute triage SLA",
+      "Proactive vulnerability management across all endpoints and cloud",
+      "Rapid incident containment and digital forensics readiness",
+      "Monthly executive security posture and compliance scorecards",
+    ],
+    includes: [
+      "Security monitoring",
+      "Threat detection",
+      "Vulnerability management",
+      "Incident response",
+      "Security reporting",
+      "Security operations",
+      "Continuous risk assessment",
+    ],
+    ctaLabel: "Activate 24/7 Security",
+    ctaRoute: "/contact?plan=managed-cybersecurity",
+  },
+];
+
+// ─── 3 Flagship Engagements for Homepage ─────────────────────────────────────
+export const FLAGSHIP_ENGAGEMENTS: EnterprisePlan[] = [
+  ENTERPRISE_PLANS.find((p) => p.id === "ai-launch")!,
+  ENTERPRISE_PLANS.find((p) => p.id === "ai-transformation")!,
+  ENTERPRISE_PLANS.find((p) => p.id === "enterprise-transformation")!,
+];
+
+// ─── Legacy compatibility exports so existing imports don't crash ────────────
+export type AIPackage = EnterprisePlan;
+export type ScaleOSTier = EnterprisePlan;
 export interface CatalogOverviewItem {
   id: number;
   package: string;
@@ -41,35 +657,13 @@ export interface CatalogOverviewItem {
   monthlyPrice: string;
   bestFor: string;
 }
-
-export interface ScaleOSTier {
+export interface EngagementTier {
   id: string;
   name: string;
-  price: string;
-  priceNumeric: number;
-  seats: string;
-  contract: string;
-  renewal: string;
-  isMostPopular?: boolean;
-  subtitle: string;
+  startingPrice: string;
   description: string;
-  pillars: {
-    title: string;
-    items: string[];
-  }[];
-  summaryQuote: string;
-  summaryPrice: string;
-  lifetimeSupportNote?: string;
+  isPopular?: boolean;
 }
-
-export interface ScaleOSComparisonRow {
-  feature: string;
-  starter: string;
-  growth: string;
-  enterprise: string;
-  isCheckmark?: boolean;
-}
-
 export interface PortfolioProject {
   id: number;
   project: string;
@@ -78,502 +672,27 @@ export interface PortfolioProject {
   cycle: string;
   typeNotes: string;
 }
-
+export interface ScaleOSComparisonRow {
+  feature: string;
+  starter: string;
+  growth: string;
+  enterprise: string;
+  isCheckmark?: boolean;
+}
 export interface AlternativeComparisonRow {
   traditional: string;
   scaleOS: string;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// PDF 1: AI DEVELOPMENT PACKAGES (2026 EDITION — U.S. MARKET PRICING)
-// ─────────────────────────────────────────────────────────────────────────────
-
-export const AI_CATALOG_OVERVIEW: CatalogOverviewItem[] = [
-  {
-    id: 1,
-    package: "AI Agent Pro",
-    isBestOverall: true,
-    coreService: "AI Agent Development",
-    setupPrice: "$7,500",
-    monthlyPrice: "$1,500",
-    bestFor: "Companies wanting an AI employee",
-  },
-  {
-    id: 2,
-    package: "AI Automation",
-    coreService: "Business Process Automation",
-    setupPrice: "$5,000",
-    monthlyPrice: "$1,000",
-    bestFor: "SMBs reducing manual work",
-  },
-  {
-    id: 3,
-    package: "AI Voice Pro",
-    coreService: "AI Voice & Customer Support",
-    setupPrice: "$6,500",
-    monthlyPrice: "$1,500",
-    bestFor: "High-volume call businesses",
-  },
-  {
-    id: 4,
-    package: "Private AI Brain",
-    coreService: "RAG / Knowledge AI",
-    setupPrice: "$7,500",
-    monthlyPrice: "$1,500",
-    bestFor: "Companies with large internal knowledge",
-  },
-  {
-    id: 5,
-    package: "AI Sales Engine",
-    coreService: "CRM & Sales Automation",
-    setupPrice: "$6,500",
-    monthlyPrice: "$1,500",
-    bestFor: "Sales-driven businesses",
-  },
-];
-
-export const AI_PACKAGES: AIPackage[] = [
-  {
-    id: "ai-agent-pro",
-    packageNumber: "PACKAGE 01 · RECOMMENDED",
-    name: "AI Agent Pro",
-    subtitle: "Your AI Employee",
-    setupPrice: 7500,
-    monthlyPrice: 1500,
-    setupPriceFormatted: "$7,500",
-    monthlyPriceFormatted: "$1,500/mo",
-    isRecommended: true,
-    tag: "Best Overall",
-    description:
-      "Build a custom AI agent that performs a specific business function — from qualifying leads to running internal operations.",
-    includes: [
-      "1 custom AI agent",
-      "Business workflow design",
-      "OpenAI / LLM integration",
-      "CRM integration",
-      "Email integration",
-      "Automated task execution",
-      "Human approval workflow",
-      "Dashboard & analytics",
-      "30-day optimization",
-    ],
-    exampleAgents: [
-      "AI SDR",
-      "AI Recruiter",
-      "AI Operations Agent",
-      "AI Customer Service Agent",
-      "AI Research Agent",
-    ],
-    idealCustomer: "SMBs & startups",
-    recommendedPlanBadge: "★ Best overall",
-  },
-  {
-    id: "ai-automation",
-    packageNumber: "PACKAGE 02",
-    name: "AI Automation",
-    subtitle: "Eliminate Repetitive Work",
-    setupPrice: 5000,
-    monthlyPrice: 1000,
-    setupPriceFormatted: "$5,000",
-    monthlyPriceFormatted: "$1,000/mo",
-    description:
-      "Turn repetitive manual processes into automated AI workflows that run end-to-end without hands-on effort.",
-    includes: [
-      "Up to 3 automated workflows",
-      "AI document processing",
-      "Email automation",
-      "CRM automation",
-      "Data extraction",
-      "Notifications",
-      "API integrations",
-      "Human approval steps",
-      "Workflow dashboard",
-      "Monthly optimization",
-    ],
-    exampleWorkflow: [
-      "Email",
-      "AI reads request",
-      "extracts info",
-      "updates CRM",
-      "creates task",
-      "notifies employee",
-    ],
-    idealCustomer: "5–100 employees",
-    bestOutcome: "Less manual admin work",
-  },
-  {
-    id: "ai-voice-pro",
-    packageNumber: "PACKAGE 03",
-    name: "AI Voice Pro",
-    subtitle: "24/7 AI Phone Agent",
-    setupPrice: 6500,
-    monthlyPrice: 1500,
-    setupPriceFormatted: "$6,500",
-    monthlyPriceFormatted: "$1,500/mo",
-    description:
-      "An AI voice agent that answers, qualifies, routes, and books calls — around the clock, without added headcount.",
-    includes: [
-      "AI phone agent",
-      "Inbound call handling",
-      "Lead qualification",
-      "Appointment booking",
-      "FAQ handling",
-      "CRM integration",
-      "Call summaries & recordings",
-      "Human transfer",
-      "Analytics dashboard",
-    ],
-    useCases: [
-      "Medical & home services",
-      "Solar & real estate",
-      "Insurance & automotive",
-      "Restaurants & B2B services",
-    ],
-    idealCustomer: "500+ calls / month",
-    bestOutcome: "More calls, same headcount",
-  },
-  {
-    id: "private-ai-brain",
-    packageNumber: "PACKAGE 04",
-    name: "Private AI Brain",
-    subtitle: "ChatGPT for Your Company",
-    setupPrice: 7500,
-    monthlyPrice: 1500,
-    setupPriceFormatted: "$7,500",
-    monthlyPriceFormatted: "$1,500/mo",
-    description:
-      "Give employees an AI assistant trained on the company's own knowledge — with cited sources for every answer.",
-    includes: [
-      "Private AI knowledge base",
-      "RAG architecture",
-      "Document ingestion",
-      "Source citations",
-      "User authentication",
-      "Admin dashboard",
-      "Access controls",
-      "Analytics",
-      "Continuous knowledge updates",
-    ],
-    connectsTo: [
-      "PDFs, SOPs & internal documents",
-      "Website & knowledge bases",
-      "Google Drive & SharePoint",
-      "Databases",
-    ],
-    exampleQuery:
-      "\"What's our refund policy for enterprise customers?\" — the AI searches company documents and answers with the relevant source.",
-    idealCustomer: "20–500 employee companies",
-  },
-  {
-    id: "ai-sales-engine",
-    packageNumber: "PACKAGE 05",
-    name: "AI Sales Engine",
-    subtitle: "AI Sales Team in a Box",
-    setupPrice: 6500,
-    monthlyPrice: 1500,
-    setupPriceFormatted: "$6,500",
-    monthlyPriceFormatted: "$1,500/mo",
-    description:
-      "Automate the sales process from lead to meeting — qualification, personalization, follow-up, and booking.",
-    includes: [
-      "Lead qualification",
-      "Lead enrichment",
-      "AI personalization",
-      "Email sequences & follow-ups",
-      "CRM integration",
-      "AI sales assistant",
-      "Meeting booking",
-      "Lead scoring",
-      "Sales dashboard",
-    ],
-    workflowSteps: [
-      "Lead",
-      "Research",
-      "Score",
-      "Personalized Outreach",
-      "Follow-up",
-      "Qualification",
-      "Meeting",
-      "CRM",
-    ],
-    idealCustomer: "Agencies, SaaS, B2B",
-    bestOutcome: "More qualified opportunities",
-  },
-];
-
+export const AI_PACKAGES = ENTERPRISE_PLANS;
 export const AI_ENGAGEMENT_TIERS: EngagementTier[] = [
-  {
-    id: "starter",
-    name: "STARTER",
-    startingPrice: "From $5,000",
-    description: "For businesses automating one important process.",
-  },
-  {
-    id: "growth",
-    name: "★ GROWTH",
-    startingPrice: "From $7,500",
-    description: "For companies deploying a complete AI workflow or agent.",
-    isPopular: true,
-  },
-  {
-    id: "enterprise",
-    name: "ENTERPRISE",
-    startingPrice: "From $25,000",
-    description:
-      "Multiple AI agents, integrations, private AI infrastructure, and ongoing optimization.",
-  },
+  { id: "ai-launch", name: "AI Launch", startingPrice: "$25,000", description: "Targeted single-function AI rollout" },
+  { id: "ai-trans", name: "AI Transformation", startingPrice: "$75,000", description: "Multi-process automation", isPopular: true },
+  { id: "ent-trans", name: "Enterprise Transformation", startingPrice: "$300,000+", description: "Holistic organizational transformation" },
 ];
-
-// ─────────────────────────────────────────────────────────────────────────────
-// PDF 2: THINKATIC SCALEOS (OUTSOURCING PARTNERSHIP PROPOSAL)
-// ─────────────────────────────────────────────────────────────────────────────
-
-export const SCALEOS_OVERVIEW = {
-  title: "Thinkatic ScaleOS",
-  subtitle: "Outsourcing Partnership Proposal",
-  pitch:
-    "One investment. One partner. 11 months of operational support — from process design and BPO deployment to recruitment, training, technology, quality and performance management.",
-  motto: "Outsource. Scale. Operate.",
-  location: "Magarpatta City, Hadapsar, Pune, India",
-  companyLine: "Thinkatic · A Healweal Group Company",
-  quote:
-    "\"Thinkatic is not charging you a monthly consulting or renewal fee. You make one strategic investment and we build and support your outsourcing operation for the full 11-month engagement.\"",
-  stats: [
-    { value: "11", label: "MONTH LAUNCH & MANAGED SUPPORT COMMITMENT" },
-    { value: "₹0", label: "ANNUAL RENEWAL OR CONTRACT RENEWAL FEE" },
-    { value: "3", label: "SCALE TIERS — 5 TO 500 SEATS" },
-  ],
-  pipeline: [
-    "Project",
-    "Trained Team",
-    "Technology",
-    "Operations",
-    "Quality Control",
-    "Ongoing Support",
-  ],
-};
-
-export const SCALEOS_TIERS: ScaleOSTier[] = [
-  {
-    id: "starter",
-    name: "Starter",
-    price: "₹5,00,000",
-    priceNumeric: 500000,
-    seats: "5–10 seats",
-    contract: "11-month partnership",
-    renewal: "₹0 renewal fee",
-    subtitle: "FOR BUSINESSES STARTING THEIR OUTSOURCING JOURNEY",
-    description:
-      "5–10 seats · 11-month partnership · ₹0 renewal fee — the low-risk entry point into managed outsourcing.",
-    pillars: [
-      {
-        title: "BUILD",
-        items: [
-          "Process discovery",
-          "Process mapping",
-          "SOP creation",
-          "Workflow design",
-          "Outsourcing roadmap",
-        ],
-      },
-      {
-        title: "BUILD THE TEAM",
-        items: [
-          "BPO partner allocation",
-          "Recruitment coordination",
-          "Candidate screening support",
-          "Agent onboarding",
-          "Training coordination",
-        ],
-      },
-      {
-        title: "BUILD THE OPERATION",
-        items: [
-          "CRM / workflow setup",
-          "Basic technology configuration",
-          "KPI framework",
-          "QA framework",
-          "Reporting structure & escalation matrix",
-        ],
-      },
-      {
-        title: "LAUNCH",
-        items: [
-          "Go-live support",
-          "Initial performance monitoring",
-          "Process stabilization",
-          "Monthly performance review",
-        ],
-      },
-    ],
-    summaryQuote: "Start outsourcing without building an outsourcing department.",
-    summaryPrice: "₹5 lakh one-time investment for an 11-month partnership.",
-  },
-  {
-    id: "growth",
-    name: "Growth",
-    price: "₹7,50,000",
-    priceNumeric: 750000,
-    seats: "10–50 seats",
-    contract: "11-month partnership",
-    renewal: "₹0 renewal fee",
-    isMostPopular: true,
-    subtitle: "FOR BUSINESSES READY TO BUILD A SERIOUS OUTSOURCED OPERATION",
-    description:
-      "10–50 seats · 11-month partnership · ₹0 renewal fee — turn outsourcing into a scalable operating engine.",
-    pillars: [
-      {
-        title: "ADVANCED OPERATIONS",
-        items: [
-          "Dedicated account manager",
-          "Advanced SOPs",
-          "Detailed workforce planning",
-          "Multi-level escalation system",
-          "Advanced QA framework",
-          "Weekly performance reporting",
-        ],
-      },
-      {
-        title: "TECHNOLOGY",
-        items: [
-          "Advanced CRM / workflow configuration",
-          "Automated reporting",
-          "Productivity dashboards",
-          "Performance analytics",
-          "Call / chat QA integration",
-        ],
-      },
-      {
-        title: "PEOPLE",
-        items: [
-          "Structured recruitment pipeline",
-          "Training framework",
-          "Mock-process assessment",
-          "Replacement coordination",
-          "Attrition management support",
-        ],
-      },
-      {
-        title: "GROWTH",
-        items: [
-          "Capacity planning",
-          "Additional seat deployment",
-          "Process optimization",
-          "Monthly strategy review",
-          "Expansion support up to 50 seats",
-        ],
-      },
-    ],
-    summaryQuote: "Turn outsourcing into a scalable operating engine.",
-    summaryPrice: "₹7.5 lakh once. No renewal fee for the 11-month contract.",
-  },
-  {
-    id: "enterprise",
-    name: "Enterprise",
-    price: "₹10,00,000",
-    priceNumeric: 1000000,
-    seats: "50–500 seats",
-    contract: "11-month contract",
-    renewal: "lifetime support · ₹0 renewal fee",
-    subtitle: "FOR BUSINESSES BUILDING A LARGE-SCALE OUTSOURCING OPERATION",
-    description:
-      "50–500 seats · 11-month contract · lifetime support · ₹0 renewal fee.",
-    pillars: [
-      {
-        title: "ENTERPRISE IMPLEMENTATION",
-        items: [
-          "Multi-process implementation",
-          "Multi-team, multi-shift deployment",
-          "Large-scale workforce planning",
-          "Enterprise SOP architecture",
-          "Department-level KPI framework",
-        ],
-      },
-      {
-        title: "TECHNOLOGY & ANALYTICS",
-        items: [
-          "Enterprise reporting & dashboards",
-          "Workflow automation",
-          "AI-assisted QA where applicable",
-          "Performance analytics",
-          "Integration support",
-        ],
-      },
-      {
-        title: "ENTERPRISE MANAGEMENT",
-        items: [
-          "Dedicated enterprise account team",
-          "Priority escalation",
-          "Monthly business reviews",
-          "Capacity & workforce optimization",
-          "Scale-up support up to 500 seats",
-        ],
-      },
-      {
-        title: "LIFETIME STRATEGIC SUPPORT",
-        items: [
-          "Process & outsourcing advisory",
-          "BPO partner coordination",
-          "Expansion discussions",
-          "Technology guidance",
-          "Operational troubleshooting",
-        ],
-      },
-    ],
-    lifetimeSupportNote:
-      "After the initial 11-month contract, Thinkatic continues providing lifetime strategic advisory without a separate renewal fee. This does not include unlimited free manpower, technology licenses, additional seats, recruitment, or execution — those remain separately chargeable if required.",
-    summaryQuote: "Build an outsourcing infrastructure that can scale from 50 to 500 seats.",
-    summaryPrice: "₹10 lakh one-time investment. 11-month enterprise partnership + lifetime strategic support.",
-  },
-];
-
-export const SCALEOS_MATRIX: ScaleOSComparisonRow[] = [
-  { feature: "One-time investment", starter: "₹5,00,000", growth: "₹7,50,000", enterprise: "₹10,00,000" },
-  { feature: "Contract period", starter: "11 months", growth: "11 months", enterprise: "11 months" },
-  { feature: "Seats supported", starter: "5–10", growth: "10–50", enterprise: "50–500" },
-  { feature: "Renewal fee", starter: "₹0", growth: "₹0", enterprise: "₹0" },
-  { feature: "Lifetime support", starter: "—", growth: "—", enterprise: "✓" },
-  { feature: "BPO partner allocation", starter: "✓", growth: "✓", enterprise: "✓" },
-  { feature: "Recruitment coordination", starter: "✓", growth: "✓", enterprise: "✓" },
-  { feature: "SOP development", starter: "Standard", growth: "Advanced", enterprise: "Enterprise" },
-  { feature: "Technology setup", starter: "Standard", growth: "Advanced", enterprise: "Enterprise" },
-  { feature: "QA framework", starter: "Standard", growth: "Advanced", enterprise: "Enterprise" },
-  { feature: "Performance reporting", starter: "Monthly", growth: "Weekly", enterprise: "Real-time" },
-  { feature: "Process optimization", starter: "Basic", growth: "Continuous", enterprise: "Continuous" },
-  { feature: "Scale-up support", starter: "Up to 10 seats", growth: "Up to 50 seats", enterprise: "Up to 500 seats" },
-  { feature: "Strategic reviews", starter: "Quarterly", growth: "Monthly", enterprise: "Monthly" },
-  { feature: "Account management", starter: "Shared", growth: "Dedicated", enterprise: "Dedicated Enterprise Team" },
-];
-
-export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
-  { id: 1, project: "AutoCAD Map Digitization / Cadastral", region: "INDIA", payout: "₹3.50 / polygon", cycle: "Monthly", typeNotes: "Direct sign-up available" },
-  { id: 2, project: "UK IVA", region: "UK", payout: "£35 / CPA", cycle: "Weekly", typeNotes: "Individual volunteer agreement" },
-  { id: 3, project: "UK Debt Settlement", region: "UK", payout: "£20 / CPA", cycle: "Biweekly", typeNotes: "CPA" },
-  { id: 4, project: "Solar Appointment Setting", region: "USA", payout: "$40 / appointment", cycle: "Weekly", typeNotes: "Appointment setting" },
-  { id: 5, project: "Final Expense Live Transfer", region: "USA", payout: "$35 / CPA", cycle: "Weekly", typeNotes: "Live transfer" },
-  { id: 6, project: "USA Auto Warranty Live Transfer", region: "USA", payout: "$40 / CPA", cycle: "Weekly", typeNotes: "Live transfer" },
-  { id: 7, project: "Bank DSA – Domestic", region: "INDIA", payout: "2–3% loan; ₹800–₹1,400 / card", cycle: "Monthly", typeNotes: "Banks + selected NBFCs" },
-  { id: 8, project: "GIS Project", region: "INDIA", payout: "TBC", cycle: "TBC", typeNotes: "GIS / mapping" },
-  { id: 9, project: "SSID Live Transfer", region: "USA", payout: "$30 / CPA", cycle: "Weekly", typeNotes: "Live transfer" },
-  { id: 10, project: "Social Security ID / Home Improvement Live Transfer", region: "USA", payout: "$25 / CPA", cycle: "Weekly", typeNotes: "Live transfer" },
-  { id: 11, project: "ACA U65 Health Insurance Live Transfer", region: "USA", payout: "$40–$65 / CPA", cycle: "Weekly", typeNotes: "Health insurance" },
-  { id: 12, project: "Additional USA Project Slot A", region: "USA", payout: "TBC", cycle: "TBC", typeNotes: "Pending details" },
-  { id: 13, project: "Additional USA Project Slot B", region: "USA", payout: "TBC", cycle: "TBC", typeNotes: "Pending details" },
-  { id: 14, project: "Additional USA Project Slot C", region: "USA", payout: "TBC", cycle: "TBC", typeNotes: "Pending details" },
-  { id: 15, project: "Additional USA Project Slot D", region: "USA", payout: "TBC", cycle: "TBC", typeNotes: "Pending details" },
-  { id: 16, project: "Additional UK Project Slot A", region: "UK", payout: "TBC", cycle: "TBC", typeNotes: "Pending details" },
-  { id: 17, project: "Additional UK Project Slot B", region: "UK", payout: "TBC", cycle: "TBC", typeNotes: "Pending details" },
-];
-
-export const ALTERNATIVE_COMPARISON: AlternativeComparisonRow[] = [
-  { traditional: "Hire an outsourcing manager", scaleOS: "Thinkatic manages it" },
-  { traditional: "Find a BPO partner", scaleOS: "Thinkatic coordinates" },
-  { traditional: "Recruit agents", scaleOS: "Thinkatic coordinates" },
-  { traditional: "Build SOPs, training & QA", scaleOS: "Included" },
-  { traditional: "Set up reporting", scaleOS: "Included" },
-  { traditional: "Manage escalations", scaleOS: "Included" },
-  { traditional: "Find replacement staff", scaleOS: "Included" },
-  { traditional: "Scale the operation", scaleOS: "Included" },
-  { traditional: "Pay annual renewal", scaleOS: "₹0" },
-  { traditional: "Manage multiple vendors", scaleOS: "One Thinkatic relationship" },
-];
+export const AI_CATALOG_OVERVIEW: CatalogOverviewItem[] = [];
+export const SCALEOS_OVERVIEW = { title: "Enterprise Technology Architecture" };
+export const SCALEOS_TIERS: EnterprisePlan[] = [];
+export const SCALEOS_MATRIX: ScaleOSComparisonRow[] = [];
+export const PORTFOLIO_PROJECTS: PortfolioProject[] = [];
+export const ALTERNATIVE_COMPARISON: AlternativeComparisonRow[] = [];

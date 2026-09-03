@@ -3,6 +3,7 @@ import { Link, useParams } from "wouter";
 import Layout from "@/components/layout/Layout";
 import { services, BLUE, BLUE_DIM, BLUE_BORDER } from "@/data/services-data";
 import NotFound from "@/pages/not-found";
+import { useSEO } from "@/hooks/useSEO";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -49,9 +50,30 @@ function CheckItem({ text }: { text: string }) {
 
 export default function ServiceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const svc = services.find((s) => s.id === slug);
+
+  const aliasMap: Record<string, string> = {
+    "custom-ai": "ai-launch",
+    "generative-ai": "ai-transformation",
+    "ai-automation": "ai-transformation",
+    "machine-learning": "enterprise-ai",
+    "cloud-devops": "cloud-modernization",
+    "healthcare-bpo": "enterprise-transformation",
+    "customer-support": "ai-transformation",
+    "sales-lead-generation": "ai-launch",
+    "back-office": "data-foundation",
+    "ai-powered-bpo": "enterprise-ai",
+  };
+
+  const targetId = slug ? (aliasMap[slug] || slug) : "";
+  const svc = services.find((s) => s.id === targetId);
 
   if (!svc) return <NotFound />;
+
+  useSEO({
+    title: `${svc.title} — Enterprise Technology Architecture`,
+    description: svc.description,
+    path: `/services/${svc.id}`,
+  });
 
   const related = services.filter((s) => s.id !== svc.id).slice(0, 3);
 
