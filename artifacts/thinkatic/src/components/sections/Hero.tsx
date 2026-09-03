@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion';
 import { Link } from 'wouter';
-import { ArrowRight, CalendarDays, Shield, Award, Zap, Star, CheckCircle2, Lock, Database, Cloud, Cpu, Sparkles } from 'lucide-react';
+import {
+  ArrowRight, CalendarDays, Shield, Award, Zap, CheckCircle2,
+  Lock, Database, Cloud, Cpu, Sparkles, Activity, Terminal
+} from 'lucide-react';
+
+// ─── Content Locked Assets ───────────────────────────────────────────────────
 
 const HERO_LINES = ['Enterprise Technology', 'Transformation', 'For Mission-Critical', 'Scale.'];
 
@@ -20,10 +25,10 @@ const CERT_BADGES = [
 ];
 
 const ARCHITECTURE_METRICS = [
-  { value: '99.99%', label: 'Cloud Uptime SLA', color: '#214ECF' },
-  { value: 'Zero Trust', label: 'Security Baseline', color: '#10B981' },
-  { value: '2B+', label: 'Annual Operations', color: '#8B5CF6' },
-  { value: '<25ms', label: 'Platform Latency', color: '#F59E0B' },
+  { value: '99.99%', label: 'Cloud Uptime SLA', color: '#1E40AF', sub: 'High Availability' },
+  { value: 'Zero Trust', label: 'Security Baseline', color: '#059669', sub: 'NIST & SOC 2' },
+  { value: '2B+', label: 'Annual Operations', color: '#7C3AED', sub: 'Mission-Critical' },
+  { value: '<25ms', label: 'Platform Latency', color: '#D97706', sub: 'Real-Time Edge' },
 ];
 
 const TELEMETRY_PIPELINES = [
@@ -37,186 +42,217 @@ const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 export function Hero() {
   return (
     <section
-      className="relative min-h-[100dvh] w-full overflow-hidden flex items-center"
-      style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f4f7ff 38%, #eef3ff 100%)' }}
+      className="relative min-h-[100dvh] w-full overflow-hidden flex items-center bg-white"
       aria-label="Hero — Thinkatic Enterprise Technology Transformation Partner"
     >
+      {/* ── Background Architectural Canvas ── */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        {/* Soft atmospheric gradient behind command center */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute top-1/4 right-0 w-[650px] h-[650px] opacity-40"
           style={{
-            backgroundImage: 'linear-gradient(rgba(71,163,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(71,163,255,1) 1px, transparent 1px)',
-            backgroundSize: '44px 44px',
-            maskImage: 'radial-gradient(ellipse 85% 85% at 50% 50%, black 20%, transparent 100%)',
+            background: 'radial-gradient(circle at 60% 40%, rgba(30, 64, 175, 0.07) 0%, rgba(5, 150, 105, 0.03) 45%, transparent 70%)',
+            filter: 'blur(70px)',
           }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(37,99,235,0.18),transparent_28%),radial-gradient(circle_at_82%_80%,rgba(71,163,255,0.16),transparent_26%),radial-gradient(circle_at_50%_48%,rgba(33,78,207,0.08),transparent_22%)]" />
+
+        {/* Hairline Technical Grid */}
+        <div
+          className="absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage: 'linear-gradient(#0F172A 1px, transparent 1px), linear-gradient(90deg, #0F172A 1px, transparent 1px)',
+            backgroundSize: '72px 72px',
+          }}
+        />
+
+        {/* Subtle decorative circuit traces */}
+        <svg
+          className="absolute inset-0 w-full h-full opacity-[0.03]"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <line x1="0" y1="144" x2="100%" y2="144" stroke="#0F172A" strokeWidth="1" />
+          <line x1="0" y1="576" x2="100%" y2="576" stroke="#0F172A" strokeWidth="1" strokeDasharray="6 6" />
+          <circle cx="50%" cy="144" r="3" fill="#1E40AF" />
+          <circle cx="75%" cy="576" r="3" fill="#1E40AF" />
+        </svg>
+
+        {/* Subtle bottom division */}
+        <div className="absolute bottom-0 inset-x-0 h-px bg-slate-200" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 w-full relative z-10 flex flex-col lg:flex-row items-center pt-36 pb-20 lg:pt-0 lg:pb-0 min-h-[100dvh]">
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE }}
-          className="w-full lg:w-[54%] flex flex-col items-start text-left relative z-20 lg:pr-12"
-        >
-          {/* Eyebrow */}
-          <div
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border mb-6"
-            style={{ background: 'rgba(33,78,207,0.06)', borderColor: 'rgba(33,78,207,0.18)' }}
-          >
-            <span className="w-2 h-2 rounded-full bg-[#214ECF] animate-pulse" aria-hidden="true" />
-            <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-[#214ECF] font-bold">
-              Enterprise Technology Transformation Partner
-            </span>
-          </div>
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 w-full relative z-10 pt-32 pb-20 lg:pt-28 lg:pb-16 min-h-[100dvh] flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
 
-          {/* Headline */}
-          <h1 className="font-display font-bold text-slate-900 leading-[1.04] mb-6 tracking-tight">
-            {HERO_LINES.map((line, i) => {
-              const isAccent = line === 'Transformation' || line === 'Enterprise Technology';
-
-              return (
-                <motion.span
-                  key={line}
-                  className="block"
-                  initial={{ opacity: 0, y: 22 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.08 + i * 0.08, duration: 0.55, ease: EASE }}
-                  style={{
-                    fontSize: line === 'Transformation' ? 'clamp(2.5rem,4.8vw,4.5rem)' : 'clamp(2.2rem,4.2vw,3.8rem)',
-                    ...(line === 'Transformation'
-                      ? {
-                          background: 'linear-gradient(135deg,#1E40AF 0%,#214ECF 50%,#3B82F6 100%)',
-                          WebkitBackgroundClip: 'text',
-                          WebkitTextFillColor: 'transparent',
-                        }
-                      : {}),
-                  }}
-                >
-                  {line}
-                </motion.span>
-              );
-            })}
-          </h1>
-
-          {/* Core positioning text */}
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.6, ease: EASE }}
-            className="text-base sm:text-lg max-w-[540px] leading-relaxed mb-6 font-normal text-slate-600"
-          >
-            <strong className="font-semibold text-slate-900">
-              Thinkatic helps US enterprises build, modernize, secure and operate mission-critical technology systems.
-            </strong>{' '}
-            We unite AI, Cloud, Cybersecurity, Data, and Engineering into cohesive enterprise transformations.
-          </motion.p>
-
-          {/* Primary Capabilities Pills */}
+          {/* ═══════════════════════════════════════════════════════════════════
+              LEFT COLUMN: Authoritative Enterprise Proclamation (7 cols)
+          ═══════════════════════════════════════════════════════════════════ */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.52, duration: 0.5, ease: EASE }}
-            className="flex flex-wrap gap-2 mb-7"
+            transition={{ duration: 0.7, ease: EASE }}
+            className="lg:col-span-7 flex flex-col items-start text-left"
           >
-            {CAPABILITIES.map(({ label, icon: Icon }) => (
-              <div
-                key={label}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border bg-white shadow-xs text-xs font-semibold text-slate-800"
-                style={{ borderColor: '#DCE5FF' }}
-              >
-                <Icon size={13} className="text-[#214ECF]" />
-                <span>{label}</span>
-              </div>
-            ))}
-          </motion.div>
+            {/* Technical Eyebrow Badge */}
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-md border border-slate-200 bg-slate-50/80 mb-6 shadow-2xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#1E40AF] animate-pulse" aria-hidden="true" />
+              <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-slate-800 font-bold">
+                Enterprise Technology Transformation Partner
+              </span>
+            </div>
 
-          {/* Action CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.62, duration: 0.55, ease: EASE }}
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-3.5 mb-8 w-full sm:w-auto"
-          >
-            <Link href="/contact">
-              <button
-                className="w-full sm:w-auto h-12 px-7 rounded-xl font-bold text-white text-[13px] tracking-wider border-0 flex items-center justify-center gap-2 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#1D4ED8] bg-[#1E40AF] cursor-pointer shadow-sm"
-              >
-                <CalendarDays size={15} aria-hidden="true" />
-                Plan Your Transformation
-              </button>
-            </Link>
-            <Link href="/pricing">
-              <button
-                className="w-full sm:w-auto h-12 px-7 rounded-xl font-bold text-slate-900 text-[13px] tracking-wider flex items-center justify-center gap-2 transition-all duration-200 hover:bg-slate-50 hover:border-slate-300 border border-slate-200 bg-white cursor-pointer shadow-2xs"
-              >
-                View Enterprise Plans
-                <ArrowRight size={15} className="text-[#1E40AF]" aria-hidden="true" />
-              </button>
-            </Link>
-          </motion.div>
+            {/* Monumental Headline */}
+            <h1 className="font-display font-black text-slate-900 leading-[0.98] mb-6 tracking-[-0.035em]">
+              <span className="block text-4xl sm:text-5xl lg:text-[4rem] xl:text-[4.25rem] text-slate-900">
+                {HERO_LINES[0]}
+              </span>
+              <span className="block text-4xl sm:text-5xl lg:text-[4rem] xl:text-[4.25rem] text-[#1E40AF] mt-1 mb-1">
+                {HERO_LINES[1]}
+              </span>
+              <span className="block text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.5rem] text-slate-900 font-bold tracking-tight">
+                {HERO_LINES[2]} {HERO_LINES[3]}
+              </span>
+            </h1>
 
-          {/* Certifications & SLA badges */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.72, duration: 0.5, ease: EASE }}
-            className="flex items-center gap-3 flex-wrap pt-4 border-t border-[#DCE5FF] w-full"
-          >
-            {CERT_BADGES.map(({ icon: Icon, label }, i) => (
-              <div key={label} className="flex items-center gap-1.5 text-slate-700">
-                <Icon size={12} className="text-[#214ECF]" aria-hidden="true" />
-                <span className="text-[11px] font-mono uppercase tracking-[0.1em] text-slate-600 font-medium">
-                  {label}
+            {/* Core Positioning Narrative */}
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.6, ease: EASE }}
+              className="text-base sm:text-lg max-w-xl leading-relaxed mb-7 text-slate-700 font-normal"
+            >
+              <strong className="font-semibold text-slate-900">
+                Thinkatic helps US enterprises build, modernize, secure and operate mission-critical technology systems.
+              </strong>{' '}
+              We unite AI, Cloud, Cybersecurity, Data, and Engineering into cohesive enterprise transformations.
+            </motion.p>
+
+            {/* Capabilities Navigation Architecture (Connected Bar) */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.55, ease: EASE }}
+              className="w-full max-w-xl mb-8"
+            >
+              <div className="flex items-center gap-2 mb-2.5">
+                <Terminal size={12} className="text-[#1E40AF]" />
+                <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-500">
+                  Core Engineering Disciplines
                 </span>
-                {i < CERT_BADGES.length - 1 && <span className="ml-2 w-px h-3 bg-[#DCE5FF]" aria-hidden="true" />}
               </div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Right Hero Architecture Snapshot */}
-        <motion.div
-          initial={{ opacity: 0, x: 24 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3, duration: 0.75, ease: EASE }}
-          className="w-full lg:w-[46%] relative mt-14 lg:mt-0 flex-shrink-0"
-          aria-hidden="true"
-        >
-          <div className="relative rounded-[2rem] border p-5 md:p-7 overflow-hidden" style={{ background: '#F4F7FF', borderColor: '#DCE5FF', boxShadow: '0 20px 60px rgba(33,78,207,0.12)' }}>
-            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_25%,rgba(33,78,207,0.14),transparent_30%),radial-gradient(circle_at_50%_78%,rgba(33,78,207,0.09),transparent_36%)]" />
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-[linear-gradient(90deg,transparent,rgba(37,99,235,0.6)_30%,rgba(33,78,207,0.72)_50%,rgba(37,99,235,0.6)_70%,transparent)]" />
-
-            <div className="relative z-10 flex flex-col gap-5">
-              {/* Dashboard Header */}
-              <div className="rounded-[1.5rem] border px-6 py-6" style={{ background: '#FFFFFF', borderColor: '#DCE5FF', boxShadow: '0 8px 24px rgba(33,78,207,0.06)' }}>
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <p className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] mb-1.5 text-[#214ECF]">
-                      Enterprise Architecture
-                    </p>
-                    <h3 className="text-slate-900 font-display text-2xl font-black leading-tight">
-                      Mission-Critical Telemetry
-                    </h3>
+              <div className="flex flex-wrap gap-1.5 p-1 rounded-lg border border-slate-200 bg-slate-50/60 shadow-2xs">
+                {CAPABILITIES.map(({ label, icon: Icon }) => (
+                  <div
+                    key={label}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white border border-slate-200/90 text-xs font-mono font-medium text-slate-800 transition-all hover:border-[#93C5FD] hover:text-[#1E40AF] cursor-default shadow-2xs"
+                  >
+                    <Icon size={12} className="text-[#1E40AF]" />
+                    <span>{label}</span>
                   </div>
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-200 bg-emerald-50">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-700 font-bold">Active SLA</span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Confident Enterprise CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.55, ease: EASE }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-9 w-full sm:w-auto"
+            >
+              <Link href="/contact">
+                <button
+                  className="h-12 px-7 rounded-xl font-bold text-white text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 transition-all duration-200 hover:bg-[#1D4ED8] bg-[#1E40AF] cursor-pointer shadow-xs hover:shadow-sm"
+                >
+                  <CalendarDays size={15} aria-hidden="true" />
+                  Plan Your Transformation
+                </button>
+              </Link>
+              <Link href="/pricing">
+                <button
+                  className="h-12 px-7 rounded-xl font-bold text-slate-800 text-xs tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-200 hover:bg-slate-50 hover:border-slate-300 border border-slate-200 bg-white cursor-pointer shadow-2xs"
+                >
+                  View Enterprise Plans
+                  <ArrowRight size={14} className="text-[#1E40AF]" aria-hidden="true" />
+                </button>
+              </Link>
+            </motion.div>
+
+            {/* Certifications & Trust Architecture (Understated Baseline) */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.55, duration: 0.5, ease: EASE }}
+              className="flex items-center gap-y-2 gap-x-4 flex-wrap pt-5 border-t border-slate-200 w-full max-w-xl"
+            >
+              {CERT_BADGES.map(({ icon: Icon, label }, i) => (
+                <div key={label} className="flex items-center gap-1.5 text-slate-600">
+                  <Icon size={13} className="text-[#1E40AF]" aria-hidden="true" />
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-slate-600 font-semibold">
+                    {label}
+                  </span>
+                  {i < CERT_BADGES.length - 1 && (
+                    <span className="hidden sm:inline-block ml-3 text-slate-300 select-none">·</span>
+                  )}
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* ═══════════════════════════════════════════════════════════════════
+              RIGHT COLUMN: Enterprise Technology Command Center (5 cols)
+          ═══════════════════════════════════════════════════════════════════ */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3, duration: 0.75, ease: EASE }}
+            className="lg:col-span-5 relative w-full"
+            aria-label="Enterprise Infrastructure Command Center"
+          >
+            {/* Multi-Layered Technical Command Deck */}
+            <div className="relative space-y-4">
+
+              {/* Panel A: Mission-Critical Telemetry Console */}
+              <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-xs relative overflow-hidden">
+                {/* Corner registration crosshairs */}
+                <div className="absolute top-2 left-2 text-slate-300 font-mono text-[9px] select-none">+</div>
+                <div className="absolute top-2 right-2 text-slate-300 font-mono text-[9px] select-none">+</div>
+
+                {/* Header Strip */}
+                <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
+                  <div className="flex items-center gap-2">
+                    <Activity size={14} className="text-[#1E40AF]" />
+                    <div>
+                      <p className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#1E40AF]">
+                        Enterprise Architecture
+                      </p>
+                      <h3 className="text-slate-900 font-display text-base font-bold leading-tight">
+                        Mission-Critical Telemetry
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-emerald-200 bg-emerald-50">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-700 font-bold">
+                      Active SLA
+                    </span>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3.5">
+                {/* High-Density Metric Grid */}
+                <div className="grid grid-cols-2 gap-3">
                   {ARCHITECTURE_METRICS.map((metric) => (
                     <div
                       key={metric.label}
-                      className="rounded-xl p-3.5 border text-center"
-                      style={{ background: '#F8FAFF', borderColor: '#DCE5FF' }}
+                      className="rounded-lg p-3 border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-slate-300 transition-colors"
                     >
-                      <p className="font-display font-black text-2xl sm:text-3xl leading-none mb-1.5" style={{ color: metric.color }}>
-                        {metric.value}
-                      </p>
-                      <p className="text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                      <div className="flex items-baseline justify-between mb-1">
+                        <p className="font-display font-black text-xl sm:text-2xl leading-none text-slate-900">
+                          {metric.value}
+                        </p>
+                        <span className="w-1.5 h-1.5 rounded-full" style={{ background: metric.color }} />
+                      </div>
+                      <p className="text-[10px] font-mono uppercase tracking-wider text-slate-600 font-semibold leading-tight">
                         {metric.label}
                       </p>
                     </div>
@@ -224,46 +260,47 @@ export function Hero() {
                 </div>
               </div>
 
-              {/* Active Pipeline Cards */}
-              <div className="grid gap-3">
-                {TELEMETRY_PIPELINES.map((item) => (
-                  <div
-                    key={item.label}
-                    className="rounded-xl px-4 py-3.5 flex items-center justify-between"
-                    style={{
-                      background: '#FFFFFF',
-                      border: '1px solid #DCE5FF',
-                      boxShadow: '0 4px 14px rgba(33,78,207,0.04)',
-                    }}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="text-lg leading-none">{item.icon}</span>
-                      <div>
-                        <div className="text-[10px] font-mono uppercase tracking-wider text-slate-600 font-semibold">
-                          {item.label}
-                        </div>
-                        <div className="text-xs font-bold text-slate-900">
-                          {item.value}
+              {/* Panel B: Active Production Pipelines Stream */}
+              <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs relative overflow-hidden">
+                <div className="flex items-center justify-between mb-3 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-500">
+                  <span>Active Production Pipelines</span>
+                  <span className="text-[#1E40AF]">Live Signal</span>
+                </div>
+
+                <div className="space-y-2">
+                  {TELEMETRY_PIPELINES.map((item) => (
+                    <div
+                      key={item.label}
+                      className="rounded-lg p-2.5 border border-slate-100 bg-slate-50/70 flex items-center justify-between hover:bg-white hover:border-slate-200 transition-colors"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <span className="text-base leading-none select-none">{item.icon}</span>
+                        <div>
+                          <div className="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-semibold">
+                            {item.label}
+                          </div>
+                          <div className="text-xs font-bold text-slate-900">
+                            {item.value}
+                          </div>
                         </div>
                       </div>
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-blue-50 text-[#1E40AF] border border-blue-200/70">
+                        {item.status}
+                      </span>
                     </div>
-                    <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-md bg-blue-50 text-[#1E40AF] border border-blue-200/80">
-                      {item.status}
-                    </span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
 
-              {/* Executive Testimonial Quote */}
-              <div
-                className="rounded-xl border p-4.5 bg-slate-50/80 border-slate-200"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-lg flex items-center justify-center font-bold text-xs border border-[#1E40AF]/30 bg-[#1E40AF]/10 text-[#1E40AF] shrink-0">
+              {/* Panel C: Executive Endorsement Anchor */}
+              <div className="rounded-xl border border-slate-200 bg-slate-50/90 p-4.5 shadow-2xs relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-full bg-[#1E40AF]" />
+                <div className="flex items-start gap-3 pl-1">
+                  <div className="w-8 h-8 rounded-md flex items-center justify-center font-mono font-bold text-xs border border-[#1E40AF]/30 bg-[#1E40AF]/10 text-[#1E40AF] shrink-0">
                     CTO
                   </div>
                   <div>
-                    <p className="text-xs sm:text-sm leading-relaxed italic text-slate-800 mb-1.5 font-medium">
+                    <p className="text-xs leading-relaxed italic text-slate-800 mb-1.5 font-medium">
                       "Thinkatic re-architected our core technology infrastructure and deployed enterprise AI pipelines with zero disruption. World-class technical acumen."
                     </p>
                     <p className="text-xs font-bold text-slate-900">Enterprise Vice President of Engineering</p>
@@ -271,9 +308,11 @@ export function Hero() {
                   </div>
                 </div>
               </div>
+
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );

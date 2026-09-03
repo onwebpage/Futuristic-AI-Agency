@@ -17,7 +17,7 @@ function ThinkaticLogo({ compact }: { compact?: boolean }) {
     <img
       src="/logo-transparent-light.png"
       alt="Thinkatic"
-      style={{ height: compact ? "52px" : "64px", width: "auto", objectFit: "contain", filter: "contrast(1.18) saturate(1.15)", transition: "height 0.3s" }}
+      style={{ height: compact ? "42px" : "48px", width: "auto", objectFit: "contain", filter: "contrast(1.18) saturate(1.15)", transition: "height 0.25s" }}
     />
   );
 }
@@ -278,7 +278,7 @@ export default function Navbar() {
       >
         <div
           className="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between gap-4 transition-all duration-300"
-          style={{ height: scrolled ? "58px" : "68px" }}
+          style={{ height: scrolled ? "56px" : "64px" }}
         >
           {/* Logo */}
           <Link
