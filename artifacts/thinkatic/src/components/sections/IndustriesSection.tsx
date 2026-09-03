@@ -3,6 +3,18 @@ import {
   motion, AnimatePresence, useInView, animate,
 } from "framer-motion";
 import { useLocation } from "wouter";
+import {
+  Cpu,
+  Award,
+  ShieldCheck,
+  Layers,
+  Zap,
+  BarChart3,
+  RefreshCw,
+  UserCheck,
+  Globe,
+  ArrowUpRight,
+} from "lucide-react";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -198,16 +210,70 @@ const INDUSTRIES = [
 type Industry = typeof INDUSTRIES[number];
 
 const REASONS = [
-  "AI-first approach",
-  "Highly trained professionals",
-  "Enterprise-grade security",
-  "Flexible engagement models",
-  "Rapid team scaling",
-  "Transparent reporting",
-  "Continuous process improvement",
-  "Dedicated account management",
-  "Global delivery capabilities",
-];
+  {
+    id: "01",
+    title: "AI-first approach",
+    icon: Cpu,
+    tag: "CORE ARCHITECTURE",
+    highlight: "Autonomous agents & neural models",
+  },
+  {
+    id: "02",
+    title: "Highly trained professionals",
+    icon: Award,
+    tag: "TOP 1% TALENT",
+    highlight: "Domain-certified operators",
+  },
+  {
+    id: "03",
+    title: "Enterprise-grade security",
+    icon: ShieldCheck,
+    tag: "SOC2 & ISO 27001",
+    highlight: "Zero-trust & air-gapped data",
+  },
+  {
+    id: "04",
+    title: "Flexible engagement models",
+    icon: Layers,
+    tag: "MODULAR SLAs",
+    highlight: "Dedicated pods & hybrid teams",
+  },
+  {
+    id: "05",
+    title: "Rapid team scaling",
+    icon: Zap,
+    tag: "RAPID SCALE",
+    highlight: "Production ready in <14 days",
+  },
+  {
+    id: "06",
+    title: "Transparent reporting",
+    icon: BarChart3,
+    tag: "REAL-TIME BI",
+    highlight: "Audited telemetry & live dashboards",
+  },
+  {
+    id: "07",
+    title: "Continuous process improvement",
+    icon: RefreshCw,
+    tag: "KAIZEN VELOCITY",
+    highlight: "Iterative sprint optimization",
+  },
+  {
+    id: "08",
+    title: "Dedicated account management",
+    icon: UserCheck,
+    tag: "EXECUTIVE LIAISON",
+    highlight: "Named director & technical leads",
+  },
+  {
+    id: "09",
+    title: "Global delivery capabilities",
+    icon: Globe,
+    tag: "25+ COUNTRIES",
+    highlight: "24/7/365 multi-shore resiliency",
+  },
+] as const;
 
 // ─── Animated stat number ─────────────────────────────────────────────────────
 
@@ -428,40 +494,71 @@ function IndustryCard({ industry, index, isActive, onActivate }: IndustryCardPro
   );
 }
 
-// ─── Reason card (kept from original) ────────────────────────────────────────
+// ─── Precision Reason Card ───────────────────────────────────────────────────
 
-function ReasonCard({ reason, index }: { reason: string; index: number }) {
+function ReasonCard({ reason, index }: { reason: typeof REASONS[number]; index: number }) {
+  const Icon = reason.icon;
   const col = index % 3;
   const row = Math.floor(index / 3);
   const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: row * 0.1 + col * 0.06 }}
-      className="group flex items-start gap-4 rounded-xl p-5 border border-[#DCE5FF] bg-white cursor-default overflow-hidden relative"
-      style={{
-        transition: "border-color 0.2s",
-      }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: row * 0.08 + col * 0.04 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="group relative bg-white hover:bg-[#FBFDFF] p-6 md:p-7 flex flex-col justify-between transition-all duration-300 cursor-default"
     >
-      <motion.div
-        className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center mt-0.5"
-        animate={{ background: "rgba(33,78,207,0.09)" }}
-        style={{ border: "1px solid rgba(33,78,207,0.18)" }}
-      >
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
-          <path d="M20 6L9 17l-5-5" stroke="#214ECF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </motion.div>
-      <motion.span
-        className="text-sm font-medium"
-        animate={{ color: "#111827" }}
-        transition={{ duration: 0.25 }}
-      >
-        {reason}
-      </motion.span>
+      {/* Micro grid watermark on hover */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          backgroundImage: "linear-gradient(rgba(30,64,175,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(30,64,175,0.03) 1px, transparent 1px)",
+          backgroundSize: "20px 20px"
+        }}
+      />
+
+      {/* Top row: Index badge and Icon */}
+      <div>
+        <div className="flex items-center justify-between mb-5 relative z-10">
+          <div className="flex items-center gap-2">
+            <span className="font-mono font-bold text-[11px] text-[#1E40AF] bg-blue-50/90 border border-blue-200/60 px-2 py-0.5 rounded tracking-wider">
+              {reason.id}
+            </span>
+            <span className="text-[10px] font-mono font-semibold uppercase tracking-widest text-slate-500">
+              {reason.tag}
+            </span>
+          </div>
+          <div
+            className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105"
+            style={{
+              background: hovered ? "rgba(30,64,175,0.12)" : "rgba(30,64,175,0.06)",
+              border: "1px solid rgba(30,64,175,0.15)",
+            }}
+          >
+            <Icon size={16} className="text-[#1E40AF] transition-colors" />
+          </div>
+        </div>
+
+        {/* Title */}
+        <h4 className="text-slate-900 font-bold text-base md:text-lg tracking-tight leading-snug group-hover:text-[#1E40AF] transition-colors relative z-10">
+          {reason.title}
+        </h4>
+      </div>
+
+      {/* Bottom row: Operational Verification */}
+      <div className="pt-5 mt-4 border-t border-slate-100 flex items-center justify-between relative z-10">
+        <div className="flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+          <span className="text-[11px] font-mono text-slate-600 font-medium">
+            {reason.highlight}
+          </span>
+        </div>
+        <ArrowUpRight size={13} className="text-slate-400 group-hover:text-[#1E40AF] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+      </div>
     </motion.div>
   );
 }
@@ -554,33 +651,66 @@ export function IndustriesSection() {
 
         {/* ── Why Thinkatic ── */}
         <div>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
+          {/* Header block */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.6, ease }}
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/80 border border-blue-200/60 mb-4"
+              >
+                <div className="w-1.5 h-1.5 rounded-full bg-[#1E40AF]" />
+                <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#1E40AF]">
+                  Why businesses choose Thinkatic
+                </span>
+              </motion.div>
+
+              <div className="overflow-hidden">
+                <motion.h3
+                  initial={{ y: "100%", opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.75, ease }}
+                  className="font-display font-black text-slate-900 leading-[1.1]"
+                  style={{ fontSize: "clamp(2rem,3.4vw,3.2rem)" }}
+                >
+                  Nine Reasons to Choose Intelligent Operations
+                </motion.h3>
+              </div>
+            </div>
+
+            {/* Verification telemetry HUD indicator */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, ease, delay: 0.2 }}
+              className="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-slate-200/90 bg-white shadow-2xs self-start md:self-auto"
+            >
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <div className="text-left">
+                <p className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">Architecture Standard</p>
+                <p className="text-xs font-mono font-bold text-[#0F172A]">9/9 Protocols Active</p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Precision 3x3 Architectural Lattice */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, ease }}
-            className="text-[10px] font-mono uppercase tracking-[0.25em] mb-4"
-            style={{ color: "rgba(71,163,255,0.7)" }}
+            transition={{ duration: 0.7, ease }}
+            className="rounded-2xl border border-slate-200/90 bg-slate-200/80 p-[1px] shadow-[0_10px_35px_-10px_rgba(15,23,42,0.06)] overflow-hidden"
           >
-            Why Businesses Choose Thinkatic
-          </motion.p>
-          <div className="overflow-hidden mb-10">
-            <motion.h3
-              initial={{ y: "100%", opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.75, ease }}
-              className="font-display font-bold text-foreground"
-              style={{ fontSize: "clamp(1.8rem,3vw,2.8rem)" }}
-            >
-              Nine Reasons to Choose Intelligent Operations
-            </motion.h3>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {REASONS.map((r, i) => (
-              <ReasonCard key={r} reason={r} index={i} />
-            ))}
-          </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[1px]">
+              {REASONS.map((r, i) => (
+                <ReasonCard key={r.id} reason={r} index={i} />
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
