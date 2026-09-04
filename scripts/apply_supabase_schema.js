@@ -16,7 +16,6 @@ try {
 
 const connectionString =
   process.env.SUPABASE_DB_URL ||
-  process.env.DATABASE_URL ||
   process.argv[2];
 
 if (!connectionString) {

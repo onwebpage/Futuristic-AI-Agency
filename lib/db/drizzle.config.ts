@@ -5,9 +5,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const credentials = process.env.DATABASE_URL
-  ? { url: process.env.DATABASE_URL }
-  : process.env.PGHOST
+const credentials = process.env.PGHOST
   ? {
       host: process.env.PGHOST,
       port: Number(process.env.PGPORT ?? 5432),
