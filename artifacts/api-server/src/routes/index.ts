@@ -4,6 +4,7 @@ import contactsRouter from "./contacts.js";
 import adminRouter from "./admin.js";
 import paypalRouter from "./paypal.js";
 import plansRouter from "./plans.js";
+import userRouter from "./user.js";
 
 const router: IRouter = Router();
 
@@ -12,5 +13,6 @@ router.use(contactsRouter);
 router.use(adminRouter);
 router.use(paypalRouter);
 router.use(plansRouter);
+router.use(userRouter);
 
 export default router;

@@ -7,7 +7,7 @@ import {
   Check, Search, X, ArrowRight, FileText,
   HeadphonesIcon, Activity, Briefcase, Cpu, Users,
   ChevronDown, CalendarDays, Building2, Globe, Zap,
-  Sparkles, Cloud, ShieldCheck, Database,
+  Sparkles, Cloud, ShieldCheck, Database, User,
 } from "lucide-react";
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
@@ -378,6 +378,19 @@ export default function Navbar() {
               )}
             </div>
 
+            {/* Client Portal — desktop */}
+            <Link href={typeof window !== "undefined" && localStorage.getItem("user_token") ? "/dashboard" : "/login"} className="hidden md:block">
+              <motion.button
+                whileHover={{ y: -1 }}
+                whileTap={{ y: 0 }}
+                className="h-9 flex items-center gap-1.5 px-3 rounded-lg transition-all duration-200 border border-blue-200 bg-blue-50/70 text-blue-800 hover:bg-blue-100/80 font-bold text-[11px] tracking-wider shadow-2xs cursor-pointer"
+                aria-label="Client Portal"
+              >
+                <User size={12} className="text-blue-600" aria-hidden="true" />
+                {typeof window !== "undefined" && localStorage.getItem("user_token") ? "PORTAL" : "CLIENT LOGIN"}
+              </motion.button>
+            </Link>
+
             {/* Request Proposal — desktop only */}
             <Link href="/request-proposal" className="hidden lg:block">
               <motion.button
@@ -558,6 +571,14 @@ export default function Navbar() {
               className="px-6 pb-8 pt-4 border-t flex flex-col gap-3 shrink-0"
               style={{ borderColor: "rgba(33,78,207,0.04)" }}
             >
+              <Link href={typeof window !== "undefined" && localStorage.getItem("user_token") ? "/dashboard" : "/login"} onClick={() => setMobileOpen(false)}>
+                <button
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-blue-200 bg-blue-50/80 text-blue-700 font-bold text-xs shadow-2xs"
+                >
+                  <User size={13} aria-hidden="true" />
+                  {typeof window !== "undefined" && localStorage.getItem("user_token") ? "MY CLIENT PORTAL" : "CLIENT LOGIN / SIGNUP"}
+                </button>
+              </Link>
               <Link href="/request-proposal" onClick={() => setMobileOpen(false)}>
                 <button
                   className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border font-semibold text-muted-foreground transition-colors hover:text-foreground hover:border-[#DCE5FF]"

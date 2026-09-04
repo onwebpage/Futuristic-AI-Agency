@@ -48,6 +48,10 @@ const NotFound           = lazy(() => import("@/pages/not-found"));
 const AdminLoginPage     = lazy(() => import("@/pages/AdminLoginPage"));
 const AdminDashboardPage = lazy(() => import("@/pages/AdminDashboardPage"));
 
+// Client Portal & Dashboard pages
+const UserAuthPage       = lazy(() => import("@/pages/UserAuthPage"));
+const UserDashboardPage  = lazy(() => import("@/pages/UserDashboardPage"));
+
 // ── React Query client ────────────────────────────────────────────────────────
 
 const queryClient = new QueryClient({
@@ -89,6 +93,10 @@ function Router() {
         <Route path="/apply-online" component={ApplyOnlinePage} />
         <Route path="/admin-login" component={AdminLoginPage} />
         <Route path="/admin" component={AdminDashboardPage} />
+        <Route path="/login" component={UserAuthPage} />
+        <Route path="/signup" component={UserAuthPage} />
+        <Route path="/auth" component={UserAuthPage} />
+        <Route path="/dashboard" component={UserDashboardPage} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

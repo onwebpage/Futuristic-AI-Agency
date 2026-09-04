@@ -12,15 +12,11 @@ services:
         value: production
       - key: PORT
         value: 10000
-      - key: DATABASE_URL
-        fromDatabase:
-          name: thinkatic-db
-          property: connectionString
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_PUBLISHABLE_KEY
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false
       - key: SESSION_SECRET
         generateValue: true
-
-databases:
-  - name: thinkatic-db
-    databaseName: thinkatic
-    region: oregon
-    plan: free

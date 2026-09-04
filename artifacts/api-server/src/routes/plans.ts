@@ -1,7 +1,5 @@
 import { Router } from "express";
-import { db, withDbRetry } from "@workspace/db";
-import { plansTable } from "@workspace/db/schema";
-import { eq, asc, sql } from "drizzle-orm";
+import { plansRepository } from "@workspace/db";
 import { requireAuth } from "../lib/auth.js";
 
 const router = Router();
@@ -404,31 +402,20 @@ let seedPromise: Promise<void> | undefined;
 
 function ensureSeedData() {
   if (!seedPromise) {
-    seedPromise = withDbRetry(async () => {
-      await db.transaction(async (tx) => {
-        await tx.execute(sql`select pg_advisory_xact_lock(873421)`);
-        const existing = await tx.select({ id: plansTable.id }).from(plansTable).limit(1);
-        if (existing.length === 0) {
-          await tx.insert(plansTable).values(SEED_PLANS);
-        }
-      });
-    }, "Plan seed initialization", 6).catch((error) => {
+    seedPromise = plansRepository.seedIfEmpty(SEED_PLANS).catch((error) => {
       seedPromise = undefined;
-      throw error;
+      console.warn("[Plans] Seed data check warning:", error?.message || error);
     });
   }
   return seedPromise;
 }
 
-ensureSeedData().catch((error) => console.error("Plan seed initialization failed:", error));
+ensureSeedData().catch(() => {});
 
 router.get("/plans", async (_req, res) => {
   try {
     await ensureSeedData();
-    const plans = await withDbRetry(
-      () => db.select().from(plansTable).orderBy(asc(plansTable.serviceNumber), asc(plansTable.sortOrder)),
-      "Plans query",
-    );
+    const plans = await plansRepository.getAll();
 
     const groupMap = new Map<string, { id: string; number: string; category: string; plans: typeof plans }>();
     for (const plan of plans) {
@@ -443,102 +430,117 @@ router.get("/plans", async (_req, res) => {
       groupMap.get(plan.serviceId)!.plans.push(plan);
     }
     res.json(Array.from(groupMap.values()));
-  } catch (error) {
+  } catch (error: any) {
     console.error("Plans query failed:", error);
-    res.status(503).json({ error: "Plans are temporarily unavailable." });
+    res.status(503).json({ error: "Plans are temporarily unavailable.", details: error?.message });
   }
 });
 
 router.get("/admin/plans", requireAuth, async (_req, res) => {
   try {
     await ensureSeedData();
-    const plans = await withDbRetry(
-      () => db.select().from(plansTable).orderBy(asc(plansTable.serviceNumber), asc(plansTable.sortOrder)),
-      "Admin plans query",
-    );
+    const plans = await plansRepository.getAll();
     res.json(plans);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Admin plans query failed:", error);
-    res.status(503).json({ error: "Plans are temporarily unavailable." });
+    res.status(503).json({ error: "Plans are temporarily unavailable.", details: error?.message });
   }
 });
 
 router.post("/admin/plans", requireAuth, async (req, res) => {
-  const { serviceId, serviceNumber, category, name, price, tag, description, features, popular, sortOrder } = req.body as {
-    serviceId: string;
-    serviceNumber: string;
-    category: string;
-    name: string;
-    price: number;
-    tag: string;
-    description: string;
-    features: string[];
-    popular?: boolean;
-    sortOrder?: number;
-  };
+  try {
+    const { serviceId, serviceNumber, category, name, price, tag, description, features, popular, sortOrder } = req.body as {
+      serviceId: string;
+      serviceNumber: string;
+      category: string;
+      name: string;
+      price: number;
+      tag: string;
+      description: string;
+      features: string[];
+      popular?: boolean;
+      sortOrder?: number;
+    };
 
-  if (!serviceId || !name || !price || !tag || !description) {
-    res.status(400).json({ error: "serviceId, name, price, tag, and description are required" });
-    return;
+    if (!serviceId || !name || !price || !tag || !description) {
+      res.status(400).json({ error: "serviceId, name, price, tag, and description are required" });
+      return;
+    }
+
+    const plan = await plansRepository.create({
+      serviceId,
+      serviceNumber: serviceNumber || "00",
+      category: category || "Other",
+      name,
+      price: Number(price),
+      tag,
+      description,
+      features: features ?? [],
+      popular: popular ?? false,
+      sortOrder: sortOrder ?? 0,
+    });
+
+    res.status(201).json(plan);
+  } catch (error: any) {
+    console.error("Create plan error:", error);
+    res.status(500).json({ error: "Failed to create plan", details: error?.message });
   }
-
-  const [plan] = await db
-    .insert(plansTable)
-    .values({ serviceId, serviceNumber: serviceNumber || "00", category: category || "Other", name, price: Number(price), tag, description, features: features ?? [], popular: popular ?? false, sortOrder: sortOrder ?? 0 })
-    .returning();
-
-  res.status(201).json(plan);
 });
 
 router.patch("/admin/plans/:id", requireAuth, async (req, res) => {
-  const id = parseInt(req.params.id as string);
-  const { name, price, tag, description, features, popular, sortOrder, serviceId, serviceNumber, category } = req.body as Partial<{
-    name: string;
-    price: number;
-    tag: string;
-    description: string;
-    features: string[];
-    popular: boolean;
-    sortOrder: number;
-    serviceId: string;
-    serviceNumber: string;
-    category: string;
-  }>;
+  try {
+    const id = parseInt(req.params.id as string);
+    const { name, price, tag, description, features, popular, sortOrder, serviceId, serviceNumber, category } = req.body as Partial<{
+      name: string;
+      price: number;
+      tag: string;
+      description: string;
+      features: string[];
+      popular: boolean;
+      sortOrder: number;
+      serviceId: string;
+      serviceNumber: string;
+      category: string;
+    }>;
 
-  const updates: Record<string, unknown> = { updatedAt: new Date() };
-  if (name !== undefined) updates.name = name;
-  if (price !== undefined) updates.price = Number(price);
-  if (tag !== undefined) updates.tag = tag;
-  if (description !== undefined) updates.description = description;
-  if (features !== undefined) updates.features = features;
-  if (popular !== undefined) updates.popular = popular;
-  if (sortOrder !== undefined) updates.sortOrder = sortOrder;
-  if (serviceId !== undefined) updates.serviceId = serviceId;
-  if (serviceNumber !== undefined) updates.serviceNumber = serviceNumber;
-  if (category !== undefined) updates.category = category;
+    const plan = await plansRepository.update(id, {
+      name,
+      price: price !== undefined ? Number(price) : undefined,
+      tag,
+      description,
+      features,
+      popular,
+      sortOrder,
+      serviceId,
+      serviceNumber,
+      category,
+    });
 
-  const [plan] = await db
-    .update(plansTable)
-    .set(updates)
-    .where(eq(plansTable.id, id))
-    .returning();
+    if (!plan) {
+      res.status(404).json({ error: "Plan not found" });
+      return;
+    }
 
-  if (!plan) {
-    res.status(404).json({ error: "Plan not found" });
-    return;
+    res.json(plan);
+  } catch (error: any) {
+    console.error("Update plan error:", error);
+    res.status(500).json({ error: "Failed to update plan", details: error?.message });
   }
-
-  res.json(plan);
 });
 
 router.delete("/admin/plans/:id", requireAuth, async (req, res) => {
-  const id = parseInt(req.params.id as string);
-  const [deleted] = await db.delete(plansTable).where(eq(plansTable.id, id)).returning();
-  if (!deleted) {
-    res.status(404).json({ error: "Plan not found" });
-    return;
+  try {
+    const id = parseInt(req.params.id as string);
+    const success = await plansRepository.delete(id);
+    if (!success) {
+      res.status(404).json({ error: "Plan not found" });
+      return;
+    }
+    res.json({ success: true });
+  } catch (error: any) {
+    console.error("Delete plan error:", error);
+    res.status(500).json({ error: "Failed to delete plan", details: error?.message });
   }
-  res.json({ success: true });
 });
 
 export default router;

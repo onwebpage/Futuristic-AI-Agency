@@ -7,7 +7,9 @@ Use this checklist before every production deployment. Check off each item.
 ## 1. Pre-Deployment — Environment
 
 - [ ] All environment variables set in hosting platform (Vercel / Railway / etc.)
-  - [ ] `DATABASE_URL` — PostgreSQL connection string
+  - [ ] `VITE_SUPABASE_URL` — Supabase Project URL
+  - [ ] `VITE_SUPABASE_PUBLISHABLE_KEY` — Supabase Publishable / Anon Key
+  - [ ] `SUPABASE_SECRET_KEY` — Supabase Secret / Service Role Key
   - [ ] `PAYPAL_CLIENT_ID` — PayPal API key
   - [ ] `PAYPAL_CLIENT_SECRET` — PayPal secret
   - [ ] `VITE_GA_MEASUREMENT_ID` — Google Analytics 4 Measurement ID (e.g. `G-XXXXXXXXXX`)
@@ -39,9 +41,9 @@ pnpm --filter @workspace/thinkatic run build
 
 ## 3. Pre-Deployment — Database
 
-- [ ] `drizzle-kit push` has been run against the production database
+- [ ] Supabase schema migration has been applied to the Supabase project
   ```bash
-  DATABASE_URL="..." npx drizzle-kit push --config ./lib/db/drizzle.config.cjs
+  # Execute supabase/migrations/20260904000000_create_schema.sql via Supabase Dashboard SQL Editor
   ```
 - [ ] All schema changes reviewed — no destructive migrations without backup
 - [ ] Admin credentials seeded / verified
@@ -161,8 +163,8 @@ pnpm --filter @workspace/thinkatic run build
 # Preview build locally before deploying
 pnpm --filter @workspace/thinkatic run serve
 
-# Push DB schema
-DATABASE_URL="..." npx drizzle-kit push --config ./lib/db/drizzle.config.cjs
+# Apply Supabase migrations via Dashboard SQL Editor or Supabase CLI
+# Migration file: supabase/migrations/20260904000000_create_schema.sql
 
 # Start API server (production)
 cross-env NODE_ENV=production pnpm --filter @workspace/api-server run build && \
