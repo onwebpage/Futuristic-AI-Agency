@@ -254,7 +254,7 @@ export function OurClients() {
             Trusted Companies
           </motion.p>
 
-          <div className="overflow-hidden mb-5">
+          <div className="overflow-visible mb-5">
             <motion.h2
               initial={{ y: "100%", opacity: 0 }}
               animate={inView ? { y: 0, opacity: 1 } : {}}

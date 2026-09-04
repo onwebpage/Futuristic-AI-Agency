@@ -90,43 +90,53 @@ export default function UserAuthPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden font-sans">
-      {/* Subtle Background Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/60 via-slate-50 to-indigo-50/40 pointer-events-none" />
-      <div className="absolute top-[-150px] right-[-100px] w-[500px] h-[500px] rounded-full bg-blue-100/50 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-[-150px] left-[-100px] w-[500px] h-[500px] rounded-full bg-indigo-100/50 blur-3xl pointer-events-none" />
+    <div
+      className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden font-sans"
+      style={{
+        background: "radial-gradient(circle at 12% 18%, rgba(33,78,207,0.12), transparent 30%), radial-gradient(circle at 88% 82%, rgba(71,163,255,0.10), transparent 32%), #F4F7FF",
+      }}
+    >
+      <div
+        className="absolute inset-0 pointer-events-none opacity-60"
+        style={{ backgroundImage: "linear-gradient(rgba(33,78,207,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(33,78,207,0.05) 1px, transparent 1px)", backgroundSize: "44px 44px" }}
+      />
+      <div className="absolute -top-40 -right-32 w-[520px] h-[520px] rounded-full border border-blue-200/40 pointer-events-none" />
+      <div className="absolute -bottom-48 -left-40 w-[560px] h-[560px] rounded-full border border-blue-200/30 pointer-events-none" />
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-        <Link href="/" className="flex justify-center mb-6">
-          <BrandLogo />
+        <Link href="/" className="flex justify-center mb-7">
+          <BrandLogo larger />
         </Link>
-        <h2 className="text-center text-3xl font-extrabold tracking-tight text-slate-900">
+        <p className="text-center text-[10px] font-mono font-bold uppercase tracking-[0.32em] text-blue-700 mb-3">
+          Thinkatic Enterprise Portal
+        </p>
+        <h2 className="text-center text-3xl sm:text-4xl font-black tracking-tight text-slate-950">
           {mode === "signup" ? "Create Client Account" : "Sign in to Client Portal"}
         </h2>
-        <p className="mt-2 text-center text-sm text-slate-600">
+        <p className="mt-3 text-center text-sm leading-relaxed text-slate-600">
           Access your enterprise AI projects, attendance, KYC, and wallet.
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-        <div className="bg-white py-8 px-6 shadow-xl shadow-slate-200/50 sm:rounded-2xl sm:px-10 border border-slate-100">
+        <div className="bg-white/95 py-8 px-6 shadow-[0_24px_70px_rgba(30,64,175,0.14)] sm:rounded-3xl sm:px-10 border border-blue-100/80 backdrop-blur-sm">
           {/* Tabs */}
-          <div className="flex border-b border-slate-100 mb-6 pb-2">
+          <div className="flex gap-1 p-1 mb-7 rounded-2xl bg-slate-100 border border-slate-200/80">
             <button
               type="button"
               onClick={() => {
                 setMode("login");
                 setErrorMessage("");
               }}
-              className={`flex-1 py-2 text-sm font-semibold text-center transition-all relative ${
-                mode === "login" ? "text-blue-600" : "text-slate-400 hover:text-slate-600"
+              className={`flex-1 py-2.5 rounded-xl text-sm font-bold text-center transition-all relative ${
+                mode === "login" ? "text-blue-700 bg-white shadow-sm" : "text-slate-500 hover:text-slate-700"
               }`}
             >
               Sign In
               {mode === "login" && (
                 <motion.div
                   layoutId="authTab"
-                  className="absolute bottom-[-9px] left-0 right-0 h-[2px] bg-blue-600 rounded-full"
+                  className="absolute inset-x-3 bottom-0 h-0.5 bg-blue-600 rounded-full"
                 />
               )}
             </button>
@@ -136,15 +146,15 @@ export default function UserAuthPage() {
                 setMode("signup");
                 setErrorMessage("");
               }}
-              className={`flex-1 py-2 text-sm font-semibold text-center transition-all relative ${
-                mode === "signup" ? "text-blue-600" : "text-slate-400 hover:text-slate-600"
+              className={`flex-1 py-2.5 rounded-xl text-sm font-bold text-center transition-all relative ${
+                mode === "signup" ? "text-blue-700 bg-white shadow-sm" : "text-slate-500 hover:text-slate-700"
               }`}
             >
               Create Account
               {mode === "signup" && (
                 <motion.div
                   layoutId="authTab"
-                  className="absolute bottom-[-9px] left-0 right-0 h-[2px] bg-blue-600 rounded-full"
+                  className="absolute inset-x-3 bottom-0 h-0.5 bg-blue-600 rounded-full"
                 />
               )}
             </button>
@@ -178,11 +188,11 @@ export default function UserAuthPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {mode === "signup" && (
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                <label className="block text-[11px] font-bold uppercase tracking-[0.16em] text-slate-700 mb-2">
                   Full Name
                 </label>
-                <div className="relative rounded-xl shadow-xs">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <div className="relative rounded-2xl">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-blue-500">
                     <User size={16} />
                   </div>
                   <input
@@ -191,18 +201,18 @@ export default function UserAuthPage() {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="Alex Johnson"
-                    className="block w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors"
+                    className="block w-full pl-11 pr-4 py-3 bg-slate-50/80 border border-slate-200 rounded-2xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:bg-white transition-all"
                   />
                 </div>
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+              <label className="block text-[11px] font-bold uppercase tracking-[0.16em] text-slate-700 mb-2">
                 Work Email Address
               </label>
-              <div className="relative rounded-xl shadow-xs">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="relative rounded-2xl">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-blue-500">
                   <Mail size={16} />
                 </div>
                 <input
@@ -211,22 +221,22 @@ export default function UserAuthPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@company.com"
-                  className="block w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors"
+                  className="block w-full pl-11 pr-4 py-3 bg-slate-50/80 border border-slate-200 rounded-2xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:bg-white transition-all"
                 />
               </div>
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700">
+                <label className="block text-[11px] font-bold uppercase tracking-[0.16em] text-slate-700">
                   Password
                 </label>
                 {mode === "login" && (
-                  <span className="text-xs text-slate-400">Default: password123</span>
+                  <span className="text-[11px] font-medium text-slate-400">Default: password123</span>
                 )}
               </div>
-              <div className="relative rounded-xl shadow-xs">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="relative rounded-2xl">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-blue-500">
                   <Lock size={16} />
                 </div>
                 <input
@@ -235,28 +245,29 @@ export default function UserAuthPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="block w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors"
+                  className="block w-full pl-11 pr-11 py-3 bg-slate-50/80 border border-slate-200 rounded-2xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:bg-white transition-all"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-blue-600 transition-colors"
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
               {mode === "signup" && (
-                <p className="mt-1 text-[11px] text-slate-400">Minimum 6 characters</p>
+                <p className="mt-1.5 text-[11px] text-slate-400">Minimum 6 characters</p>
               )}
             </div>
 
             {mode === "signup" && (
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                <label className="block text-[11px] font-bold uppercase tracking-[0.16em] text-slate-700 mb-2">
                   Referral Code (Optional)
                 </label>
-                <div className="relative rounded-xl shadow-xs">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <div className="relative rounded-2xl">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-blue-500">
                     <Share2 size={16} />
                   </div>
                   <input
@@ -264,7 +275,7 @@ export default function UserAuthPage() {
                     value={referralCode}
                     onChange={(e) => setReferralCode(e.target.value)}
                     placeholder="THINK-ABC123"
-                    className="block w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors uppercase tracking-wider"
+                    className="block w-full pl-11 pr-4 py-3 bg-slate-50/80 border border-slate-200 rounded-2xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:bg-white transition-all uppercase tracking-wider"
                   />
                 </div>
               </div>
@@ -274,7 +285,7 @@ export default function UserAuthPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 border border-transparent rounded-xl shadow-md text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-60 transition-all cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-4 border border-transparent rounded-2xl shadow-[0_10px_24px_rgba(33,78,207,0.24)] text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/20 disabled:opacity-60 transition-all cursor-pointer"
               >
                 {loading ? (
                   <span>Processing...</span>
@@ -293,7 +304,7 @@ export default function UserAuthPage() {
             </div>
           </form>
 
-          <div className="mt-6 border-t border-slate-100 pt-4 text-center">
+          <div className="mt-7 border-t border-slate-100 pt-5 text-center">
             <p className="text-xs text-slate-500">
               {mode === "login" ? (
                 <>
@@ -329,8 +340,8 @@ export default function UserAuthPage() {
         </div>
 
         {/* Security badge */}
-        <div className="mt-6 flex items-center justify-center gap-2 text-xs text-slate-400">
-          <ShieldCheck size={14} className="text-emerald-600" />
+        <div className="mt-6 flex items-center justify-center gap-2 text-xs text-slate-500">
+          <ShieldCheck size={14} className="text-blue-600" />
           <span>Protected by Supabase Row-Level Security & Enterprise Encryption</span>
         </div>
       </div>

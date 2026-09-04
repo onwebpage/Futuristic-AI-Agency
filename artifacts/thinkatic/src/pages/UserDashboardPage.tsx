@@ -429,7 +429,7 @@ export default function UserDashboardPage() {
             </span>
           </Link>
 
-          {/* Right Section: Refresh, User Info, Sign Out */}
+          {/* Right Section: Refresh, User Info, Log Out */}
           <div className="flex items-center gap-4 ml-auto">
             <button
               onClick={handleRefresh}
@@ -457,7 +457,7 @@ export default function UserDashboardPage() {
               className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-red-100 flex-shrink-0 whitespace-nowrap"
             >
               <LogOut size={13} />
-              <span className="hidden sm:inline">Sign Out</span>
+              <span>Log Out</span>
             </button>
           </div>
         </div>
