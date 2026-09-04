@@ -14,7 +14,7 @@ import BrandLogo from "@/components/layout/BrandLogo";
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 
 function ThinkaticLogo({ compact }: { compact?: boolean }) {
-  return <BrandLogo compact={compact} />;
+  return <BrandLogo compact={compact} larger />;
 }
 
 // ─── Nav data ─────────────────────────────────────────────────────────────────
