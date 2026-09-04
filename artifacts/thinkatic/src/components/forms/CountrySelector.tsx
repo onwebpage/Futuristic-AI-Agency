@@ -121,58 +121,51 @@ export function CountrySelector({
           type="button"
           onClick={() => setOpen(v => !v)}
           className={cn(
-            "w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-sm transition-all duration-200",
-            "bg-white/[0.04] hover:bg-white/[0.06]",
+            "w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-sm transition-all duration-200 bg-white text-slate-900 cursor-pointer shadow-2xs",
             open
-              ? "border-[#214ECF]/60 ring-1 ring-[#214ECF]/20"
+              ? "border-[#1E40AF] ring-2 ring-[#1E40AF]/15"
               : error
                 ? "border-red-500/50"
-                : "border-border hover:border-[#DCE5FF]",
+                : "border-slate-200 hover:border-slate-300 hover:bg-slate-50/60",
           )}
         >
           {selected ? (
             <>
               <span className="text-xl leading-none">{selected.flag}</span>
-              <span className="text-foreground flex-1 text-left">{selected.name}</span>
-              <span className="text-muted-foreground text-xs font-mono">{selected.dialCode}</span>
+              <span className="text-slate-900 font-medium flex-1 text-left">{selected.name}</span>
+              <span className="text-slate-500 text-xs font-mono">{selected.dialCode}</span>
             </>
           ) : (
-            <span className="text-muted-foreground flex-1 text-left">{placeholder}</span>
+            <span className="text-slate-400 flex-1 text-left">{placeholder}</span>
           )}
           <ChevronDown
             size={14}
-            className={cn("text-muted-foreground transition-transform duration-200 shrink-0", open && "rotate-180")}
+            className={cn("text-slate-500 transition-transform duration-200 shrink-0", open && "rotate-180")}
           />
         </button>
 
         <AnimatePresence>
           {open && (
             <motion.div
-              initial={{ opacity: 0, y: 8, scale: 0.98 }}
+              initial={{ opacity: 0, y: 6, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 4, scale: 0.98 }}
               transition={{ duration: 0.18, ease }}
-              className="absolute z-50 top-full mt-2 w-full rounded-xl border overflow-hidden"
-              style={{
-                background: "rgba(10,10,15,0.97)",
-                backdropFilter: "blur(24px)",
-                borderColor: "rgba(33,78,207,0.08)",
-                boxShadow: "0 24px 60px rgba(0,0,0,0.5)",
-              }}
+              className="absolute z-50 top-full mt-2 w-full rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-[0_20px_45px_-10px_rgba(15,23,42,0.15)]"
             >
               {/* Search */}
-              <div className="p-2 border-b" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
-                <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.04]">
-                  <Search size={13} className="text-muted-foreground shrink-0" />
+              <div className="p-2 border-b border-slate-100 bg-slate-50/60">
+                <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-slate-200">
+                  <Search size={13} className="text-slate-400 shrink-0" />
                   <input
                     ref={searchRef}
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                     placeholder="Search countries..."
-                    className="bg-transparent text-sm text-foreground placeholder:text-muted-foreground flex-1 outline-none"
+                    className="bg-transparent text-sm text-slate-900 placeholder:text-slate-400 flex-1 outline-none"
                   />
                   {search && (
-                    <button onClick={() => setSearch("")} className="text-muted-foreground hover:text-muted-foreground">
+                    <button onClick={() => setSearch("")} className="text-slate-400 hover:text-slate-600">
                       <X size={12} />
                     </button>
                   )}
@@ -180,9 +173,9 @@ export function CountrySelector({
               </div>
 
               {/* List */}
-              <div className="max-h-52 overflow-y-auto p-1.5">
+              <div className="max-h-56 overflow-y-auto p-1.5">
                 {filtered.length === 0 ? (
-                  <div className="py-6 text-center text-sm text-muted-foreground">No countries found</div>
+                  <div className="py-6 text-center text-sm text-slate-500">No countries found</div>
                 ) : (
                   filtered.map(country => (
                     <button
@@ -194,18 +187,18 @@ export function CountrySelector({
                         setSearch("");
                       }}
                       className={cn(
-                        "w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors text-left",
+                        "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm transition-colors text-left cursor-pointer",
                         country.code === value
-                          ? "bg-[#214ECF]/15 text-foreground"
-                          : "hover:bg-white/[0.05] text-muted-foreground hover:text-foreground",
+                          ? "bg-blue-50 text-[#1E40AF] font-semibold"
+                          : "hover:bg-slate-50 text-slate-700 hover:text-slate-900 font-normal",
                       )}
                     >
                       <span className="text-lg leading-none">{country.flag}</span>
                       <span className="flex-1">{country.name}</span>
-                      <span className="text-muted-foreground text-xs font-mono">{country.dialCode}</span>
+                      <span className="text-slate-400 text-xs font-mono">{country.dialCode}</span>
                       {country.code === value && (
                         <svg viewBox="0 0 10 8" fill="none" className="w-3 h-3 shrink-0">
-                          <path d="M1 4L3.5 6.5L9 1" stroke="#214ECF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M1 4L3.5 6.5L9 1" stroke="#1E40AF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       )}
                     </button>

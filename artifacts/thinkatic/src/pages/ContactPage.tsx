@@ -5,20 +5,32 @@ import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import {
-  ChevronRight, ArrowRight, MapPin, Phone, Mail, Clock,
-  Building2, Cpu, HeadphonesIcon, Activity, Users, Briefcase,
-  Zap, Globe, MessageSquare, Loader2,
+  ChevronRight,
+  ArrowRight,
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Cpu,
+  HeadphonesIcon,
+  Users,
+  Briefcase,
+  ShieldCheck,
+  MessageSquare,
+  Loader2,
+  CheckCircle2,
+  Building,
 } from "lucide-react";
 import ScrollToTop from "@/components/layout/ScrollToTop";
-import { FormInput, FormTextarea, FormSelect, StepIndicator, SuccessState, ErrorBanner } from "@/components/forms/FormField";
+import {
+  FormInput,
+  FormTextarea,
+  FormSelect,
+  ErrorBanner,
+} from "@/components/forms/FormField";
 import { CountrySelector } from "@/components/forms/CountrySelector";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
-};
 
 // ─── Schema ───────────────────────────────────────────────────────────────────
 
@@ -43,13 +55,17 @@ type Step2Data = z.infer<typeof step2Schema>;
 // ─── Department cards ─────────────────────────────────────────────────────────
 
 const departments = [
-  { id: "bpo",  label: "BPO Operations",  icon: HeadphonesIcon, desc: "Support, healthcare, back-office" },
-  { id: "tech", label: "Technology",       icon: Cpu,            desc: "AI, software, automation" },
-  { id: "sales",label: "Sales & Growth",  icon: Users,          desc: "SDR, lead gen, partnerships" },
-  { id: "hr",   label: "Human Resources", icon: Briefcase,      desc: "Hiring, onboarding" },
+  { id: "bpo",   label: "BPO Operations",  icon: HeadphonesIcon, desc: "Support, healthcare, back-office" },
+  { id: "tech",  label: "Technology",      icon: Cpu,            desc: "AI, software, automation" },
+  { id: "sales", label: "Sales & Growth",  icon: Users,          desc: "SDR, lead gen, partnerships" },
+  { id: "hr",    label: "Human Resources", icon: Briefcase,      desc: "Hiring, onboarding" },
 ];
 
-function DepartmentCard({ dept, selected, onSelect }: {
+function DepartmentCard({
+  dept,
+  selected,
+  onSelect,
+}: {
   dept: typeof departments[0];
   selected: boolean;
   onSelect: () => void;
@@ -60,36 +76,35 @@ function DepartmentCard({ dept, selected, onSelect }: {
       type="button"
       onClick={onSelect}
       whileHover={{ y: -2 }}
-      whileTap={{ scale: 0.97 }}
-      className="relative flex flex-col gap-2 p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer"
-      style={{
-        background: selected ? "rgba(33,78,207,0.08)" : "rgba(255,255,255,0.03)",
-        borderColor: selected ? "rgba(71,163,255,0.45)" : "rgba(33,78,207,0.06)",
-        boxShadow: selected ? "0 0 20px rgba(71,163,255,0.10)" : "none",
-      }}
+      whileTap={{ scale: 0.98 }}
+      className={`relative flex flex-col gap-2.5 p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer ${
+        selected
+          ? "bg-blue-50/90 border-[#1E40AF] ring-2 ring-[#1E40AF]/15 shadow-sm"
+          : "bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50/60 shadow-2xs"
+      }`}
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         <div
-          className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-colors"
-          style={{
-            background: selected ? "rgba(33,78,207,0.14)" : "rgba(33,78,207,0.04)",
-          }}
+          className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+            selected
+              ? "bg-[#1E40AF] text-white shadow-xs"
+              : "bg-blue-50 text-[#1E40AF] border border-blue-200/60"
+          }`}
         >
-          <Icon size={14} className={selected ? "text-[#214ECF]" : "text-muted-foreground"} />
+          <Icon size={16} />
         </div>
-        <span className={`text-sm font-semibold transition-colors ${selected ? "text-foreground" : "text-muted-foreground"}`}>
+        <span className={`text-sm font-bold transition-colors ${selected ? "text-slate-900" : "text-slate-800"}`}>
           {dept.label}
         </span>
       </div>
-      <p className="text-[11px] text-muted-foreground pl-10 leading-relaxed">{dept.desc}</p>
+      <p className="text-xs text-slate-500 pl-12 leading-relaxed font-normal">{dept.desc}</p>
       {selected && (
         <motion.div
           layoutId="dept-check"
-          className="absolute top-3 right-3 w-4 h-4 rounded-full flex items-center justify-center"
-          style={{ background: "#214ECF" }}
+          className="absolute top-3.5 right-3.5 w-4 h-4 rounded-full bg-[#1E40AF] text-white flex items-center justify-center shadow-xs"
         >
           <svg viewBox="0 0 8 6" fill="none" className="w-2.5 h-2.5">
-            <path d="M1 3L3 5L7 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M1 3L3 5L7 1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </motion.div>
       )}
@@ -124,35 +139,18 @@ const businessInfo = [
   },
 ];
 
-// ─── Left panel background ────────────────────────────────────────────────────
-
-function PanelBackground() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute inset-0" style={{ background: "#FFFFFF" }} />
-      <div
-        className="absolute inset-0 opacity-[0.025]"
-        style={{
-          backgroundImage: "linear-gradient(rgba(255,255,255,0.8) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.8) 1px,transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-      />
-    </div>
-  );
-}
-
 // ─── Google Map embed ─────────────────────────────────────────────────────────
 
 function GoogleMapEmbed() {
   return (
-    <div className="relative overflow-hidden rounded-2xl border" style={{ borderColor: "rgba(33,78,207,0.06)" }}>
-      <div className="aspect-[16/7]">
+    <div className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-2xs">
+      <div className="aspect-[16/8]">
         <iframe
           title="Thinkatic Office - Magarpatta City, Pune"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.693553779744!2d73.93108487521395!3d18.516726282585963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c18b4551359b%3A0x5e4a8a5c0e5e1a1a!2sMagarpatta%20City%2C%20Hadapsar%2C%20Pune%2C%20Maharashtra%20411028!5e0!3m2!1sen!2sin!4v1699999999999!5m2!1sen!2sin"
           width="100%"
           height="100%"
-          style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) brightness(0.85) contrast(1.1)" }}
+          style={{ border: 0, filter: "contrast(1.02) saturate(0.85)" }}
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
@@ -160,16 +158,21 @@ function GoogleMapEmbed() {
         />
       </div>
       {/* Overlay pin label */}
-      <div className="absolute bottom-3 left-3 flex items-center gap-2 px-3 py-2 rounded-xl backdrop-blur-sm"
-        style={{ background: "rgba(255, 255, 255, 0.9)", border: "1px solid rgba(33,78,207,0.12)" }}>
-        <MapPin size={13} className="text-[#214ECF]" />
-        <span className="text-xs text-muted-foreground">Magarpatta City, Pune</span>
+      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3.5 py-2 rounded-xl backdrop-blur-md bg-white/95 border border-slate-200/80 shadow-xs">
+        <div className="flex items-center gap-2">
+          <MapPin size={14} className="text-[#1E40AF]" />
+          <span className="text-xs font-semibold text-slate-800">Magarpatta City, Pune</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">Tech Center</span>
+        </div>
       </div>
     </div>
   );
 }
 
-// ─── Main component ───────────────────────────────────────────────────────────
+// ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function ContactPage() {
   const [step, setStep] = useState(0);
@@ -263,318 +266,451 @@ export default function ContactPage() {
   return (
     <>
       <ScrollToTop />
-      <div className="min-h-[100dvh] flex flex-col lg:flex-row">
+      <div className="min-h-screen bg-gradient-to-b from-[#FFFFFF] via-[#F8FAFC] to-[#F1F5F9] relative overflow-hidden pt-28 pb-24 md:pt-36 md:pb-32">
+        {/* Ambient Subtle Background Grid */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(30,64,175,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(30,64,175,0.02) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
 
-        {/* ── LEFT PANEL ── */}
-        <div className="relative lg:w-[46%] lg:min-h-[100dvh] flex flex-col justify-between p-8 lg:p-14 xl:p-16 overflow-hidden">
-          <PanelBackground />
+        {/* Ambient Soft Radial Illumination */}
+        <div
+          className="absolute top-20 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(ellipse, rgba(30,64,175,0.04) 0%, transparent 70%)" }}
+        />
 
-          {/* Breadcrumb */}
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+
+          {/* ── Breadcrumb ── */}
           <motion.nav
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease }}
-            className="relative z-10 flex items-center gap-1.5 text-muted-foreground text-xs font-mono"
+            className="flex items-center gap-2 text-slate-500 text-xs font-mono mb-8"
           >
-            <Link href="/" className="hover:text-muted-foreground transition-colors">Home</Link>
-            <ChevronRight size={11} />
-            <span className="text-muted-foreground">Contact</span>
+            <Link href="/" className="hover:text-[#1E40AF] transition-colors font-medium">
+              Home
+            </Link>
+            <ChevronRight size={12} className="text-slate-400" />
+            <span className="text-[#1E40AF] font-bold">Contact</span>
           </motion.nav>
 
-          {/* Main content */}
-          <div className="relative z-10 mt-12 lg:mt-0 flex flex-col justify-center flex-1">
+          {/* ── Page Header Hero ── */}
+          <div className="mb-14 md:mb-16">
             <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/70 mb-5 shadow-2xs"
             >
-              <motion.p
-                variants={fadeUp}
-                className="text-xs font-mono uppercase tracking-[0.22em] mb-5"
-                style={{ color: "#214ECF" }}
-              >
+              <div className="w-1.5 h-1.5 rounded-full bg-[#1E40AF] animate-pulse" />
+              <span className="text-[11px] font-mono font-bold uppercase tracking-[0.22em] text-[#1E40AF]">
                 Let's talk
-              </motion.p>
-              <motion.h1
-                variants={fadeUp}
-                className="font-display font-black text-foreground leading-[1.0] mb-8"
-                style={{ fontSize: "clamp(2.6rem,5.5vw,4.5rem)" }}
-              >
-                Let's Build<br />
-                Something<br />
-                <span className="text-gradient">Exceptional.</span>
-              </motion.h1>
-              <motion.p variants={fadeUp} className="text-muted-foreground text-sm leading-relaxed max-w-sm mb-10">
-                Whether you're exploring AI automation, scaling operations, or building enterprise software — we turn complex challenges into measurable results.
-              </motion.p>
+              </span>
+            </motion.div>
 
-              {/* Business info cards */}
-              <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.08 }}
+              className="font-display font-black text-slate-900 leading-[1.02] tracking-tight mb-5"
+              style={{ fontSize: "clamp(2.5rem, 5.2vw, 4.5rem)" }}
+            >
+              Let's Build Something
+              <br />
+              <span className="text-[#1E40AF]">
+                Exceptional.
+              </span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.16 }}
+              className="text-base md:text-lg text-slate-600 max-w-2xl font-normal leading-relaxed"
+            >
+              Whether you're exploring AI automation, scaling operations, or building enterprise software — we turn complex challenges into measurable results.
+            </motion.p>
+          </div>
+
+          {/* ── Main 2-Column Command Hub ── */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+
+            {/* ── Left Column: Executive Liaison & Location (5 cols) ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.2 }}
+              className="lg:col-span-5 flex flex-col gap-6"
+            >
+              {/* Business Info Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3.5">
                 {businessInfo.map((info) => {
                   const Icon = info.icon;
-                  const content = (
-                    <div
-                      key={info.label}
-                      className="flex items-start gap-3 p-3.5 rounded-2xl border group transition-all duration-200 hover:border-border"
-                      style={{ background: "rgba(244,247,255,0.8)", borderColor: "rgba(255,255,255,0.07)" }}
-                    >
-                      <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
-                        style={{ background: "rgba(71,163,255,0.10)" }}>
-                        <Icon size={13} className="text-[#214ECF]" />
+                  const cardContent = (
+                    <div className="flex items-start gap-4 p-4 rounded-2xl border border-slate-200/90 bg-white/90 shadow-2xs hover:border-blue-300 hover:shadow-xs transition-all duration-200 group">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-blue-50/90 border border-blue-200/60 text-[#1E40AF] group-hover:scale-105 transition-transform">
+                        <Icon size={16} />
                       </div>
-                      <div>
-                        <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-1">{info.label}</p>
-                        {info.lines.map((l, i) => (
-                          <p key={i} className="text-xs text-muted-foreground leading-relaxed group-hover:text-muted-foreground transition-colors">{l}</p>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-500 mb-1">
+                          {info.label}
+                        </p>
+                        {info.lines.map((line, idx) => (
+                          <p
+                            key={idx}
+                            className="text-sm font-semibold text-slate-900 leading-snug group-hover:text-[#1E40AF] transition-colors truncate"
+                          >
+                            {line}
+                          </p>
                         ))}
                       </div>
                     </div>
                   );
-                  return info.href
-                    ? <a key={info.label} href={info.href}>{content}</a>
-                    : <div key={info.label}>{content}</div>;
+
+                  return info.href ? (
+                    <a key={info.label} href={info.href} className="block cursor-pointer">
+                      {cardContent}
+                    </a>
+                  ) : (
+                    <div key={info.label}>{cardContent}</div>
+                  );
                 })}
-              </motion.div>
+              </div>
 
-              {/* Map */}
-              <motion.div variants={fadeUp}>
-                <GoogleMapEmbed />
-              </motion.div>
+              {/* Google Map Embed */}
+              <GoogleMapEmbed />
+
+              {/* Enterprise Assurance Card */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white/90 p-5 shadow-2xs">
+                <div className="flex items-center gap-2 mb-3">
+                  <ShieldCheck size={16} className="text-[#1E40AF]" />
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-900">
+                    Enterprise Assurance Standards
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-2 text-xs font-mono text-slate-600">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    SOC 2 Type II
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    ISO 27001 Certified
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    GDPR & HIPAA Ready
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    &lt;24h Response SLA
+                  </span>
+                </div>
+              </div>
             </motion.div>
-          </div>
 
-          {/* Footer link */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="relative z-10 mt-10 flex items-center gap-4 text-muted-foreground text-xs"
-          >
-            <Link href="/privacy-policy" className="hover:text-muted-foreground transition-colors">Privacy Policy</Link>
-            <span>·</span>
-            <Link href="/terms" className="hover:text-muted-foreground transition-colors">Terms</Link>
-          </motion.div>
-        </div>
+            {/* ── Right Column: The Executive Engagement Console (7 cols) ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, ease, delay: 0.25 }}
+              className="lg:col-span-7"
+            >
+              <div className="rounded-3xl border border-slate-200/90 bg-white/95 backdrop-blur-xl p-7 sm:p-10 lg:p-12 shadow-[0_20px_50px_-15px_rgba(15,23,42,0.07)] relative overflow-hidden">
+                {/* Subtle micro background grid watermark */}
+                <div
+                  className="absolute inset-0 pointer-events-none opacity-20"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(rgba(30,64,175,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(30,64,175,0.03) 1px, transparent 1px)",
+                    backgroundSize: "28px 28px",
+                  }}
+                />
 
-        {/* ── RIGHT PANEL — form ── */}
-        <div className="flex-1 lg:min-h-[100dvh] flex items-start lg:items-center justify-center p-6 sm:p-10 lg:p-14 xl:p-16"
-          style={{ background: "hsl(0 0% 5%)" }}>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.2, ease }}
-            className="w-full max-w-lg"
-          >
-            <AnimatePresence mode="wait">
+                <div className="relative z-10">
+                  <AnimatePresence mode="wait">
 
-              {/* ── Success ── */}
-              {status === "success" ? (
-                <motion.div key="success"
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, ease }}
-                >
-                  <SuccessState
-                    title="Message received."
-                    message={`Thanks${step1Data?.name ? `, ${step1Data.name.split(" ")[0]}` : ""}. We'll review your request and be in touch within 24 hours.`}
-                    onReset={reset}
-                    resetLabel="Send another message"
-                  />
-                </motion.div>
+                    {/* ── Success State ── */}
+                    {status === "success" ? (
+                      <motion.div
+                        key="success"
+                        initial={{ opacity: 0, scale: 0.96 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.4, ease }}
+                        className="flex flex-col items-center text-center py-12 px-4 gap-6"
+                      >
+                        <div className="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-200/80 text-emerald-600 flex items-center justify-center shadow-xs">
+                          <CheckCircle2 size={32} />
+                        </div>
+                        <div>
+                          <h2 className="font-display font-black text-slate-900 text-2xl sm:text-3xl mb-2">
+                            Message received.
+                          </h2>
+                          <p className="text-slate-600 text-sm leading-relaxed max-w-md">
+                            Thanks{step1Data?.name ? `, ${step1Data.name.split(" ")[0]}` : ""}. We'll review your request and be in touch within 24 hours.
+                          </p>
+                        </div>
+                        <button
+                          onClick={reset}
+                          className="mt-2 text-sm font-semibold text-[#1E40AF] hover:underline underline-offset-4 cursor-pointer"
+                        >
+                          Send another message
+                        </button>
+                      </motion.div>
 
-              ) : step === 0 ? (
-                /* ── Step 1: Contact Info ── */
-                <motion.div
-                  key="step1"
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.4, ease }}
-                >
-                  <div className="mb-8">
-                    <StepIndicator step={0} total={2} labels={stepLabels} />
-                  </div>
+                    ) : step === 0 ? (
+                      /* ── Step 1: Contact Info ── */
+                      <motion.div
+                        key="step1"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.35, ease }}
+                      >
+                        {/* High-End Step Progress HUD */}
+                        <div className="flex items-center justify-between pb-6 mb-8 border-b border-slate-100">
+                          <div className="flex items-center gap-3">
+                            <span className="w-7 h-7 rounded-full bg-[#1E40AF] text-white text-xs font-mono font-bold flex items-center justify-center shadow-xs">
+                              01
+                            </span>
+                            <div>
+                              <p className="text-xs font-mono font-bold uppercase tracking-wider text-slate-900">
+                                Step 1 of 2: {stepLabels[0]}
+                              </p>
+                              <p className="text-[11px] text-slate-500 font-mono">Next: Project Scope</p>
+                            </div>
+                          </div>
+                          <span className="text-xs font-mono font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200/80 px-2.5 py-1 rounded-md">
+                            2 min setup
+                          </span>
+                        </div>
 
-                  <h2 className="font-display font-bold text-foreground text-2xl sm:text-3xl mb-2 leading-tight">
-                    Start with your<br />contact details
-                  </h2>
-                  <p className="text-muted-foreground text-sm mb-8">We'll use this to reach out personally.</p>
+                        <div className="mb-8">
+                          <h2 className="font-display font-bold text-slate-900 text-2xl sm:text-3xl mb-2 leading-tight">
+                            Start with your<br />contact details
+                          </h2>
+                          <p className="text-slate-600 text-sm font-normal">
+                            We'll use this to reach out personally.
+                          </p>
+                        </div>
 
-                  <form onSubmit={form1.handleSubmit(onStep1)} className="flex flex-col gap-5">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <FormInput
-                        label="Full Name"
-                        required
-                        placeholder="Jane Smith"
-                        error={form1.formState.errors.name?.message}
-                        {...form1.register("name")}
-                      />
-                      <FormInput
-                        label="Work Email"
-                        required
-                        type="email"
-                        placeholder="jane@company.com"
-                        error={form1.formState.errors.email?.message}
-                        {...form1.register("email")}
-                      />
-                    </div>
+                        <form onSubmit={form1.handleSubmit(onStep1)} className="flex flex-col gap-5">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <FormInput
+                              label="Full Name"
+                              required
+                              placeholder="Jane Smith"
+                              error={form1.formState.errors.name?.message}
+                              {...form1.register("name")}
+                            />
+                            <FormInput
+                              label="Work Email"
+                              required
+                              type="email"
+                              placeholder="jane@company.com"
+                              error={form1.formState.errors.email?.message}
+                              {...form1.register("email")}
+                            />
+                          </div>
 
-                    <FormInput
-                      label="Company"
-                      required
-                      placeholder="Acme Corporation"
-                      error={form1.formState.errors.company?.message}
-                      {...form1.register("company")}
-                    />
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <CountrySelector
-                        label="Country"
-                        required
-                        value={form1.watch("country")}
-                        onChange={(code) => form1.setValue("country", code, { shouldValidate: true })}
-                        error={form1.formState.errors.country?.message}
-                        placeholder="Select country"
-                      />
-                      <FormInput
-                        label="Phone (optional)"
-                        type="tel"
-                        placeholder="+1 (555) 000-0000"
-                        {...form1.register("phone")}
-                      />
-                    </div>
-
-                    <motion.button
-                      type="submit"
-                      whileHover={{ scale: 1.01 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="mt-2 flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-foreground transition-all"
-                      style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 28px rgba(71,163,255,0.25)" }}
-                    >
-                      Continue
-                      <ArrowRight size={15} />
-                    </motion.button>
-                  </form>
-                </motion.div>
-
-              ) : (
-                /* ── Step 2: Project Details ── */
-                <motion.div
-                  key="step2"
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.4, ease }}
-                >
-                  <div className="mb-8">
-                    <StepIndicator step={1} total={2} labels={stepLabels} />
-                  </div>
-
-                  <h2 className="font-display font-bold text-foreground text-2xl sm:text-3xl mb-2 leading-tight">
-                    Tell us about<br />your project
-                  </h2>
-                  <p className="text-muted-foreground text-sm mb-8">Help us route you to the right team.</p>
-
-                  <form onSubmit={form2.handleSubmit(onStep2)} className="flex flex-col gap-5">
-
-                    {/* Department cards */}
-                    <div>
-                      <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground mb-3">
-                        Department <span className="text-[#214ECF]">*</span>
-                      </p>
-                      <div className="grid grid-cols-2 gap-2.5">
-                        {departments.map(dept => (
-                          <DepartmentCard
-                            key={dept.id}
-                            dept={dept}
-                            selected={selectedDept === dept.id}
-                            onSelect={() => {
-                              setSelectedDept(dept.id);
-                              form2.setValue("department", dept.id, { shouldValidate: true });
-                            }}
+                          <FormInput
+                            label="Company"
+                            required
+                            placeholder="Acme Corporation"
+                            error={form1.formState.errors.company?.message}
+                            {...form1.register("company")}
                           />
-                        ))}
-                      </div>
-                      {form2.formState.errors.department && (
-                        <p className="mt-2 text-[11px] text-red-400 flex items-center gap-1.5">
-                          <span>⚠</span> {form2.formState.errors.department.message}
-                        </p>
-                      )}
-                    </div>
 
-                    <FormSelect
-                      label="Service Interest"
-                      required
-                      error={form2.formState.errors.serviceInterest?.message}
-                      {...form2.register("serviceInterest")}
-                    >
-                      <optgroup label="BPO Services">
-                        <option value="Healthcare BPO">Healthcare BPO</option>
-                        <option value="Customer Support Outsourcing">Customer Support</option>
-                        <option value="Sales & Lead Generation">Sales &amp; Lead Generation</option>
-                        <option value="Back Office Operations">Back Office Operations</option>
-                        <option value="AI-Powered BPO">AI-Powered BPO</option>
-                      </optgroup>
-                      <optgroup label="Technology">
-                        <option value="AI Development & Integration">AI Development &amp; Integration</option>
-                        <option value="Custom Software Development">Custom Software</option>
-                        <option value="Automation & RPA">Automation &amp; RPA</option>
-                        <option value="AI Consulting">AI Consulting &amp; Strategy</option>
-                      </optgroup>
-                      <option value="General Inquiry">Not sure / General Inquiry</option>
-                    </FormSelect>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <CountrySelector
+                              label="Country"
+                              required
+                              value={form1.watch("country")}
+                              onChange={(code) => form1.setValue("country", code, { shouldValidate: true })}
+                              error={form1.formState.errors.country?.message}
+                              placeholder="Select country"
+                            />
+                            <FormInput
+                              label="Phone (optional)"
+                              type="tel"
+                              placeholder="+1 (555) 000-0000"
+                              {...form1.register("phone")}
+                            />
+                          </div>
 
-                    <FormSelect
-                      label="Monthly Budget"
-                      {...form2.register("budget")}
-                    >
-                      <option value="">Prefer not to say</option>
-                      <option value="Under $2,000">Under $2,000 / mo</option>
-                      <option value="$2,000–$5,000">$2,000–$5,000 / mo</option>
-                      <option value="$5,000–$15,000">$5,000–$15,000 / mo</option>
-                      <option value="$15,000–$50,000">$15,000–$50,000 / mo</option>
-                      <option value="$50,000+">$50,000+ / mo</option>
-                    </FormSelect>
+                          <motion.button
+                            type="submit"
+                            whileHover={{ scale: 1.01 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="mt-4 flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-display font-bold text-sm text-white bg-[#1E40AF] hover:bg-[#1D4ED8] transition-all shadow-[0_4px_20px_rgba(30,64,175,0.25)] cursor-pointer"
+                          >
+                            Continue
+                            <ArrowRight size={15} />
+                          </motion.button>
+                        </form>
+                      </motion.div>
 
-                    <FormTextarea
-                      label="Message"
-                      required
-                      placeholder="Tell us about your project, goals, and timeline…"
-                      rows={5}
-                      error={form2.formState.errors.message?.message}
-                      {...form2.register("message")}
-                    />
-
-                    {status === "error" && <ErrorBanner message={errorMsg} />}
-
-                    <div className="flex gap-3 mt-2">
-                      <button
-                        type="button"
-                        onClick={() => setStep(0)}
-                        className="flex items-center gap-1.5 px-5 py-3.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground border border-border hover:border-white/25 transition-all"
+                    ) : (
+                      /* ── Step 2: Project Details ── */
+                      <motion.div
+                        key="step2"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.35, ease }}
                       >
-                        ← Back
-                      </button>
-                      <motion.button
-                        type="submit"
-                        disabled={status === "submitting"}
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="flex-1 flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-foreground transition-all disabled:opacity-60"
-                        style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 28px rgba(71,163,255,0.25)" }}
-                      >
-                        {status === "submitting" ? (
-                          <><Loader2 size={15} className="animate-spin" /> Sending…</>
-                        ) : (
-                          <><MessageSquare size={15} /> Send Message</>
-                        )}
-                      </motion.button>
-                    </div>
-                  </form>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
+                        {/* High-End Step Progress HUD */}
+                        <div className="flex items-center justify-between pb-6 mb-8 border-b border-slate-100">
+                          <div className="flex items-center gap-3">
+                            <span className="w-7 h-7 rounded-full bg-[#1E40AF] text-white text-xs font-mono font-bold flex items-center justify-center shadow-xs">
+                              02
+                            </span>
+                            <div>
+                              <p className="text-xs font-mono font-bold uppercase tracking-wider text-slate-900">
+                                Step 2 of 2: {stepLabels[1]}
+                              </p>
+                              <p className="text-[11px] text-slate-500 font-mono">Final Step</p>
+                            </div>
+                          </div>
+                          <span className="text-xs font-mono font-semibold text-blue-600 bg-blue-50 border border-blue-200/80 px-2.5 py-1 rounded-md">
+                            Direct Routing
+                          </span>
+                        </div>
+
+                        <div className="mb-8">
+                          <h2 className="font-display font-bold text-slate-900 text-2xl sm:text-3xl mb-2 leading-tight">
+                            Tell us about<br />your project
+                          </h2>
+                          <p className="text-slate-600 text-sm font-normal">
+                            Help us route you to the right team.
+                          </p>
+                        </div>
+
+                        <form onSubmit={form2.handleSubmit(onStep2)} className="flex flex-col gap-5">
+                          {/* Department selection */}
+                          <div>
+                            <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-600 font-bold mb-3">
+                              Department <span className="text-[#1E40AF]">*</span>
+                            </p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                              {departments.map((dept) => (
+                                <DepartmentCard
+                                  key={dept.id}
+                                  dept={dept}
+                                  selected={selectedDept === dept.id}
+                                  onSelect={() => {
+                                    setSelectedDept(dept.id);
+                                    form2.setValue("department", dept.id, { shouldValidate: true });
+                                  }}
+                                />
+                              ))}
+                            </div>
+                            {form2.formState.errors.department && (
+                              <p className="mt-2 text-[11px] text-red-500 flex items-center gap-1.5 font-medium">
+                                <span>⚠</span> {form2.formState.errors.department.message}
+                              </p>
+                            )}
+                          </div>
+
+                          <FormSelect
+                            label="Service Interest"
+                            required
+                            error={form2.formState.errors.serviceInterest?.message}
+                            {...form2.register("serviceInterest")}
+                          >
+                            <optgroup label="BPO Services">
+                              <option value="Healthcare BPO">Healthcare BPO</option>
+                              <option value="Customer Support Outsourcing">Customer Support</option>
+                              <option value="Sales & Lead Generation">Sales &amp; Lead Generation</option>
+                              <option value="Back Office Operations">Back Office Operations</option>
+                              <option value="AI-Powered BPO">AI-Powered BPO</option>
+                            </optgroup>
+                            <optgroup label="Technology">
+                              <option value="AI Development & Integration">AI Development &amp; Integration</option>
+                              <option value="Custom Software Development">Custom Software</option>
+                              <option value="Automation & RPA">Automation &amp; RPA</option>
+                              <option value="AI Consulting">AI Consulting &amp; Strategy</option>
+                            </optgroup>
+                            <option value="General Inquiry">Not sure / General Inquiry</option>
+                          </FormSelect>
+
+                          <FormSelect
+                            label="Monthly Budget"
+                            {...form2.register("budget")}
+                          >
+                            <option value="">Prefer not to say</option>
+                            <option value="Under $2,000">Under $2,000 / mo</option>
+                            <option value="$2,000–$5,000">$2,000–$5,000 / mo</option>
+                            <option value="$5,000–$15,000">$5,000–$15,000 / mo</option>
+                            <option value="$15,000–$50,000">$15,000–$50,000 / mo</option>
+                            <option value="$50,000+">$50,000+ / mo</option>
+                          </FormSelect>
+
+                          <FormTextarea
+                            label="Message"
+                            required
+                            placeholder="Tell us about your project, goals, and timeline…"
+                            rows={4}
+                            error={form2.formState.errors.message?.message}
+                            {...form2.register("message")}
+                          />
+
+                          {status === "error" && <ErrorBanner message={errorMsg} />}
+
+                          <div className="flex items-center gap-3 mt-3">
+                            <button
+                              type="button"
+                              onClick={() => setStep(0)}
+                              className="flex items-center gap-1.5 px-6 py-4 rounded-xl text-sm font-semibold text-slate-700 bg-slate-50 hover:bg-white hover:text-slate-900 border border-slate-200 transition-all cursor-pointer"
+                            >
+                              ← Back
+                            </button>
+                            <motion.button
+                              type="submit"
+                              disabled={status === "submitting"}
+                              whileHover={{ scale: 1.01 }}
+                              whileTap={{ scale: 0.98 }}
+                              className="flex-1 flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-display font-bold text-sm text-white bg-[#1E40AF] hover:bg-[#1D4ED8] transition-all shadow-[0_4px_20px_rgba(30,64,175,0.25)] disabled:opacity-60 cursor-pointer"
+                            >
+                              {status === "submitting" ? (
+                                <>
+                                  <Loader2 size={15} className="animate-spin" /> Sending…
+                                </>
+                              ) : (
+                                <>
+                                  <MessageSquare size={15} /> Send Message
+                                </>
+                              )}
+                            </motion.button>
+                          </div>
+                        </form>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Bottom Trust Note */}
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-500 px-2">
+                <span>Enterprise encryption · Zero data retention guarantee</span>
+                <div className="flex items-center gap-3">
+                  <Link href="/privacy-policy" className="hover:text-[#1E40AF] transition-colors">
+                    Privacy Policy
+                  </Link>
+                  <span>·</span>
+                  <Link href="/terms" className="hover:text-[#1E40AF] transition-colors">
+                    Terms
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
         </div>
       </div>
     </>
