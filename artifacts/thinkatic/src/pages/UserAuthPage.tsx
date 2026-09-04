@@ -14,6 +14,7 @@ import {
   EyeOff,
   Share2,
 } from "lucide-react";
+import BrandLogo from "@/components/layout/BrandLogo";
 
 export default function UserAuthPage() {
   const [location, setLocation] = useLocation();
@@ -97,7 +98,7 @@ export default function UserAuthPage() {
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <Link href="/" className="flex justify-center mb-6">
-          <span className="text-3xl font-bold tracking-tight text-slate-900">Thinkatic</span>
+          <BrandLogo />
         </Link>
         <h2 className="text-center text-3xl font-extrabold tracking-tight text-slate-900">
           {mode === "signup" ? "Create Client Account" : "Sign in to Client Portal"}

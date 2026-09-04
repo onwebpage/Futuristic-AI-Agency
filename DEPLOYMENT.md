@@ -35,7 +35,7 @@ pnpm --filter @workspace/thinkatic run build
 - [ ] `sitemap.xml` is present in `dist/public/`
 - [ ] `robots.txt` is present in `dist/public/`
 - [ ] OG image (`opengraph.jpg`) is present and ≥ 1200×630px
-- [ ] Favicon (`favicon.svg`) is present
+- [ ] No favicon is configured; browser tabs intentionally show no custom site icon
 
 ---
 

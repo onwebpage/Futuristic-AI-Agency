@@ -36,6 +36,10 @@ app.use("/api", router);
 if (process.env.NODE_ENV === "production") {
   const staticPath = path.resolve(process.cwd(), "artifacts/thinkatic/dist/public");
   if (existsSync(staticPath)) {
+    app.get(
+      ["/favicon.ico", "/favicon.png", "/favicon.svg", "/apple-touch-icon.png"],
+      (_req, res) => res.set("Cache-Control", "no-store").status(404).end(),
+    );
     app.use(express.static(staticPath));
     app.get("*splat", (_req, res) => {
       res.sendFile(path.join(staticPath, "index.html"));

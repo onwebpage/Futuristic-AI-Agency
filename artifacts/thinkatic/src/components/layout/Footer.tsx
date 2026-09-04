@@ -9,6 +9,7 @@ import {
   Building2, Heart, ShoppingCart, GraduationCap, Truck, Globe,
   CheckCircle2,
 } from "lucide-react";
+import BrandLogo from "@/components/layout/BrandLogo";
 
 
 // ─── Footer data ──────────────────────────────────────────────────────────────
@@ -295,7 +296,7 @@ export default function Footer() {
             className="flex flex-col gap-5"
           >
             <Link href="/" aria-label="Thinkatic – Home" className="inline-block w-fit hover:opacity-75 transition-opacity">
-              <span className="font-display font-bold text-4xl tracking-tight text-slate-900">Thinkatic</span>
+              <BrandLogo />
             </Link>
             <p className="text-[13px] leading-relaxed max-w-sm" style={{ color: "#4B5563" }}>
               AI-Powered Business Process Outsourcing &amp; Enterprise Technology Solutions. Your long-term growth partner across 15+ industries.

@@ -9,18 +9,12 @@ import {
   ChevronDown, CalendarDays, Building2, Globe, Zap,
   Sparkles, Cloud, ShieldCheck, Database, User,
 } from "lucide-react";
+import BrandLogo from "@/components/layout/BrandLogo";
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 
 function ThinkaticLogo({ compact }: { compact?: boolean }) {
-  return (
-    <span
-      className="font-display font-bold tracking-tight text-slate-900"
-      style={{ fontSize: compact ? "24px" : "27px", lineHeight: 1, transition: "font-size 0.25s" }}
-    >
-      Thinkatic
-    </span>
-  );
+  return <BrandLogo compact={compact} />;
 }
 
 // ─── Nav data ─────────────────────────────────────────────────────────────────

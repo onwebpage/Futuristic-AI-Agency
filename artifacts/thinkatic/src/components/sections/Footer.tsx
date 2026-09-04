@@ -1,7 +1,8 @@
 import { Linkedin, Instagram } from 'lucide-react';
+import BrandLogo from '../layout/BrandLogo';
 
 function ThinkaticLogoMark() {
-  return <span className="text-xl font-display font-bold text-foreground tracking-tight" style={{ letterSpacing: "-0.01em" }}>Thinkatic</span>;
+  return <BrandLogo compact />;
 }
 
 export function Footer() {

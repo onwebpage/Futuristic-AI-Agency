@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Lock, User } from "lucide-react";
+import BrandLogo from "@/components/layout/BrandLogo";
 
 export default function AdminLoginPage() {
   const [, setLocation] = useLocation();
@@ -54,7 +55,7 @@ export default function AdminLoginPage() {
       >
         <div className="mb-10 text-center">
           <div className="flex items-center justify-center mb-4">
-            <span className="text-xl font-bold text-foreground tracking-tight">Thinkatic</span>
+            <BrandLogo />
           </div>
           <h1 className="text-3xl font-bold text-foreground mb-2">Admin Panel</h1>
           <p className="text-sm" style={{ color: "#4B5563" }}>

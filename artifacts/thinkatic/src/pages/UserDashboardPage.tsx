@@ -28,6 +28,7 @@ import {
   Send,
   X,
 } from "lucide-react";
+import BrandLogo from "@/components/layout/BrandLogo";
 
 interface Profile {
   id: string;
@@ -422,7 +423,7 @@ export default function UserDashboardPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           {/* Logo & Portal Label */}
           <Link href="/" className="flex items-center gap-3 min-w-0">
-            <span className="text-2xl font-bold tracking-tight text-slate-900 flex-shrink-0">Thinkatic</span>
+            <BrandLogo />
             <span className="text-xs font-mono tracking-widest text-blue-600 uppercase font-bold border-l border-slate-300 pl-3 flex-shrink-0">
                 Client Portal
             </span>

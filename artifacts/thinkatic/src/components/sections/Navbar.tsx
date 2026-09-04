@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { MagneticButton } from '../ui/MagneticButton';
+import BrandLogo from '../layout/BrandLogo';
 
 export function Navbar() {
   const [hidden, setHidden] = useState(false);
@@ -31,7 +32,7 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
         <div className="flex items-center">
-          <span className="text-xl font-display font-bold tracking-tight">THINKATIC</span>
+          <BrandLogo compact />
         </div>
 
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">

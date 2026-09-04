@@ -27,6 +27,7 @@ import {
   Wallet,
   FileText,
 } from "lucide-react";
+import BrandLogo from "@/components/layout/BrandLogo";
 
 type Submission = {
   id: number;
@@ -565,7 +566,7 @@ export default function AdminDashboardPage() {
       >
         <div className="px-2 mb-8">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-sm font-bold text-foreground tracking-tight">Thinkatic</span>
+            <BrandLogo compact />
           </div>
           <div className="text-xs" style={{ color: "#4B5563" }}>Admin Panel</div>
         </div>
