@@ -416,20 +416,7 @@ router.get("/plans", async (_req, res) => {
   try {
     await ensureSeedData();
     const plans = await plansRepository.getAll();
-
-    const groupMap = new Map<string, { id: string; number: string; category: string; plans: typeof plans }>();
-    for (const plan of plans) {
-      if (!groupMap.has(plan.serviceId)) {
-        groupMap.set(plan.serviceId, {
-          id: plan.serviceId,
-          number: plan.serviceNumber,
-          category: plan.category,
-          plans: [],
-        });
-      }
-      groupMap.get(plan.serviceId)!.plans.push(plan);
-    }
-    res.json(Array.from(groupMap.values()));
+    res.json(plans);
   } catch (error: any) {
     console.error("Plans query failed:", error);
     res.status(503).json({ error: "Plans are temporarily unavailable.", details: error?.message });
