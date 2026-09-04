@@ -1,23 +1,7 @@
 import { Linkedin, Instagram } from 'lucide-react';
 
 function ThinkaticLogoMark() {
-  return (
-    <div className="flex items-center gap-2.5">
-      <svg viewBox="0 0 22 26" width="22" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="logoGradFooter" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#214ECF" />
-            <stop offset="100%" stopColor="#214ECF" />
-          </linearGradient>
-        </defs>
-        <path d="M0 0 H13 V5 H6 V26 H0 Z" fill="url(#logoGradFooter)" />
-        <path d="M15 0 H22 V5 H15 Z" fill="url(#logoGradFooter)" opacity="0.75" />
-      </svg>
-      <span className="text-xl font-display font-bold text-foreground tracking-tight" style={{ letterSpacing: "-0.01em" }}>
-        Thinkatic
-      </span>
-    </div>
-  );
+  return <span className="text-xl font-display font-bold text-foreground tracking-tight" style={{ letterSpacing: "-0.01em" }}>Thinkatic</span>;
 }
 
 export function Footer() {

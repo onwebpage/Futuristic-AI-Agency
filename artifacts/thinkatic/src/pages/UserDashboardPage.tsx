@@ -419,39 +419,41 @@ export default function UserDashboardPage() {
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
       {/* Top Navigation */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/" className="flex items-center gap-2">
-              <img src="/logo-transparent-light.png" alt="Thinkatic" className="h-8 w-auto object-contain" />
-              <span className="text-xs font-mono tracking-widest text-blue-600 uppercase font-bold border-l border-slate-200 pl-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          {/* Logo & Portal Label */}
+          <Link href="/" className="flex items-center gap-3 min-w-0">
+            <span className="text-2xl font-bold tracking-tight text-slate-900 flex-shrink-0">Thinkatic</span>
+            <span className="text-xs font-mono tracking-widest text-blue-600 uppercase font-bold border-l border-slate-300 pl-3 flex-shrink-0">
                 Client Portal
-              </span>
-            </Link>
-          </div>
+            </span>
+          </Link>
 
-          <div className="flex items-center gap-3">
+          {/* Right Section: Refresh, User Info, Sign Out */}
+          <div className="flex items-center gap-4 ml-auto">
             <button
               onClick={handleRefresh}
               disabled={refreshing}
-              className="p-2 text-slate-500 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors"
+              className="p-2 text-slate-500 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors flex-shrink-0"
               title="Refresh Data"
             >
               <RefreshCw size={16} className={refreshing ? "animate-spin text-blue-600" : ""} />
             </button>
 
-            <div className="flex items-center gap-2.5 border-l border-slate-200 pl-3">
-              <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold uppercase">
+            <div className="h-8 w-px bg-slate-200 flex-shrink-0" />
+
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold uppercase flex-shrink-0">
                 {profile?.fullName ? profile.fullName.charAt(0) : "U"}
               </div>
-              <div className="hidden sm:block text-left">
-                <div className="text-xs font-semibold text-slate-900">{profile?.fullName || "Client"}</div>
-                <div className="text-[10px] text-slate-500">{profile?.email}</div>
+              <div className="hidden sm:block text-left min-w-0">
+                <div className="text-xs font-semibold text-slate-900 truncate">{profile?.fullName || "Client"}</div>
+                <div className="text-[10px] text-slate-500 truncate">{profile?.email}</div>
               </div>
             </div>
 
             <button
               onClick={handleLogout}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-red-100"
+              className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-red-100 flex-shrink-0 whitespace-nowrap"
             >
               <LogOut size={13} />
               <span className="hidden sm:inline">Sign Out</span>

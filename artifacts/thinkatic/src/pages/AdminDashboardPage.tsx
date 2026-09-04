@@ -565,16 +565,6 @@ export default function AdminDashboardPage() {
       >
         <div className="px-2 mb-8">
           <div className="flex items-center gap-2 mb-1">
-            <svg viewBox="0 0 22 26" width="16" height="19" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="logoGradAdmin" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#214ECF" />
-                  <stop offset="100%" stopColor="#214ECF" />
-                </linearGradient>
-              </defs>
-              <path d="M0 0 H13 V5 H6 V26 H0 Z" fill="url(#logoGradAdmin)" />
-              <path d="M15 0 H22 V5 H15 Z" fill="url(#logoGradAdmin)" opacity="0.75" />
-            </svg>
             <span className="text-sm font-bold text-foreground tracking-tight">Thinkatic</span>
           </div>
           <div className="text-xs" style={{ color: "#4B5563" }}>Admin Panel</div>
@@ -588,7 +578,7 @@ export default function AdminDashboardPage() {
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left w-full"
               style={{
                 background: tab === id ? "rgba(33,78,207,0.08)" : "transparent",
-                color: tab === id ? "#214ECF" : "rgba(255,255,255,0.45)",
+                color: tab === id ? "#214ECF" : "#4B5563",
                 border: tab === id ? "1px solid rgba(33,78,207,0.18)" : "1px solid transparent",
               }}
             >

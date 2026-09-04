@@ -14,11 +14,12 @@ import {
 
 function ThinkaticLogo({ compact }: { compact?: boolean }) {
   return (
-    <img
-      src="/logo-transparent-light.png"
-      alt="Thinkatic"
-      style={{ height: compact ? "42px" : "48px", width: "auto", objectFit: "contain", filter: "contrast(1.18) saturate(1.15)", transition: "height 0.25s" }}
-    />
+    <span
+      className="font-display font-bold tracking-tight text-slate-900"
+      style={{ fontSize: compact ? "24px" : "27px", lineHeight: 1, transition: "font-size 0.25s" }}
+    >
+      Thinkatic
+    </span>
   );
 }
 

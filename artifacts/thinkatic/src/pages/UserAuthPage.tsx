@@ -97,11 +97,7 @@ export default function UserAuthPage() {
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <Link href="/" className="flex justify-center mb-6">
-          <img
-            src="/logo-transparent-light.png"
-            alt="Thinkatic"
-            className="h-10 w-auto object-contain filter contrast-125"
-          />
+          <span className="text-3xl font-bold tracking-tight text-slate-900">Thinkatic</span>
         </Link>
         <h2 className="text-center text-3xl font-extrabold tracking-tight text-slate-900">
           {mode === "signup" ? "Create Client Account" : "Sign in to Client Portal"}

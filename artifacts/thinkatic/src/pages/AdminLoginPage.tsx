@@ -53,17 +53,7 @@ export default function AdminLoginPage() {
         className="w-full max-w-md px-6"
       >
         <div className="mb-10 text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <svg viewBox="0 0 22 26" width="22" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="logoGradLogin" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#214ECF" />
-                  <stop offset="100%" stopColor="#214ECF" />
-                </linearGradient>
-              </defs>
-              <path d="M0 0 H13 V5 H6 V26 H0 Z" fill="url(#logoGradLogin)" />
-              <path d="M15 0 H22 V5 H15 Z" fill="url(#logoGradLogin)" opacity="0.75" />
-            </svg>
+          <div className="flex items-center justify-center mb-4">
             <span className="text-xl font-bold text-foreground tracking-tight">Thinkatic</span>
           </div>
           <h1 className="text-3xl font-bold text-foreground mb-2">Admin Panel</h1>

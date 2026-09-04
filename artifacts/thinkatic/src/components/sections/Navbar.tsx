@@ -30,10 +30,7 @@ export function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center">
-            <div className="w-3 h-3 bg-background rounded-full" />
-          </div>
+        <div className="flex items-center">
           <span className="text-xl font-display font-bold tracking-tight">THINKATIC</span>
         </div>
 

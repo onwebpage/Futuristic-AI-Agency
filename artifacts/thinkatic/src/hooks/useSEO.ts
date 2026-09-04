@@ -129,7 +129,6 @@ export function useSEO({
         "@type": "Organization",
         name: "Thinkatic",
         url: BASE_URL,
-        logo: `${BASE_URL}/logo-transparent.png`,
         sameAs: [
           "https://www.linkedin.com/company/thinkatic",
           "https://twitter.com/thinkatic",
@@ -167,7 +166,6 @@ export const STRUCTURED_DATA = {
     "@type": "Organization",
     name: "Thinkatic",
     url: BASE_URL,
-    logo: `${BASE_URL}/logo-transparent.png`,
     description: "AI-Powered Business Process Outsourcing & Enterprise Technology Solutions",
     sameAs: [
       "https://www.linkedin.com/company/thinkatic",
