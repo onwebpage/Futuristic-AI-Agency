@@ -124,11 +124,11 @@ const EMPTY_PLAN_FORM: PlanFormData = {
 };
 
 const STATUS_COLORS: Record<string, { bg: string; text: string }> = {
-  new: { bg: "rgba(59,130,246,0.12)", text: "#60a5fa" },
-  contacted: { bg: "rgba(99,102,241,0.12)", text: "#818cf8" },
-  qualified: { bg: "rgba(251,191,36,0.12)", text: "#fbbf24" },
-  closed_won: { bg: "rgba(59,130,246,0.18)", text: "#93c5fd" },
-  closed_lost: { bg: "rgba(239,68,68,0.12)", text: "#f87171" },
+  new: { bg: "rgba(59,130,246,0.12)", text: "#1D4ED8" },
+  contacted: { bg: "rgba(99,102,241,0.12)", text: "#4338CA" },
+  qualified: { bg: "rgba(251,191,36,0.12)", text: "#92400E" },
+  closed_won: { bg: "rgba(59,130,246,0.18)", text: "#1D4ED8" },
+  closed_lost: { bg: "rgba(239,68,68,0.12)", text: "#B91C1C" },
 };
 
 const STATUS_OPTIONS = ["new", "contacted", "qualified", "closed_won", "closed_lost"];
@@ -146,7 +146,7 @@ function apiCall(path: string, options: RequestInit = {}) {
 }
 
 function StatusBadge({ status }: { status: string }) {
-  const colors = STATUS_COLORS[status] ?? { bg: "rgba(33,78,207,0.06)", text: "rgba(255,255,255,0.5)" };
+  const colors = STATUS_COLORS[status] ?? { bg: "rgba(33,78,207,0.06)", text: "#334155" };
   return (
     <span
       className="px-2.5 py-1 rounded-full text-xs font-semibold capitalize"
@@ -165,11 +165,11 @@ function StatCard({ label, value, sub }: { label: string; value: number | string
       className="rounded-2xl p-6"
       style={{ background: "rgba(244,247,255,0.8)", border: "1px solid rgba(255,255,255,0.07)" }}
     >
-      <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "rgba(33,78,207,0.22)" }}>
+      <div className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#475569" }}>
         {label}
       </div>
       <div className="text-4xl font-bold text-foreground">{value}</div>
-      {sub && <div className="text-xs mt-1" style={{ color: "rgba(33,78,207,0.22)" }}>{sub}</div>}
+      {sub && <div className="text-xs mt-1" style={{ color: "#475569" }}>{sub}</div>}
     </motion.div>
   );
 }
@@ -191,7 +191,7 @@ function InputField({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-xs font-medium uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.4)" }}>
+      <label className="text-xs font-medium uppercase tracking-widest" style={{ color: "#475569" }}>
         {label}
       </label>
       <input
@@ -200,10 +200,10 @@ function InputField({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={required}
-        className="w-full px-4 py-2.5 rounded-xl text-sm text-foreground focus:outline-none transition-all"
+        className="w-full px-4 py-2.5 rounded-xl text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none transition-all"
         style={{ background: "rgba(33,78,207,0.04)", border: "1px solid rgba(255,255,255,0.1)" }}
         onFocus={(e) => { e.currentTarget.style.border = "1px solid rgba(71,163,255,0.4)"; }}
-        onBlur={(e) => { e.currentTarget.style.border = "1px solid rgba(255,255,255,0.1)"; }}
+        onBlur={(e) => { e.currentTarget.style.border = "1px solid rgba(33,78,207,0.14)"; }}
       />
     </div>
   );
@@ -673,7 +673,7 @@ export default function AdminDashboardPage() {
   const panelOpen = editingPlan !== null || isAddingPlan;
 
   return (
-    <div className="min-h-screen flex" style={{ background: "#FFFFFF", color: "#111827" }}>
+    <div className="admin-panel min-h-screen flex" style={{ background: "#FFFFFF", color: "#111827" }}>
       {/* Sidebar */}
       <aside
         className="w-56 flex-shrink-0 flex flex-col py-8 px-4"
@@ -744,8 +744,8 @@ export default function AdminDashboardPage() {
               onClick={refresh}
               className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm transition-all"
               style={{ color: "#4B5563", border: "1px solid rgba(33,78,207,0.06)" }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = "white"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.4)"; }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "#214ECF"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "#4B5563"; }}
             >
               <RefreshCw size={14} className={refreshing ? "animate-spin" : ""} />
             </button>
@@ -1033,7 +1033,7 @@ export default function AdminDashboardPage() {
                               style={{
                                 background: "rgba(33,78,207,0.04)",
                                 border: "1px solid rgba(255,255,255,0.1)",
-                                color: "white",
+                                color: "#111827",
                               }}
                             >
                               {STATUS_OPTIONS.map((s) => (

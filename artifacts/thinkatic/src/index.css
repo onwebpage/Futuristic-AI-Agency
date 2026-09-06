@@ -259,6 +259,21 @@
     letter-spacing: -0.008em;
   }
 
+  .admin-panel [style*="color: rgba(33,78,207,0.22)"],
+  .admin-panel [style*="color: rgba(33,78,207,0.16)"],
+  .admin-panel [style*="color: rgba(33,78,207,0.5)"],
+  .admin-panel [style*="color: rgba(255,255,255,0.4)"],
+  .admin-panel [style*="color: rgba(255,255,255,0.5)"],
+  .admin-panel [style*="color: rgba(71,163,255,0.6)"],
+  .admin-panel [style*="color: rgba(33, 78, 207, 0.22)"],
+  .admin-panel [style*="color: rgba(33, 78, 207, 0.16)"],
+  .admin-panel [style*="color: rgba(33, 78, 207, 0.5)"],
+  .admin-panel [style*="color: rgba(255, 255, 255, 0.4)"],
+  .admin-panel [style*="color: rgba(255, 255, 255, 0.5)"],
+  .admin-panel [style*="color: rgba(71, 163, 255, 0.6)"] {
+    color: #475569 !important;
+  }
+
   /* Monospace Telemetry & Figures */
   code, kbd, samp, pre, .font-mono {
     font-family: var(--font-mono);
