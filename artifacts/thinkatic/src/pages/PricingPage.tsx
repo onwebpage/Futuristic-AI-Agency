@@ -15,6 +15,7 @@ import {
   type EnterprisePlan,
 } from "@/data/packages-data";
 import { useSEO } from "@/hooks/useSEO";
+import { BPOPlansSection } from "@/components/sections/BPOPlansSection";
 
 const smoothEase = [0.22, 1, 0.36, 1] as const;
 
@@ -346,6 +347,8 @@ export default function PricingPage() {
               })}
             </div>
           )}
+
+          <BPOPlansSection />
 
           {/* ── Section 6: Mandatory Pricing Disclaimer ── */}
           <div className="relative rounded-xl p-8 sm:p-12 border border-slate-200 bg-white shadow-2xs overflow-hidden">

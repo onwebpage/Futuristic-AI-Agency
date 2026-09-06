@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
+import { BPO_PLANS } from "@/data/packages-data";
 
 // ── Knowledge base ────────────────────────────────────────────────────────────
 const KB = {
@@ -11,11 +12,11 @@ const KB = {
     { id: "private-ai-brain", name: "Private AI Brain", setup: 7500, monthly: 1500 },
     { id: "ai-sales-engine", name: "AI Sales Engine", setup: 6500, monthly: 1500 },
   ],
-  scaleOSTiers: [
-    { id: "starter", name: "ScaleOS Starter (5–10 seats)", price: "₹5,00,000" },
-    { id: "growth", name: "ScaleOS Growth (10–50 seats)", price: "₹7,50,000" },
-    { id: "enterprise", name: "ScaleOS Enterprise (50–500 seats)", price: "₹10,00,000" },
-  ],
+  scaleOSTiers: BPO_PLANS.map(({ id, name, seatRange, priceFormatted }) => ({
+    id,
+    name: `ScaleOS ${name} (${seatRange})`,
+    price: priceFormatted,
+  })),
 };
 
 type Message = {
@@ -29,7 +30,7 @@ type Message = {
 const WELCOME: Message = {
   id: "welcome",
   role: "bot",
-  text: "Hey there! 👋 I'm Thinkatic's AI assistant. I can help you explore our **AI Development Packages** (2026 U.S. Edition) or our **ScaleOS Managed BPO Partnership** (₹0 renewal fee).\n\nWhat would you like to know?",
+  text: "Hey there! 👋 I'm Thinkatic's AI assistant. I can help you explore our **AI Development Packages** (2026 U.S. Edition) or our **ScaleOS Managed BPO Partnership** ($0 renewal fee).\n\nWhat would you like to know?",
   chips: ["AI Development Packages", "Thinkatic ScaleOS (BPO)", "Pricing Details", "How to order?"],
 };
 
@@ -42,7 +43,7 @@ function getResponse(input: string): Message {
   if (/buy|order|purchase|pay|checkout|how.*plan|place.*order/i.test(q)) {
     return {
       id: id(), role: "bot",
-      text: "Placing an order is quick and secure:\n\n1️⃣ Go to the **Pricing** page.\n2️⃣ Choose between **AI Development Packages ($ USD)** or **Thinkatic ScaleOS (₹ INR)**.\n3️⃣ Click **Order Now / Get Started**.\n4️⃣ Pay securely with PayPal or request direct enterprise invoicing.\n5️⃣ Our team connects with you within **24 hours** to kick off onboarding.",
+      text: "Placing an order is quick and secure:\n\n1️⃣ Go to the **Pricing** page.\n2️⃣ Choose between **AI Development Packages** or the **Thinkatic ScaleOS BPO Partnership**.\n3️⃣ Click **Discuss Your BPO Plan / Get Started**.\n4️⃣ Request direct enterprise invoicing.\n5️⃣ Our team connects with you within **24 hours** to kick off onboarding.",
       links: [{ label: "Go to Pricing & Packages →", href: "/pricing" }],
       chips: ["AI Agent Pro", "Thinkatic ScaleOS", "Contact Sales"],
     };
@@ -52,7 +53,7 @@ function getResponse(input: string): Message {
   if (/scaleos|outsourc|bpo|seat|renewal|pune|india.*package|campaign|portfolio/i.test(q)) {
     return {
       id: id(), role: "bot",
-      text: "**Thinkatic ScaleOS** — Managed Outsourcing without building an outsourcing department.\n\n• **1 Strategic Investment for 11 Months**\n• **₹0 Annual Renewal Fee**\n• **17 Live Campaigns Portfolio** (USA, UK, India)\n\n📦 **Scale Tiers:**\n1. **Starter** (5–10 seats) — ₹5,00,000\n2. **Growth (★ Popular)** (10–50 seats) — ₹7,50,000\n3. **Enterprise** (50–500 seats) — ₹10,00,000 (with Lifetime Strategic Support)",
+      text: "**Thinkatic ScaleOS** — Managed Outsourcing without building an outsourcing department.\n\n• **1 Strategic Investment for 11 Months**\n• **$0 Annual Renewal Fee**\n• **Live Project Portfolio Access**\n\n📦 **BPO Plans:**\n1. **Starter** (5–10 seats) — $2,000\n2. **Growth (★ Popular)** (10–50 seats) — $4,000\n3. **Enterprise** (50–500 seats) — $5,000 (with Lifetime Strategic Support)\n\nLifetime Strategic Support does not include unlimited free manpower, technology licenses, additional seats, recruitment, or execution; those remain separately chargeable where required.",
       links: [{ label: "View ScaleOS Packages →", href: "/pricing" }, { label: "Request Proposal →", href: "/request-proposal" }],
       chips: ["Tell me about 17 projects", "How does ScaleOS work?", "AI Development Packages"],
     };
@@ -62,7 +63,7 @@ function getResponse(input: string): Message {
   if (/price|pricing|cost|how much|rate|fee|budget/i.test(q)) {
     return {
       id: id(), role: "bot",
-      text: "We offer benchmarked pricing for two distinct models:\n\n🤖 **AI Development Packages (U.S. Market 2026):**\n• **AI Agent Pro (★ Best Overall)** — $7,500 setup + $1,500/mo\n• **AI Automation** — $5,000 setup + $1,000/mo\n• **AI Voice Pro** — $6,500 setup + $1,500/mo\n• **Private AI Brain** — $7,500 setup + $1,500/mo\n• **AI Sales Engine** — $6,500 setup + $1,500/mo\n\n🏢 **Thinkatic ScaleOS (11-Month Managed BPO):**\n• **Starter (5–10 seats)** — ₹5,00,000\n• **Growth (10–50 seats)** — ₹7,50,000\n• **Enterprise (50–500 seats)** — ₹10,00,000 (Lifetime Support, ₹0 Renewal)",
+      text: "We offer benchmarked pricing for two distinct models:\n\n🤖 **AI Development Packages (U.S. Market 2026):**\n• **AI Agent Pro (★ Best Overall)** — $7,500 setup + $1,500/mo\n• **AI Automation** — $5,000 setup + $1,000/mo\n• **AI Voice Pro** — $6,500 setup + $1,500/mo\n• **Private AI Brain** — $7,500 setup + $1,500/mo\n• **AI Sales Engine** — $6,500 setup + $1,500/mo\n\n🏢 **Thinkatic ScaleOS BPO Partnership (11 Months):**\n• **Starter (5–10 seats)** — $2,000\n• **Growth (10–50 seats)** — $4,000\n• **Enterprise (50–500 seats)** — $5,000 (Lifetime Strategic Support, $0 Renewal)",
       links: [{ label: "See Full Pricing & Packages →", href: "/pricing" }],
       chips: ["AI Agent Pro", "ScaleOS Growth", "Cheapest option?"],
     };

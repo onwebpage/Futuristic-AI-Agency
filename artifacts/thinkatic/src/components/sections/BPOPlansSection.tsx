@@ -1,0 +1,105 @@
+import { motion } from "framer-motion";
+import { Link } from "wouter";
+import { ArrowRight, CheckCircle2, ShieldCheck, Star } from "lucide-react";
+import { BPO_PLANS } from "@/data/packages-data";
+
+const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
+
+export function BPOPlansSection() {
+  return (
+    <section
+      id="bpo-plans"
+      className="relative py-28 md:py-36 overflow-hidden"
+      style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #F6F9FF 50%, #FFFFFF 100%)" }}
+      aria-labelledby="bpo-plans-title"
+    >
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/10 mb-5">
+            <ShieldCheck size={13} className="text-[#214ECF]" />
+            <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#214ECF]">
+              Thinkatic ScaleOS Partnership
+            </span>
+          </div>
+          <h2 id="bpo-plans-title" className="font-display font-black text-3xl sm:text-4xl md:text-5xl text-slate-900 tracking-tight leading-[1.1] mb-5">
+            BPO Plans for <span className="bg-gradient-to-r from-[#1E40AF] via-[#214ECF] to-[#60A5FA] bg-clip-text text-transparent">Operational Scale</span>
+          </h2>
+          <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+            A structured outsourcing partnership for teams that need the people, processes, technology, and operational support to scale with confidence.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+          {BPO_PLANS.map((plan, index) => (
+            <motion.article
+              key={plan.id}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, ease, delay: 0.1 * index }}
+              className={`relative rounded-xl p-7 sm:p-8 flex flex-col bg-white transition-all duration-300 ${
+                plan.isPopular
+                  ? "border-2 border-[#1E40AF] shadow-lg ring-4 ring-blue-500/10"
+                  : "border border-slate-200 shadow-xs hover:border-slate-300 hover:shadow-md"
+              }`}
+            >
+              <div className="flex items-center justify-between gap-3 mb-6">
+                <span className="text-[11px] font-mono font-bold tracking-[0.25em] uppercase text-slate-500">
+                  BPO PLAN {String(index + 1).padStart(2, "0")}
+                </span>
+                {plan.isPopular && (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-bold bg-[#1E40AF] text-white shadow-2xs">
+                    <Star size={11} className="fill-white" />
+                    MOST POPULAR
+                  </span>
+                )}
+              </div>
+
+              <div className="mb-6">
+                <h3 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 tracking-tight mb-2">
+                  {plan.name}
+                </h3>
+                <div className="font-display font-black text-3xl sm:text-4xl text-[#1E40AF] tracking-tight mb-4">
+                  {plan.priceFormatted}
+                </div>
+                <div className="flex flex-wrap gap-2 text-xs font-semibold text-slate-700">
+                  <span className="rounded-md bg-slate-100 border border-slate-200 px-2.5 py-1">{plan.seatRange}</span>
+                  <span className="rounded-md bg-slate-100 border border-slate-200 px-2.5 py-1">{plan.partnershipTerm}</span>
+                </div>
+              </div>
+
+              <div className="pt-6 border-t border-slate-100 flex-1">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 block mb-3">
+                  Partnership Includes
+                </span>
+                <ul className="space-y-2.5">
+                  {plan.includes.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-xs text-slate-800 font-medium">
+                      <CheckCircle2 size={15} className="text-[#1E40AF] shrink-0 mt-0.5" />
+                      <span className="leading-snug">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <Link href={`/contact?plan=${plan.id}`}>
+                <button className={`w-full h-12 mt-8 px-6 rounded-xl font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer ${
+                  plan.isPopular
+                    ? "bg-[#1E40AF] text-white shadow-xs hover:bg-[#1D4ED8]"
+                    : "bg-slate-900 text-white hover:bg-slate-800 shadow-xs"
+                }`}>
+                  Discuss {plan.name} BPO Plan
+                  <ArrowRight size={15} />
+                </button>
+              </Link>
+            </motion.article>
+          ))}
+        </div>
+
+        <div className="max-w-4xl mx-auto mt-10 rounded-xl border border-blue-100 bg-blue-50/50 px-5 py-4 text-center text-xs leading-relaxed text-slate-600">
+          <strong className="text-slate-800">Lifetime Strategic Support</strong> does not mean unlimited free manpower, technology licenses, additional seats, recruitment, or execution. Those remain separately chargeable where required.
+        </div>
+      </div>
+    </section>
+  );
+}

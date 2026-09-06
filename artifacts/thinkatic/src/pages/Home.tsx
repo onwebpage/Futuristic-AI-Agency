@@ -7,6 +7,7 @@ import { Hero } from "@/components/sections/Hero";
 import { OurClients } from "@/components/sections/OurClients";
 import { BPOServices } from "@/components/sections/BPOServices";
 import { FlagshipPricingSection } from "@/components/sections/FlagshipPricingSection";
+import { BPOPlansSection } from "@/components/sections/BPOPlansSection";
 import { WhyThinkatic } from "@/components/sections/WhyThinkatic";
 import { IndustriesSection } from "@/components/sections/IndustriesSection";
 import { GlobalCoverage } from "@/components/sections/GlobalCoverage";
@@ -262,22 +263,25 @@ export default function Home() {
       {/* 5 · Flagship Strategic Pricing Engagements */}
       <FlagshipPricingSection />
 
-      {/* 6 · Industries */}
+      {/* 6 · ScaleOS BPO Partnership Plans */}
+      <BPOPlansSection />
+
+      {/* 7 · Industries */}
       <IndustriesSection />
 
-      {/* 7 · Global Coverage */}
+      {/* 8 · Global Coverage */}
       <GlobalCoverage />
 
-      {/* 8 · Transformation Process */}
+      {/* 9 · Transformation Process */}
       <Process />
 
-      {/* 9 · Testimonials */}
+      {/* 10 · Testimonials */}
       <Testimonials />
 
-      {/* 10 · Enterprise FAQ */}
+      {/* 11 · Enterprise FAQ */}
       <FAQ />
 
-      {/* 11 · Final Strategic CTA */}
+      {/* 12 · Final Strategic CTA */}
       <FinalCTA />
     </Layout>
   );

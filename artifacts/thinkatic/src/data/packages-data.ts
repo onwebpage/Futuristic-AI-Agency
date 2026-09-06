@@ -645,6 +645,117 @@ export const FLAGSHIP_ENGAGEMENTS: EnterprisePlan[] = [
   ENTERPRISE_PLANS.find((p) => p.id === "enterprise-transformation")!,
 ];
 
+// ─── ScaleOS BPO partnership plans ──────────────────────────────────────────
+export interface BPOPlan {
+  id: string;
+  name: "Starter" | "Growth" | "Enterprise";
+  priceFormatted: string;
+  seatRange: string;
+  partnershipTerm: string;
+  isPopular?: boolean;
+  includes: string[];
+}
+
+export const BPO_PLANS: BPOPlan[] = [
+  {
+    id: "bpo-starter",
+    name: "Starter",
+    priceFormatted: "$2,000",
+    seatRange: "5–10 seats",
+    partnershipTerm: "11-month partnership",
+    includes: [
+      "$0 renewal fee",
+      "BPO partner allocation",
+      "Recruitment coordination",
+      "Candidate screening support",
+      "Agent onboarding",
+      "Training coordination",
+      "Process discovery",
+      "Process mapping",
+      "SOP creation",
+      "Workflow design",
+      "Outsourcing roadmap",
+      "CRM / workflow setup",
+      "Basic technology configuration",
+      "KPI framework",
+      "QA framework",
+      "Reporting structure & escalation matrix",
+      "Go-live support",
+      "Initial performance monitoring",
+      "Process stabilization",
+      "Monthly performance review",
+      "Live Project Portfolio Access",
+      "Scale-up support up to 10 seats",
+    ],
+  },
+  {
+    id: "bpo-growth",
+    name: "Growth",
+    priceFormatted: "$4,000",
+    seatRange: "10–50 seats",
+    partnershipTerm: "11-month partnership",
+    isPopular: true,
+    includes: [
+      "$0 renewal fee",
+      "Everything in Starter, plus:",
+      "Dedicated account manager",
+      "Advanced SOPs",
+      "Detailed workforce planning",
+      "Multi-level escalation system",
+      "Advanced QA framework",
+      "Weekly performance reporting",
+      "Advanced CRM / workflow configuration",
+      "Automated reporting",
+      "Productivity dashboards",
+      "Performance analytics",
+      "Call / chat QA integration",
+      "Structured recruitment pipeline",
+      "Training framework",
+      "Mock-process assessment",
+      "Replacement coordination",
+      "Attrition management support",
+      "Capacity planning",
+      "Additional seat deployment",
+      "Process optimization",
+      "Monthly strategy review",
+      "Expansion support up to 50 seats",
+      "Live Project Portfolio Access",
+    ],
+  },
+  {
+    id: "bpo-enterprise",
+    name: "Enterprise",
+    priceFormatted: "$5,000",
+    seatRange: "50–500 seats",
+    partnershipTerm: "11-month enterprise partnership",
+    includes: [
+      "$0 renewal fee",
+      "Everything in Growth, plus:",
+      "Multi-process implementation",
+      "Multi-team, multi-shift deployment",
+      "Large-scale workforce planning",
+      "Enterprise SOP architecture",
+      "Department-level KPI framework",
+      "Enterprise reporting & dashboards",
+      "Workflow automation",
+      "AI-assisted QA where applicable",
+      "Performance analytics",
+      "Integration support",
+      "Dedicated enterprise account team",
+      "Priority escalation",
+      "Monthly business reviews",
+      "Capacity & workforce optimization",
+      "Scale-up support up to 500 seats",
+      "Lifetime Strategic Support",
+      "Process & outsourcing advisory",
+      "BPO partner coordination",
+      "Expansion discussions",
+      "Technology guidance",
+      "Operational troubleshooting",
+    ],
+  },
+];
+
 // ─── Legacy compatibility exports so existing imports don't crash ────────────
 export type AIPackage = EnterprisePlan;
 export type ScaleOSTier = EnterprisePlan;
