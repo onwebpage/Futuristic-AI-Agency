@@ -29,6 +29,7 @@ import {
   X,
 } from "lucide-react";
 import BrandLogo from "@/components/layout/BrandLogo";
+import { BPO_PLANS } from "@/data/packages-data";
 
 interface Profile {
   id: string;
@@ -52,7 +53,23 @@ interface Plan {
   description: string;
   features: string[];
   popular: boolean;
+  isBpo?: boolean;
 }
+
+const BPO_PLAN_IDS = new Set(BPO_PLANS.map((plan) => plan.id));
+const BPO_DASHBOARD_PLANS: Plan[] = BPO_PLANS.map((plan, index) => ({
+  id: 1000 + index,
+  serviceId: plan.id,
+  serviceNumber: `BPO-${String(index + 1).padStart(2, "0")}`,
+  category: "BPO & Outsourcing",
+  name: plan.name,
+  price: plan.priceNumeric,
+  tag: plan.isPopular ? "MOST POPULAR" : "ScaleOS Partnership",
+  description: "Thinkatic ScaleOS BPO / Outsourcing Partnership",
+  features: [plan.seatRange, plan.partnershipTerm, ...plan.includes],
+  popular: Boolean(plan.isPopular),
+  isBpo: true,
+}));
 
 interface AttendanceRecord {
   id: number;
@@ -207,7 +224,8 @@ export default function UserDashboardPage() {
       const plansRes = await fetch("/api/plans");
       if (plansRes.ok) {
         const plansData = await plansRes.json();
-        setPlans(plansData);
+        const technologyPlans = plansData.filter((plan: Plan) => !BPO_PLAN_IDS.has(plan.serviceId));
+        setPlans([...technologyPlans, ...BPO_DASHBOARD_PLANS]);
       }
 
       // 3. Attendance
@@ -311,6 +329,12 @@ export default function UserDashboardPage() {
   };
 
   const handleSelectPlan = async (plan: Plan) => {
+    if (plan.isBpo) {
+      setPlanToConfirm(null);
+      setLocation(`/contact?plan=${plan.serviceId}`);
+      return;
+    }
+
     setSelectingPlan(true);
     try {
       const res = await authFetch("/user/plans/select", {
@@ -753,9 +777,9 @@ export default function UserDashboardPage() {
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h1 className="text-xl font-bold text-slate-900">16 Flagship Technology Packages</h1>
+                  <h1 className="text-xl font-bold text-slate-900">Services &amp; Plans</h1>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    Select an enterprise plan directly backed by our engineering squads and SLA guarantees.
+                    Explore enterprise technology packages and Thinkatic ScaleOS BPO partnerships.
                   </p>
                 </div>
                 {profile?.selectedPlan && (
@@ -840,7 +864,7 @@ export default function UserDashboardPage() {
                             : "bg-blue-600 hover:bg-blue-700 text-white shadow-xs"
                         }`}
                       >
-                        {isCurrent ? "Currently Active Plan" : "Select Enterprise Plan"}
+                        {isCurrent ? "Currently Active Plan" : plan.isBpo ? "Discuss BPO Plan" : "Select Enterprise Plan"}
                       </button>
                     </div>
                   );
@@ -1360,7 +1384,9 @@ export default function UserDashboardPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4">
           <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold text-slate-900">Activate Plan</h3>
+              <h3 className="text-base font-bold text-slate-900">
+                {planToConfirm.isBpo ? "Discuss BPO Plan" : "Activate Plan"}
+              </h3>
               <button
                 onClick={() => setPlanToConfirm(null)}
                 className="text-slate-400 hover:text-slate-600"
@@ -1370,9 +1396,11 @@ export default function UserDashboardPage() {
             </div>
 
             <p className="text-xs text-slate-600 leading-relaxed">
-              You are about to activate <span className="font-bold text-slate-900">{planToConfirm.name}</span> (
-              ${planToConfirm.price.toLocaleString()}). This will assign the package to your enterprise account and
-              alert your engineering account executive.
+              {planToConfirm.isBpo ? "You are about to discuss " : "You are about to activate "}
+              <span className="font-bold text-slate-900">{planToConfirm.name}</span> (
+              ${planToConfirm.price.toLocaleString()}). {planToConfirm.isBpo
+                ? "Continue to contact Thinkatic about this BPO partnership."
+                : "This will assign the package to your enterprise account and alert your engineering account executive."}
             </p>
 
             <div className="p-3 bg-blue-50 border border-blue-100 rounded-xl text-xs text-blue-800 space-y-1">
@@ -1399,7 +1427,7 @@ export default function UserDashboardPage() {
                 onClick={() => handleSelectPlan(planToConfirm)}
                 className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-xs cursor-pointer"
               >
-                {selectingPlan ? "Activating..." : "Confirm & Activate"}
+                {selectingPlan ? "Activating..." : planToConfirm.isBpo ? "Continue to Contact" : "Confirm & Activate"}
               </button>
             </div>
           </div>

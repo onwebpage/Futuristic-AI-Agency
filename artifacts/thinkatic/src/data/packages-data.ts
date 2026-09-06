@@ -650,6 +650,7 @@ export interface BPOPlan {
   id: string;
   name: "Starter" | "Growth" | "Enterprise";
   priceFormatted: string;
+  priceNumeric: number;
   seatRange: string;
   partnershipTerm: string;
   isPopular?: boolean;
@@ -661,6 +662,7 @@ export const BPO_PLANS: BPOPlan[] = [
     id: "bpo-starter",
     name: "Starter",
     priceFormatted: "$2,000",
+    priceNumeric: 2000,
     seatRange: "5–10 seats",
     partnershipTerm: "11-month partnership",
     includes: [
@@ -692,6 +694,7 @@ export const BPO_PLANS: BPOPlan[] = [
     id: "bpo-growth",
     name: "Growth",
     priceFormatted: "$4,000",
+    priceNumeric: 4000,
     seatRange: "10–50 seats",
     partnershipTerm: "11-month partnership",
     isPopular: true,
@@ -726,6 +729,7 @@ export const BPO_PLANS: BPOPlan[] = [
     id: "bpo-enterprise",
     name: "Enterprise",
     priceFormatted: "$5,000",
+    priceNumeric: 5000,
     seatRange: "50–500 seats",
     partnershipTerm: "11-month enterprise partnership",
     includes: [
