@@ -27,6 +27,7 @@ import {
   FileCheck,
   Send,
   X,
+  MessageSquare,
 } from "lucide-react";
 import BrandLogo from "@/components/layout/BrandLogo";
 import { BPO_PLANS } from "@/data/packages-data";
@@ -54,6 +55,17 @@ interface Plan {
   features: string[];
   popular: boolean;
   isBpo?: boolean;
+}
+
+interface ClientUpdate {
+  id: number;
+  title: string;
+  message: string;
+  category: string | null;
+  status: "draft" | "published";
+  publishedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
 }
 
 const BPO_PLAN_IDS = new Set(BPO_PLANS.map((plan) => plan.id));
@@ -130,10 +142,11 @@ interface Transaction {
 
 export default function UserDashboardPage() {
   const [, setLocation] = useLocation();
-  const [tab, setTab] = useState<"overview" | "plans" | "attendance" | "kyc" | "affiliate" | "wallet" | "profile">("overview");
+  const [tab, setTab] = useState<"overview" | "plans" | "updates" | "attendance" | "kyc" | "affiliate" | "wallet" | "profile">("overview");
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [plans, setPlans] = useState<Plan[]>([]);
+  const [updates, setUpdates] = useState<ClientUpdate[]>([]);
   const [attendance, setAttendance] = useState<AttendanceRecord[]>([]);
   const [kyc, setKyc] = useState<KycRecord | null>(null);
   const [affiliate, setAffiliate] = useState<AffiliateData | null>(null);
@@ -226,6 +239,11 @@ export default function UserDashboardPage() {
         const plansData = await plansRes.json();
         const technologyPlans = plansData.filter((plan: Plan) => !BPO_PLAN_IDS.has(plan.serviceId));
         setPlans([...technologyPlans, ...BPO_DASHBOARD_PLANS]);
+      }
+
+      const updatesRes = await authFetch("/user/updates");
+      if (updatesRes.ok) {
+        setUpdates(await updatesRes.json());
       }
 
       // 3. Attendance
@@ -495,6 +513,7 @@ export default function UserDashboardPage() {
             {[
               { id: "overview", label: "Dashboard Overview", icon: LayoutDashboard },
               { id: "plans", label: "Services & Plans", icon: Layers, badge: plans.length },
+              { id: "updates", label: "Your Updates", icon: MessageSquare, badge: updates.length || undefined },
               { id: "attendance", label: "Attendance & Shift", icon: Clock },
               { id: "kyc", label: "KYC Verification", icon: ShieldCheck, badge: kyc?.status === "verified" ? "Verified" : kyc?.status === "pending" ? "Pending" : "Required" },
               { id: "affiliate", label: "Affiliate & Rewards", icon: Share2 },
@@ -870,6 +889,47 @@ export default function UserDashboardPage() {
                   );
                 })}
               </div>
+            </div>
+          )}
+
+          {tab === "updates" && (
+            <div className="space-y-6">
+              <div>
+                <h1 className="text-xl font-bold text-slate-900">Your Updates</h1>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Private project, operational, and progress updates from your Thinkatic team.
+                </p>
+              </div>
+
+              {updates.length === 0 ? (
+                <div className="bg-white rounded-2xl border border-slate-200 p-10 text-center shadow-xs">
+                  <MessageSquare size={28} className="mx-auto mb-3 text-slate-300" />
+                  <p className="text-sm font-semibold text-slate-700">No updates yet</p>
+                  <p className="text-xs text-slate-500 mt-1">Your client-specific updates will appear here.</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {updates.map((update) => (
+                    <article key={update.id} className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <h2 className="text-base font-bold text-slate-900">{update.title}</h2>
+                            {update.category && <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-semibold">{update.category}</span>}
+                          </div>
+                          <time className="text-[11px] text-slate-400" dateTime={update.publishedAt || update.createdAt}>
+                            {new Date(update.publishedAt || update.createdAt).toLocaleString()}
+                          </time>
+                        </div>
+                        <span className="text-[10px] uppercase tracking-wider font-bold text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-full px-2.5 py-1 self-start">
+                          Published
+                        </span>
+                      </div>
+                      <p className="text-sm leading-relaxed text-slate-600 whitespace-pre-wrap">{update.message}</p>
+                    </article>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 

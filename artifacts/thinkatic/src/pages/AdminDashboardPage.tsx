@@ -26,6 +26,8 @@ import {
   Share2,
   Wallet,
   FileText,
+  MessageSquare,
+  Send,
 } from "lucide-react";
 import BrandLogo from "@/components/layout/BrandLogo";
 
@@ -75,6 +77,39 @@ type PlanFormData = {
   features: string;
   popular: boolean;
 };
+
+type ClientUpdate = {
+  id: number;
+  userId: string;
+  title: string;
+  message: string;
+  category: string | null;
+  status: "draft" | "published";
+  publishedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type UpdateClient = {
+  userId: string;
+  clientName: string;
+  email: string;
+  assignedPlan: string | null;
+  planPrice: number | null;
+  planSeats: string | null;
+  planStatus: string;
+  lastUpdateSent: string | null;
+  updateCount: number;
+};
+
+type UpdateFormData = {
+  title: string;
+  message: string;
+  category: string;
+  status: "draft" | "published";
+};
+
+const EMPTY_UPDATE_FORM: UpdateFormData = { title: "", message: "", category: "", status: "published" };
 
 const EMPTY_PLAN_FORM: PlanFormData = {
   serviceId: "",
@@ -177,7 +212,7 @@ function InputField({
 export default function AdminDashboardPage() {
   const [, setLocation] = useLocation();
   const [tab, setTab] = useState<
-    "overview" | "leads" | "analytics" | "plans" | "attendance" | "kyc" | "affiliates" | "wallets" | "settings"
+    "overview" | "leads" | "analytics" | "plans" | "client-updates" | "attendance" | "kyc" | "affiliates" | "wallets" | "settings"
   >("overview");
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);
@@ -202,6 +237,17 @@ export default function AdminDashboardPage() {
   const [planForm, setPlanForm] = useState<PlanFormData>(EMPTY_PLAN_FORM);
   const [savingPlan, setSavingPlan] = useState(false);
   const [planMessage, setPlanMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  // Client updates state
+  const [updateClients, setUpdateClients] = useState<UpdateClient[]>([]);
+  const [updateClientsLoading, setUpdateClientsLoading] = useState(false);
+  const [selectedUpdateClient, setSelectedUpdateClient] = useState<UpdateClient | null>(null);
+  const [clientUpdateHistory, setClientUpdateHistory] = useState<ClientUpdate[]>([]);
+  const [clientUpdatesLoading, setClientUpdatesLoading] = useState(false);
+  const [updateForm, setUpdateForm] = useState<UpdateFormData>(EMPTY_UPDATE_FORM);
+  const [editingClientUpdate, setEditingClientUpdate] = useState<ClientUpdate | null>(null);
+  const [updateModalOpen, setUpdateModalOpen] = useState(false);
+  const [savingClientUpdate, setSavingClientUpdate] = useState(false);
 
   // Attendance state
   const [attendanceRecords, setAttendanceRecords] = useState<any[]>([]);
@@ -318,6 +364,73 @@ export default function AdminDashboardPage() {
     }
   }, []);
 
+  const loadUpdateClients = useCallback(async () => {
+    setUpdateClientsLoading(true);
+    try {
+      const res = await apiCall("/admin/client-updates/clients");
+      if (res.status === 401) { logout(); return; }
+      if (res.ok) setUpdateClients(await res.json());
+    } finally {
+      setUpdateClientsLoading(false);
+    }
+  }, []);
+
+  const loadClientUpdateHistory = async (client: UpdateClient) => {
+    setSelectedUpdateClient(client);
+    setClientUpdatesLoading(true);
+    try {
+      const res = await apiCall(`/admin/client-updates/users/${client.userId}`);
+      if (res.ok) setClientUpdateHistory(await res.json());
+    } finally {
+      setClientUpdatesLoading(false);
+    }
+  };
+
+  const openClientUpdate = (client: UpdateClient, update?: ClientUpdate) => {
+    setSelectedUpdateClient(client);
+    setEditingClientUpdate(update ?? null);
+    setUpdateForm(update
+      ? { title: update.title, message: update.message, category: update.category ?? "", status: update.status }
+      : EMPTY_UPDATE_FORM);
+    setUpdateModalOpen(true);
+  };
+
+  const saveClientUpdate = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!selectedUpdateClient || !updateForm.title.trim() || !updateForm.message.trim()) return;
+    setSavingClientUpdate(true);
+    try {
+      const path = editingClientUpdate
+        ? `/admin/client-updates/${editingClientUpdate.id}`
+        : "/admin/client-updates";
+      const res = await apiCall(path, {
+        method: editingClientUpdate ? "PATCH" : "POST",
+        body: JSON.stringify({
+          ...updateForm,
+          userId: selectedUpdateClient.userId,
+        }),
+      });
+      if (!res.ok) throw new Error("Unable to save client update");
+      setUpdateModalOpen(false);
+      await loadClientUpdateHistory(selectedUpdateClient);
+      await loadUpdateClients();
+    } catch (error) {
+      setDataError(error instanceof Error ? error.message : "Unable to save client update");
+    } finally {
+      setSavingClientUpdate(false);
+    }
+  };
+
+  const deleteClientUpdate = async (update: ClientUpdate) => {
+    if (!confirm("Delete this client update permanently?")) return;
+    const res = await apiCall(`/admin/client-updates/${update.id}`, { method: "DELETE" });
+    if (!res.ok) { setDataError("Unable to delete client update"); return; }
+    if (selectedUpdateClient) {
+      await loadClientUpdateHistory(selectedUpdateClient);
+      await loadUpdateClients();
+    }
+  };
+
   const handleReviewKyc = async (id: number, status: "verified" | "rejected", reason?: string) => {
     setReviewingKyc(true);
     try {
@@ -343,7 +456,8 @@ export default function AdminDashboardPage() {
     if (tab === "kyc") loadKyc();
     if (tab === "affiliates") loadAffiliates();
     if (tab === "wallets") loadWallets();
-  }, [tab, loadPlans, loadAttendance, loadKyc, loadAffiliates, loadWallets]);
+    if (tab === "client-updates") loadUpdateClients();
+  }, [tab, loadPlans, loadAttendance, loadKyc, loadAffiliates, loadWallets, loadUpdateClients]);
 
   const refresh = async () => {
     setRefreshing(true);
@@ -548,6 +662,7 @@ export default function AdminDashboardPage() {
     { id: "leads", label: "Leads", icon: Users },
     { id: "analytics", label: "Analytics", icon: BarChart3 },
     { id: "plans", label: "Plans", icon: Tag },
+    { id: "client-updates", label: "Client Updates", icon: MessageSquare },
     { id: "attendance", label: "Attendance", icon: Clock },
     { id: "kyc", label: "KYC Review", icon: ShieldCheck },
     { id: "affiliates", label: "Affiliates", icon: Share2 },
@@ -622,7 +737,7 @@ export default function AdminDashboardPage() {
           style={{ borderBottom: "1px solid rgba(33,78,207,0.12)", background: "rgba(255,255,255,0.92)", backdropFilter: "blur(12px)" }}
         >
           <h1 className="text-lg font-bold text-foreground capitalize">
-            {tab === "overview" ? "Dashboard Overview" : tab === "leads" ? "Lead Management" : tab === "analytics" ? "Analytics" : tab === "plans" ? "Plan Management" : "Settings"}
+            {tab === "overview" ? "Dashboard Overview" : tab === "leads" ? "Lead Management" : tab === "analytics" ? "Analytics" : tab === "plans" ? "Plan Management" : tab === "client-updates" ? "Client Updates" : "Settings"}
           </h1>
           <div className="flex items-center gap-3">
             <button
@@ -1026,6 +1141,7 @@ export default function AdminDashboardPage() {
                                     borderBottom: i < group.plans.length - 1 ? "1px solid rgba(255,255,255,0.04)" : "none",
                                     background: editingPlan?.id === plan.id ? "rgba(71,163,255,0.04)" : "rgba(255,255,255,0.01)",
                                   }}
+
                                 >
                                   <div
                                     className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -1341,6 +1457,35 @@ export default function AdminDashboardPage() {
                       </div>
                     </div>
                   </div>
+                </div>
+              )}
+
+              {/* Client Updates Tab */}
+              {tab === "client-updates" && (
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="text-xl font-bold text-foreground">Client Updates</h2>
+                    <p className="text-xs mt-1" style={{ color: "#4B5563" }}>Send private project and operational updates to clients with assigned plans.</p>
+                  </div>
+                  {updateClientsLoading ? (
+                    <div className="flex items-center justify-center h-48"><div className="animate-spin rounded-full border-2 border-border border-t-blue-400 w-8 h-8" /></div>
+                  ) : updateClients.length === 0 ? (
+                    <div className="rounded-2xl p-8 text-center" style={{ background: "rgba(244,247,255,0.8)", border: "1px solid rgba(33,78,207,0.1)" }}><Users size={28} className="mx-auto mb-3" style={{ color: "#214ECF" }} /><p className="text-sm font-semibold text-slate-700">No clients with assigned plans</p></div>
+                  ) : (
+                    <div className="space-y-4">
+                      {updateClients.map((client) => (
+                        <div key={client.userId} className="rounded-2xl p-5" style={{ background: "rgba(244,247,255,0.8)", border: "1px solid rgba(33,78,207,0.1)" }}>
+                          <div className="flex flex-col lg:flex-row lg:items-center gap-4">
+                            <div className="flex-1 min-w-0"><div className="flex items-center gap-2 mb-1"><h3 className="font-bold text-foreground truncate">{client.clientName}</h3><span className="px-2 py-0.5 rounded-full text-[10px] font-semibold" style={{ background: "rgba(33,78,207,0.08)", color: "#214ECF" }}>{client.planStatus}</span></div><p className="text-xs truncate" style={{ color: "#4B5563" }}>{client.email}</p></div>
+                            <div className="lg:w-64"><div className="text-xs font-semibold text-foreground">{client.assignedPlan || "Unassigned"}</div><div className="text-xs" style={{ color: "#4B5563" }}>{client.planPrice === null ? "" : `$${client.planPrice.toLocaleString()}`}{client.planSeats ? ` · ${client.planSeats}` : ""}</div></div>
+                            <div className="lg:w-40 text-xs" style={{ color: "#4B5563" }}><div><span className="font-semibold text-foreground">{client.updateCount}</span> update{client.updateCount === 1 ? "" : "s"}</div><div>{client.lastUpdateSent ? new Date(client.lastUpdateSent).toLocaleDateString() : "Never sent"}</div></div>
+                            <div className="flex flex-wrap gap-2"><button onClick={() => loadClientUpdateHistory(client)} className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium" style={{ background: "rgba(33,78,207,0.05)", color: "#214ECF", border: "1px solid rgba(33,78,207,0.12)" }}><Eye size={13} /> View Updates</button><button onClick={() => openClientUpdate(client)} className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium text-white" style={{ background: "#214ECF" }}><Send size={13} /> Send Update</button></div>
+                          </div>
+                          {selectedUpdateClient?.userId === client.userId && <div className="mt-5 pt-5" style={{ borderTop: "1px solid rgba(33,78,207,0.1)" }}><div className="flex items-center justify-between mb-3"><h4 className="text-sm font-semibold text-foreground">Update History</h4><button onClick={() => openClientUpdate(client)} className="text-xs font-semibold" style={{ color: "#214ECF" }}>+ New Update</button></div>{clientUpdatesLoading ? <p className="text-xs text-slate-500">Loading history...</p> : clientUpdateHistory.length === 0 ? <p className="text-xs text-slate-500">No updates sent yet.</p> : <div className="space-y-3">{clientUpdateHistory.map((update) => <div key={update.id} className="rounded-xl p-4 bg-white" style={{ border: "1px solid rgba(33,78,207,0.08)" }}><div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2"><div><div className="flex items-center gap-2"><span className="text-sm font-semibold text-foreground">{update.title}</span><StatusBadge status={update.status} /></div><p className="text-xs mt-1 whitespace-pre-wrap" style={{ color: "#4B5563" }}>{update.message}</p><p className="text-[10px] mt-2" style={{ color: "#64748B" }}>{update.publishedAt ? `Sent ${new Date(update.publishedAt).toLocaleString()}` : `Created ${new Date(update.createdAt).toLocaleString()}`}</p></div><div className="flex gap-2 shrink-0"><button onClick={() => openClientUpdate(client, update)} className="p-2 rounded-lg" style={{ color: "#214ECF", background: "rgba(33,78,207,0.05)" }} title="Edit update"><Pencil size={13} /></button><button onClick={() => deleteClientUpdate(update)} className="p-2 rounded-lg" style={{ color: "#B91C1C", background: "rgba(239,68,68,0.06)" }} title="Delete update"><Trash2 size={13} /></button></div></div></div>)}</div>}</div>}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -1785,6 +1930,43 @@ export default function AdminDashboardPage() {
           )}
         </div>
       </main>
+
+      {/* Client Update Composer Modal */}
+      {updateModalOpen && selectedUpdateClient && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4">
+          <form onSubmit={saveClientUpdate} className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-base font-bold text-slate-900">{editingClientUpdate ? "Edit Client Update" : "Send Client Update"}</h3>
+                <p className="text-[11px] text-slate-500 mt-1">Only {selectedUpdateClient.clientName} ({selectedUpdateClient.email})</p>
+              </div>
+              <button type="button" onClick={() => setUpdateModalOpen(false)} className="text-slate-400 hover:text-slate-600"><X size={18} /></button>
+            </div>
+            <InputField label="Update Title" value={updateForm.title} onChange={(value) => setUpdateForm((prev) => ({ ...prev, title: value }))} placeholder="Daily Progress Update" required />
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-medium uppercase tracking-widest text-slate-500">Update Message</label>
+              <textarea required rows={6} value={updateForm.message} onChange={(e) => setUpdateForm((prev) => ({ ...prev, message: e.target.value }))} placeholder="Write a client-specific project update..." className="w-full px-4 py-2.5 rounded-xl text-sm text-slate-900 border border-slate-200 focus:outline-none focus:border-blue-400" />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <InputField label="Category / Status" value={updateForm.category} onChange={(value) => setUpdateForm((prev) => ({ ...prev, category: value }))} placeholder="Project Update" />
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-medium uppercase tracking-widest text-slate-500">Publish Status</label>
+                <select value={updateForm.status} onChange={(e) => setUpdateForm((prev) => ({ ...prev, status: e.target.value as "draft" | "published" }))} className="w-full px-4 py-2.5 rounded-xl text-sm text-slate-900 border border-slate-200 bg-white focus:outline-none focus:border-blue-400">
+                  <option value="published">Published</option>
+                  <option value="draft">Draft</option>
+                </select>
+              </div>
+            </div>
+            <div className="text-[11px] text-slate-500">Date/time: {new Date().toLocaleString()} (recorded by the server when saved)</div>
+            <div className="flex items-center justify-end gap-2.5 pt-2">
+              <button type="button" onClick={() => setUpdateModalOpen(false)} className="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl">Cancel</button>
+              <button type="submit" disabled={savingClientUpdate} className="px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-xs font-bold rounded-xl shadow-xs cursor-pointer">
+                {savingClientUpdate ? "Saving..." : editingClientUpdate ? "Save Changes" : "Send / Publish"}
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
 
       {/* KYC Rejection Reason Modal */}
       {kycReviewModal && (

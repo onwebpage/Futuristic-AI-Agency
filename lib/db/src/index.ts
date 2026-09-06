@@ -185,6 +185,31 @@ export interface WalletTransaction {
   createdAt: Date;
 }
 
+export interface ClientUpdate {
+  id: number;
+  userId: string;
+  title: string;
+  message: string;
+  category: string | null;
+  status: "draft" | "published";
+  createdBy: string;
+  publishedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ClientUpdateClient {
+  userId: string;
+  clientName: string;
+  email: string;
+  assignedPlan: string | null;
+  planPrice: number | null;
+  planSeats: string | null;
+  planStatus: string;
+  lastUpdateSent: string | null;
+  updateCount: number;
+}
+
 // -----------------------------------------------------------------------------
 // Mappers
 // -----------------------------------------------------------------------------
@@ -572,6 +597,27 @@ export const adminRepository = {
 // -----------------------------------------------------------------------------
 
 export const userProfileRepository = {
+  async getAll(): Promise<Profile[]> {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) throw error;
+    return (data || []).map((row: any) => ({
+      id: row.id,
+      email: row.email,
+      passwordHash: row.password_hash ?? null,
+      fullName: row.full_name,
+      avatarUrl: row.avatar_url,
+      role: row.role,
+      selectedPlan: row.selected_plan ?? null,
+      referralCode: row.referral_code,
+      referredBy: row.referred_by,
+      createdAt: new Date(row.created_at),
+      updatedAt: new Date(row.updated_at),
+    }));
+  },
+
   async getById(id: string): Promise<Profile | null> {
     const { data, error } = await supabase
       .from("profiles")
@@ -727,6 +773,117 @@ export const userProfileRepository = {
       .update({ password_hash: passwordHash, updated_at: new Date().toISOString() })
       .eq("id", userId);
     return !error;
+  },
+};
+
+// -----------------------------------------------------------------------------
+// Client Updates Repository
+// -----------------------------------------------------------------------------
+
+function mapClientUpdateRow(row: any): ClientUpdate {
+  return {
+    id: Number(row.id),
+    userId: row.user_id,
+    title: row.title,
+    message: row.message,
+    category: row.category ?? null,
+    status: row.status === "published" ? "published" : "draft",
+    createdBy: row.created_by,
+    publishedAt: row.published_at ?? null,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  };
+}
+
+export const clientUpdatesRepository = {
+  async getPublishedForUser(userId: string): Promise<ClientUpdate[]> {
+    const { data, error } = await supabase
+      .from("client_updates")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("status", "published")
+      .order("published_at", { ascending: false });
+    if (error) throw error;
+    return (data || []).map(mapClientUpdateRow);
+  },
+
+  async getForUser(userId: string): Promise<ClientUpdate[]> {
+    const { data, error } = await supabase
+      .from("client_updates")
+      .select("*")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
+    if (error) throw error;
+    return (data || []).map(mapClientUpdateRow);
+  },
+
+  async getById(id: number): Promise<ClientUpdate | null> {
+    const { data, error } = await supabase
+      .from("client_updates")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+    if (error) throw error;
+    return data ? mapClientUpdateRow(data) : null;
+  },
+
+  async create(data: {
+    userId: string;
+    title: string;
+    message: string;
+    category?: string | null;
+    status: "draft" | "published";
+    createdBy: string;
+  }): Promise<ClientUpdate> {
+    const publishedAt = data.status === "published" ? new Date().toISOString() : null;
+    const { data: created, error } = await supabase
+      .from("client_updates")
+      .insert({
+        user_id: data.userId,
+        title: data.title,
+        message: data.message,
+        category: data.category ?? null,
+        status: data.status,
+        created_by: data.createdBy,
+        published_at: publishedAt,
+      })
+      .select()
+      .single();
+    if (error) throw error;
+    return mapClientUpdateRow(created);
+  },
+
+  async update(id: number, updates: {
+    title?: string;
+    message?: string;
+    category?: string | null;
+    status?: "draft" | "published";
+  }): Promise<ClientUpdate | null> {
+    const payload: Record<string, unknown> = { updated_at: new Date().toISOString() };
+    if (updates.title !== undefined) payload.title = updates.title;
+    if (updates.message !== undefined) payload.message = updates.message;
+    if (updates.category !== undefined) payload.category = updates.category;
+    if (updates.status !== undefined) {
+      payload.status = updates.status;
+      payload.published_at = updates.status === "published" ? new Date().toISOString() : null;
+    }
+    const { data, error } = await supabase
+      .from("client_updates")
+      .update(payload)
+      .eq("id", id)
+      .select()
+      .maybeSingle();
+    if (error) throw error;
+    return data ? mapClientUpdateRow(data) : null;
+  },
+
+  async delete(id: number): Promise<boolean> {
+    const { error, count } = await supabase
+      .from("client_updates")
+      .delete({ count: "exact" })
+      .eq("id", id);
+    if (error) throw error;
+    return (count ?? 0) > 0;
   },
 };
 

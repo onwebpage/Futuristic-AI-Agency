@@ -5,6 +5,7 @@ import adminRouter from "./admin.js";
 import paypalRouter from "./paypal.js";
 import plansRouter from "./plans.js";
 import userRouter from "./user.js";
+import clientUpdatesRouter from "./clientUpdates.js";
 
 const router: IRouter = Router();
 
@@ -14,5 +15,6 @@ router.use(adminRouter);
 router.use(paypalRouter);
 router.use(plansRouter);
 router.use(userRouter);
+router.use(clientUpdatesRouter);
 
 export default router;
