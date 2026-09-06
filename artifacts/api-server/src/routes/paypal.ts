@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { createPaypalOrder, capturePaypalOrder, loadPaypalDefault } from "../lib/paypal.js";
+import { requireUserAuth } from "./user.js";
 
 const router = Router();
 
@@ -13,7 +14,7 @@ router.get("/paypal/setup", async (req, res) => {
   }
 });
 
-router.post("/paypal/order", async (req, res) => {
+router.post("/paypal/order", requireUserAuth, async (req, res) => {
   try {
     await createPaypalOrder(req, res);
   } catch (err: any) {
@@ -23,7 +24,7 @@ router.post("/paypal/order", async (req, res) => {
   }
 });
 
-router.post("/paypal/order/:orderID/capture", async (req, res) => {
+router.post("/paypal/order/:orderID/capture", requireUserAuth, async (req, res) => {
   try {
     await capturePaypalOrder(req, res);
   } catch (err: any) {

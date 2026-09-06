@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import BrandLogo from "@/components/layout/BrandLogo";
 import { BPO_PLANS } from "@/data/packages-data";
+import PayPalButton from "@/components/ui/PayPalButton";
 
 interface Profile {
   id: string;
@@ -140,6 +141,32 @@ interface Transaction {
   createdAt: string;
 }
 
+interface Purchase {
+  id: number;
+  packageId: string;
+  packageName: string;
+  amount: number;
+  currency: string;
+  status: string;
+  purchasedAt: string | null;
+}
+
+interface PayoutDetail {
+  id: number;
+  method: "paypal" | "indian_bank";
+  displayLabel: string;
+}
+
+interface Withdrawal {
+  id: number;
+  amount: number;
+  currency: string;
+  method: "paypal" | "indian_bank";
+  status: "PENDING" | "APPROVED" | "REJECTED";
+  rejectionReason: string | null;
+  createdAt: string;
+}
+
 export default function UserDashboardPage() {
   const [, setLocation] = useLocation();
   const [tab, setTab] = useState<"overview" | "plans" | "updates" | "attendance" | "kyc" | "affiliate" | "wallet" | "profile">("overview");
@@ -152,6 +179,15 @@ export default function UserDashboardPage() {
   const [affiliate, setAffiliate] = useState<AffiliateData | null>(null);
   const [wallet, setWallet] = useState<WalletData | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [purchases, setPurchases] = useState<Purchase[]>([]);
+  const [bpoEligible, setBpoEligible] = useState(false);
+  const [payoutDetails, setPayoutDetails] = useState<PayoutDetail[]>([]);
+  const [withdrawals, setWithdrawals] = useState<Withdrawal[]>([]);
+  const [withdrawMethod, setWithdrawMethod] = useState<"paypal" | "indian_bank">("paypal");
+  const [payoutDetailsId, setPayoutDetailsId] = useState("");
+  const [payoutEmail, setPayoutEmail] = useState("");
+  const [bankDetails, setBankDetails] = useState({ accountHolderName: "", bankName: "", accountNumber: "", ifscCode: "", accountType: "savings" });
+  const [savingPayout, setSavingPayout] = useState(false);
 
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -160,7 +196,6 @@ export default function UserDashboardPage() {
   // Modals & sub-states
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [planToConfirm, setPlanToConfirm] = useState<Plan | null>(null);
-  const [selectingPlan, setSelectingPlan] = useState(false);
 
   // Attendance state
   const [attendanceNotes, setAttendanceNotes] = useState("");
@@ -182,7 +217,6 @@ export default function UserDashboardPage() {
   // Withdrawal state
   const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
   const [withdrawAmount, setWithdrawAmount] = useState("");
-  const [withdrawDestination, setWithdrawDestination] = useState("");
   const [withdrawing, setWithdrawing] = useState(false);
 
   // Profile Form
@@ -283,6 +317,21 @@ export default function UserDashboardPage() {
         const txData = await txRes.json();
         setTransactions(txData);
       }
+
+      const purchaseRes = await authFetch("/user/purchases");
+      if (purchaseRes.ok) {
+        const purchaseData = await purchaseRes.json();
+        setPurchases(purchaseData);
+      }
+
+      const accessRes = await authFetch("/user/withdrawals/access");
+      const eligible = accessRes.ok;
+      setBpoEligible(eligible);
+      if (eligible) {
+        const [detailRes, withdrawalRes] = await Promise.all([authFetch("/user/payout-details"), authFetch("/user/withdrawals")]);
+        if (detailRes.ok) setPayoutDetails(await detailRes.json());
+        if (withdrawalRes.ok) setWithdrawals(await withdrawalRes.json());
+      }
     } catch (err: any) {
       console.error("Failed to load dashboard data:", err);
     } finally {
@@ -346,28 +395,21 @@ export default function UserDashboardPage() {
     }
   };
 
-  const handleSelectPlan = async (plan: Plan) => {
-    if (plan.isBpo) {
-      setPlanToConfirm(null);
-      setLocation(`/contact?plan=${plan.serviceId}`);
-      return;
-    }
-
-    setSelectingPlan(true);
+  const savePayoutDetail = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSavingPayout(true);
     try {
-      const res = await authFetch("/user/plans/select", {
-        method: "POST",
-        body: JSON.stringify({ planServiceId: plan.serviceId }),
-      });
+      const payload = withdrawMethod === "paypal" ? { method: withdrawMethod, paypalEmail: payoutEmail } : { method: withdrawMethod, ...bankDetails };
+      const res = await authFetch("/user/payout-details", { method: "POST", body: JSON.stringify(payload) });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to select plan");
-      showToast("success", `Successfully activated plan: ${plan.name}`);
-      setPlanToConfirm(null);
-      loadAllData();
+      if (!res.ok) throw new Error(data.error || "Could not save payout details");
+      setPayoutDetails((prev) => [data, ...prev.filter((item) => item.method !== data.method)]);
+      setPayoutDetailsId(String(data.id));
+      showToast("success", "Payout details saved securely.");
     } catch (err: any) {
       showToast("error", err.message);
     } finally {
-      setSelectingPlan(false);
+      setSavingPayout(false);
     }
   };
 
@@ -398,17 +440,20 @@ export default function UserDashboardPage() {
       return;
     }
     setWithdrawing(true);
+    if (!payoutDetailsId) {
+      showToast("error", "Save and select a payout method first");
+      return;
+    }
     try {
-      const res = await authFetch("/user/wallet/withdraw", {
+      const res = await authFetch("/user/withdrawals", {
         method: "POST",
-        body: JSON.stringify({ amount: amt, destination: withdrawDestination }),
+        body: JSON.stringify({ amount: amt, payoutDetailsId: Number(payoutDetailsId) }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Withdrawal failed");
-      showToast("success", "Withdrawal request processed successfully!");
+      showToast("success", "Withdrawal request submitted for admin review.");
       setWithdrawModalOpen(false);
       setWithdrawAmount("");
-      setWithdrawDestination("");
       loadAllData();
     } catch (err: any) {
       showToast("error", err.message);
@@ -517,7 +562,7 @@ export default function UserDashboardPage() {
               { id: "attendance", label: "Attendance & Shift", icon: Clock },
               { id: "kyc", label: "KYC Verification", icon: ShieldCheck, badge: kyc?.status === "verified" ? "Verified" : kyc?.status === "pending" ? "Pending" : "Required" },
               { id: "affiliate", label: "Affiliate & Rewards", icon: Share2 },
-              { id: "wallet", label: "Wallet & Payouts", icon: Wallet, badge: `$${wallet?.balance.toFixed(0) || 0}` },
+              ...(bpoEligible ? [{ id: "wallet", label: "BPO Withdrawals", icon: Wallet, badge: `$${wallet?.balance.toFixed(0) || 0}` }] : []),
               { id: "profile", label: "Account Settings", icon: Settings },
             ].map((item) => {
               const Icon = item.icon;
@@ -1283,11 +1328,11 @@ export default function UserDashboardPage() {
           )}
 
           {/* TAB 6: WALLET & PAYOUTS */}
-          {tab === "wallet" && (
+          {bpoEligible && tab === "wallet" && (
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h1 className="text-xl font-bold text-slate-900">Client Wallet & Payout Ledger</h1>
+                  <h1 className="text-xl font-bold text-slate-900">BPO Wallet & Withdrawals</h1>
                   <p className="text-xs text-slate-500 mt-0.5">
                     Manage available funds, payouts, and view the immutable transaction ledger.
                   </p>
@@ -1372,6 +1417,30 @@ export default function UserDashboardPage() {
                       )}
                     </tbody>
                   </table>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <form onSubmit={savePayoutDetail} className="bg-white border border-slate-200 rounded-2xl p-5 space-y-3">
+                  <div className="font-bold text-sm text-slate-900">Manage payout details</div>
+                  <div className="flex gap-2">
+                    <button type="button" onClick={() => setWithdrawMethod("paypal")} className={`px-3 py-2 rounded-lg text-xs font-bold ${withdrawMethod === "paypal" ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-600"}`}>PayPal</button>
+                    <button type="button" onClick={() => setWithdrawMethod("indian_bank")} className={`px-3 py-2 rounded-lg text-xs font-bold ${withdrawMethod === "indian_bank" ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-600"}`}>Indian Bank</button>
+                  </div>
+                  {withdrawMethod === "paypal" ? (
+                    <input required type="email" value={payoutEmail} onChange={(e) => setPayoutEmail(e.target.value)} placeholder="PayPal email" className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs" />
+                  ) : (
+                    <div className="grid grid-cols-2 gap-2">
+                      {(["accountHolderName", "bankName", "accountNumber", "ifscCode"] as const).map((field) => <input key={field} required value={bankDetails[field]} onChange={(e) => setBankDetails((prev) => ({ ...prev, [field]: e.target.value }))} placeholder={field === "ifscCode" ? "IFSC code" : field.replace(/([A-Z])/g, " $1")} className="px-3 py-2.5 rounded-xl border border-slate-200 text-xs" />)}
+                      <select value={bankDetails.accountType} onChange={(e) => setBankDetails((prev) => ({ ...prev, accountType: e.target.value }))} className="px-3 py-2.5 rounded-xl border border-slate-200 text-xs"><option value="savings">Savings account</option><option value="current">Current account</option></select>
+                    </div>
+                  )}
+                  <button disabled={savingPayout} className="px-4 py-2.5 bg-slate-900 text-white rounded-xl text-xs font-bold">{savingPayout ? "Saving..." : "Save payout details"}</button>
+                  <div className="text-[11px] text-slate-500">{payoutDetails.length ? payoutDetails.map((detail) => <div key={detail.id}>{detail.displayLabel}</div>) : "No payout details saved yet."}</div>
+                </form>
+                <div className="bg-white border border-slate-200 rounded-2xl p-5">
+                  <div className="font-bold text-sm text-slate-900 mb-3">Withdrawal history</div>
+                  {withdrawals.length === 0 ? <p className="text-xs text-slate-500">No withdrawal requests yet.</p> : <div className="space-y-2">{withdrawals.map((withdrawal) => <div key={withdrawal.id} className="flex items-center justify-between border-b border-slate-100 pb-2 text-xs"><span>${withdrawal.amount.toFixed(2)} via {withdrawal.method === "indian_bank" ? "Indian bank" : "PayPal"}</span><span className={`font-bold ${withdrawal.status === "APPROVED" ? "text-emerald-600" : withdrawal.status === "REJECTED" ? "text-red-600" : "text-amber-600"}`}>{withdrawal.status}</span></div>)}</div>}
                 </div>
               </div>
             </div>
@@ -1481,14 +1550,7 @@ export default function UserDashboardPage() {
               >
                 Cancel
               </button>
-              <button
-                type="button"
-                disabled={selectingPlan}
-                onClick={() => handleSelectPlan(planToConfirm)}
-                className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-xs cursor-pointer"
-              >
-                {selectingPlan ? "Activating..." : planToConfirm.isBpo ? "Continue to Contact" : "Confirm & Activate"}
-              </button>
+              <PayPalButton packageId={planToConfirm.serviceId} />
             </div>
           </div>
         </div>
@@ -1529,17 +1591,11 @@ export default function UserDashboardPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
-                Payout Destination (PayPal Email or Bank Wire Details)
-              </label>
-              <input
-                type="text"
-                required
-                value={withdrawDestination}
-                onChange={(e) => setWithdrawDestination(e.target.value)}
-                placeholder="e.g. payouts@company.com or IBAN..."
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-blue-500"
-              />
+              <label className="block text-xs font-semibold text-slate-700 mb-1">Saved payout method</label>
+              <select required value={payoutDetailsId} onChange={(e) => setPayoutDetailsId(e.target.value)} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-blue-500">
+                <option value="">Select a payout method</option>
+                {payoutDetails.map((detail) => <option key={detail.id} value={detail.id}>{detail.displayLabel}</option>)}
+              </select>
             </div>
 
             <div className="flex items-center justify-end gap-2.5 pt-2">

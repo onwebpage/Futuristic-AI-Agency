@@ -16,6 +16,7 @@ import {
 } from "@/data/packages-data";
 import { useSEO } from "@/hooks/useSEO";
 import { BPOPlansSection } from "@/components/sections/BPOPlansSection";
+import PayPalButton from "@/components/ui/PayPalButton";
 
 const smoothEase = [0.22, 1, 0.36, 1] as const;
 
@@ -322,18 +323,7 @@ export default function PricingPage() {
 
                     {/* Actions */}
                     <div className="flex flex-col gap-2 pt-2">
-                      <Link href={plan.ctaRoute || `/contact?plan=${plan.id}`}>
-                        <button
-                          className={`w-full h-11 px-5 rounded-xl font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer ${
-                            isPopular
-                              ? "bg-[#1E40AF] text-white shadow-xs hover:bg-[#1D4ED8]"
-                              : "bg-slate-900 text-white hover:bg-slate-800 shadow-xs"
-                          }`}
-                        >
-                          <span>{plan.ctaLabel}</span>
-                          <ArrowRight size={14} />
-                        </button>
-                      </Link>
+                      <PayPalButton packageId={plan.id} />
 
                       <Link href={`/services/${plan.id}`}>
                         <button className="w-full py-2 px-4 rounded-lg text-[11px] font-semibold text-slate-600 hover:text-[#1E40AF] hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 cursor-pointer">

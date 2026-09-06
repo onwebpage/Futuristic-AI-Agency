@@ -41,10 +41,15 @@ export default function PayPalButton({
   const [errorMessage, setErrorMessage] = useState("");
 
   const createOrder = async () => {
+    const token = localStorage.getItem("user_token");
+    if (!token) {
+      window.location.href = `/login?returnTo=${encodeURIComponent(window.location.pathname)}`;
+      throw new Error("Please sign in before purchasing a package.");
+    }
     setStatus("creating");
     const response = await fetch("/api/paypal/order", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify({ packageId }),
     });
     const output = await response.json().catch(() => ({}));
@@ -56,10 +61,12 @@ export default function PayPalButton({
   };
 
   const captureOrder = async (orderId: string) => {
+    const token = localStorage.getItem("user_token");
     const response = await fetch(`/api/paypal/order/${orderId}/capture`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
     });
     const data = await response.json().catch(() => ({}));
@@ -77,7 +84,10 @@ export default function PayPalButton({
     }
     try {
       setStatus("processing");
-      await captureOrder(data.orderId);
+      const payment = await captureOrder(data.orderId);
+      if (payment.success && payment.status === "COMPLETED") {
+        window.location.href = "/dashboard";
+      }
       setStatus("success");
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Payment could not be completed.");
@@ -166,7 +176,7 @@ export default function PayPalButton({
         }
       };
 
-      const paypalButton = document.getElementById("paypal-button");
+      const paypalButton = document.getElementById(`paypal-button-${packageId}`);
 
       if (paypalButton) {
         paypalButton.addEventListener("click", onClick);
@@ -199,7 +209,7 @@ export default function PayPalButton({
   return (
     <div className="space-y-3">
       <div className={status === "creating" || status === "approval" || status === "processing" || status === "success" ? "pointer-events-none opacity-60" : ""}>
-        {React.createElement("paypal-button", { id: "paypal-button" })}
+        {React.createElement("paypal-button", { id: `paypal-button-${packageId}` })}
       </div>
       <p className={`text-xs ${status === "success" ? "text-emerald-600" : status === "error" ? "text-red-600" : "text-muted-foreground"}`} role={status === "error" ? "alert" : "status"}>
         {statusText}

@@ -1,5 +1,6 @@
 import { Router, type IRouter, type Request, type Response, type NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import {
   userProfileRepository,
@@ -8,6 +9,8 @@ import {
   affiliateRepository,
   walletRepository,
   plansRepository,
+  purchaseRepository,
+  withdrawalRepository,
 } from "@workspace/db";
 
 const router: IRouter = Router();
@@ -30,6 +33,26 @@ export function requireUserAuth(req: AuthRequest, res: Response, next: NextFunct
   } catch {
     res.status(401).json({ error: "Invalid or expired session" });
   }
+}
+
+async function requireBpoWithdrawal(req: AuthRequest, res: Response, next: NextFunction) {
+  try {
+    if (!req.user?.id || !(await purchaseRepository.hasPaidBpo(req.user.id))) {
+      res.status(403).json({ error: "BPO purchase required for withdrawal access" });
+      return;
+    }
+    next();
+  } catch (error: any) {
+    res.status(500).json({ error: "Unable to verify withdrawal eligibility", details: error?.message });
+  }
+}
+
+const encryptionKey = () => crypto.createHash("sha256").update(process.env.WITHDRAWAL_ENCRYPTION_KEY || JWT_SECRET).digest();
+function encryptPayoutDetails(value: object) {
+  const iv = crypto.randomBytes(12);
+  const cipher = crypto.createCipheriv("aes-256-gcm", encryptionKey(), iv);
+  const encrypted = Buffer.concat([cipher.update(JSON.stringify(value), "utf8"), cipher.final()]);
+  return `${iv.toString("base64url")}.${cipher.getAuthTag().toString("base64url")}.${encrypted.toString("base64url")}`;
 }
 
 // -----------------------------------------------------------------------------
@@ -176,6 +199,15 @@ router.patch("/user/profile", requireUserAuth, async (req: AuthRequest, res: Res
   }
 });
 
+router.get("/user/purchases", requireUserAuth, async (req: AuthRequest, res: Response) => {
+  try {
+    const purchases = await purchaseRepository.listForUser(req.user!.id);
+    res.json(purchases);
+  } catch (err: any) {
+    res.status(500).json({ error: "Failed to load purchases", details: err?.message });
+  }
+});
+
 // -----------------------------------------------------------------------------
 // Plan Selection
 // -----------------------------------------------------------------------------
@@ -191,6 +223,14 @@ router.post("/user/plans/select", requireUserAuth, async (req: AuthRequest, res:
     const plan = await plansRepository.getByServiceId(planServiceId);
     if (!plan) {
       res.status(404).json({ error: "Plan not found" });
+      return;
+    }
+
+    const paidPurchase = (await purchaseRepository.listForUser(req.user!.id)).find(
+      (purchase) => purchase.packageId === planServiceId && purchase.status === "PAID",
+    );
+    if (!paidPurchase) {
+      res.status(402).json({ error: "Complete verified payment before activating this plan" });
       return;
     }
 
@@ -332,7 +372,76 @@ router.get("/user/wallet/transactions", requireUserAuth, async (req: AuthRequest
   }
 });
 
-router.post("/user/wallet/withdraw", requireUserAuth, async (req: AuthRequest, res: Response) => {
+router.get("/user/withdrawals/access", requireUserAuth, requireBpoWithdrawal, async (_req, res) => {
+  res.json({ eligible: true, minimumAmount: Number(process.env.MIN_WITHDRAWAL_AMOUNT || 50) });
+});
+
+router.get("/user/payout-details", requireUserAuth, requireBpoWithdrawal, async (req: AuthRequest, res: Response) => {
+  try {
+    res.json(await withdrawalRepository.listPayoutDetails(req.user!.id));
+  } catch (err: any) {
+    res.status(500).json({ error: "Failed to load payout details", details: err?.message });
+  }
+});
+
+router.post("/user/payout-details", requireUserAuth, requireBpoWithdrawal, async (req: AuthRequest, res: Response) => {
+  try {
+    const { method, paypalEmail, accountHolderName, bankName, accountNumber, ifscCode, accountType } = req.body ?? {};
+    if (method === "paypal") {
+      if (typeof paypalEmail !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(paypalEmail)) {
+        res.status(400).json({ error: "A valid PayPal email is required" });
+        return;
+      }
+      const detail = await withdrawalRepository.savePayoutDetail({ userId: req.user!.id, method, encrypted: encryptPayoutDetails({ paypalEmail }), displayLabel: `PayPal ending ${paypalEmail.slice(-Math.min(18, paypalEmail.length))}` });
+      res.json(detail);
+      return;
+    }
+    if (method !== "indian_bank" || typeof accountHolderName !== "string" || accountHolderName.trim().length < 2 || typeof bankName !== "string" || bankName.trim().length < 2 || typeof accountNumber !== "string" || !/^\d{9,18}$/.test(accountNumber) || typeof ifscCode !== "string" || !/^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifscCode.toUpperCase()) || !["savings", "current"].includes(accountType)) {
+      res.status(400).json({ error: "Valid Indian bank account holder, bank name, account number, IFSC code, and account type are required" });
+      return;
+    }
+    const detail = await withdrawalRepository.savePayoutDetail({ userId: req.user!.id, method, encrypted: encryptPayoutDetails({ accountHolderName: accountHolderName.trim(), bankName: bankName.trim(), accountNumber, ifscCode: ifscCode.toUpperCase(), accountType }), displayLabel: `${bankName.trim()} account ending ${accountNumber.slice(-4)}` });
+    res.json(detail);
+  } catch (err: any) {
+    res.status(500).json({ error: "Failed to save payout details", details: err?.message });
+  }
+});
+
+router.get("/user/withdrawals", requireUserAuth, requireBpoWithdrawal, async (req: AuthRequest, res: Response) => {
+  try {
+    res.json(await withdrawalRepository.listForUser(req.user!.id));
+  } catch (err: any) {
+    res.status(500).json({ error: "Failed to load withdrawal history", details: err?.message });
+  }
+});
+
+router.post("/user/withdrawals", requireUserAuth, requireBpoWithdrawal, async (req: AuthRequest, res: Response) => {
+  try {
+    const amount = Number(req.body?.amount);
+    const payoutDetailsId = Number(req.body?.payoutDetailsId);
+    const minimumAmount = Number(process.env.MIN_WITHDRAWAL_AMOUNT || 50);
+    if (!Number.isFinite(amount) || amount < minimumAmount) {
+      res.status(400).json({ error: `Minimum withdrawal amount is ${minimumAmount.toFixed(2)}` });
+      return;
+    }
+    if (!Number.isInteger(payoutDetailsId) || payoutDetailsId <= 0) {
+      res.status(400).json({ error: "A saved payout method is required" });
+      return;
+    }
+    const detail = await withdrawalRepository.getPayoutDetail(req.user!.id, payoutDetailsId);
+    if (!detail) {
+      res.status(400).json({ error: "Invalid payout method" });
+      return;
+    }
+    const withdrawal = await withdrawalRepository.create(req.user!.id, Math.round(amount * 100) / 100, "USD", detail.method, payoutDetailsId);
+    res.status(201).json(withdrawal);
+  } catch (err: any) {
+    const message = err?.message || "Withdrawal failed";
+    res.status(message.includes("Insufficient") || message.includes("already pending") ? 400 : 500).json({ error: message });
+  }
+});
+
+router.post("/user/wallet/withdraw", requireUserAuth, requireBpoWithdrawal, async (req: AuthRequest, res: Response) => {
   try {
     const { amount, destination } = req.body as { amount: number; destination: string };
     if (!amount || amount <= 0) {

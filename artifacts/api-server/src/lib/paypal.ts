@@ -13,6 +13,7 @@ import {
   OrdersController,
 } from "@paypal/paypal-server-sdk";
 import { Request, Response } from "express";
+import { purchaseRepository } from "@workspace/db";
 
 type PayPalPackage = {
   id: string;
@@ -20,21 +21,18 @@ type PayPalPackage = {
   amount: string;
   currency: "USD";
 };
-type PaymentRecord = PayPalPackage & {
-  orderId: string;
-  status: "CREATED" | "COMPLETED";
-  captureId?: string;
-};
-
-const PAYPAL_PACKAGES: Record<string, PayPalPackage> = {
-  "ai-agent-pro": { id: "ai-agent-pro", name: "AI Agent Pro", amount: "7500.00", currency: "USD" },
-  "ai-automation": { id: "ai-automation", name: "AI Automation", amount: "5000.00", currency: "USD" },
-  "ai-voice-pro": { id: "ai-voice-pro", name: "AI Voice Pro", amount: "6500.00", currency: "USD" },
-  "private-ai-brain": { id: "private-ai-brain", name: "Private AI Brain", amount: "7500.00", currency: "USD" },
-  "ai-sales-engine": { id: "ai-sales-engine", name: "AI Sales Engine", amount: "6500.00", currency: "USD" },
-};
-
-const payments = new Map<string, PaymentRecord>();
+const packageEntries: Array<[string, string, number]> = [
+  ["ai-launch", "AI Launch", 25000], ["ai-transformation", "AI Transformation", 75000], ["enterprise-ai", "Enterprise AI", 150000],
+  ["cloud-modernization", "Cloud Modernization", 100000], ["legacy-transformation", "Legacy Transformation", 150000], ["enterprise-transformation", "Enterprise Transformation", 300000],
+  ["cybersecurity-foundation", "Cybersecurity Foundation", 50000], ["enterprise-security", "Enterprise Security", 125000], ["ai-security", "AI Security", 100000],
+  ["data-foundation", "Data Foundation", 75000], ["enterprise-data-platform", "Enterprise Data Platform", 150000],
+  ["digital-product-development", "Digital Product Development", 50000], ["enterprise-product-engineering", "Enterprise Product Engineering", 150000],
+  ["managed-ai", "Managed AI", 10000], ["managed-cloud", "Managed Cloud", 10000], ["managed-cybersecurity", "Managed Cybersecurity", 15000],
+  ["bpo-starter", "BPO Starter", 2000], ["bpo-growth", "BPO Growth", 4000], ["bpo-enterprise", "BPO Enterprise", 5000],
+];
+const PAYPAL_PACKAGES: Record<string, PayPalPackage> = Object.fromEntries(
+  packageEntries.map(([id, name, amount]) => [id, { id, name, amount: amount.toFixed(2), currency: "USD" as const }]),
+);
 let client: Client | undefined;
 let ordersController: OrdersController | undefined;
 let oAuthAuthorizationController: OAuthAuthorizationController | undefined;
@@ -83,6 +81,8 @@ function parseBody(body: unknown): Record<string, any> {
 function errorMessage(error: unknown) {
   return error instanceof Error ? error.message : "PayPal request failed";
 }
+
+type AuthenticatedRequest = Request & { user?: { id: string; email: string } };
 export async function getClientToken() {
   const { oAuthAuthorizationController } = getControllers();
   const clientId = process.env.PAYPAL_CLIENT_ID!;
@@ -95,8 +95,9 @@ export async function getClientToken() {
   return result.accessToken;
 }
 
-export async function createPaypalOrder(req: Request, res: Response) {
+export async function createPaypalOrder(req: AuthenticatedRequest, res: Response) {
   try {
+    if (!req.user?.id) return res.status(401).json({ error: "Authentication required" });
     const product = getPackage(req.body?.packageId);
     if (!product) return res.status(400).json({ error: "Invalid or unavailable package." });
     const { ordersController } = getControllers();
@@ -113,7 +114,14 @@ export async function createPaypalOrder(req: Request, res: Response) {
     });
   const order = parseBody(body);
   if (!order.id) return res.status(502).json({ error: "PayPal did not return an order ID." });
-  payments.set(order.id, { ...product, orderId: order.id, status: "CREATED" });
+    await purchaseRepository.createPending({
+      userId: req.user.id,
+      packageId: product.id,
+      packageName: product.name,
+      orderId: order.id,
+      amount: Number(product.amount),
+      currency: product.currency,
+    });
     return res.status(httpResponse.statusCode).json({ id: order.id, packageId: product.id, amount: product.amount, currency: product.currency });
   } catch (error) {
     console.error("PayPal create order failed:", errorMessage(error));
@@ -121,12 +129,13 @@ export async function createPaypalOrder(req: Request, res: Response) {
   }
 }
 
-export async function capturePaypalOrder(req: Request, res: Response) {
+export async function capturePaypalOrder(req: AuthenticatedRequest, res: Response) {
+  if (!req.user?.id) return res.status(401).json({ error: "Authentication required" });
   const orderId = typeof req.params.orderID === "string" ? req.params.orderID : "";
   if (!orderId) return res.status(400).json({ error: "Invalid PayPal order ID." });
-  const record = payments.get(orderId);
-  if (!record) return res.status(404).json({ error: "Payment session not found or expired." });
-  if (record.status === "COMPLETED") return res.status(409).json({ error: "Payment has already been completed." });
+  const record = await purchaseRepository.getByOrderId(orderId);
+  if (!record || record.userId !== req.user.id) return res.status(404).json({ error: "Payment session not found or expired." });
+  if (record.status === "PAID") return res.json({ success: true, status: "COMPLETED", orderId, captureId: record.paypalCaptureId, packageId: record.packageId, amount: record.amount.toFixed(2), currency: record.currency });
   try {
     const { ordersController } = getControllers();
     const { body: orderBody } = await ordersController.getOrder({ id: orderId });
@@ -135,8 +144,8 @@ export async function capturePaypalOrder(req: Request, res: Response) {
     const approvedAmount = approvedUnit?.amount;
     if (
       approvedOrder.status !== "APPROVED" ||
-      approvedUnit?.custom_id !== record.id ||
-      approvedAmount?.value !== record.amount ||
+      approvedUnit?.custom_id !== record.packageId ||
+      approvedAmount?.value !== record.amount.toFixed(2) ||
       approvedAmount?.currency_code !== record.currency
     ) {
       return res.status(409).json({ error: "Payment order could not be verified." });
@@ -149,27 +158,25 @@ export async function capturePaypalOrder(req: Request, res: Response) {
   const capturedAmount = capture?.amount?.value;
   const capturedCurrency = capture?.amount?.currency_code;
 
-  if (
-  order.status !== "COMPLETED" ||
-  capture?.status !== "COMPLETED" ||
-  unit?.custom_id !== record.id ||
-      capturedAmount !== record.amount ||
+    if (
+    order.status !== "COMPLETED" ||
+    capture?.status !== "COMPLETED" ||
+    unit?.custom_id !== record.packageId ||
+      capturedAmount !== record.amount.toFixed(2) ||
       capturedCurrency !== record.currency
     ) {
       console.error("PayPal capture verification failed", { orderId, status: order.status, captureStatus: capture?.status });
       return res.status(502).json({ error: "Payment could not be verified." });
     }
-  record.status = "COMPLETED";
-  record.captureId = capture.id;
-  payments.set(orderId, record);
+  const purchase = await purchaseRepository.markPaid(orderId, capture.id);
     return res.status(httpResponse.statusCode).json({
       success: true,
       status: "COMPLETED",
       orderId,
-  captureId: capture.id,
-  packageId: record.id,
-  amount: record.amount,
-      currency: record.currency,
+    captureId: capture.id,
+    packageId: purchase.packageId,
+    amount: purchase.amount.toFixed(2),
+      currency: purchase.currency,
     });
   } catch (error) {
     console.error("PayPal capture failed:", errorMessage(error));

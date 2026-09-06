@@ -1,4 +1,4 @@
-import { Router, type IRouter } from "express";
+import { Router, type IRouter, type Request } from "express";
 import bcrypt from "bcryptjs";
 import {
   adminRepository,
@@ -7,6 +7,7 @@ import {
   kycRepository,
   affiliateRepository,
   walletRepository,
+  withdrawalRepository,
   supabase,
 } from "@workspace/db";
 import { signToken, requireAuth } from "../lib/auth.js";
@@ -323,6 +324,35 @@ router.get("/admin/wallets", requireAuth, async (_req, res) => {
   } catch (error: any) {
     console.error("Admin wallets error:", error);
     res.status(500).json({ error: "Failed to load wallets", details: error?.message });
+  }
+});
+
+router.get("/admin/withdrawals", requireAuth, async (_req, res) => {
+  try {
+    res.json(await withdrawalRepository.listAll());
+  } catch (error: any) {
+    console.error("Admin withdrawals error:", error);
+    res.status(500).json({ error: "Failed to load withdrawal requests", details: error?.message });
+  }
+});
+
+router.patch("/admin/withdrawals/:id", requireAuth, async (req: Request & { admin?: { id: number } }, res) => {
+  try {
+    const status = req.body?.status;
+    if (status !== "APPROVED" && status !== "REJECTED") {
+      res.status(400).json({ error: "Status must be APPROVED or REJECTED" });
+      return;
+    }
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id <= 0 || !req.admin?.id) {
+      res.status(400).json({ error: "Invalid withdrawal request" });
+      return;
+    }
+    const withdrawal = await withdrawalRepository.review(id, req.admin.id, status, req.body?.rejectionReason);
+    res.json(withdrawal);
+  } catch (error: any) {
+    const message = error?.message || "Failed to review withdrawal";
+    res.status(message.includes("not found") ? 404 : 500).json({ error: message });
   }
 });
 

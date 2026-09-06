@@ -212,7 +212,7 @@ function InputField({
 export default function AdminDashboardPage() {
   const [, setLocation] = useLocation();
   const [tab, setTab] = useState<
-    "overview" | "leads" | "analytics" | "plans" | "client-updates" | "attendance" | "kyc" | "affiliates" | "wallets" | "settings"
+    "overview" | "leads" | "analytics" | "plans" | "client-updates" | "attendance" | "kyc" | "affiliates" | "wallets" | "withdrawals" | "settings"
   >("overview");
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);
@@ -270,6 +270,8 @@ export default function AdminDashboardPage() {
     recentTransactions: [],
   });
   const [walletsLoading, setWalletsLoading] = useState(false);
+  const [withdrawals, setWithdrawals] = useState<any[]>([]);
+  const [withdrawalsLoading, setWithdrawalsLoading] = useState(false);
 
   const adminUsername = localStorage.getItem("admin_username") ?? "admin";
 
@@ -361,6 +363,17 @@ export default function AdminDashboardPage() {
       if (res.ok) setWalletsData(await res.json());
     } finally {
       setWalletsLoading(false);
+    }
+  }, []);
+
+  const loadWithdrawals = useCallback(async () => {
+    setWithdrawalsLoading(true);
+    try {
+      const res = await apiCall("/admin/withdrawals");
+      if (res.status === 401) { logout(); return; }
+      if (res.ok) setWithdrawals(await res.json());
+    } finally {
+      setWithdrawalsLoading(false);
     }
   }, []);
 
@@ -456,8 +469,9 @@ export default function AdminDashboardPage() {
     if (tab === "kyc") loadKyc();
     if (tab === "affiliates") loadAffiliates();
     if (tab === "wallets") loadWallets();
+    if (tab === "withdrawals") loadWithdrawals();
     if (tab === "client-updates") loadUpdateClients();
-  }, [tab, loadPlans, loadAttendance, loadKyc, loadAffiliates, loadWallets, loadUpdateClients]);
+  }, [tab, loadPlans, loadAttendance, loadKyc, loadAffiliates, loadWallets, loadWithdrawals, loadUpdateClients]);
 
   const refresh = async () => {
     setRefreshing(true);
@@ -667,6 +681,7 @@ export default function AdminDashboardPage() {
     { id: "kyc", label: "KYC Review", icon: ShieldCheck },
     { id: "affiliates", label: "Affiliates", icon: Share2 },
     { id: "wallets", label: "Wallets", icon: Wallet },
+    { id: "withdrawals", label: "BPO Withdrawals", icon: Wallet },
     { id: "settings", label: "Settings", icon: Settings },
   ] as const;
 
@@ -1709,6 +1724,20 @@ export default function AdminDashboardPage() {
                         </tbody>
                       </table>
                     </div>
+                  </div>
+                </div>
+              )}
+
+              {tab === "withdrawals" && (
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between">
+                    <div><h2 className="text-base font-bold text-foreground">BPO Withdrawal Requests</h2><p className="text-xs text-slate-500">Approve or reject eligible BPO client payout requests.</p></div>
+                    <button onClick={loadWithdrawals} className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-blue-600 bg-blue-50 border border-blue-100"><RefreshCw size={13} className={withdrawalsLoading ? "animate-spin" : ""} />Refresh</button>
+                  </div>
+                  <div className="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-xs">
+                    <div className="overflow-x-auto"><table className="w-full text-left text-xs"><thead className="bg-slate-50 text-slate-500 uppercase font-mono text-[10px] border-b border-slate-200"><tr><th className="py-3 px-4">Request</th><th className="py-3 px-4">User</th><th className="py-3 px-4">Amount</th><th className="py-3 px-4">Method</th><th className="py-3 px-4">Status</th><th className="py-3 px-4">Action</th></tr></thead><tbody className="divide-y divide-slate-100">
+                      {withdrawals.length === 0 ? <tr><td colSpan={6} className="py-8 text-center text-slate-400">No withdrawal requests.</td></tr> : withdrawals.map((withdrawal) => <tr key={withdrawal.id}><td className="py-3 px-4 font-mono">#{withdrawal.id}</td><td className="py-3 px-4 font-mono">{withdrawal.userId.slice(0, 8)}...</td><td className="py-3 px-4 font-bold">${withdrawal.amount.toFixed(2)} {withdrawal.currency}</td><td className="py-3 px-4">{withdrawal.method === "indian_bank" ? "Indian bank" : "PayPal"}</td><td className="py-3 px-4 font-bold">{withdrawal.status}</td><td className="py-3 px-4">{withdrawal.status === "PENDING" ? <div className="flex gap-2"><button onClick={async () => { const res = await apiCall(`/admin/withdrawals/${withdrawal.id}`, { method: "PATCH", body: JSON.stringify({ status: "APPROVED" }) }); if (res.ok) loadWithdrawals(); }} className="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-lg font-bold">Approve</button><button onClick={async () => { const reason = window.prompt("Rejection reason") || "Rejected by admin"; const res = await apiCall(`/admin/withdrawals/${withdrawal.id}`, { method: "PATCH", body: JSON.stringify({ status: "REJECTED", rejectionReason: reason }) }); if (res.ok) loadWithdrawals(); }} className="px-2.5 py-1 bg-red-50 text-red-700 rounded-lg font-bold">Reject</button></div> : <span className="text-slate-400">Reviewed</span>}</td></tr>)}
+                    </tbody></table></div>
                   </div>
                 </div>
               )}

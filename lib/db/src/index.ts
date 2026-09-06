@@ -185,6 +185,40 @@ export interface WalletTransaction {
   createdAt: Date;
 }
 
+export interface Purchase {
+  id: number;
+  userId: string;
+  packageId: string;
+  packageName: string;
+  paypalOrderId: string;
+  paypalCaptureId: string | null;
+  amount: number;
+  currency: string;
+  status: string;
+  purchasedAt: Date | null;
+  createdAt: Date;
+}
+
+export interface PayoutDetail {
+  id: number;
+  method: "paypal" | "indian_bank";
+  displayLabel: string;
+  createdAt: Date;
+}
+
+export interface Withdrawal {
+  id: number;
+  userId: string;
+  amount: number;
+  currency: string;
+  method: "paypal" | "indian_bank";
+  payoutDetailsId: number;
+  status: "PENDING" | "APPROVED" | "REJECTED";
+  rejectionReason: string | null;
+  reviewedAt: Date | null;
+  createdAt: Date;
+}
+
 export interface ClientUpdate {
   id: number;
   userId: string;
@@ -1334,6 +1368,125 @@ export const walletRepository = {
       referenceId: t.reference_id,
       createdAt: new Date(t.created_at),
     }));
+  },
+};
+
+const mapPurchase = (row: any): Purchase => ({
+  id: Number(row.id), userId: row.user_id, packageId: row.package_id, packageName: row.package_name,
+  paypalOrderId: row.paypal_order_id, paypalCaptureId: row.paypal_capture_id ?? null,
+  amount: Number(row.amount), currency: row.currency, status: row.status,
+  purchasedAt: row.purchased_at ? new Date(row.purchased_at) : null, createdAt: new Date(row.created_at),
+});
+
+const mapWithdrawal = (row: any): Withdrawal => ({
+  id: Number(row.id), userId: row.user_id, amount: Number(row.amount), currency: row.currency,
+  method: row.method, payoutDetailsId: Number(row.payout_details_id), status: row.status,
+  rejectionReason: row.rejection_reason ?? null, reviewedAt: row.reviewed_at ? new Date(row.reviewed_at) : null,
+  createdAt: new Date(row.created_at),
+});
+
+export const purchaseRepository = {
+  async createPending(data: { userId: string; packageId: string; packageName: string; orderId: string; amount: number; currency: string }) {
+    const { data: row, error } = await supabase.from("purchases").insert({
+      user_id: data.userId, package_id: data.packageId, package_name: data.packageName,
+      paypal_order_id: data.orderId, amount: data.amount, currency: data.currency, status: "PENDING",
+    }).select().single();
+    if (error) throw error;
+    return mapPurchase(row);
+  },
+
+  async getByOrderId(orderId: string): Promise<Purchase | null> {
+    const { data, error } = await supabase.from("purchases").select("*").eq("paypal_order_id", orderId).maybeSingle();
+    if (error) throw error;
+    return data ? mapPurchase(data) : null;
+  },
+
+  async markPaid(orderId: string, captureId: string): Promise<Purchase> {
+    const { data, error } = await supabase.from("purchases").update({
+      paypal_capture_id: captureId, status: "PAID", purchased_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+    }).eq("paypal_order_id", orderId).eq("status", "PENDING").select().maybeSingle();
+    if (error) throw error;
+    if (!data) {
+      const existing = await this.getByOrderId(orderId);
+      if (!existing || existing.status !== "PAID") throw new Error("Purchase could not be finalized");
+      return existing;
+    }
+    const { error: profileError } = await supabase.from("profiles").update({ selected_plan: data.package_id, updated_at: new Date().toISOString() }).eq("id", data.user_id);
+    if (profileError) throw profileError;
+    return mapPurchase(data);
+  },
+
+  async listForUser(userId: string): Promise<Purchase[]> {
+    const { data, error } = await supabase.from("purchases").select("*").eq("user_id", userId).order("created_at", { ascending: false });
+    if (error) throw error;
+    return (data || []).map(mapPurchase);
+  },
+
+  async hasPaidBpo(userId: string): Promise<boolean> {
+    const { count, error } = await supabase.from("purchases").select("id", { count: "exact", head: true }).eq("user_id", userId).eq("status", "PAID").in("package_id", ["bpo-starter", "bpo-growth", "bpo-enterprise"]);
+    if (error) throw error;
+    return (count ?? 0) > 0;
+  },
+};
+
+export const withdrawalRepository = {
+  async savePayoutDetail(data: { userId: string; method: "paypal" | "indian_bank"; encrypted: string; displayLabel: string }) {
+    const { data: row, error } = await supabase.from("payout_details").upsert({
+      user_id: data.userId, method: data.method, details_encrypted: data.encrypted, display_label: data.displayLabel, updated_at: new Date().toISOString(),
+    }, { onConflict: "user_id,method" }).select("id,method,display_label,created_at").single();
+    if (error) throw error;
+    return { id: Number(row.id), method: row.method, displayLabel: row.display_label, createdAt: new Date(row.created_at) } as PayoutDetail;
+  },
+
+  async listPayoutDetails(userId: string): Promise<PayoutDetail[]> {
+    const { data, error } = await supabase.from("payout_details").select("id,method,display_label,created_at").eq("user_id", userId).order("created_at", { ascending: false });
+    if (error) throw error;
+    return (data || []).map((row: any) => ({ id: Number(row.id), method: row.method, displayLabel: row.display_label, createdAt: new Date(row.created_at) }));
+  },
+
+  async getPayoutDetail(userId: string, id: number) {
+    const { data, error } = await supabase.from("payout_details").select("*").eq("id", id).eq("user_id", userId).maybeSingle();
+    if (error) throw error;
+    return data;
+  },
+
+  async create(userId: string, amount: number, currency: string, method: "paypal" | "indian_bank", payoutDetailsId: number): Promise<Withdrawal> {
+    const wallet = await walletRepository.getOrCreate(userId);
+    if (wallet.balance < amount) throw new Error("Insufficient wallet balance");
+    const { count } = await supabase.from("withdrawals").select("id", { count: "exact", head: true }).eq("user_id", userId).eq("status", "PENDING");
+    if ((count ?? 0) > 0) throw new Error("A withdrawal is already pending");
+    const { data, error } = await supabase.from("withdrawals").insert({ user_id: userId, amount, currency, method, payout_details_id: payoutDetailsId }).select().single();
+    if (error) throw error;
+    const { error: walletError } = await supabase.from("wallets").update({ balance: wallet.balance - amount, pending_balance: wallet.pendingBalance + amount, updated_at: new Date().toISOString() }).eq("id", wallet.id).eq("balance", wallet.balance);
+    if (walletError) throw walletError;
+    return mapWithdrawal(data);
+  },
+
+  async listForUser(userId: string): Promise<Withdrawal[]> {
+    const { data, error } = await supabase.from("withdrawals").select("*").eq("user_id", userId).order("created_at", { ascending: false });
+    if (error) throw error;
+    return (data || []).map(mapWithdrawal);
+  },
+
+  async listAll(): Promise<Withdrawal[]> {
+    const { data, error } = await supabase.from("withdrawals").select("*").order("created_at", { ascending: false });
+    if (error) throw error;
+    return (data || []).map(mapWithdrawal);
+  },
+
+  async review(id: number, adminId: number, status: "APPROVED" | "REJECTED", rejectionReason?: string) {
+    const { data: withdrawal, error } = await supabase.from("withdrawals").select("*").eq("id", id).eq("status", "PENDING").maybeSingle();
+    if (error) throw error;
+    if (!withdrawal) throw new Error("Withdrawal not found or already reviewed");
+    const { error: updateError } = await supabase.from("withdrawals").update({ status, rejection_reason: status === "REJECTED" ? rejectionReason ?? "Rejected by admin" : null, reviewed_by: adminId, reviewed_at: new Date().toISOString(), updated_at: new Date().toISOString() }).eq("id", id);
+    if (updateError) throw updateError;
+    const wallet = await walletRepository.getOrCreate(withdrawal.user_id);
+    const nextPending = Math.max(0, wallet.pendingBalance - Number(withdrawal.amount));
+    const nextBalance = status === "REJECTED" ? wallet.balance + Number(withdrawal.amount) : wallet.balance;
+    await supabase.from("wallets").update({ balance: nextBalance, pending_balance: nextPending, updated_at: new Date().toISOString() }).eq("id", wallet.id);
+    const reviewed = await supabase.from("withdrawals").select("*").eq("id", id).single();
+    if (reviewed.error) throw reviewed.error;
+    return mapWithdrawal(reviewed.data);
   },
 };
 

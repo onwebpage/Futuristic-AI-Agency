@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { Link } from "wouter";
-import { ArrowRight, CheckCircle2, ShieldCheck, Star } from "lucide-react";
+import { CheckCircle2, ShieldCheck, Star } from "lucide-react";
 import { BPO_PLANS } from "@/data/packages-data";
+import PayPalButton from "@/components/ui/PayPalButton";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -82,16 +82,9 @@ export function BPOPlansSection() {
                 </ul>
               </div>
 
-              <Link href={`/contact?plan=${plan.id}`}>
-                <button className={`w-full h-12 mt-8 px-6 rounded-xl font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer ${
-                  plan.isPopular
-                    ? "bg-[#1E40AF] text-white shadow-xs hover:bg-[#1D4ED8]"
-                    : "bg-slate-900 text-white hover:bg-slate-800 shadow-xs"
-                }`}>
-                  Discuss {plan.name} BPO Plan
-                  <ArrowRight size={15} />
-                </button>
-              </Link>
+              <div className="mt-8">
+                <PayPalButton packageId={plan.id} />
+              </div>
             </motion.article>
           ))}
         </div>
