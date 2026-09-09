@@ -44,6 +44,11 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
+# Environment Variables — NEVER commit .env to version control
+.env
+.env.local
+.env.*.local
+
 # Replit
 .cache/
 .local/

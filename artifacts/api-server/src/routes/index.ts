@@ -12,6 +12,7 @@ import documentsCommunicationRouter from "./documentsCommunication.js";
 import meetingsRouter from "./meetings.js";
 import billingRouter from "./billing.js";
 import partnerRouter from "./partner.js";
+import chatRouter from "./chat.js";
 
 const router: IRouter = Router();
 
@@ -28,5 +29,6 @@ router.use(documentsCommunicationRouter);
 router.use(meetingsRouter);
 router.use(billingRouter);
 router.use(partnerRouter);
+router.use(chatRouter);
 
 export default router;

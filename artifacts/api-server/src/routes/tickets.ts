@@ -178,6 +178,23 @@ router.get("/user/notifications", requireUserAuth, async (req: UserRequest, res)
   } catch (error: any) { res.status(500).json({ error: "Failed to load notifications", details: error?.message }); }
 });
 
+router.post("/user/notifications/:id/read", requireUserAuth, async (req: UserRequest, res) => {
+  try {
+    const { data, error } = await supabase.from("notifications").update({ read_at: new Date().toISOString() }).eq("id", Number(req.params.id)).eq("recipient_user_id", req.user!.id).select().maybeSingle();
+    if (error) throw error;
+    if (!data) { res.status(404).json({ error: "Notification not found" }); return; }
+    res.json(data);
+  } catch (error: any) { res.status(500).json({ error: "Failed to mark notification read", details: error?.message }); }
+});
+
+router.post("/user/notifications/read-all", requireUserAuth, async (req: UserRequest, res) => {
+  try {
+    const { error } = await supabase.from("notifications").update({ read_at: new Date().toISOString() }).eq("recipient_user_id", req.user!.id).is("read_at", null);
+    if (error) throw error;
+    res.json({ success: true });
+  } catch (error: any) { res.status(500).json({ error: "Failed to mark notifications read", details: error?.message }); }
+});
+
 router.get("/admin/modules", requireAuth, async (_req: AdminRequest, res) => {
   try {
     const { data, error } = await supabase.from("module_settings").select("*").order("module_key");

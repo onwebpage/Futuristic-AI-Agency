@@ -73,6 +73,7 @@ export default function AdminControlCentrePage() {
   const [finance, setFinance] = useState<any>(null);
   const [settings, setSettings] = useState<any>(null);
   const [featureControls, setFeatureControls] = useState<any[]>([]);
+  const [adminReports, setAdminReports] = useState<any>(null);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -114,7 +115,12 @@ export default function AdminControlCentrePage() {
 
   const loadNotifications = useCallback(async () => {
     const response = await apiCall("/admin/notifications");
-    if (response.ok) setNotifications(await response.json());
+    if (response.ok) { const body = await response.json(); setNotifications(body.data || body); }
+  }, []);
+
+  const loadReports = useCallback(async () => {
+    const response = await apiCall("/admin/reports?report=overview&page=1&pageSize=25");
+    if (response.ok) setAdminReports(await response.json());
   }, []);
 
   const loadAuditLogs = useCallback(async () => {
@@ -158,8 +164,9 @@ export default function AdminControlCentrePage() {
       loadAuditLogs(),
       loadFinance(),
       loadSettings(),
+      loadReports(),
     ]).finally(() => setLoading(false));
-  }, [loadOverview, loadApprovals, loadUsers, loadRoles, loadNotifications, loadAuditLogs, loadFinance, loadSettings, setLocation]);
+  }, [loadOverview, loadApprovals, loadUsers, loadRoles, loadNotifications, loadAuditLogs, loadFinance, loadSettings, loadReports, setLocation]);
 
   useEffect(() => {
     if (!loading) loadUsers();
@@ -370,10 +377,10 @@ export default function AdminControlCentrePage() {
 
   const renderNotifications = () => (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-slate-500">Admin notifications</div>
+      <div className="mb-4 flex items-center justify-between"><div className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">Admin notifications</div><button onClick={() => apiCall("/admin/notifications/read-all", { method: "POST" }).then(loadNotifications)} className="text-xs font-semibold text-blue-700">Mark all read</button></div>
       <div className="space-y-3">
         {(notifications || []).map((notification: any) => (
-          <button key={notification.id} onClick={() => apiCall(`/admin/notifications/${notification.id}/read`, { method: "POST" })} className="flex w-full items-center justify-between rounded-xl border border-slate-200 bg-slate-50 p-3 text-left">
+          <button key={notification.id} onClick={() => apiCall(`/admin/notifications/${notification.id}/read`, { method: "POST" }).then(loadNotifications)} className="flex w-full items-center justify-between rounded-xl border border-slate-200 bg-slate-50 p-3 text-left">
             <div>
               <div className="text-sm font-semibold text-slate-800">{notification.title}</div>
               <div className="text-xs text-slate-500">{notification.body}</div>
@@ -384,6 +391,8 @@ export default function AdminControlCentrePage() {
       </div>
     </div>
   );
+
+  const renderReports = () => <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div className="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-slate-500">Admin reports</div>{!adminReports ? <div className="text-sm text-slate-500">No report data available.</div> : <div className="space-y-2"><div className="text-sm text-slate-700">Report: {adminReports.report}</div><div className="text-xs text-slate-500">{adminReports.pagination?.total || 0} records</div>{(adminReports.data || []).slice(0, 10).map((row: any, index: number) => <div key={row.id || index} className="rounded-xl bg-slate-50 p-3 text-sm text-slate-700">{row.name || row.subject || row.invoice_number || row.statement_number || row.title || row.action || `Record ${row.id}`}</div>)}</div>}</div>;
 
   const renderAudit = () => (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
@@ -466,7 +475,7 @@ export default function AdminControlCentrePage() {
       case "users": return renderUsers();
       case "audit": return renderAudit();
       case "notifications": return renderNotifications();
-      case "reports": return renderSearch();
+      case "reports": return renderReports();
       case "settings": return renderSettings();
       case "feature-controls": return renderFeatureControls();
       default: return renderOverview();

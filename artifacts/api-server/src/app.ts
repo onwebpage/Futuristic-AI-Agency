@@ -27,7 +27,10 @@ app.use(
     },
   }),
 );
-app.use(cors());
+
+// Configure CORS for production
+const corsOrigins = (process.env.CORS_ORIGINS || "http://localhost:4173,http://localhost:3000").split(",").map((o) => o.trim());
+app.use(cors({ origin: corsOrigins, credentials: true }));
 app.use(express.json({ limit: "40mb" }));
 app.use(express.urlencoded({ extended: true }));
 

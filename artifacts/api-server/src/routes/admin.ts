@@ -11,6 +11,7 @@ import {
   supabase,
 } from "@workspace/db";
 import { signToken, requireAuth } from "../lib/auth.js";
+import { logger } from "../lib/logger.js";
 
 const router: IRouter = Router();
 type AdminRequest = Request & { admin?: { id: number; username: string } };
@@ -20,7 +21,7 @@ async function ensureDefaultAdmin() {
     const passwordHash = await bcrypt.hash("admin123", 10);
     await adminRepository.ensureDefaultAdmin(passwordHash);
   } catch (err: any) {
-    console.warn("[Admin] Init admin warning:", err?.message || err);
+    logger.warn({ err }, "[Admin] Init admin warning");
   }
 }
 
@@ -38,12 +39,14 @@ router.post("/admin/login", async (req, res) => {
     const user = await adminRepository.getByUsername(username);
 
     if (!user) {
+      await supabase.from("audit_logs").insert({ action: "admin_login", entity_type: "admin_session", entity_id: String(username).slice(0, 200), metadata: { result: "failure", reason: "unknown_account" } });
       res.status(401).json({ error: "Invalid credentials" });
       return;
     }
 
     const valid = await bcrypt.compare(password, user.passwordHash);
     if (!valid) {
+      await supabase.from("audit_logs").insert({ actor_admin_id: user.id, action: "admin_login", entity_type: "admin_session", entity_id: String(user.id), metadata: { result: "failure", reason: "invalid_password" } });
       res.status(401).json({ error: "Invalid credentials" });
       return;
     }
@@ -58,8 +61,8 @@ router.post("/admin/login", async (req, res) => {
     });
     res.json({ token, username: user.username });
   } catch (error: any) {
-    console.error("Admin login error:", error);
-    res.status(500).json({ error: "Login failed", details: error?.message });
+    logger.error({ err: error }, "Admin login error");
+    res.status(500).json({ error: "Login failed" });
   }
 });
 
@@ -68,8 +71,8 @@ router.get("/admin/stats", requireAuth, async (_req, res) => {
     const stats = await contactsRepository.getStats();
     res.json(stats);
   } catch (error: any) {
-    console.error("Admin stats error:", error);
-    res.status(500).json({ error: "Failed to load stats", details: error?.message });
+    logger.error({ err: error }, "Admin stats error");
+    res.status(500).json({ error: "Failed to load stats" });
   }
 });
 
@@ -102,7 +105,7 @@ router.get("/admin/submissions", requireAuth, async (req, res) => {
 
     res.json(filtered);
   } catch (error: any) {
-    console.error("Admin submissions error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load submissions", details: error?.message });
   }
 });
@@ -119,7 +122,7 @@ router.get("/admin/submissions/:id", requireAuth, async (req, res) => {
 
     res.json(submission);
   } catch (error: any) {
-    console.error("Admin get submission error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load submission", details: error?.message });
   }
 });
@@ -138,7 +141,7 @@ router.patch("/admin/submissions/:id", requireAuth, async (req, res) => {
 
     res.json(updated);
   } catch (error: any) {
-    console.error("Admin update submission error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to update submission", details: error?.message });
   }
 });
@@ -155,7 +158,7 @@ router.delete("/admin/submissions/:id", requireAuth, async (req, res) => {
 
     res.json({ success: true });
   } catch (error: any) {
-    console.error("Admin delete submission error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to delete submission", details: error?.message });
   }
 });
@@ -184,7 +187,7 @@ router.get("/admin/submissions-export", requireAuth, async (_req, res) => {
     res.setHeader("Content-Disposition", "attachment; filename=leads.csv");
     res.send(csv);
   } catch (error: any) {
-    console.error("Admin CSV export error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to export CSV", details: error?.message });
   }
 });
@@ -229,7 +232,7 @@ router.patch("/admin/settings/password", requireAuth, async (req: Parameters<typ
 
     res.json({ success: true });
   } catch (error: any) {
-    console.error("Update password error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to update password", details: error?.message });
   }
 });
@@ -247,7 +250,7 @@ router.get("/admin/attendance", requireAuth, async (req, res) => {
     });
     res.json(records);
   } catch (error: any) {
-    console.error("Admin attendance error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load attendance", details: error?.message });
   }
 });
@@ -264,7 +267,7 @@ router.get("/admin/kyc", requireAuth, async (req, res) => {
     });
     res.json(records);
   } catch (error: any) {
-    console.error("Admin KYC error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load KYC records", details: error?.message });
   }
 });
@@ -287,7 +290,7 @@ router.patch("/admin/kyc/:id", requireAuth, async (req, res) => {
 
     res.json({ success: true, status });
   } catch (error: any) {
-    console.error("Admin review KYC error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to review KYC", details: error?.message });
   }
 });
@@ -305,7 +308,7 @@ router.get("/admin/affiliates", requireAuth, async (_req, res) => {
     if (error) throw error;
     res.json(data || []);
   } catch (error: any) {
-    console.error("Admin affiliates error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load affiliates", details: error?.message });
   }
 });
@@ -330,7 +333,7 @@ router.get("/admin/wallets", requireAuth, async (_req, res) => {
 
     res.json({ wallets: wallets || [], recentTransactions: transactions || [] });
   } catch (error: any) {
-    console.error("Admin wallets error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load wallets", details: error?.message });
   }
 });
@@ -339,7 +342,7 @@ router.get("/admin/withdrawals", requireAuth, async (_req, res) => {
   try {
     res.json(await withdrawalRepository.listAll());
   } catch (error: any) {
-    console.error("Admin withdrawals error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load withdrawal requests", details: error?.message });
   }
 });
@@ -474,7 +477,7 @@ router.get("/admin/control-centre/overview", requireAuth, async (_req, res) => {
       })),
     });
   } catch (error: any) {
-    console.error("Admin control centre overview error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load control centre overview", details: error?.message });
   }
 });
@@ -526,7 +529,7 @@ router.get("/admin/approvals", requireAuth, adminModuleFeature("approvals"), asy
 
     res.json(approvals.slice(0, 50));
   } catch (error: any) {
-    console.error("Admin approvals error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load approvals", details: error?.message });
   }
 });
@@ -653,7 +656,7 @@ router.post("/admin/approvals/:approvalId/decision", requireAuth, adminModuleFea
 
     res.json({ success: true, approvalId, status: decision });
   } catch (error: any) {
-    console.error("Approval decision error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to process approval decision", details: error?.message });
   }
 });
@@ -692,7 +695,7 @@ router.get("/admin/users", requireAuth, async (req, res) => {
       updatedAt: row.updated_at,
     })), pagination: { page, pageSize, total, totalPages: Math.ceil(total / pageSize) } });
   } catch (error: any) {
-    console.error("Admin users error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load users", details: error?.message });
   }
 });
@@ -709,7 +712,7 @@ router.get("/admin/users/:id", requireAuth, async (req, res) => {
     const { data: statusEvent } = await supabase.from("audit_logs").select("action").eq("entity_type", "user").eq("entity_id", user.id).in("action", ["user_active", "user_deactivated"]).order("created_at", { ascending: false }).limit(1).maybeSingle();
     res.json({ ...user, status: statusEvent?.action === "user_deactivated" ? "deactivated" : "active", memberships: memberships || [] });
   } catch (error: any) {
-    console.error("Admin user details error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load user details", details: error?.message });
   }
 });
@@ -735,7 +738,7 @@ router.patch("/admin/users/:id/status", requireAuth, async (req: AdminRequest, r
     await supabase.from("profiles").update({ account_status: status, updated_at: new Date().toISOString() }).eq("id", targetId);
     res.json({ id: targetId, status });
   } catch (error: any) {
-    console.error("Admin user status error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to update user status", details: error?.message });
   }
 });
@@ -779,7 +782,7 @@ router.patch("/admin/users/:id/role", requireAuth, async (req: AdminRequest, res
 
     res.json(data);
   } catch (error: any) {
-    console.error("Admin users role update error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to update user role", details: error?.message });
   }
 });
@@ -793,40 +796,73 @@ router.get("/admin/roles", requireAuth, async (_req, res) => {
     ];
     res.json(roles);
   } catch (error: any) {
-    console.error("Admin roles error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load roles", details: error?.message });
   }
 });
 
-router.get("/admin/notifications", requireAuth, async (_req, res) => {
+router.get("/admin/notifications", requireAuth, async (req: AdminRequest, res) => {
   try {
-    const { data, error } = await supabase.from("notifications").select("*").order("created_at", { ascending: false }).limit(50);
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 50));
+    const unreadOnly = String(req.query.unread || "false") === "true";
+    let query = supabase.from("notifications").select("*", { count: "exact" }).eq("recipient_admin_id", req.admin!.id).order("created_at", { ascending: false }).range((page - 1) * pageSize, page * pageSize - 1);
+    if (unreadOnly) query = query.is("read_at", null);
+    const { data, error, count } = await query;
     if (error) throw error;
-    res.json((data || []).map((row: any) => ({
-      id: row.id,
-      type: row.type,
-      title: row.title,
-      body: row.body,
-      entityType: row.entity_type,
-      entityId: row.entity_id,
-      read: !!row.read_at,
-      createdAt: row.created_at,
-    })));
+    const { count: unreadCount, error: unreadError } = await supabase.from("notifications").select("id", { count: "exact", head: true }).eq("recipient_admin_id", req.admin!.id).is("read_at", null);
+    if (unreadError) throw unreadError;
+    res.json({ data: (data || []).map((row: any) => ({ id: row.id, type: row.type, title: row.title, body: row.body, entityType: row.entity_type, entityId: row.entity_id, read: !!row.read_at, createdAt: row.created_at })), unreadCount: unreadCount || 0, pagination: { page, pageSize, total: count || 0, totalPages: Math.ceil((count || 0) / pageSize) } });
   } catch (error: any) {
-    console.error("Admin notifications error:", error);
     res.status(500).json({ error: "Failed to load notifications", details: error?.message });
   }
 });
 
-router.post("/admin/notifications/:id/read", requireAuth, async (req, res) => {
+router.post("/admin/notifications/:id/read", requireAuth, async (req: AdminRequest, res) => {
   try {
-    const { data, error } = await supabase.from("notifications").update({ read_at: new Date().toISOString() }).eq("id", Number(req.params.id)).select().single();
+    const { data, error } = await supabase.from("notifications").update({ read_at: new Date().toISOString() }).eq("id", Number(req.params.id)).eq("recipient_admin_id", req.admin!.id).select().maybeSingle();
     if (error) throw error;
+    if (!data) { res.status(404).json({ error: "Notification not found" }); return; }
     res.json(data);
   } catch (error: any) {
-    console.error("Notification read update error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to update notification", details: error?.message });
   }
+});
+
+router.post("/admin/notifications/read-all", requireAuth, async (req: AdminRequest, res) => {
+  try {
+    const { error } = await supabase.from("notifications").update({ read_at: new Date().toISOString() }).eq("recipient_admin_id", req.admin!.id).is("read_at", null);
+    if (error) throw error;
+    res.json({ success: true });
+  } catch (error: any) { res.status(500).json({ error: "Failed to mark notifications read", details: error?.message }); }
+});
+
+router.get("/admin/reports", requireAuth, async (req, res) => {
+  try {
+    const report = String(req.query.report || "overview");
+    const search = String(req.query.search || "").trim();
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 25));
+    const from = String(req.query.from || "");
+    const to = String(req.query.to || "");
+    const applyDates = (query: any, column = "created_at") => { if (from) query = query.gte(column, from); if (to) query = query.lte(column, `${to}T23:59:59.999Z`); return query; };
+    let query: any;
+    if (report === "clients") query = supabase.from("profiles").select("id,email,full_name,role,created_at", { count: "exact" }).in("role", ["user", "client"]).order("created_at", { ascending: false });
+    else if (report === "projects") query = supabase.from("projects").select("id,name,client_id,status,progress_percent,created_at,updated_at", { count: "exact" }).order("updated_at", { ascending: false });
+    else if (report === "tickets") query = supabase.from("tickets").select("id,ticket_number,subject,status,priority,requester_role,created_at", { count: "exact" }).order("created_at", { ascending: false });
+    else if (report === "finance" || report === "payments") query = supabase.from(report === "finance" ? "invoices" : "invoice_payments").select("*", { count: "exact" }).order("created_at", { ascending: false });
+    else if (report === "bpo" || report === "payouts") query = supabase.from("bpo_payout_statements").select("id,partner_id,statement_number,payable_amount,approved_amount,paid_amount,pending_amount,status,created_at", { count: "exact" }).order("created_at", { ascending: false });
+    else if (report === "attendance") query = supabase.from("attendance").select("*", { count: "exact" }).order("date", { ascending: false });
+    else if (report === "productivity" || report === "quality" || report === "training") query = report === "quality" ? supabase.from("bpo_quality_evaluations").select("id,partner_id,agent_id,score,status,evaluation_date,created_at", { count: "exact" }).order("evaluation_date", { ascending: false }) : report === "training" ? supabase.from("bpo_training_programs").select("id,partner_id,title,status,completion_percent,starts_at,ends_at,created_at", { count: "exact" }).order("starts_at", { ascending: false }) : supabase.from("bpo_agents").select("id,partner_id,name,employee_id,status,created_at", { count: "exact" }).order("created_at", { ascending: false });
+    else query = supabase.from("audit_logs").select("id,action,entity_type,entity_id,created_at,metadata", { count: "exact" }).order("created_at", { ascending: false });
+    query = applyDates(query, report === "attendance" ? "date" : "created_at");
+    if (search && ["clients", "projects", "tickets", "bpo", "payouts", "productivity", "training"].includes(report)) query = report === "clients" ? query.or(`email.ilike.%${search}%,full_name.ilike.%${search}%`) : report === "projects" ? query.ilike("name", `%${search}%`) : report === "tickets" ? query.or(`subject.ilike.%${search}%,ticket_number.ilike.%${search}%`) : report === "productivity" || report === "training" ? query.ilike(report === "productivity" ? "name" : "title", `%${search}%`) : query.ilike("statement_number", `%${search}%`);
+    query = query.range((page - 1) * pageSize, page * pageSize - 1);
+    const { data, error, count } = await query;
+    if (error) throw error;
+    res.json({ report, data: data || [], pagination: { page, pageSize, total: count || 0, totalPages: Math.ceil((count || 0) / pageSize) }, filters: { from, to, search } });
+  } catch (error: any) { res.status(500).json({ error: "Failed to load report", details: error?.message }); }
 });
 
 router.get("/admin/settings", requireAuth, async (_req, res) => {
@@ -842,7 +878,7 @@ router.get("/admin/settings", requireAuth, async (_req, res) => {
       settings: settings.data || [],
     });
   } catch (error: any) {
-    console.error("Admin settings error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load settings", details: error?.message });
   }
 });
@@ -864,7 +900,7 @@ router.get("/admin/feature-controls", requireAuth, async (_req, res) => {
     const rows = data || [];
     res.json(CONTROL_MODULES.map((item) => ({ ...item, enabled: rows.find((row: any) => row.module_key === item.key)?.enabled ?? true, updatedAt: rows.find((row: any) => row.module_key === item.key)?.updated_at || null })));
   } catch (error: any) {
-    console.error("Admin feature controls error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load feature controls", details: error?.message });
   }
 });
@@ -885,7 +921,7 @@ router.patch("/admin/feature-controls/:key", requireAuth, async (req: AdminReque
     await supabase.from("audit_logs").insert({ actor_admin_id: req.admin!.id, action: "feature_changed", entity_type: "module", entity_id: key, metadata: { enabled: req.body.enabled, result: "success" } });
     res.json(data);
   } catch (error: any) {
-    console.error("Admin feature control update error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to update feature control", details: error?.message });
   }
 });
@@ -911,7 +947,7 @@ router.patch("/admin/settings/:key", requireAuth, async (req: AdminRequest, res)
 
     res.status(400).json({ error: "Request body must include enabled or value" });
   } catch (error: any) {
-    console.error("Admin settings update error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to update settings", details: error?.message });
   }
 });
@@ -941,7 +977,7 @@ router.get("/admin/finance", requireAuth, adminModuleFeature("billing"), async (
       walletActivity: [],
     });
   } catch (error: any) {
-    console.error("Finance admin error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load finance summary", details: error?.message });
   }
 });
@@ -983,7 +1019,7 @@ router.get("/admin/search", requireAuth, adminModuleFeature("global_search"), as
       pagination: { page, pageSize },
     });
   } catch (error: any) {
-    console.error("Admin global search error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to execute global search", details: error?.message });
   }
 });
@@ -1007,7 +1043,7 @@ router.get("/admin/audit-logs", requireAuth, adminModuleFeature("audit_logs"), a
 
     res.json(data || []);
   } catch (error: any) {
-    console.error("Admin audit logs filter error:", error);
+    logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load audit logs", details: error?.message });
   }
 });

@@ -36,6 +36,7 @@ import {
   Receipt,
   CreditCard,
   TrendingUp,
+  BarChart3,
   AlertTriangle,
   BadgeCheck,
 } from "lucide-react";
@@ -257,7 +258,8 @@ interface Withdrawal {
 
 export default function UserDashboardPage() {
   const [, setLocation] = useLocation();
-  const [tab, setTab] = useState<"overview" | "projects" | "meetings" | "billing" | "documents" | "communications" | "plans" | "updates" | "tickets" | "attendance" | "kyc" | "affiliate" | "wallet" | "profile">("overview");
+  const [tab, setTab] = useState<"overview" | "projects" | "meetings" | "billing" | "documents" | "communications" | "plans" | "updates" | "tickets" | "attendance" | "kyc" | "affiliate" | "wallet" | "reports" | "profile">("overview");
+  const [clientReports, setClientReports] = useState<any>(null);
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [plans, setPlans] = useState<Plan[]>([]);
@@ -412,6 +414,8 @@ export default function UserDashboardPage() {
 
       const notificationsRes = await authFetch("/user/notifications");
       if (notificationsRes.ok) setNotifications(await notificationsRes.json());
+      const reportsRes = await authFetch("/user/reports?page=1&pageSize=25");
+      if (reportsRes.ok) setClientReports(await reportsRes.json());
       if (availableModules.documents !== false) { const documentsRes = await authFetch("/documents"); if (documentsRes.ok) setDocuments(await documentsRes.json()); }
       if (availableModules.communication !== false) { const conversationsRes = await authFetch("/conversations"); if (conversationsRes.ok) setConversations(await conversationsRes.json()); }
       if (availableModules.meetings !== false) {
@@ -811,6 +815,7 @@ export default function UserDashboardPage() {
               ...(modules.documents !== false ? [{ id: "documents", label: "Documents", icon: FileText, badge: documents.length || undefined }] : []),
               ...(modules.communication !== false ? [{ id: "communications", label: "Project Chat", icon: MessageSquare, badge: conversations.filter((conversation) => conversation.messages.some((message) => !message.read && message.sender_admin_id)).length || undefined }] : []),
               { id: "plans", label: "Services & Plans", icon: Layers, badge: plans.length },
+              { id: "reports", label: "Reports", icon: BarChart3 },
               ...(modules.client_updates !== false ? [{ id: "updates", label: "Your Updates", icon: MessageSquare, badge: updates.length || undefined }] : []),
               ...(modules.tickets !== false ? [{ id: "tickets", label: "Support Tickets", icon: MessageSquare, badge: tickets.length || undefined }] : []),
               ...(modules.attendance !== false ? [{ id: "attendance", label: "Attendance & Shift", icon: Clock }] : []),
@@ -1014,8 +1019,8 @@ export default function UserDashboardPage() {
               </div>
 
               <section className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-                <div className="flex items-center justify-between mb-3"><h2 className="text-sm font-bold text-slate-900">Notifications</h2><span className="text-[11px] text-slate-500">{notifications.length} total</span></div>
-                {notifications.length === 0 ? <p className="text-xs text-slate-500 py-4">No project notifications yet.</p> : <div className="space-y-2">{notifications.slice(0, 5).map((notification) => <div key={notification.id} className="rounded-xl border border-slate-100 bg-slate-50 p-3"><div className="flex items-start justify-between gap-3"><p className="text-xs font-semibold text-slate-800">{notification.title}</p><time className="text-[10px] text-slate-400 whitespace-nowrap">{new Date(notification.created_at).toLocaleDateString()}</time></div><p className="text-xs text-slate-500 mt-1">{notification.body}</p></div>)}</div>}
+                <div className="flex items-center justify-between mb-3"><h2 className="text-sm font-bold text-slate-900">Notifications</h2><div className="flex items-center gap-3"><button onClick={async () => { await authFetch("/user/notifications/read-all", { method: "POST" }); setNotifications((items) => items.map((item) => ({ ...item, read_at: new Date().toISOString() }))); }} className="text-[11px] font-semibold text-blue-600">Mark all read</button><span className="text-[11px] text-slate-500">{notifications.length} total</span></div></div>
+                {notifications.length === 0 ? <p className="text-xs text-slate-500 py-4">No project notifications yet.</p> : <div className="space-y-2">{notifications.slice(0, 5).map((notification) => <button onClick={async () => { await authFetch(`/user/notifications/${notification.id}/read`, { method: "POST" }); setNotifications((items) => items.map((item) => item.id === notification.id ? { ...item, read_at: new Date().toISOString() } : item)); }} key={notification.id} className={`block w-full rounded-xl border p-3 text-left ${notification.read_at ? "border-slate-100 bg-slate-50" : "border-blue-100 bg-blue-50"}`}><div className="flex items-start justify-between gap-3"><p className="text-xs font-semibold text-slate-800">{notification.title}</p><time className="text-[10px] text-slate-400 whitespace-nowrap">{new Date(notification.created_at).toLocaleDateString()}</time></div><p className="text-xs text-slate-500 mt-1">{notification.body}</p></button>)}</div>}
               </section>
 
               {/* Recent Ledger & Attendance Previews */}
@@ -1357,6 +1362,13 @@ export default function UserDashboardPage() {
                   )}
                 </div>
               )}
+            </div>
+          )}
+
+          {tab === "reports" && (
+            <div className="space-y-5">
+              <div><h1 className="text-xl font-bold text-slate-900">Reports</h1><p className="text-xs text-slate-500 mt-0.5">Your projects, invoices, and support activity.</p></div>
+              {!clientReports ? <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-500">No report data available.</div> : <div className="grid gap-5 md:grid-cols-3">{Object.entries(clientReports).filter(([key]) => ["projects", "invoices", "tickets"].includes(key)).map(([name, report]: [string, any]) => <section key={name} className="rounded-2xl border border-slate-200 bg-white p-5"><h2 className="font-black capitalize">{name}</h2><p className="mt-2 text-xs text-slate-500">{report.total || 0} records</p><div className="mt-4 space-y-2">{(report.data || []).slice(0, 5).map((row: any) => <div key={row.id} className="rounded-lg bg-slate-50 p-2 text-xs text-slate-700">{row.name || row.subject || row.invoice_number || `Record ${row.id}`}<span className="ml-2 text-slate-400">{row.status || ""}</span></div>)}</div></section>)}</div>}
             </div>
           )}
 

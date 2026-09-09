@@ -17,6 +17,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { PageSkeleton } from "@/components/ui/PageSkeleton";
+import { FloatingChat } from "@/components/FloatingChat";
 import CookieBanner from "@/components/CookieBanner";
 import { usePageTracking, initAnalytics } from "@/lib/analytics";
 import { useEffect } from "react";
@@ -126,6 +127,7 @@ function App() {
           <Toaster />
           {/* Global overlays — rendered outside the page tree */}
           <CookieBanner />
+          <FloatingChat />
         </TooltipProvider>
       </QueryClientProvider>
     </ErrorBoundary>
