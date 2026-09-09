@@ -7,6 +7,7 @@
 //
 // <BEGIN_EXACT_CODE>
 import React, { useEffect, useState } from "react";
+import { getPayPalInstance } from "@/lib/paypalSdk";
 
 declare global {
   namespace JSX {
@@ -107,27 +108,10 @@ export default function PayPalButton({
   useEffect(() => {
     let disposed = false;
     let cleanup: (() => void) | undefined;
-    let script: HTMLScriptElement | undefined;
 
     const loadPayPalSDK = async () => {
       try {
-        if (!(window as any).paypal) {
-          script = document.createElement("script");
-          script.src = import.meta.env.PROD
-            ? "https://www.paypal.com/web-sdk/v6/core"
-            : "https://www.sandbox.paypal.com/web-sdk/v6/core";
-          script.async = true;
-          script.onload = () => {
-            if (!disposed) void initPayPal().then((remove) => { cleanup = remove; });
-          };
-          script.onerror = () => {
-            setErrorMessage("PayPal checkout could not load. Please try again.");
-            setStatus("error");
-          };
-          document.body.appendChild(script);
-        } else {
-          cleanup = await initPayPal();
-        }
+        cleanup = await initPayPal(() => disposed);
       } catch (e) {
         if (!disposed) {
           setErrorMessage("PayPal checkout is temporarily unavailable.");
@@ -140,11 +124,10 @@ export default function PayPalButton({
     return () => {
       disposed = true;
       cleanup?.();
-      script?.remove();
     };
   }, [packageId]);
 
-  const initPayPal = async (): Promise<(() => void) | undefined> => {
+  const initPayPal = async (isDisposed: () => boolean = () => false): Promise<(() => void) | undefined> => {
     try {
       const setupResponse = await fetch("/api/paypal/setup");
       const setup = await setupResponse.json().catch(() => ({}));
@@ -152,10 +135,8 @@ export default function PayPalButton({
         throw new Error(setup.error || "PayPal checkout is temporarily unavailable.");
       }
       const clientToken: string = setup.clientToken;
-      const sdkInstance = await (window as any).paypal.createInstance({
-        clientToken,
-        components: ["paypal-payments"],
-      });
+      const sdkInstance = await getPayPalInstance(clientToken);
+      if (isDisposed()) return undefined;
 
       const paypalCheckout =
         sdkInstance.createPayPalOneTimePaymentSession({

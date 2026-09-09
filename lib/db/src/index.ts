@@ -38,6 +38,8 @@ export interface PlanRow {
   features: string[];
   popular: boolean;
   sort_order: number;
+  enabled?: boolean;
+  client_visible?: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -54,6 +56,8 @@ export interface Plan {
   features: string[];
   popular: boolean;
   sortOrder: number;
+  enabled?: boolean;
+  clientVisible?: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -261,6 +265,8 @@ export function mapPlanRow(row: PlanRow): Plan {
     features: Array.isArray(row.features) ? row.features : [],
     popular: Boolean(row.popular),
     sortOrder: Number(row.sort_order),
+    enabled: row.enabled !== false,
+    clientVisible: row.client_visible !== false,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -308,6 +314,18 @@ export const plansRepository = {
     return (data as PlanRow[] || []).map(mapPlanRow);
   },
 
+  async getClientVisible(): Promise<Plan[]> {
+    const { data, error } = await supabase
+      .from("plans")
+      .select("*")
+      .eq("enabled", true)
+      .eq("client_visible", true)
+      .order("service_number", { ascending: true })
+      .order("sort_order", { ascending: true });
+    if (error) throw error;
+    return (data as PlanRow[] || []).map(mapPlanRow);
+  },
+
   async getById(id: number): Promise<Plan | null> {
     const { data, error } = await supabase
       .from("plans")
@@ -344,6 +362,8 @@ export const plansRepository = {
         features: plan.features,
         popular: plan.popular,
         sort_order: plan.sortOrder,
+        enabled: plan.enabled,
+        client_visible: plan.clientVisible,
       })
       .select()
       .single();
@@ -366,6 +386,8 @@ export const plansRepository = {
     if (updates.features !== undefined) payload.features = updates.features;
     if (updates.popular !== undefined) payload.popular = updates.popular;
     if (updates.sortOrder !== undefined) payload.sort_order = updates.sortOrder;
+    if (updates.enabled !== undefined) payload.enabled = updates.enabled;
+    if (updates.clientVisible !== undefined) payload.client_visible = updates.clientVisible;
 
     const { data, error } = await supabase
       .from("plans")

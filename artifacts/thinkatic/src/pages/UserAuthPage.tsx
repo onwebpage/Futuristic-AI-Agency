@@ -45,7 +45,9 @@ export default function UserAuthPage() {
   useEffect(() => {
     const token = localStorage.getItem("user_token");
     if (token) {
-      setLocation("/dashboard");
+      const storedProfile = localStorage.getItem("user_profile");
+      const role = storedProfile ? (JSON.parse(storedProfile) as { role?: string }).role : undefined;
+      setLocation(role === "partner" || role === "bpo_partner" ? "/partner" : "/dashboard");
     }
   }, [setLocation]);
 
@@ -65,14 +67,26 @@ export default function UserAuthPage() {
 
       const res = await fetch(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
+      const rawBody = await res.text();
+      let data: { success?: boolean; token?: string; profile?: unknown; message?: string; error?: string } = {};
+      if (rawBody.trim()) {
+        try {
+          data = JSON.parse(rawBody);
+        } catch {
+          throw new Error(`Authentication service returned an invalid response (${res.status}).`);
+        }
+      }
 
       if (!res.ok) {
-        throw new Error(data.error || "Authentication failed. Please check your details.");
+        throw new Error(data.message || data.error || `Authentication failed (${res.status}). Please try again.`);
+      }
+
+      if (!data.token || !data.profile) {
+        throw new Error("Authentication service returned an incomplete login response.");
       }
 
       localStorage.setItem("user_token", data.token);
@@ -80,7 +94,8 @@ export default function UserAuthPage() {
 
       setSuccessMessage(mode === "signup" ? "Account created successfully! Redirecting..." : "Login successful! Redirecting...");
       setTimeout(() => {
-        setLocation("/dashboard");
+        const role = (data.profile as { role?: string }).role;
+        setLocation(role === "partner" || role === "bpo_partner" ? "/partner" : "/dashboard");
       }, 700);
     } catch (err: any) {
       setErrorMessage(err.message || "Something went wrong. Please try again.");

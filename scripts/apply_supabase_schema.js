@@ -27,17 +27,23 @@ Thinkatic - Supabase Schema Migration Runner
 To execute the migration directly against Supabase Postgres:
   node scripts/apply_supabase_schema.js "postgresql://postgres:[YOUR-PASSWORD]@db.gkcmdngzatpdrzfdahcq.supabase.co:5432/postgres"
 
-Alternatively, copy the contents of:
-  supabase/migrations/20260904000000_create_schema.sql
-and paste it directly into your Supabase Dashboard -> SQL Editor and click "Run".
+Alternatively, run every SQL file in supabase/migrations/ in filename order
+from the Supabase Dashboard -> SQL Editor. The billing schema is provided by:
+  20260908000006_create_billing.sql
+  20260908000007_billing_enhancements.sql
+Do not run only the billing files unless the earlier base/module migrations
+have already been applied.
 ================================================================================
 `);
   process.exit(0);
 }
 
 async function run() {
-  const sqlPath = path.join(__dirname, "../supabase/migrations/20260904000000_create_schema.sql");
-  const sql = fs.readFileSync(sqlPath, "utf-8");
+  const migrationDir = path.join(__dirname, "../supabase/migrations");
+  const migrations = fs.readdirSync(migrationDir)
+    .filter((name) => /^\d+.*\.sql$/.test(name))
+    .sort()
+    .map((name) => ({ name, sql: fs.readFileSync(path.join(migrationDir, name), "utf-8") }));
 
   console.log(`[Migration] Connecting to Supabase database...`);
   const client = new pg.Client({
@@ -48,10 +54,23 @@ async function run() {
   try {
     await client.connect();
     console.log(`[Migration] Connected successfully.`);
-    console.log(`[Migration] Executing schema migration (${sql.length} bytes)...`);
+    console.log(`[Migration] Executing ${migrations.length} ordered migrations...`);
 
     await client.query("BEGIN;");
-    await client.query(sql);
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS public._app_migrations (
+        name TEXT PRIMARY KEY,
+        applied_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `);
+    const applied = await client.query("SELECT name FROM public._app_migrations");
+    const appliedNames = new Set(applied.rows.map((row) => row.name));
+    for (const migration of migrations) {
+      if (appliedNames.has(migration.name)) continue;
+      console.log(`[Migration] Applying ${migration.name}`);
+      await client.query(migration.sql);
+      await client.query("INSERT INTO public._app_migrations (name) VALUES ($1)", [migration.name]);
+    }
     await client.query("COMMIT;");
 
     console.log(`[Migration] Successfully applied complete schema and seed data!`);

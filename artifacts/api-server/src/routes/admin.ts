@@ -1,4 +1,4 @@
-import { Router, type IRouter, type Request } from "express";
+import { Router, type IRouter, type Request, type Response, type NextFunction } from "express";
 import bcrypt from "bcryptjs";
 import {
   adminRepository,
@@ -13,6 +13,7 @@ import {
 import { signToken, requireAuth } from "../lib/auth.js";
 
 const router: IRouter = Router();
+type AdminRequest = Request & { admin?: { id: number; username: string } };
 
 async function ensureDefaultAdmin() {
   try {
@@ -48,6 +49,13 @@ router.post("/admin/login", async (req, res) => {
     }
 
     const token = signToken({ id: user.id, username: user.username });
+    await supabase.from("audit_logs").insert({
+      actor_admin_id: user.id,
+      action: "admin_login",
+      entity_type: "admin_session",
+      entity_id: String(user.id),
+      metadata: { result: "success" },
+    });
     res.json({ token, username: user.username });
   } catch (error: any) {
     console.error("Admin login error:", error);
@@ -353,6 +361,654 @@ router.patch("/admin/withdrawals/:id", requireAuth, async (req: Request & { admi
   } catch (error: any) {
     const message = error?.message || "Failed to review withdrawal";
     res.status(message.includes("not found") ? 404 : 500).json({ error: message });
+  }
+});
+
+// -----------------------------------------------------------------------------
+// Admin Control Centre
+// -----------------------------------------------------------------------------
+function safeNumber(value: unknown, fallback = 0): number {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function adminModuleFeature(moduleKey: string) {
+  return async (_req: Request, res: Response, next: NextFunction) => {
+    const { data, error } = await supabase.from("module_settings").select("enabled").eq("module_key", moduleKey).maybeSingle();
+    if (error) {
+      res.status(500).json({ error: "Feature availability could not be verified" });
+      return;
+    }
+    if (data?.enabled === false) {
+      res.status(503).json({ error: `${moduleKey} is currently disabled`, module: moduleKey });
+      return;
+    }
+    next();
+  };
+}
+
+router.get("/admin/control-centre/overview", requireAuth, async (_req, res) => {
+  try {
+    const [profiles, leads, partners, centres, agents, projects, ticketsData, kycData, invoicesData, payoutsData, paymentsData, auditData] = await Promise.all([
+      supabase.from("profiles").select("id, role, created_at").order("created_at", { ascending: false }),
+      supabase.from("contact_submissions").select("id, status, created_at").order("created_at", { ascending: false }),
+      supabase.from("bpo_partners").select("id, status, created_at").order("created_at", { ascending: false }),
+      supabase.from("bpo_centres").select("id, status").order("created_at", { ascending: false }),
+      supabase.from("bpo_agents").select("id, status").order("created_at", { ascending: false }),
+      supabase.from("projects").select("id, status, updated_at").order("updated_at", { ascending: false }),
+      supabase.from("tickets").select("id, status, priority").order("created_at", { ascending: false }),
+      supabase.from("kyc_verifications").select("id, status").order("created_at", { ascending: false }),
+      supabase.from("invoices").select("id, status, total, balance_due").order("created_at", { ascending: false }),
+      supabase.from("bpo_payout_statements").select("id, status, payable_amount").order("created_at", { ascending: false }),
+      supabase.from("invoice_payments").select("id, status, amount").order("created_at", { ascending: false }),
+      supabase.from("audit_logs").select("id, action, entity_type, created_at, actor_admin_id, actor_user_id").order("created_at", { ascending: false }).limit(12),
+    ]);
+
+    const profileRows = profiles.data || [];
+    const leadRows = leads.data || [];
+    const partnerRows = partners.data || [];
+    const centreRows = centres.data || [];
+    const agentRows = agents.data || [];
+    const projectRows = projects.data || [];
+    const ticketRows = ticketsData.data || [];
+    const kycRows = kycData.data || [];
+    const invoiceRows = invoicesData.data || [];
+    const payoutRows = payoutsData.data || [];
+    const paymentRows = paymentsData.data || [];
+
+    const activeClients = profileRows.filter((user: any) => user.role === "client" || user.role === "user").length;
+    const activePartners = partnerRows.filter((partner: any) => partner.status === "active" || partner.status === "approved").length;
+    const activeProjects = projectRows.filter((project: any) => project.status && !["completed", "cancelled"].includes(project.status)).length;
+    const pendingKyc = kycRows.filter((item: any) => ["pending", "submitted", "in_review", "changes_requested"].includes(String(item.status).toLowerCase())).length;
+    const openTickets = ticketRows.filter((item: any) => ["open", "assigned", "in_progress", "waiting_for_requester"].includes(String(item.status))).length;
+    const pendingApprovals = Math.max(0, pendingKyc + payoutRows.filter((item: any) => String(item.status).toLowerCase() === "pending").length + invoiceRows.filter((item: any) => ["sent", "pending_payment", "partially_paid", "overdue"].includes(String(item.status))).length);
+    const outstandingInvoices = invoiceRows.reduce((sum: number, invoice: any) => sum + safeNumber(invoice.balance_due ?? invoice.total ?? 0), 0);
+    const pendingPayments = paymentRows.filter((item: any) => ["initiated", "pending"].includes(String(item.status).toLowerCase())).length;
+    const pendingPartnerPayouts = payoutRows.filter((item: any) => ["pending", "approved", "processing"].includes(String(item.status).toLowerCase())).length;
+
+    res.json({
+      totals: {
+        totalClients: profileRows.filter((user: any) => user.role === "client" || user.role === "user").length,
+        activeClients,
+        leads: leadRows.length,
+        totalPartners: partnerRows.length,
+        activePartners,
+        centres: centreRows.length,
+        agents: agentRows.length,
+        activeProjects,
+        activeCampaigns: Math.max(0, projectRows.length),
+        openTickets,
+        pendingApprovals,
+        pendingKyc,
+        outstandingInvoices,
+        pendingPayments,
+        pendingPartnerPayouts,
+      },
+      recentActivity: (auditData.data || []).map((item: any) => ({
+        id: item.id,
+        action: item.action,
+        entityType: item.entity_type,
+        createdAt: item.created_at,
+      })),
+      pendingApprovalsList: [
+        ...kycRows.filter((item: any) => ["pending", "submitted", "in_review", "changes_requested"].includes(String(item.status).toLowerCase())).slice(0, 6).map((item: any) => ({ id: item.id, type: "KYC", entity: `KYC-${item.id}`, status: String(item.status).toUpperCase(), createdAt: new Date().toISOString() })),
+        ...payoutRows.filter((item: any) => String(item.status).toLowerCase() === "pending").slice(0, 4).map((item: any) => ({ id: item.id, type: "Partner payout", entity: `Payout-${item.id}`, status: "PENDING", createdAt: item.created_at || new Date().toISOString() })),
+      ],
+      recentTickets: ticketRows.slice(0, 6).map((item: any) => ({
+        id: item.id,
+        subject: `Ticket ${item.id}`,
+        status: item.status,
+        priority: item.priority,
+      })),
+      financeAlerts: invoiceRows.filter((item: any) => ["overdue", "pending_payment", "partially_paid"].includes(String(item.status).toLowerCase())).slice(0, 5).map((item: any) => ({
+        id: item.id,
+        type: "Invoice",
+        label: `Invoice ${item.id}`,
+        amount: safeNumber(item.balance_due ?? item.total),
+      })),
+      bpoAlerts: payoutRows.filter((item: any) => ["pending", "processing"].includes(String(item.status).toLowerCase())).slice(0, 5).map((item: any) => ({
+        id: item.id,
+        type: "Partner payout",
+        label: `Statement ${item.id}`,
+        amount: safeNumber(item.payable_amount),
+      })),
+    });
+  } catch (error: any) {
+    console.error("Admin control centre overview error:", error);
+    res.status(500).json({ error: "Failed to load control centre overview", details: error?.message });
+  }
+});
+
+router.get("/admin/approvals", requireAuth, adminModuleFeature("approvals"), async (_req, res) => {
+  try {
+    const [kycRows, invoicesRows, payoutsRows, partnerRows, projectRows, decisionRows] = await Promise.all([
+      supabase.from("kyc_verifications").select("id, user_id, status, submitted_at").order("submitted_at", { ascending: false }),
+      supabase.from("invoices").select("id, client_id, status, total, created_at").order("created_at", { ascending: false }),
+      supabase.from("bpo_payout_statements").select("id, partner_id, status, payable_amount, created_at").order("created_at", { ascending: false }),
+      supabase.from("bpo_partners").select("id, name, status").order("created_at", { ascending: false }),
+      supabase.from("projects").select("id, client_id, name, status").order("updated_at", { ascending: false }),
+      supabase.from("audit_logs").select("entity_id, metadata, created_at").eq("entity_type", "approval").eq("action", "approval_decision").order("created_at", { ascending: false }),
+    ]);
+
+    const decisions = new Map<string, string>();
+    for (const row of decisionRows.data || []) if (!decisions.has(String(row.entity_id))) decisions.set(String(row.entity_id), String((row.metadata as any)?.status || "").toUpperCase());
+    const approvals: any[] = [];
+    for (const row of kycRows.data || []) {
+      const id = `kyc-${row.id}`;
+      if (["pending", "submitted", "in_review", "changes_requested"].includes(String(row.status).toLowerCase()) && decisions.get(id) !== "APPROVED" && decisions.get(id) !== "REJECTED") {
+        approvals.push({ id, type: "KYC", requester: row.user_id, entity: `KYC-${row.id}`, createdAt: row.submitted_at || new Date().toISOString(), status: decisions.get(id) || String(row.status).toUpperCase(), details: "KYC review required" });
+      }
+    }
+    for (const row of invoicesRows.data || []) {
+      const id = `invoice-${row.id}`;
+      if (["sent", "pending_payment", "partially_paid", "overdue"].includes(String(row.status)) && decisions.get(id) !== "APPROVED" && decisions.get(id) !== "REJECTED") {
+        approvals.push({ id, type: "Invoice approval", requester: row.client_id, entity: `Invoice-${row.id}`, createdAt: row.created_at || new Date().toISOString(), status: decisions.get(id) || "PENDING", details: `Invoice total ${safeNumber(row.total).toFixed(2)}` });
+      }
+    }
+    for (const row of payoutsRows.data || []) {
+      const id = `payout-${row.id}`;
+      if (["pending", "approved", "processing"].includes(String(row.status).toLowerCase()) && decisions.get(id) !== "APPROVED" && decisions.get(id) !== "REJECTED") {
+        approvals.push({ id, type: "Partner payout", requester: row.partner_id, entity: `Payout-${row.id}`, createdAt: row.created_at || new Date().toISOString(), status: decisions.get(id) || String(row.status).toUpperCase(), details: `Payable ${safeNumber(row.payable_amount).toFixed(2)}` });
+      }
+    }
+    for (const row of partnerRows.data || []) {
+      const id = `partner-${row.id}`;
+      if (["pending", "in_review", "new"].includes(String(row.status).toLowerCase()) && decisions.get(id) !== "APPROVED" && decisions.get(id) !== "REJECTED") {
+        approvals.push({ id, type: "Partner onboarding", requester: row.name, entity: row.name, createdAt: new Date().toISOString(), status: decisions.get(id) || "PENDING", details: "Partner onboarding requires admin review" });
+      }
+    }
+    for (const row of projectRows.data || []) {
+      const id = `project-${row.id}`;
+      if (["planning", "design", "uat"].includes(String(row.status).toLowerCase()) && decisions.get(id) !== "APPROVED" && decisions.get(id) !== "REJECTED") {
+        approvals.push({ id, type: "Project approval", requester: row.client_id, entity: row.name || `Project-${row.id}`, createdAt: new Date().toISOString(), status: decisions.get(id) || "PENDING", details: `Project status ${row.status}` });
+      }
+    }
+
+    res.json(approvals.slice(0, 50));
+  } catch (error: any) {
+    console.error("Admin approvals error:", error);
+    res.status(500).json({ error: "Failed to load approvals", details: error?.message });
+  }
+});
+
+router.post("/admin/approvals/:approvalId/decision", requireAuth, adminModuleFeature("approvals"), async (req: AdminRequest, res) => {
+  try {
+    const { status, comment } = req.body as { status?: string; comment?: string };
+    const valid = ["APPROVED", "REJECTED", "CHANGES_REQUESTED"];
+    const decision = String(status || "").toUpperCase();
+    if (!valid.includes(decision)) {
+      res.status(400).json({ error: "Status must be APPROVED, REJECTED, or CHANGES_REQUESTED" });
+      return;
+    }
+
+    const approvalId = String(req.params.approvalId);
+    const separatorIndex = approvalId.indexOf("-");
+    const approvalType = separatorIndex > 0 ? approvalId.slice(0, separatorIndex) : "";
+    const approvalRecordId = separatorIndex > 0 ? approvalId.slice(separatorIndex + 1) : "";
+    if (!approvalType || !approvalRecordId || (approvalType !== "partner" && !/^\d+$/.test(approvalRecordId))) {
+      res.status(400).json({ error: "Invalid approval identifier" });
+      return;
+    }
+    const { data: priorDecision, error: priorDecisionError } = await supabase
+      .from("audit_logs")
+      .select("id, metadata")
+      .eq("entity_type", "approval")
+      .eq("entity_id", approvalId)
+      .eq("action", "approval_decision")
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    if (priorDecisionError) throw priorDecisionError;
+    const priorStatus = String((priorDecision?.metadata as any)?.status || "").toUpperCase();
+    if (priorStatus === "APPROVED" || priorStatus === "REJECTED" || (priorStatus === "CHANGES_REQUESTED" && decision === "CHANGES_REQUESTED")) {
+      res.status(409).json({ error: "This approval has already been decided" });
+      return;
+    }
+
+    let recipientUserId: string | null = null;
+
+    if (approvalType === "kyc") {
+      const { data: kycRecord, error: kycLookupError } = await supabase.from("kyc_verifications").select("id, user_id, status").eq("id", Number(approvalRecordId)).maybeSingle();
+      if (kycLookupError) throw kycLookupError;
+      if (!kycRecord || !["pending", "submitted", "in_review", "changes_requested"].includes(String(kycRecord.status).toLowerCase())) {
+        res.status(409).json({ error: "Approval is no longer pending" });
+        return;
+      }
+      recipientUserId = kycRecord.user_id;
+
+      const nextKycStatus = decision === "APPROVED" ? "approved" : decision === "REJECTED" ? "rejected" : "changes_requested";
+      const { error: kycUpdateError } = await supabase.from("kyc_verifications").update({ status: nextKycStatus, updated_at: new Date().toISOString() }).eq("id", Number(approvalRecordId));
+      if (kycUpdateError) throw kycUpdateError;
+    } else if (approvalType === "invoice") {
+      const { data: invoice, error } = await supabase.from("invoices").select("id, client_id, status").eq("id", Number(approvalRecordId)).maybeSingle();
+      if (error) throw error;
+      if (!invoice || !["sent", "pending_payment", "partially_paid", "overdue"].includes(String(invoice.status))) {
+        res.status(409).json({ error: "Invoice is no longer pending approval" });
+        return;
+      }
+      recipientUserId = invoice.client_id;
+    } else if (approvalType === "payout") {
+      const { data: payout, error } = await supabase.from("bpo_payout_statements").select("id, partner_id, status").eq("id", Number(approvalRecordId)).maybeSingle();
+      if (error) throw error;
+      if (!payout || !["pending", "approved", "processing"].includes(String(payout.status).toLowerCase())) {
+        res.status(409).json({ error: "Payout is no longer pending approval" });
+        return;
+      }
+      const nextPayoutStatus = decision === "APPROVED" ? "approved" : decision === "REJECTED" ? "rejected" : "pending";
+      const { error: payoutUpdateError } = await supabase.from("bpo_payout_statements").update({ status: nextPayoutStatus, updated_at: new Date().toISOString() }).eq("id", Number(approvalRecordId));
+      if (payoutUpdateError) throw payoutUpdateError;
+    } else if (approvalType === "partner") {
+      const { data: partner, error } = await supabase.from("bpo_partners").select("id, status").eq("id", approvalRecordId).maybeSingle();
+      if (error) throw error;
+      if (!partner) {
+        res.status(404).json({ error: "Partner approval not found" });
+        return;
+      }
+      if (decision !== "CHANGES_REQUESTED") {
+        const { error: partnerUpdateError } = await supabase.from("bpo_partners").update({ status: decision === "APPROVED" ? "active" : "inactive", updated_at: new Date().toISOString() }).eq("id", approvalRecordId);
+        if (partnerUpdateError) throw partnerUpdateError;
+      }
+      const { data: membership } = await supabase.from("bpo_partner_users").select("user_id").eq("partner_id", approvalRecordId).eq("status", "active").limit(1).maybeSingle();
+      recipientUserId = membership?.user_id || null;
+    } else if (approvalType === "project") {
+      const { data: project, error } = await supabase.from("projects").select("id, client_id, status").eq("id", Number(approvalRecordId)).maybeSingle();
+      if (error) throw error;
+      if (!project || !["planning", "design", "uat"].includes(String(project.status).toLowerCase())) {
+        res.status(409).json({ error: "Project is no longer pending approval" });
+        return;
+      }
+      recipientUserId = project.client_id;
+    } else {
+      res.status(404).json({ error: "Approval type not found" });
+      return;
+    }
+
+    const { error: auditError } = await supabase.from("audit_logs").insert({
+      actor_admin_id: req.admin!.id,
+      action: "approval_decision",
+      entity_type: "approval",
+      entity_id: approvalId,
+      metadata: { status: decision, comment: comment || "", result: decision },
+    });
+    if (auditError) throw auditError;
+
+    await supabase.from("notifications").insert({
+      recipient_admin_id: req.admin!.id,
+      type: "approval_decision",
+      title: `Approval ${decision.toLowerCase()}`,
+      body: `${approvalId} was marked ${decision.toLowerCase()}.`,
+      entity_type: "approval",
+      entity_id: approvalId,
+    });
+    if (recipientUserId) {
+      await supabase.from("notifications").insert({
+        recipient_user_id: recipientUserId,
+        type: "approval_decision",
+        title: `Approval ${decision.toLowerCase()}`,
+        body: `Your ${approvalType} approval was marked ${decision.toLowerCase()}.`,
+        entity_type: approvalType,
+        entity_id: approvalRecordId,
+      });
+    }
+
+    res.json({ success: true, approvalId, status: decision });
+  } catch (error: any) {
+    console.error("Approval decision error:", error);
+    res.status(500).json({ error: "Failed to process approval decision", details: error?.message });
+  }
+});
+
+router.get("/admin/users", requireAuth, async (req, res) => {
+  try {
+    const search = String(req.query.search || "").trim();
+    const role = String(req.query.role || "all");
+    const status = String(req.query.status || "all");
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 25));
+
+    const { data, error } = await supabase.from("profiles").select("id, email, full_name, role, created_at, updated_at").order("created_at", { ascending: false });
+    if (error) throw error;
+
+    let filtered = data || [];
+    if (role !== "all") filtered = filtered.filter((row: any) => String(row.role).toLowerCase() === String(role).toLowerCase());
+    const statusEvents = filtered.length ? (await supabase.from("audit_logs").select("entity_id, action, created_at").eq("entity_type", "user").in("action", ["user_active", "user_deactivated"]).in("entity_id", filtered.map((row: any) => row.id)).order("created_at", { ascending: false })).data || [] : [];
+    const statusByUser = new Map<string, string>();
+    for (const event of statusEvents) if (!statusByUser.has(String(event.entity_id))) statusByUser.set(String(event.entity_id), event.action === "user_deactivated" ? "deactivated" : "active");
+    if (status !== "all") filtered = filtered.filter((row: any) => (statusByUser.get(String(row.id)) || "active") === status);
+    if (search) {
+      const value = search.toLowerCase();
+      filtered = filtered.filter((row: any) => String(row.email || "").toLowerCase().includes(value) || String(row.full_name || "").toLowerCase().includes(value) || String(row.role || "").toLowerCase().includes(value));
+    }
+
+    const total = filtered.length;
+    const start = (page - 1) * pageSize;
+    res.json({ data: filtered.slice(start, start + pageSize).map((row: any) => ({
+      id: row.id,
+      email: row.email,
+      name: row.full_name || row.email,
+      role: row.role || "user",
+      status: statusByUser.get(String(row.id)) || "active",
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    })), pagination: { page, pageSize, total, totalPages: Math.ceil(total / pageSize) } });
+  } catch (error: any) {
+    console.error("Admin users error:", error);
+    res.status(500).json({ error: "Failed to load users", details: error?.message });
+  }
+});
+
+router.get("/admin/users/:id", requireAuth, async (req, res) => {
+  try {
+    const { data: user, error } = await supabase.from("profiles").select("id, email, full_name, role, created_at, updated_at").eq("id", String(req.params.id)).maybeSingle();
+    if (error) throw error;
+    if (!user) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+    const { data: memberships } = await supabase.from("bpo_partner_users").select("id, partner_id, role, status, bpo_partners(id, name, partner_code)").eq("user_id", user.id);
+    const { data: statusEvent } = await supabase.from("audit_logs").select("action").eq("entity_type", "user").eq("entity_id", user.id).in("action", ["user_active", "user_deactivated"]).order("created_at", { ascending: false }).limit(1).maybeSingle();
+    res.json({ ...user, status: statusEvent?.action === "user_deactivated" ? "deactivated" : "active", memberships: memberships || [] });
+  } catch (error: any) {
+    console.error("Admin user details error:", error);
+    res.status(500).json({ error: "Failed to load user details", details: error?.message });
+  }
+});
+
+router.patch("/admin/users/:id/status", requireAuth, async (req: AdminRequest, res) => {
+  try {
+    const status = String(req.body?.status || "").toLowerCase();
+    if (!['active', 'deactivated'].includes(status)) {
+      res.status(400).json({ error: "Status must be active or deactivated" });
+      return;
+    }
+    const targetId = String(req.params.id);
+    if (String(req.admin!.id) === targetId) {
+      res.status(403).json({ error: "Administrators cannot deactivate themselves" });
+      return;
+    }
+    const { data: user } = await supabase.from("profiles").select("id").eq("id", targetId).maybeSingle();
+    if (!user) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+    await supabase.from("audit_logs").insert({ actor_admin_id: req.admin!.id, action: `user_${status}`, entity_type: "user", entity_id: targetId, metadata: { status, result: "success" } });
+    await supabase.from("profiles").update({ account_status: status, updated_at: new Date().toISOString() }).eq("id", targetId);
+    res.json({ id: targetId, status });
+  } catch (error: any) {
+    console.error("Admin user status error:", error);
+    res.status(500).json({ error: "Failed to update user status", details: error?.message });
+  }
+});
+
+router.patch("/admin/users/:id/role", requireAuth, async (req: AdminRequest, res) => {
+  try {
+    const currentRole = String(req.body?.role || "").toUpperCase();
+    const allowed = ["ADMIN", "BPO_PARTNER", "CLIENT"];
+    if (!allowed.includes(currentRole)) {
+      res.status(400).json({ error: "Invalid role" });
+      return;
+    }
+
+    const targetId = String(req.params.id);
+    if (String(req.admin!.id) === String(targetId)) {
+      res.status(403).json({ error: "Self-escalation is not allowed" });
+      return;
+    }
+
+    const { data: user } = await supabase.from("profiles").select("id, role").eq("id", targetId).maybeSingle();
+    if (!user) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+
+    if ((user.role === "client" || user.role === "bpo_partner") && currentRole === "ADMIN") {
+      res.status(403).json({ error: "Role escalation is not permitted" });
+      return;
+    }
+
+    const { data, error } = await supabase.from("profiles").update({ role: currentRole.toLowerCase(), updated_at: new Date().toISOString() }).eq("id", targetId).select("id, role").single();
+    if (error) throw error;
+
+    await supabase.from("audit_logs").insert({
+      actor_admin_id: req.admin!.id,
+      action: "role_changed",
+      entity_type: "user",
+      entity_id: String(data.id),
+      metadata: { previousRole: user.role, newRole: data.role },
+    });
+
+    res.json(data);
+  } catch (error: any) {
+    console.error("Admin users role update error:", error);
+    res.status(500).json({ error: "Failed to update user role", details: error?.message });
+  }
+});
+
+router.get("/admin/roles", requireAuth, async (_req, res) => {
+  try {
+    const roles = [
+      { id: "ADMIN", name: "ADMIN", description: "Full administrative access", permissions: ["clients.manage", "projects.manage", "bpo.manage", "finance.manage", "users.manage", "audit.view"] },
+      { id: "BPO_PARTNER", name: "BPO_PARTNER", description: "Partner operations access", permissions: ["bpo.dashboard.view", "bpo.projects.view", "bpo.centres.view", "bpo.agents.view", "bpo.quality.view", "bpo.payouts.view"] },
+      { id: "CLIENT", name: "CLIENT", description: "Client portal access", permissions: ["client.profile.view", "projects.view", "documents.view", "tickets.create", "billing.view"] },
+    ];
+    res.json(roles);
+  } catch (error: any) {
+    console.error("Admin roles error:", error);
+    res.status(500).json({ error: "Failed to load roles", details: error?.message });
+  }
+});
+
+router.get("/admin/notifications", requireAuth, async (_req, res) => {
+  try {
+    const { data, error } = await supabase.from("notifications").select("*").order("created_at", { ascending: false }).limit(50);
+    if (error) throw error;
+    res.json((data || []).map((row: any) => ({
+      id: row.id,
+      type: row.type,
+      title: row.title,
+      body: row.body,
+      entityType: row.entity_type,
+      entityId: row.entity_id,
+      read: !!row.read_at,
+      createdAt: row.created_at,
+    })));
+  } catch (error: any) {
+    console.error("Admin notifications error:", error);
+    res.status(500).json({ error: "Failed to load notifications", details: error?.message });
+  }
+});
+
+router.post("/admin/notifications/:id/read", requireAuth, async (req, res) => {
+  try {
+    const { data, error } = await supabase.from("notifications").update({ read_at: new Date().toISOString() }).eq("id", Number(req.params.id)).select().single();
+    if (error) throw error;
+    res.json(data);
+  } catch (error: any) {
+    console.error("Notification read update error:", error);
+    res.status(500).json({ error: "Failed to update notification", details: error?.message });
+  }
+});
+
+router.get("/admin/settings", requireAuth, async (_req, res) => {
+  try {
+    const [modules, settings] = await Promise.all([
+      supabase.from("module_settings").select("module_key, enabled, updated_at").order("module_key"),
+      supabase.from("platform_settings").select("setting_key, setting_value, updated_at").order("setting_key"),
+    ]);
+
+    res.json({
+      sections: ["General", "Security", "Notifications", "Billing", "Payments", "Payouts", "BPO", "Projects", "Support", "KYC", "Feature Controls"],
+      modules: modules.data || [],
+      settings: settings.data || [],
+    });
+  } catch (error: any) {
+    console.error("Admin settings error:", error);
+    res.status(500).json({ error: "Failed to load settings", details: error?.message });
+  }
+});
+
+const CONTROL_MODULES = [
+  { key: "projects", label: "Projects" },
+  { key: "billing", label: "Billing" },
+  { key: "bpo_partner_portal", label: "BPO Partner Portal" },
+  { key: "bpo_operations", label: "BPO Operations" },
+  { key: "approvals", label: "Approvals" },
+  { key: "audit_logs", label: "Audit Logs" },
+  { key: "global_search", label: "Global Search" },
+];
+
+router.get("/admin/feature-controls", requireAuth, async (_req, res) => {
+  try {
+    const { data, error } = await supabase.from("module_settings").select("module_key, enabled, updated_at, updated_by").in("module_key", CONTROL_MODULES.map((item) => item.key));
+    if (error) throw error;
+    const rows = data || [];
+    res.json(CONTROL_MODULES.map((item) => ({ ...item, enabled: rows.find((row: any) => row.module_key === item.key)?.enabled ?? true, updatedAt: rows.find((row: any) => row.module_key === item.key)?.updated_at || null })));
+  } catch (error: any) {
+    console.error("Admin feature controls error:", error);
+    res.status(500).json({ error: "Failed to load feature controls", details: error?.message });
+  }
+});
+
+router.patch("/admin/feature-controls/:key", requireAuth, async (req: AdminRequest, res) => {
+  try {
+    const key = String(req.params.key);
+    if (!CONTROL_MODULES.some((item) => item.key === key)) {
+      res.status(404).json({ error: "Feature control not found" });
+      return;
+    }
+    if (typeof req.body?.enabled !== "boolean") {
+      res.status(400).json({ error: "enabled must be boolean" });
+      return;
+    }
+    const { data, error } = await supabase.from("module_settings").upsert({ module_key: key, enabled: req.body.enabled, updated_by: req.admin!.id, updated_at: new Date().toISOString() }).select("module_key, enabled, updated_at").single();
+    if (error) throw error;
+    await supabase.from("audit_logs").insert({ actor_admin_id: req.admin!.id, action: "feature_changed", entity_type: "module", entity_id: key, metadata: { enabled: req.body.enabled, result: "success" } });
+    res.json(data);
+  } catch (error: any) {
+    console.error("Admin feature control update error:", error);
+    res.status(500).json({ error: "Failed to update feature control", details: error?.message });
+  }
+});
+
+router.patch("/admin/settings/:key", requireAuth, async (req: AdminRequest, res) => {
+  try {
+    const key = String(req.params.key);
+    if (req.body?.enabled !== undefined) {
+      const { data, error } = await supabase.from("module_settings").upsert({ module_key: key, enabled: Boolean(req.body.enabled), updated_at: new Date().toISOString(), updated_by: req.admin!.id }).select().single();
+      if (error) throw error;
+      await supabase.from("audit_logs").insert({ actor_admin_id: req.admin!.id, action: "module_changed", entity_type: "module", entity_id: key, metadata: { enabled: Boolean(req.body.enabled) } });
+      res.json(data);
+      return;
+    }
+
+    if (req.body?.value !== undefined) {
+      const { data, error } = await supabase.from("platform_settings").upsert({ setting_key: key, setting_value: req.body.value, updated_at: new Date().toISOString(), updated_by: req.admin!.id }).select().single();
+      if (error) throw error;
+      await supabase.from("audit_logs").insert({ actor_admin_id: req.admin!.id, action: "platform_setting_changed", entity_type: "setting", entity_id: key, metadata: { value: req.body.value } });
+      res.json(data);
+      return;
+    }
+
+    res.status(400).json({ error: "Request body must include enabled or value" });
+  } catch (error: any) {
+    console.error("Admin settings update error:", error);
+    res.status(500).json({ error: "Failed to update settings", details: error?.message });
+  }
+});
+
+router.get("/admin/finance", requireAuth, adminModuleFeature("billing"), async (_req, res) => {
+  try {
+    const [invoicesRows, paymentsRows, payoutsRows] = await Promise.all([
+      supabase.from("invoices").select("id, status, total, amount_paid, balance_due, due_date").order("due_date", { ascending: true }),
+      supabase.from("invoice_payments").select("id, status, amount, created_at").order("created_at", { ascending: false }),
+      supabase.from("bpo_payout_statements").select("id, status, payable_amount, approved_amount, paid_amount, pending_amount").order("created_at", { ascending: false }),
+    ]);
+
+    const invoiceRows = invoicesRows.data || [];
+    const paymentRows = paymentsRows.data || [];
+    const payoutRows = payoutsRows.data || [];
+
+    res.json({
+      paidInvoices: invoiceRows.filter((item: any) => String(item.status).toLowerCase() === "paid").length,
+      unpaidInvoices: invoiceRows.filter((item: any) => !["paid", "cancelled", "refunded"].includes(String(item.status))).length,
+      overdueInvoices: invoiceRows.filter((item: any) => String(item.status).toLowerCase() === "overdue").length,
+      outstandingAmount: invoiceRows.reduce((sum: number, item: any) => sum + safeNumber(item.balance_due ?? item.total), 0),
+      payments: paymentRows,
+      pendingPayments: paymentRows.filter((item: any) => ["initiated", "pending"].includes(String(item.status).toLowerCase())).length,
+      partnerPayable: payoutRows.reduce((sum: number, item: any) => sum + safeNumber(item.payable_amount), 0),
+      approvedPayouts: payoutRows.filter((item: any) => String(item.status).toLowerCase() === "approved").length,
+      pendingPayouts: payoutRows.filter((item: any) => ["pending", "processing"].includes(String(item.status).toLowerCase())).length,
+      walletActivity: [],
+    });
+  } catch (error: any) {
+    console.error("Finance admin error:", error);
+    res.status(500).json({ error: "Failed to load finance summary", details: error?.message });
+  }
+});
+
+router.get("/admin/search", requireAuth, adminModuleFeature("global_search"), async (req, res) => {
+  try {
+    const search = String(req.query.q || "").trim();
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const pageSize = Math.min(25, Math.max(1, Number(req.query.pageSize) || 10));
+    if (!search) {
+      res.json({ clients: [], leads: [], partners: [], projects: [], campaigns: [], agents: [], tickets: [], invoices: [], documents: [], pagination: { page, pageSize } });
+      return;
+    }
+    const rangeStart = (page - 1) * pageSize;
+    const rangeEnd = rangeStart + pageSize - 1;
+
+    const [clients, leads, partners, projects, campaigns, agents, ticketsData, invoicesData, documentsData] = await Promise.all([
+      supabase.from("profiles").select("id, email, full_name, role").or(`email.ilike.%${search}%,full_name.ilike.%${search}%`).range(rangeStart, rangeEnd),
+      supabase.from("contact_submissions").select("id, name, email, company").or(`name.ilike.%${search}%,email.ilike.%${search}%,company.ilike.%${search}%`).range(rangeStart, rangeEnd),
+      supabase.from("bpo_partners").select("id, name, partner_code").or(`name.ilike.%${search}%,partner_code.ilike.%${search}%`).range(rangeStart, rangeEnd),
+      supabase.from("projects").select("id, name, project_type").or(`name.ilike.%${search}%,project_type.ilike.%${search}%`).range(rangeStart, rangeEnd),
+      supabase.from("bpo_partner_projects").select("id, campaign_name, target").or(`campaign_name.ilike.%${search}%`).range(rangeStart, rangeEnd),
+      supabase.from("bpo_agents").select("id, name, email").or(`name.ilike.%${search}%,email.ilike.%${search}%`).range(rangeStart, rangeEnd),
+      supabase.from("tickets").select("id, subject, ticket_number").or(`subject.ilike.%${search}%,ticket_number.ilike.%${search}%`).range(rangeStart, rangeEnd),
+      supabase.from("invoices").select("id, invoice_number, status").or(`invoice_number.ilike.%${search}%,status.ilike.%${search}%`).range(rangeStart, rangeEnd),
+      supabase.from("documents").select("id, file_name, category").or(`file_name.ilike.%${search}%,category.ilike.%${search}%`).range(rangeStart, rangeEnd),
+    ]);
+
+    res.json({
+      clients: clients.data || [],
+      leads: leads.data || [],
+      partners: partners.data || [],
+      projects: projects.data || [],
+      campaigns: campaigns.data || [],
+      agents: agents.data || [],
+      tickets: ticketsData.data || [],
+      invoices: invoicesData.data || [],
+      documents: documentsData.data || [],
+      pagination: { page, pageSize },
+    });
+  } catch (error: any) {
+    console.error("Admin global search error:", error);
+    res.status(500).json({ error: "Failed to execute global search", details: error?.message });
+  }
+});
+
+router.get("/admin/audit-logs", requireAuth, adminModuleFeature("audit_logs"), async (req, res) => {
+  try {
+    const limit = Math.min(Number(req.query.limit) || 100, 500);
+    const search = String(req.query.search || "").trim();
+    const actor = String(req.query.actor || "all");
+    const action = String(req.query.action || "all");
+    const entity = String(req.query.entity || "all");
+
+    let query = supabase.from("audit_logs").select("*").order("created_at", { ascending: false }).limit(limit);
+    if (search) query = query.or(`action.ilike.%${search}%,entity_type.ilike.%${search}%`);
+    if (actor !== "all") query = query.or(`actor_admin_id.eq.${actor},actor_user_id.eq.${actor}`);
+    if (action !== "all") query = query.eq("action", action);
+    if (entity !== "all") query = query.eq("entity_type", entity);
+
+    const { data, error } = await query;
+    if (error) throw error;
+
+    res.json(data || []);
+  } catch (error: any) {
+    console.error("Admin audit logs filter error:", error);
+    res.status(500).json({ error: "Failed to load audit logs", details: error?.message });
   }
 });
 

@@ -6,6 +6,7 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 const rawPort = process.env.PORT;
 const port = rawPort ? Number(rawPort) : 3000;
+const apiTarget = process.env.API_URL ?? `http://localhost:${process.env.API_PORT ?? "4317"}`;
 const basePath = process.env.BASE_PATH ?? "/";
 const isProd = process.env.NODE_ENV === "production";
 
@@ -125,7 +126,7 @@ export default defineConfig({
     allowedHosts: true,
     fs: { strict: true },
     proxy: {
-      "/api": { target: "http://localhost:8080", changeOrigin: true },
+      "/api": { target: apiTarget, changeOrigin: true },
     },
   },
 
@@ -133,6 +134,9 @@ export default defineConfig({
     port,
     host: "0.0.0.0",
     allowedHosts: true,
+    proxy: {
+      "/api": { target: apiTarget, changeOrigin: true },
+    },
     headers: {
       // Security headers for the preview server
       "X-Content-Type-Options": "nosniff",

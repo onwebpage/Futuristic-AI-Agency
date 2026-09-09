@@ -415,7 +415,7 @@ ensureSeedData().catch(() => {});
 router.get("/plans", async (_req, res) => {
   try {
     await ensureSeedData();
-    const plans = await plansRepository.getAll();
+    const plans = await (plansRepository as typeof plansRepository & { getClientVisible: () => Promise<unknown[]> }).getClientVisible();
     res.json(plans);
   } catch (error: any) {
     console.error("Plans query failed:", error);
@@ -436,7 +436,7 @@ router.get("/admin/plans", requireAuth, async (_req, res) => {
 
 router.post("/admin/plans", requireAuth, async (req, res) => {
   try {
-    const { serviceId, serviceNumber, category, name, price, tag, description, features, popular, sortOrder } = req.body as {
+    const { serviceId, serviceNumber, category, name, price, tag, description, features, popular, sortOrder, enabled, clientVisible } = req.body as {
       serviceId: string;
       serviceNumber: string;
       category: string;
@@ -447,6 +447,8 @@ router.post("/admin/plans", requireAuth, async (req, res) => {
       features: string[];
       popular?: boolean;
       sortOrder?: number;
+      enabled?: boolean;
+      clientVisible?: boolean;
     };
 
     if (!serviceId || !name || !price || !tag || !description) {
@@ -465,7 +467,9 @@ router.post("/admin/plans", requireAuth, async (req, res) => {
       features: features ?? [],
       popular: popular ?? false,
       sortOrder: sortOrder ?? 0,
-    });
+      enabled: enabled ?? true,
+      clientVisible: clientVisible ?? true,
+    } as any);
 
     res.status(201).json(plan);
   } catch (error: any) {
@@ -477,7 +481,7 @@ router.post("/admin/plans", requireAuth, async (req, res) => {
 router.patch("/admin/plans/:id", requireAuth, async (req, res) => {
   try {
     const id = parseInt(req.params.id as string);
-    const { name, price, tag, description, features, popular, sortOrder, serviceId, serviceNumber, category } = req.body as Partial<{
+    const { name, price, tag, description, features, popular, sortOrder, serviceId, serviceNumber, category, enabled, clientVisible } = req.body as Partial<{
       name: string;
       price: number;
       tag: string;
@@ -488,6 +492,8 @@ router.patch("/admin/plans/:id", requireAuth, async (req, res) => {
       serviceId: string;
       serviceNumber: string;
       category: string;
+      enabled: boolean;
+      clientVisible: boolean;
     }>;
 
     const plan = await plansRepository.update(id, {
@@ -501,7 +507,9 @@ router.patch("/admin/plans/:id", requireAuth, async (req, res) => {
       serviceId,
       serviceNumber,
       category,
-    });
+      enabled,
+      clientVisible,
+    } as any);
 
     if (!plan) {
       res.status(404).json({ error: "Plan not found" });

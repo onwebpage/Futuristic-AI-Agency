@@ -6,7 +6,7 @@ import {
   type ClientUpdateClient,
 } from "@workspace/db";
 import { requireAuth } from "../lib/auth.js";
-import { requireUserAuth } from "./user.js";
+import { requireUserAuth, requireFeature } from "./user.js";
 
 const router: IRouter = Router();
 
@@ -30,7 +30,7 @@ async function resolvePlan(serviceId: string | null) {
   return plan ? { name: plan.name, price: plan.price, seats: null, term: "one-time" } : null;
 }
 
-router.get("/user/updates", requireUserAuth, async (req: Request & { user?: { id: string } }, res: Response) => {
+router.get("/user/updates", requireUserAuth, requireFeature("client_updates"), async (req: Request & { user?: { id: string } }, res: Response) => {
   try {
     const updates = await clientUpdatesRepository.getPublishedForUser(req.user!.id);
     res.json(updates);
