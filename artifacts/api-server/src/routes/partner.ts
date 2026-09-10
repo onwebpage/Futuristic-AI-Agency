@@ -6,7 +6,7 @@ import { requireAuth } from "../lib/auth.js";
 const router = Router();
 type UserRequest = Request & { user?: { id: string; email: string } };
 type AdminRequest = Request & { admin?: { id: number; username: string } };
-type PartnerContext = { partnerId: string; partnerUserId: number; role: string; permissions: Set<string> };
+type PartnerContext = { partnerId: string; partnerUserId: number; role: string; permissions: Set<string>; bpoStatus: string };
 type PartnerRequest = UserRequest & { partner?: PartnerContext };
 
 function fail(res: Response, status: number, message: string) { return res.status(status).json({ success: false, error: message, message }); }
@@ -29,19 +29,20 @@ function moduleFeature(moduleKey: string) {
 }
 
 async function partnerContext(req: PartnerRequest, res: Response, next: NextFunction) {
-  const { data: profile, error: profileError } = await supabase.from("profiles").select("role").eq("id", req.user!.id).maybeSingle();
+  const { data: profile, error: profileError } = await supabase.from("profiles").select("role, account_type, bpo_status, is_active").eq("id", req.user!.id).maybeSingle();
   if (profileError) return res.status(500).json({ error: "Unable to load partner profile" });
-  if (!profile || !["partner", "bpo_partner"].includes(profile.role)) return fail(res, 403, "BPO partner access required");
+  if (!profile || profile.is_active === false || profile.account_type !== "BPO" || !["partner", "bpo_partner"].includes(profile.role)) return fail(res, 403, "BPO partner access required");
   const { data: membership, error } = await supabase.from("bpo_partner_users").select("id,partner_id,role,status").eq("user_id", req.user!.id).eq("status", "active").maybeSingle();
   if (error) return res.status(500).json({ error: "Unable to verify partner membership" });
   if (!membership) return fail(res, 403, "No active partner organization is assigned");
   const { data: grants } = await supabase.from("bpo_partner_user_permissions").select("permission_key").eq("partner_user_id", membership.id);
-  req.partner = { partnerId: membership.partner_id, partnerUserId: membership.id, role: membership.role, permissions: new Set((grants || []).map((grant: any) => grant.permission_key)) };
+  req.partner = { partnerId: membership.partner_id, partnerUserId: membership.id, role: membership.role, bpoStatus: profile.bpo_status || "APPROVED", permissions: new Set((grants || []).map((grant: any) => grant.permission_key)) };
   return next();
 }
 
 function permission(permissionKey: string) {
   return (req: PartnerRequest, res: Response, next: NextFunction) => {
+    if (req.partner?.bpoStatus === "PENDING" && !req.path.endsWith("/profile") && !req.path.endsWith("/dashboard")) return fail(res, 403, "Your BPO account is pending admin approval.");
     if (req.partner?.permissions.has(permissionKey) || req.partner?.role === "partner_admin") return next();
     return fail(res, 403, `Missing permission: ${permissionKey}`);
   };
@@ -62,12 +63,17 @@ router.use((req, res, next) => {
 });
 
 router.get("/partner/profile", permission("partner.dashboard.view"), async (req: PartnerRequest, res) => {
-  const { data, error } = await supabase.from("bpo_partners").select("id,partner_code,name,legal_name,contact_name,email,phone,address,status,created_at,bpo_partner_users(id,user_id,role,status),bpo_centres(id,name,status)").eq("id", req.partner!.partnerId).single();
+  if (req.partner!.bpoStatus === "PENDING") return res.json({ status: "PENDING", accountStatus: "Pending Verification", verificationMessage: "Your account is currently under verification. Please wait up to 24 hours while we review your details. Once your account is approved, all BPO features will be automatically unlocked." });
+  const [{ data, error }, { data: profile }] = await Promise.all([
+    supabase.from("bpo_partners").select("id,partner_code,name,legal_name,contact_name,email,phone,address,status,created_at,bpo_partner_users(id,user_id,role,status),bpo_centres(id,name,status)").eq("id", req.partner!.partnerId).single(),
+    supabase.from("profiles").select("selected_plan").eq("id", req.user!.id).single(),
+  ]);
   if (error) return res.status(500).json({ error: "Failed to load partner profile" });
-  return res.json(data);
+  return res.json({ ...data, selected_plan: profile?.selected_plan || null });
 });
 
 router.get("/partner/dashboard", permission("partner.dashboard.view"), async (req: PartnerRequest, res) => {
+  if (req.partner!.bpoStatus === "PENDING") return res.json({ status: "PENDING", accountStatus: "Pending Verification", verificationMessage: "Your account is currently under verification. Please wait up to 24 hours while we review your details. Once your account is approved, all BPO features will be automatically unlocked." });
   const partnerId = req.partner!.partnerId;
   const [projects, centres, agents, assignments, attendance, tickets, notifications] = await Promise.all([
     supabase.from("bpo_partner_projects").select("id,project_id,centre_id,campaign_name,target,status,assigned_at,projects(id,name,status,start_date,expected_end_date,progress_percent)").eq("partner_id", partnerId).eq("status", "active"),

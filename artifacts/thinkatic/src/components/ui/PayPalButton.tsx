@@ -6,7 +6,7 @@
 // Retain this comment after all edits.
 //
 // <BEGIN_EXACT_CODE>
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getPayPalInstance } from "@/lib/paypalSdk";
 
 declare global {
@@ -40,13 +40,17 @@ export default function PayPalButton({
 }: PayPalButtonProps) {
   const [status, setStatus] = useState<"loading" | "ready" | "creating" | "approval" | "processing" | "success" | "cancelled" | "error">("loading");
   const [errorMessage, setErrorMessage] = useState("");
+  const busyRef = useRef(false);
+  const orderIdRef = useRef<string | null>(null);
 
   const createOrder = async () => {
+    if (busyRef.current) throw new Error("A PayPal checkout is already in progress.");
     const token = localStorage.getItem("user_token");
     if (!token) {
       window.location.href = `/login?returnTo=${encodeURIComponent(window.location.pathname)}`;
       throw new Error("Please sign in before purchasing a package.");
     }
+    busyRef.current = true;
     setStatus("creating");
     const response = await fetch("/api/paypal/order", {
       method: "POST",
@@ -55,8 +59,10 @@ export default function PayPalButton({
     });
     const output = await response.json().catch(() => ({}));
     if (!response.ok || !output.id) {
+      busyRef.current = false;
       throw new Error(output.error || "Unable to start PayPal checkout.");
     }
+    orderIdRef.current = output.id;
     setStatus("approval");
     return { orderId: output.id };
   };
@@ -71,7 +77,7 @@ export default function PayPalButton({
       },
     });
     const data = await response.json().catch(() => ({}));
-    if (!response.ok || !data.success || data.status !== "COMPLETED") {
+    if (!response.ok || !data.success || data.status !== "COMPLETED" || data.packageId !== packageId) {
       throw new Error(data.error || "PayPal could not verify the payment.");
     }
     return data;
@@ -87,20 +93,42 @@ export default function PayPalButton({
       setStatus("processing");
       const payment = await captureOrder(data.orderId);
       if (payment.success && payment.status === "COMPLETED") {
-        window.location.href = "/dashboard";
+        setStatus("success");
+        orderIdRef.current = null;
+        const storedProfile = localStorage.getItem("user_profile");
+        const profile = storedProfile ? JSON.parse(storedProfile) as { accountType?: string; role?: string } : {};
+        const destination = profile.accountType === "BPO" || profile.role === "partner" || profile.role === "bpo_partner" ? "/partner" : "/dashboard";
+        window.setTimeout(() => { window.location.href = `${destination}?payment=success&package=${encodeURIComponent(packageId)}`; }, 900);
       }
-      setStatus("success");
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "Payment could not be completed.");
       setStatus("error");
+    } finally {
+      busyRef.current = false;
     }
   };
 
   const onCancel = async () => {
+    if (orderIdRef.current) {
+      await fetch(`/api/paypal/order/${orderIdRef.current}/cancel`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${localStorage.getItem("user_token") || ""}` },
+      }).catch(() => undefined);
+    }
+    busyRef.current = false;
+    orderIdRef.current = null;
     setStatus("cancelled");
   };
 
   const onError = async () => {
+    if (orderIdRef.current) {
+      await fetch(`/api/paypal/order/${orderIdRef.current}/cancel`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${localStorage.getItem("user_token") || ""}` },
+      }).catch(() => undefined);
+    }
+    busyRef.current = false;
+    orderIdRef.current = null;
     setErrorMessage("PayPal checkout encountered an error. Please try again.");
     setStatus("error");
   };
@@ -146,6 +174,7 @@ export default function PayPalButton({
         });
 
       const onClick = async () => {
+          if (busyRef.current) return;
         try {
           const checkoutOptionsPromise = createOrder();
           await paypalCheckout.start(
@@ -153,7 +182,9 @@ export default function PayPalButton({
             checkoutOptionsPromise,
           );
         } catch (e) {
-          console.error(e);
+          busyRef.current = false;
+          setErrorMessage(e instanceof Error ? e.message : "Unable to start PayPal checkout.");
+          setStatus("error");
         }
       };
 

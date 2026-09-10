@@ -36,7 +36,7 @@ export async function requireUserAuth(req: AuthRequest, res: Response, next: Nex
     const profile = await userProfileRepository.getById(payload.id);
     const { data: deactivation } = profile ? await supabase.from("audit_logs").select("action, created_at").eq("entity_type", "user").eq("entity_id", payload.id).eq("action", "user_deactivated").order("created_at", { ascending: false }).limit(1).maybeSingle() : { data: null };
     const { data: activation } = profile ? await supabase.from("audit_logs").select("action, created_at").eq("entity_type", "user").eq("entity_id", payload.id).eq("action", "user_active").order("created_at", { ascending: false }).limit(1).maybeSingle() : { data: null };
-    if (!profile || (deactivation && (!activation || new Date(deactivation.created_at).getTime() > new Date(activation.created_at).getTime()))) {
+    if (!profile || profile.isActive === false || profile.bpoStatus === "REJECTED" || (deactivation && (!activation || new Date(deactivation.created_at).getTime() > new Date(activation.created_at).getTime()))) {
       res.status(401).json({ error: "User account is not active" });
       return;
     }
@@ -100,12 +100,19 @@ function encryptPayoutDetails(value: object) {
 
 router.post("/user/auth/signup", async (req: Request, res: Response) => {
   try {
-    const { email, password, fullName, referralCode } = req.body as {
+    const { email, password, fullName, referralCode, accountType = "USER", phone, companyName, companyDetails, documentDetails } = req.body as {
       email: string;
       password: string;
       fullName?: string;
       referralCode?: string;
+      accountType?: "USER" | "BPO";
+      phone?: string;
+      companyName?: string;
+      companyDetails?: string;
+      documentDetails?: string;
     };
+
+    if (accountType !== "USER" && accountType !== "BPO") return authError(res, 400, "A valid account type is required");
 
     if (!email || !email.includes("@")) {
       res.status(400).json({ error: "A valid email address is required" });
@@ -137,7 +144,33 @@ router.post("/user/auth/signup", async (req: Request, res: Response) => {
       passwordHash,
       fullName: fullName || email.split("@")[0],
       referredBy: referredById,
+      role: accountType === "BPO" ? "bpo_partner" : "user",
+      accountType,
+      bpoStatus: accountType === "BPO" ? "PENDING" : "APPROVED",
+      bpoApplicationDetails: accountType === "BPO" ? { phone: phone || "", companyName: companyName || "", companyDetails: companyDetails || "", documentDetails: documentDetails || "" } : {},
     });
+
+    if (accountType === "BPO") {
+      const partnerCode = `BPO-${profile.id.slice(0, 8).toUpperCase()}`;
+      const { data: partner, error: partnerError } = await supabase.from("bpo_partners").insert({
+        partner_code: partnerCode,
+        name: companyName || profile.fullName || email.split("@")[0],
+        legal_name: companyName || null,
+        contact_name: profile.fullName,
+        email: profile.email,
+        phone: phone || null,
+        status: "active",
+      }).select("id").single();
+      if (partnerError) throw partnerError;
+      const { data: membership, error: membershipError } = await supabase.from("bpo_partner_users").insert({ partner_id: partner.id, user_id: profile.id, role: "partner_admin", status: "active" }).select("id").single();
+      if (membershipError) throw membershipError;
+      const { data: permissions, error: permissionsError } = await supabase.from("bpo_permissions").select("permission_key");
+      if (permissionsError) throw permissionsError;
+      if (permissions?.length) {
+        const { error } = await supabase.from("bpo_partner_user_permissions").insert(permissions.map((item: { permission_key: string }) => ({ partner_user_id: membership.id, permission_key: item.permission_key })));
+        if (error) throw error;
+      }
+    }
 
     // Auto-create wallet
     await walletRepository.getOrCreate(profile.id);
@@ -157,10 +190,10 @@ router.post("/user/auth/signup", async (req: Request, res: Response) => {
 
     const token = jwt.sign({ id: profile.id, email: profile.email }, JWT_SECRET, { expiresIn: "30d" });
     const { passwordHash: _, ...safeProfile } = profile;
-    res.status(201).json({ token, profile: safeProfile });
+    return res.status(201).json({ token, profile: safeProfile });
   } catch (err: any) {
     console.error("User signup error:", err);
-    res.status(500).json({ error: "Signup failed", details: err?.message });
+    return res.status(500).json({ error: "Signup failed", details: err?.message });
   }
 });
 
@@ -168,6 +201,7 @@ router.post("/user/auth/login", async (req: Request, res: Response) => {
   try {
     const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
     const password = typeof req.body?.password === "string" ? req.body.password : "";
+    const accountType = req.body?.accountType === "BPO" ? "BPO" : req.body?.accountType === "USER" ? "USER" : null;
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return authError(res, 400, "A valid email address is required");
     if (!password) return authError(res, 400, "Password is required");
 
@@ -176,9 +210,14 @@ router.post("/user/auth/login", async (req: Request, res: Response) => {
     if (!profile) {
       return authError(res, 401, "Invalid email or password");
     }
+    const actualAccountType = profile.accountType || (profile.role === "partner" || profile.role === "bpo_partner" ? "BPO" : "USER");
+    if (!accountType || actualAccountType !== accountType) return authError(res, 403, "This account is registered under a different account type");
     if (!profile.passwordHash || !(await bcrypt.compare(password, profile.passwordHash))) {
       return authError(res, 401, "Invalid email or password");
     }
+
+    if (actualAccountType === "BPO" && profile.bpoStatus === "REJECTED") return authError(res, 403, "Your BPO account application has been rejected. Your account has been disabled. Please contact support if you believe this was a mistake.");
+    if (profile.isActive === false) return authError(res, 403, "This account has been disabled. Please contact support.");
 
     try {
       await walletRepository.getOrCreate(profile.id);

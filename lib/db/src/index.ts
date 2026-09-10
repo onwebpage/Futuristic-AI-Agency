@@ -113,6 +113,12 @@ export interface Profile {
   fullName: string | null;
   avatarUrl: string | null;
   role: string;
+  accountType: "USER" | "BPO";
+  bpoStatus: "PENDING" | "APPROVED" | "REJECTED";
+  isActive: boolean;
+  approvedAt: Date | null;
+  rejectedAt: Date | null;
+  bpoApplicationDetails: Record<string, unknown>;
   selectedPlan: string | null;
   referralCode: string | null;
   referredBy: string | null;
@@ -192,6 +198,7 @@ export interface WalletTransaction {
 export interface Purchase {
   id: number;
   userId: string;
+  bpoId: string | null;
   packageId: string;
   packageName: string;
   paypalOrderId: string;
@@ -666,6 +673,12 @@ export const userProfileRepository = {
       fullName: row.full_name,
       avatarUrl: row.avatar_url,
       role: row.role,
+      accountType: row.account_type ?? (row.role === "partner" || row.role === "bpo_partner" ? "BPO" : "USER"),
+      bpoStatus: row.bpo_status ?? "APPROVED",
+      isActive: row.is_active ?? true,
+      approvedAt: row.approved_at ? new Date(row.approved_at) : null,
+      rejectedAt: row.rejected_at ? new Date(row.rejected_at) : null,
+      bpoApplicationDetails: row.bpo_application_details ?? {},
       selectedPlan: row.selected_plan ?? null,
       referralCode: row.referral_code,
       referredBy: row.referred_by,
@@ -689,6 +702,12 @@ export const userProfileRepository = {
       fullName: data.full_name,
       avatarUrl: data.avatar_url,
       role: data.role,
+      accountType: data.account_type ?? (data.role === "partner" || data.role === "bpo_partner" ? "BPO" : "USER"),
+      bpoStatus: data.bpo_status ?? "APPROVED",
+      isActive: data.is_active ?? true,
+      approvedAt: data.approved_at ? new Date(data.approved_at) : null,
+      rejectedAt: data.rejected_at ? new Date(data.rejected_at) : null,
+      bpoApplicationDetails: data.bpo_application_details ?? {},
       selectedPlan: data.selected_plan ?? null,
       referralCode: data.referral_code,
       referredBy: data.referred_by,
@@ -712,6 +731,12 @@ export const userProfileRepository = {
       fullName: data.full_name,
       avatarUrl: data.avatar_url,
       role: data.role,
+      accountType: data.account_type ?? (data.role === "partner" || data.role === "bpo_partner" ? "BPO" : "USER"),
+      bpoStatus: data.bpo_status ?? "APPROVED",
+      isActive: data.is_active ?? true,
+      approvedAt: data.approved_at ? new Date(data.approved_at) : null,
+      rejectedAt: data.rejected_at ? new Date(data.rejected_at) : null,
+      bpoApplicationDetails: data.bpo_application_details ?? {},
       selectedPlan: data.selected_plan ?? null,
       referralCode: data.referral_code,
       referredBy: data.referred_by,
@@ -735,6 +760,12 @@ export const userProfileRepository = {
       fullName: data.full_name,
       avatarUrl: data.avatar_url,
       role: data.role,
+      accountType: data.account_type ?? (data.role === "partner" || data.role === "bpo_partner" ? "BPO" : "USER"),
+      bpoStatus: data.bpo_status ?? "APPROVED",
+      isActive: data.is_active ?? true,
+      approvedAt: data.approved_at ? new Date(data.approved_at) : null,
+      rejectedAt: data.rejected_at ? new Date(data.rejected_at) : null,
+      bpoApplicationDetails: data.bpo_application_details ?? {},
       selectedPlan: data.selected_plan ?? null,
       referralCode: data.referral_code,
       referredBy: data.referred_by,
@@ -753,6 +784,10 @@ export const userProfileRepository = {
     selectedPlan?: string;
     referralCode?: string;
     referredBy?: string;
+    accountType?: "USER" | "BPO";
+    bpoStatus?: "PENDING" | "APPROVED" | "REJECTED";
+    isActive?: boolean;
+    bpoApplicationDetails?: Record<string, unknown>;
   }): Promise<Profile> {
     const payload: Record<string, unknown> = {
       email: data.email,
@@ -763,6 +798,10 @@ export const userProfileRepository = {
       selected_plan: data.selectedPlan ?? null,
       referral_code: data.referralCode ?? ("REF_" + Math.random().toString(36).substring(2, 8).toUpperCase()),
       referred_by: data.referredBy ?? null,
+      account_type: data.accountType ?? "USER",
+      bpo_status: data.bpoStatus ?? "APPROVED",
+      is_active: data.isActive ?? true,
+      bpo_application_details: data.bpoApplicationDetails ?? {},
     };
     if (data.id) payload.id = data.id;
 
@@ -780,6 +819,12 @@ export const userProfileRepository = {
       fullName: created.full_name,
       avatarUrl: created.avatar_url,
       role: created.role,
+      accountType: created.account_type ?? (created.role === "partner" || created.role === "bpo_partner" ? "BPO" : "USER"),
+      bpoStatus: created.bpo_status ?? "APPROVED",
+      isActive: created.is_active ?? true,
+      approvedAt: created.approved_at ? new Date(created.approved_at) : null,
+      rejectedAt: created.rejected_at ? new Date(created.rejected_at) : null,
+      bpoApplicationDetails: created.bpo_application_details ?? {},
       selectedPlan: created.selected_plan ?? null,
       referralCode: created.referral_code,
       referredBy: created.referred_by,
@@ -811,6 +856,12 @@ export const userProfileRepository = {
       fullName: data.full_name,
       avatarUrl: data.avatar_url,
       role: data.role,
+      accountType: data.account_type ?? (data.role === "partner" || data.role === "bpo_partner" ? "BPO" : "USER"),
+      bpoStatus: data.bpo_status ?? "APPROVED",
+      isActive: data.is_active ?? true,
+      approvedAt: data.approved_at ? new Date(data.approved_at) : null,
+      rejectedAt: data.rejected_at ? new Date(data.rejected_at) : null,
+      bpoApplicationDetails: data.bpo_application_details ?? {},
       selectedPlan: data.selected_plan ?? null,
       referralCode: data.referral_code,
       referredBy: data.referred_by,
@@ -1394,7 +1445,7 @@ export const walletRepository = {
 };
 
 const mapPurchase = (row: any): Purchase => ({
-  id: Number(row.id), userId: row.user_id, packageId: row.package_id, packageName: row.package_name,
+  id: Number(row.id), userId: row.user_id, bpoId: row.bpo_id ?? null, packageId: row.package_id, packageName: row.package_name,
   paypalOrderId: row.paypal_order_id, paypalCaptureId: row.paypal_capture_id ?? null,
   amount: Number(row.amount), currency: row.currency, status: row.status,
   purchasedAt: row.purchased_at ? new Date(row.purchased_at) : null, createdAt: new Date(row.created_at),
@@ -1408,13 +1459,19 @@ const mapWithdrawal = (row: any): Withdrawal => ({
 });
 
 export const purchaseRepository = {
-  async createPending(data: { userId: string; packageId: string; packageName: string; orderId: string; amount: number; currency: string }) {
+  async createPending(data: { userId: string; bpoId?: string | null; packageId: string; packageName: string; orderId: string; amount: number; currency: string }) {
     const { data: row, error } = await supabase.from("purchases").insert({
-      user_id: data.userId, package_id: data.packageId, package_name: data.packageName,
+      user_id: data.userId, bpo_id: data.bpoId ?? null, package_id: data.packageId, package_name: data.packageName,
       paypal_order_id: data.orderId, amount: data.amount, currency: data.currency, status: "PENDING",
     }).select().single();
     if (error) throw error;
     return mapPurchase(row);
+  },
+
+  async cancelPending(orderId: string, userId: string): Promise<Purchase | null> {
+    const { data, error } = await supabase.from("purchases").update({ status: "CANCELLED", updated_at: new Date().toISOString() }).eq("paypal_order_id", orderId).eq("user_id", userId).eq("status", "PENDING").select().maybeSingle();
+    if (error) throw error;
+    return data ? mapPurchase(data) : this.getByOrderId(orderId);
   },
 
   async getByOrderId(orderId: string): Promise<Purchase | null> {

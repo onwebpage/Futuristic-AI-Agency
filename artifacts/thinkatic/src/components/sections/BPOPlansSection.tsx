@@ -72,14 +72,25 @@ export function BPOPlansSection() {
                 <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 block mb-3">
                   Partnership Includes
                 </span>
-                <ul className="space-y-2.5">
-                  {plan.includes.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-xs text-slate-800 font-medium">
-                      <CheckCircle2 size={15} className="text-[#1E40AF] shrink-0 mt-0.5" />
-                      <span className="leading-snug">{item}</span>
-                    </li>
+                <div className="space-y-5">
+                  {plan.featureGroups.map((group) => (
+                    <div key={group.title}>
+                      <h4 className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-[#1E40AF]">{group.title}</h4>
+                      <ul className="space-y-2.5">
+                        {group.items.map((item) => (
+                          <li key={item} className="flex items-start gap-2.5 text-xs text-slate-800 font-medium">
+                            <CheckCircle2 size={15} className="text-[#1E40AF] shrink-0 mt-0.5" />
+                            <span className="leading-snug">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
+                  <div className="border-t border-slate-100 pt-4">
+                    <h4 className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-[#1E40AF]">Live Project Portfolio Access</h4>
+                    <p className="text-xs font-medium leading-snug text-slate-800">{plan.portfolioAccess}</p>
+                  </div>
+                </div>
               </div>
 
               <div className="mt-8">

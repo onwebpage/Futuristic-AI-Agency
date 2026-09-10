@@ -13,7 +13,7 @@ import {
   OrdersController,
 } from "@paypal/paypal-server-sdk";
 import { Request, Response } from "express";
-import { purchaseRepository } from "@workspace/db";
+import { purchaseRepository, supabase } from "@workspace/db";
 
 type PayPalPackage = {
   id: string;
@@ -47,7 +47,8 @@ function getControllers() {
     throw new Error("PayPal is not configured");
   }
 
-  const environment = (process.env.PAYPAL_ENVIRONMENT ?? (process.env.NODE_ENV === "production" ? "production" : "sandbox")).toLowerCase();
+  const configuredEnvironment = (process.env.PAYPAL_MODE ?? process.env.PAYPAL_ENVIRONMENT ?? (process.env.NODE_ENV === "production" ? "production" : "sandbox")).toLowerCase();
+  const environment = configuredEnvironment === "live" ? "production" : configuredEnvironment;
   if (environment !== "production" && environment !== "sandbox") {
     throw new Error("Invalid PAYPAL_ENVIRONMENT");
   }
@@ -113,9 +114,11 @@ export async function createPaypalOrder(req: AuthenticatedRequest, res: Response
       prefer: "return=representation",
     });
   const order = parseBody(body);
-  if (!order.id) return res.status(502).json({ error: "PayPal did not return an order ID." });
+    if (!order.id) return res.status(502).json({ error: "PayPal did not return an order ID." });
+    const { data: membership } = await supabase.from("bpo_partner_users").select("partner_id").eq("user_id", req.user.id).eq("status", "active").maybeSingle();
     await purchaseRepository.createPending({
       userId: req.user.id,
+      bpoId: membership?.partner_id ?? null,
       packageId: product.id,
       packageName: product.name,
       orderId: order.id,
@@ -143,6 +146,7 @@ export async function capturePaypalOrder(req: AuthenticatedRequest, res: Respons
     const approvedUnit = approvedOrder.purchase_units?.[0];
     const approvedAmount = approvedUnit?.amount;
     if (
+      approvedOrder.id !== orderId ||
       approvedOrder.status !== "APPROVED" ||
       approvedUnit?.custom_id !== record.packageId ||
       approvedAmount?.value !== record.amount.toFixed(2) ||
@@ -159,9 +163,11 @@ export async function capturePaypalOrder(req: AuthenticatedRequest, res: Respons
   const capturedCurrency = capture?.amount?.currency_code;
 
     if (
-    order.status !== "COMPLETED" ||
-    capture?.status !== "COMPLETED" ||
-    unit?.custom_id !== record.packageId ||
+      order.id !== orderId ||
+      order.status !== "COMPLETED" ||
+      capture?.status !== "COMPLETED" ||
+      !capture?.id ||
+      unit?.custom_id !== record.packageId ||
       capturedAmount !== record.amount.toFixed(2) ||
       capturedCurrency !== record.currency
     ) {
@@ -182,6 +188,17 @@ export async function capturePaypalOrder(req: AuthenticatedRequest, res: Respons
     console.error("PayPal capture failed:", errorMessage(error));
     return res.status(502).json({ error: "Payment could not be completed. Please try again." });
   }
+}
+
+export async function cancelPaypalOrder(req: AuthenticatedRequest, res: Response) {
+  if (!req.user?.id) return res.status(401).json({ error: "Authentication required" });
+  const orderId = typeof req.params.orderID === "string" ? req.params.orderID : "";
+  if (!orderId) return res.status(400).json({ error: "Invalid PayPal order ID." });
+  const record = await purchaseRepository.getByOrderId(orderId);
+  if (!record || record.userId !== req.user.id) return res.status(404).json({ error: "Payment session not found or expired." });
+  if (record.status === "PAID") return res.status(409).json({ error: "This payment has already been completed." });
+  await purchaseRepository.cancelPending(orderId, req.user.id);
+  return res.json({ success: true, status: "CANCELLED", orderId, packageId: record.packageId });
 }
 
 export async function loadPaypalDefault(_req: Request, res: Response) {

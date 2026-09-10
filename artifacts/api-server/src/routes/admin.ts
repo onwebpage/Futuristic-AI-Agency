@@ -700,6 +700,56 @@ router.get("/admin/users", requireAuth, async (req, res) => {
   }
 });
 
+router.get("/admin/bpo-applications", requireAuth, async (req, res) => {
+  try {
+    const status = String(req.query.status || "all").toUpperCase();
+    let query = supabase.from("profiles").select("id,email,full_name,role,account_type,bpo_status,is_active,approved_at,rejected_at,bpo_application_details,created_at,updated_at").eq("account_type", "BPO").order("created_at", { ascending: false });
+    if (["PENDING", "APPROVED", "REJECTED"].includes(status)) query = query.eq("bpo_status", status);
+    const { data, error } = await query;
+    if (error) throw error;
+    res.json((data || []).map((row: any) => ({ id: row.id, name: row.full_name || row.email, email: row.email, accountType: row.account_type, status: row.bpo_status, isActive: row.is_active, approvedAt: row.approved_at, rejectedAt: row.rejected_at, applicationDetails: row.bpo_application_details || {}, createdAt: row.created_at, updatedAt: row.updated_at })));
+  } catch (error: any) {
+    logger.error({ err: error }, "BPO applications error");
+    res.status(500).json({ error: "Failed to load BPO applications", details: error?.message });
+  }
+});
+
+router.get("/admin/bpo-applications/:id", requireAuth, async (req, res) => {
+  try {
+    const { data, error } = await supabase.from("profiles").select("id,email,full_name,role,account_type,bpo_status,is_active,approved_at,rejected_at,bpo_application_details,created_at,updated_at").eq("id", String(req.params.id)).eq("account_type", "BPO").maybeSingle();
+    if (error) throw error;
+    if (!data) return res.status(404).json({ error: "BPO application not found" });
+    const { data: membership } = await supabase.from("bpo_partner_users").select("id,partner_id,role,status,bpo_partners(id,partner_code,name,legal_name,email,phone,status,created_at)").eq("user_id", data.id).maybeSingle();
+    return res.json({ ...data, applicationDetails: data.bpo_application_details || {}, membership: membership || null });
+  } catch (error: any) {
+    logger.error({ err: error }, "BPO application details error");
+    return res.status(500).json({ error: "Failed to load BPO application details", details: error?.message });
+  }
+});
+
+router.patch("/admin/bpo-applications/:id/status", requireAuth, async (req: AdminRequest, res) => {
+  try {
+    const status = String(req.body?.status || "").toUpperCase();
+    if (!["APPROVED", "REJECTED"].includes(status)) return res.status(400).json({ error: "Status must be APPROVED or REJECTED" });
+    const targetId = String(req.params.id);
+    const { data: existing, error: lookupError } = await supabase.from("profiles").select("id,email,account_type,bpo_status").eq("id", targetId).eq("account_type", "BPO").maybeSingle();
+    if (lookupError) throw lookupError;
+    if (!existing) return res.status(404).json({ error: "BPO application not found" });
+    const now = new Date().toISOString();
+    const patch = status === "APPROVED" ? { bpo_status: "APPROVED", is_active: true, approved_at: now, rejected_at: null, updated_at: now } : { bpo_status: "REJECTED", is_active: false, rejected_at: now, updated_at: now };
+    const { data: updated, error } = await supabase.from("profiles").update(patch).eq("id", targetId).select("id,email,bpo_status,is_active,approved_at,rejected_at").single();
+    if (error) throw error;
+    const { data: membership } = await supabase.from("bpo_partner_users").select("partner_id").eq("user_id", targetId).maybeSingle();
+    if (membership?.partner_id) await supabase.from("bpo_partners").update({ status: status === "APPROVED" ? "active" : "inactive", updated_at: now }).eq("id", membership.partner_id);
+    await supabase.from("audit_logs").insert({ actor_admin_id: req.admin!.id, action: `bpo_${status.toLowerCase()}`, entity_type: "user", entity_id: targetId, metadata: { status, result: "success" } });
+    await supabase.from("notifications").insert({ recipient_user_id: targetId, type: `bpo_${status.toLowerCase()}`, title: `BPO application ${status.toLowerCase()}`, body: status === "APPROVED" ? "Your BPO application has been approved. All BPO features are now available." : "Your BPO account application has been rejected. Your account has been disabled. Please contact support if you believe this was a mistake.", entity_type: "user", entity_id: targetId });
+    return res.json(updated);
+  } catch (error: any) {
+    logger.error({ err: error }, "BPO application status error");
+    return res.status(500).json({ error: "Failed to update BPO application", details: error?.message });
+  }
+});
+
 router.get("/admin/users/:id", requireAuth, async (req, res) => {
   try {
     const { data: user, error } = await supabase.from("profiles").select("id, email, full_name, role, created_at, updated_at").eq("id", String(req.params.id)).maybeSingle();

@@ -655,7 +655,35 @@ export interface BPOPlan {
   partnershipTerm: string;
   isPopular?: boolean;
   includes: string[];
+  featureGroups: { title: string; items: string[] }[];
+  portfolioAccess: string;
 }
+
+const STARTER_BPO_FEATURE_GROUPS = [
+  { title: "Build", items: ["Process discovery", "Process mapping", "SOP creation", "Workflow design", "Outsourcing roadmap"] },
+  { title: "Build the Team", items: ["BPO partner allocation", "Recruitment coordination", "Candidate screening support", "Agent onboarding", "Training coordination"] },
+  { title: "Build the Operation", items: ["CRM / workflow setup", "Basic technology configuration", "KPI framework", "QA framework", "Reporting structure & escalation matrix"] },
+  { title: "Launch", items: ["Go-live support", "Initial performance monitoring", "Process stabilization", "Monthly performance review"] },
+];
+
+const GROWTH_BPO_FEATURE_GROUPS = [
+  ...STARTER_BPO_FEATURE_GROUPS,
+  { title: "Advanced Operations", items: ["Dedicated account manager", "Advanced SOPs", "Detailed workforce planning", "Multi-level escalation system", "Advanced QA framework", "Weekly performance reporting"] },
+  { title: "Technology", items: ["Advanced CRM / workflow configuration", "Automated reporting", "Productivity dashboards", "Performance analytics", "Call / chat QA integration"] },
+  { title: "People", items: ["Structured recruitment pipeline", "Training framework", "Mock-process assessment", "Replacement coordination", "Attrition management support"] },
+  { title: "Growth", items: ["Capacity planning", "Additional seat deployment", "Process optimization", "Monthly strategy review", "Expansion support"] },
+];
+
+const ENTERPRISE_BPO_FEATURE_GROUPS = [
+  ...GROWTH_BPO_FEATURE_GROUPS,
+  { title: "Enterprise Implementation", items: ["Multi-process implementation", "Multi-team, multi-shift deployment", "Large-scale workforce planning", "Enterprise SOP architecture", "Department-level KPI framework"] },
+  { title: "Technology & Analytics", items: ["Enterprise reporting & dashboards", "Workflow automation", "AI-assisted QA where applicable", "Performance analytics", "Integration support"] },
+  { title: "Enterprise Management", items: ["Dedicated enterprise account team", "Priority escalation", "Monthly business reviews", "Capacity & workforce optimization", "Scale-up support"] },
+  { title: "Lifetime Strategic Support", items: ["Process & outsourcing advisory", "BPO partner coordination", "Expansion discussions", "Technology guidance", "Operational troubleshooting", "Lifetime Strategic Support"] },
+];
+
+const flattenBPOFeatures = (groups: { title: string; items: string[] }[]) => groups.flatMap((group) => group.items);
+const BPO_PORTFOLIO_ACCESS = "Access to the available project portfolio according to the existing system.";
 
 export const BPO_PLANS: BPOPlan[] = [
   {
@@ -665,30 +693,9 @@ export const BPO_PLANS: BPOPlan[] = [
     priceNumeric: 2000,
     seatRange: "5–10 seats",
     partnershipTerm: "11-month partnership",
-    includes: [
-      "$0 renewal fee",
-      "BPO partner allocation",
-      "Recruitment coordination",
-      "Candidate screening support",
-      "Agent onboarding",
-      "Training coordination",
-      "Process discovery",
-      "Process mapping",
-      "SOP creation",
-      "Workflow design",
-      "Outsourcing roadmap",
-      "CRM / workflow setup",
-      "Basic technology configuration",
-      "KPI framework",
-      "QA framework",
-      "Reporting structure & escalation matrix",
-      "Go-live support",
-      "Initial performance monitoring",
-      "Process stabilization",
-      "Monthly performance review",
-      "Live Project Portfolio Access",
-      "Scale-up support up to 10 seats",
-    ],
+    includes: [...flattenBPOFeatures(STARTER_BPO_FEATURE_GROUPS), "Live Project Portfolio Access", BPO_PORTFOLIO_ACCESS],
+    featureGroups: STARTER_BPO_FEATURE_GROUPS,
+    portfolioAccess: BPO_PORTFOLIO_ACCESS,
   },
   {
     id: "bpo-growth",
@@ -698,32 +705,9 @@ export const BPO_PLANS: BPOPlan[] = [
     seatRange: "10–50 seats",
     partnershipTerm: "11-month partnership",
     isPopular: true,
-    includes: [
-      "$0 renewal fee",
-      "Everything in Starter, plus:",
-      "Dedicated account manager",
-      "Advanced SOPs",
-      "Detailed workforce planning",
-      "Multi-level escalation system",
-      "Advanced QA framework",
-      "Weekly performance reporting",
-      "Advanced CRM / workflow configuration",
-      "Automated reporting",
-      "Productivity dashboards",
-      "Performance analytics",
-      "Call / chat QA integration",
-      "Structured recruitment pipeline",
-      "Training framework",
-      "Mock-process assessment",
-      "Replacement coordination",
-      "Attrition management support",
-      "Capacity planning",
-      "Additional seat deployment",
-      "Process optimization",
-      "Monthly strategy review",
-      "Expansion support up to 50 seats",
-      "Live Project Portfolio Access",
-    ],
+    includes: [...flattenBPOFeatures(GROWTH_BPO_FEATURE_GROUPS), "Live Project Portfolio Access", BPO_PORTFOLIO_ACCESS],
+    featureGroups: GROWTH_BPO_FEATURE_GROUPS,
+    portfolioAccess: BPO_PORTFOLIO_ACCESS,
   },
   {
     id: "bpo-enterprise",
@@ -732,31 +716,9 @@ export const BPO_PLANS: BPOPlan[] = [
     priceNumeric: 5000,
     seatRange: "50–500 seats",
     partnershipTerm: "11-month enterprise partnership",
-    includes: [
-      "$0 renewal fee",
-      "Everything in Growth, plus:",
-      "Multi-process implementation",
-      "Multi-team, multi-shift deployment",
-      "Large-scale workforce planning",
-      "Enterprise SOP architecture",
-      "Department-level KPI framework",
-      "Enterprise reporting & dashboards",
-      "Workflow automation",
-      "AI-assisted QA where applicable",
-      "Performance analytics",
-      "Integration support",
-      "Dedicated enterprise account team",
-      "Priority escalation",
-      "Monthly business reviews",
-      "Capacity & workforce optimization",
-      "Scale-up support up to 500 seats",
-      "Lifetime Strategic Support",
-      "Process & outsourcing advisory",
-      "BPO partner coordination",
-      "Expansion discussions",
-      "Technology guidance",
-      "Operational troubleshooting",
-    ],
+    includes: [...flattenBPOFeatures(ENTERPRISE_BPO_FEATURE_GROUPS), "Live Project Portfolio Access", BPO_PORTFOLIO_ACCESS],
+    featureGroups: ENTERPRISE_BPO_FEATURE_GROUPS,
+    portfolioAccess: BPO_PORTFOLIO_ACCESS,
   },
 ];
 

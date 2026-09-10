@@ -13,6 +13,7 @@ import {
   Eye,
   EyeOff,
   Share2,
+  Building2,
 } from "lucide-react";
 import BrandLogo from "@/components/layout/BrandLogo";
 
@@ -25,6 +26,11 @@ export default function UserAuthPage() {
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [referralCode, setReferralCode] = useState("");
+  const [accountType, setAccountType] = useState<"USER" | "BPO">("USER");
+  const [phone, setPhone] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [companyDetails, setCompanyDetails] = useState("");
+  const [documentDetails, setDocumentDetails] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const [loading, setLoading] = useState(false);
@@ -46,8 +52,8 @@ export default function UserAuthPage() {
     const token = localStorage.getItem("user_token");
     if (token) {
       const storedProfile = localStorage.getItem("user_profile");
-      const role = storedProfile ? (JSON.parse(storedProfile) as { role?: string }).role : undefined;
-      setLocation(role === "partner" || role === "bpo_partner" ? "/partner" : "/dashboard");
+      const stored = storedProfile ? JSON.parse(storedProfile) as { role?: string; accountType?: string } : {};
+      setLocation(stored.accountType === "BPO" || stored.role === "partner" || stored.role === "bpo_partner" ? "/partner" : "/dashboard");
     }
   }, [setLocation]);
 
@@ -59,10 +65,11 @@ export default function UserAuthPage() {
 
     try {
       const endpoint = mode === "signup" ? "/api/user/auth/signup" : "/api/user/auth/login";
-      const payload: Record<string, string> = { email, password };
+      const payload: Record<string, string> = { email, password, accountType };
       if (mode === "signup") {
         if (fullName) payload.fullName = fullName;
         if (referralCode) payload.referralCode = referralCode;
+        if (accountType === "BPO") Object.assign(payload, { phone, companyName, companyDetails, documentDetails });
       }
 
       const res = await fetch(endpoint, {
@@ -92,10 +99,10 @@ export default function UserAuthPage() {
       localStorage.setItem("user_token", data.token);
       localStorage.setItem("user_profile", JSON.stringify(data.profile));
 
-      setSuccessMessage(mode === "signup" ? "Account created successfully! Redirecting..." : "Login successful! Redirecting...");
+      setSuccessMessage(mode === "signup" && accountType === "BPO" ? "Application submitted for verification. Redirecting..." : mode === "signup" ? "Account created successfully! Redirecting..." : "Login successful! Redirecting...");
       setTimeout(() => {
-        const role = (data.profile as { role?: string }).role;
-        setLocation(role === "partner" || role === "bpo_partner" ? "/partner" : "/dashboard");
+        const profile = data.profile as { role?: string; accountType?: string };
+        setLocation(profile.accountType === "BPO" || profile.role === "partner" || profile.role === "bpo_partner" ? "/partner" : "/dashboard");
       }, 700);
     } catch (err: any) {
       setErrorMessage(err.message || "Something went wrong. Please try again.");
@@ -175,6 +182,17 @@ export default function UserAuthPage() {
             </button>
           </div>
 
+          <div className="mb-7">
+            <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.16em] text-slate-700">Account Type</p>
+            <div className="grid grid-cols-2 gap-2">
+              {(["USER", "BPO"] as const).map((type) => (
+                <button key={type} type="button" onClick={() => setAccountType(type)} className={`flex items-center justify-center gap-2 rounded-xl border px-3 py-3 text-sm font-bold transition-all ${accountType === type ? "border-blue-600 bg-blue-50 text-blue-700 ring-2 ring-blue-100" : "border-slate-200 bg-slate-50 text-slate-500 hover:border-blue-200"}`}>
+                  {type === "BPO" ? <Building2 size={16} /> : <User size={16} />}{type === "BPO" ? "BPO" : "User"}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <AnimatePresence mode="wait">
             {errorMessage && (
               <motion.div
@@ -219,6 +237,16 @@ export default function UserAuthPage() {
                     className="block w-full pl-11 pr-4 py-3 bg-slate-50/80 border border-slate-200 rounded-2xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 focus:bg-white transition-all"
                   />
                 </div>
+              </div>
+            )}
+
+            {mode === "signup" && accountType === "BPO" && (
+              <div className="space-y-4 rounded-2xl border border-blue-100 bg-blue-50/60 p-4">
+                <p className="text-xs font-bold text-blue-800">BPO verification details</p>
+                <input required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone number" className="block w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm" />
+                <input required value={companyName} onChange={(e) => setCompanyName(e.target.value)} placeholder="Company or business name" className="block w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm" />
+                <textarea required value={companyDetails} onChange={(e) => setCompanyDetails(e.target.value)} placeholder="Company details and BPO experience" className="block min-h-20 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm" />
+                <textarea required value={documentDetails} onChange={(e) => setDocumentDetails(e.target.value)} placeholder="Submitted documents or verification details" className="block min-h-20 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm" />
               </div>
             )}
 

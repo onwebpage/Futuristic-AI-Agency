@@ -40,6 +40,7 @@ const navItems = [
   { key: "crm", label: "CRM", icon: Users },
   { key: "clients", label: "Clients", icon: BriefcaseBusiness },
   { key: "partners", label: "BPO Partners", icon: Building2 },
+  { key: "bpo-management", label: "BPO Approvals", icon: ShieldCheck },
   { key: "projects", label: "Projects", icon: FolderKanban },
   { key: "operations", label: "BPO Operations", icon: Activity },
   { key: "approvals", label: "Approvals", icon: CheckCircle2 },
@@ -60,6 +61,9 @@ export default function AdminControlCentrePage() {
   const [activeTab, setActiveTab] = useState<NavKey>("overview");
   const [overview, setOverview] = useState<any>(null);
   const [approvals, setApprovals] = useState<any[]>([]);
+  const [bpoApplications, setBpoApplications] = useState<any[]>([]);
+  const [bpoStatusFilter, setBpoStatusFilter] = useState("PENDING");
+  const [selectedBpo, setSelectedBpo] = useState<any>(null);
   const [users, setUsers] = useState<any[]>([]);
   const [userPagination, setUserPagination] = useState<any>(null);
   const [userSearch, setUserSearch] = useState("");
@@ -97,6 +101,11 @@ export default function AdminControlCentrePage() {
     const response = await apiCall("/admin/approvals");
     if (response.ok) setApprovals(await response.json());
   }, []);
+
+  const loadBpoApplications = useCallback(async () => {
+    const response = await apiCall(`/admin/bpo-applications?status=${bpoStatusFilter}`);
+    if (response.ok) setBpoApplications(await response.json());
+  }, [bpoStatusFilter]);
 
   const loadUsers = useCallback(async () => {
     const query = new URLSearchParams({ page: String(userPage), pageSize: "20", search: userSearch, role: userRole, status: userStatus });
@@ -158,6 +167,7 @@ export default function AdminControlCentrePage() {
     Promise.all([
       loadOverview(),
       loadApprovals(),
+      loadBpoApplications(),
       loadUsers(),
       loadRoles(),
       loadNotifications(),
@@ -166,7 +176,7 @@ export default function AdminControlCentrePage() {
       loadSettings(),
       loadReports(),
     ]).finally(() => setLoading(false));
-  }, [loadOverview, loadApprovals, loadUsers, loadRoles, loadNotifications, loadAuditLogs, loadFinance, loadSettings, loadReports, setLocation]);
+  }, [loadOverview, loadApprovals, loadBpoApplications, loadUsers, loadRoles, loadNotifications, loadAuditLogs, loadFinance, loadSettings, loadReports, setLocation]);
 
   useEffect(() => {
     if (!loading) loadUsers();
@@ -174,8 +184,11 @@ export default function AdminControlCentrePage() {
 
   useEffect(() => {
     if (activeTab === "users") loadUsers();
+    if (activeTab === "bpo-management") loadBpoApplications();
     if (activeTab === "settings" || activeTab === "feature-controls") loadSettings();
   }, [activeTab, loadUsers, loadSettings]);
+
+  useEffect(() => { loadBpoApplications(); }, [loadBpoApplications]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -317,6 +330,17 @@ export default function AdminControlCentrePage() {
           </div>
         ))}
       </div>
+    </div>
+  );
+
+  const renderBpoManagement = () => (
+    <div className="space-y-5">
+      <div className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+        <div><div className="text-sm font-bold uppercase tracking-[0.18em] text-slate-500">BPO management</div><p className="mt-1 text-sm text-slate-600">Review submitted BPO applications and account status.</p></div>
+        <select value={bpoStatusFilter} onChange={(event) => setBpoStatusFilter(event.target.value)} className="rounded-lg border border-slate-200 px-3 py-2 text-xs"><option value="PENDING">Pending</option><option value="APPROVED">Approved</option><option value="REJECTED">Rejected</option><option value="all">All statuses</option></select>
+      </div>
+      <div className="space-y-3">{bpoApplications.length === 0 ? <div className="rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-500">No BPO applications in this status.</div> : bpoApplications.map((application) => <div key={application.id} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between"><div><div className="text-lg font-black text-slate-900">{application.name}</div><div className="mt-1 text-sm text-slate-500">{application.email} · Submitted {new Date(application.createdAt).toLocaleString()}</div><div className="mt-3 flex flex-wrap gap-2"><span className="rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-bold uppercase text-amber-700">{application.status}</span><span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold uppercase text-slate-600">{application.isActive ? "Active" : "Disabled"}</span></div></div><div className="flex flex-wrap gap-2"><button onClick={async () => { const response = await apiCall(`/admin/bpo-applications/${application.id}`); if (response.ok) setSelectedBpo(await response.json()); }} className="rounded-lg border border-slate-300 px-3 py-2 text-xs font-bold text-slate-700">View details</button>{application.status === "PENDING" && <><button onClick={() => apiCall(`/admin/bpo-applications/${application.id}/status`, { method: "PATCH", body: JSON.stringify({ status: "APPROVED" }) }).then(loadBpoApplications)} className="rounded-lg bg-emerald-600 px-3 py-2 text-xs font-bold text-white">Approve</button><button onClick={() => apiCall(`/admin/bpo-applications/${application.id}/status`, { method: "PATCH", body: JSON.stringify({ status: "REJECTED" }) }).then(loadBpoApplications)} className="rounded-lg bg-rose-600 px-3 py-2 text-xs font-bold text-white">Reject</button></>}</div></div></div>)}</div>
+      {selectedBpo && <div className="rounded-2xl border border-blue-200 bg-blue-50 p-5"><div className="flex items-center justify-between"><h3 className="text-lg font-black">Application details</h3><button onClick={() => setSelectedBpo(null)} className="text-xs font-bold text-blue-700">Close</button></div><div className="mt-4 grid gap-3 text-sm sm:grid-cols-2"><div><b>Name:</b> {selectedBpo.full_name || selectedBpo.email}</div><div><b>Email:</b> {selectedBpo.email}</div><div><b>Status:</b> {selectedBpo.bpo_status}</div><div><b>Submitted:</b> {new Date(selectedBpo.created_at).toLocaleString()}</div>{Object.entries(selectedBpo.applicationDetails || {}).map(([key, value]) => <div key={key}><b>{key}:</b> {String(value || "Not provided")}</div>)}</div></div>}
     </div>
   );
 
@@ -467,6 +491,7 @@ export default function AdminControlCentrePage() {
       case "crm": return renderSearch();
       case "clients": return renderSearch();
       case "partners": return renderSearch();
+      case "bpo-management": return renderBpoManagement();
       case "projects": return renderSearch();
       case "operations": return renderSearch();
       case "approvals": return renderApprovals();
