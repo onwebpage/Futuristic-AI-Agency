@@ -47,7 +47,8 @@ export default function PayPalButton({
     if (busyRef.current) throw new Error("A PayPal checkout is already in progress.");
     const token = localStorage.getItem("user_token");
     if (!token) {
-      window.location.href = `/login?returnTo=${encodeURIComponent(window.location.pathname)}`;
+      const returnTo = `${window.location.pathname}${window.location.search}`;
+      window.location.href = `/login?returnTo=${encodeURIComponent(returnTo)}&plan=${encodeURIComponent(packageId)}`;
       throw new Error("Please sign in before purchasing a package.");
     }
     busyRef.current = true;
@@ -193,6 +194,10 @@ export default function PayPalButton({
       if (paypalButton) {
         paypalButton.addEventListener("click", onClick);
         setStatus("ready");
+        const pendingPlan = new URLSearchParams(window.location.search).get("purchase");
+        if (pendingPlan === packageId) {
+          window.setTimeout(() => onClick(), 0);
+        }
       }
 
       return () => {

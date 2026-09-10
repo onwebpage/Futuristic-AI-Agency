@@ -102,6 +102,14 @@ export default function UserAuthPage() {
       setSuccessMessage(mode === "signup" && accountType === "BPO" ? "Application submitted for verification. Redirecting..." : mode === "signup" ? "Account created successfully! Redirecting..." : "Login successful! Redirecting...");
       setTimeout(() => {
         const profile = data.profile as { role?: string; accountType?: string };
+        const params = new URLSearchParams(window.location.search);
+        const returnTo = params.get("returnTo");
+        const selectedPlan = params.get("plan");
+        if (returnTo && selectedPlan && returnTo.startsWith("/")) {
+          const separator = returnTo.includes("?") ? "&" : "?";
+          setLocation(`${returnTo}${separator}purchase=${encodeURIComponent(selectedPlan)}`);
+          return;
+        }
         setLocation(profile.accountType === "BPO" || profile.role === "partner" || profile.role === "bpo_partner" ? "/partner" : "/dashboard");
       }, 700);
     } catch (err: any) {
