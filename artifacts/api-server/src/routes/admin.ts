@@ -534,6 +534,81 @@ router.get("/admin/approvals", requireAuth, adminModuleFeature("approvals"), asy
   }
 });
 
+// -----------------------------------------------------------------------------
+// Admin BPO Access Management
+// -----------------------------------------------------------------------------
+router.post("/admin/users/unlock-bpo-access", requireAuth, async (req: AdminRequest, res) => {
+  try {
+    const { email } = req.body as { email: string };
+
+    if (!email) {
+      res.status(400).json({ error: "Email is required" });
+      return;
+    }
+
+    // Find the user by email
+    const { data: user, error: userError } = await supabase
+      .from("profiles")
+      .select("id, email, account_type, bpo_status, role")
+      .eq("email", email)
+      .maybeSingle();
+
+    if (userError) {
+      logger.error({ err: userError }, "Failed to fetch user");
+      res.status(500).json({ error: "Failed to fetch user" });
+      return;
+    }
+
+    if (!user) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+
+    // Update user to have BPO access
+    const { error: updateError } = await supabase
+      .from("profiles")
+      .update({
+        account_type: "BPO",
+        bpo_status: "APPROVED",
+        is_active: true,
+        approved_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", user.id);
+
+    if (updateError) {
+      logger.error({ err: updateError }, "Failed to update user BPO access");
+      res.status(500).json({ error: "Failed to unlock BPO access" });
+      return;
+    }
+
+    // Log the action
+    await supabase.from("audit_logs").insert({
+      actor_admin_id: req.admin!.id,
+      action: "bpo_access_unlocked",
+      entity_type: "user_profile",
+      entity_id: String(user.id),
+      metadata: { email, result: "success", unlocked_by: req.admin!.username },
+    });
+
+    logger.info({ userId: user.id, email }, "BPO access unlocked for user");
+
+    res.json({
+      success: true,
+      message: "BPO access unlocked successfully",
+      user: {
+        id: user.id,
+        email: user.email,
+        account_type: "BPO",
+        bpo_status: "APPROVED",
+      },
+    });
+  } catch (error: any) {
+    logger.error({ err: error }, "Failed to unlock BPO access");
+    res.status(500).json({ error: "Failed to unlock BPO access", details: error?.message });
+  }
+});
+
 router.post("/admin/approvals/:approvalId/decision", requireAuth, adminModuleFeature("approvals"), async (req: AdminRequest, res) => {
   try {
     const { status, comment } = req.body as { status?: string; comment?: string };
