@@ -340,7 +340,28 @@ router.get("/admin/wallets", requireAuth, async (_req, res) => {
 
 router.get("/admin/withdrawals", requireAuth, async (_req, res) => {
   try {
-    res.json(await withdrawalRepository.listAll());
+    const withdrawals = await withdrawalRepository.listAll();
+    
+    // Enrich withdrawals with user profile data
+    const enrichedWithdrawals = await Promise.all(
+      withdrawals.map(async (withdrawal) => {
+        const userProfile = await supabase
+          .from("profiles")
+          .select("id, email, full_name, account_type, selected_plan")
+          .eq("id", withdrawal.userId)
+          .maybeSingle();
+        
+        return {
+          ...withdrawal,
+          userEmail: userProfile.data?.email || "N/A",
+          userFullName: userProfile.data?.full_name || "N/A",
+          userAccountType: userProfile.data?.account_type || "USER",
+          userPlan: userProfile.data?.selected_plan || "N/A",
+        };
+      })
+    );
+    
+    res.json(enrichedWithdrawals);
   } catch (error: any) {
     logger.error({ err: error }, "Operation failed");
     res.status(500).json({ error: "Failed to load withdrawal requests", details: error?.message });
