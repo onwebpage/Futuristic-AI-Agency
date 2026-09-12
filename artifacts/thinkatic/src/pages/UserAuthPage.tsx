@@ -283,7 +283,7 @@ export default function UserAuthPage() {
                   Password
                 </label>
                 {mode === "login" && (
-                  <span className="text-[11px] font-medium text-slate-400">Default: password123</span>
+                  <span className="text-[11px] font-medium text-slate-500">Default: password123</span>
                 )}
               </div>
               <div className="relative rounded-2xl">
@@ -302,13 +302,13 @@ export default function UserAuthPage() {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   aria-label={showPassword ? "Hide password" : "Show password"}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-blue-600 transition-colors"
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-500 hover:text-blue-600 transition-colors"
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
               {mode === "signup" && (
-                <p className="mt-1.5 text-[11px] text-slate-400">Minimum 6 characters</p>
+                <p className="mt-1.5 text-[11px] text-slate-500">Minimum 6 characters</p>
               )}
             </div>
 

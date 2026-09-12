@@ -79,7 +79,7 @@ function DepartmentCard({
       whileTap={{ scale: 0.98 }}
       className={`relative flex flex-col gap-2.5 p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer ${
         selected
-          ? "bg-blue-50/90 border-[#1E40AF] ring-2 ring-[#1E40AF]/15 shadow-sm"
+          ? "bg-blue-50/90 border-[#214ECF] ring-2 ring-[#214ECF]/15 shadow-sm"
           : "bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50/60 shadow-2xs"
       }`}
     >
@@ -87,8 +87,8 @@ function DepartmentCard({
         <div
           className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
             selected
-              ? "bg-[#1E40AF] text-white shadow-xs"
-              : "bg-blue-50 text-[#1E40AF] border border-blue-200/60"
+              ? "bg-[#214ECF] text-white shadow-xs"
+              : "bg-blue-50 text-[#214ECF] border border-blue-200/60"
           }`}
         >
           <Icon size={16} />
@@ -101,7 +101,7 @@ function DepartmentCard({
       {selected && (
         <motion.div
           layoutId="dept-check"
-          className="absolute top-3.5 right-3.5 w-4 h-4 rounded-full bg-[#1E40AF] text-white flex items-center justify-center shadow-xs"
+          className="absolute top-3.5 right-3.5 w-4 h-4 rounded-full bg-[#214ECF] text-white flex items-center justify-center shadow-xs"
         >
           <svg viewBox="0 0 8 6" fill="none" className="w-2.5 h-2.5">
             <path d="M1 3L3 5L7 1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -160,7 +160,7 @@ function GoogleMapEmbed() {
       {/* Overlay pin label */}
       <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3.5 py-2 rounded-xl backdrop-blur-md bg-white/95 border border-slate-200/80 shadow-xs">
         <div className="flex items-center gap-2">
-          <MapPin size={14} className="text-[#1E40AF]" />
+          <MapPin size={14} className="text-[#214ECF]" />
           <span className="text-xs font-semibold text-slate-800">Magarpatta City, Pune</span>
         </div>
         <div className="flex items-center gap-1.5">
@@ -292,11 +292,11 @@ export default function ContactPage() {
             transition={{ duration: 0.4, ease }}
             className="flex items-center gap-2 text-slate-500 text-xs font-mono mb-8"
           >
-            <Link href="/" className="hover:text-[#1E40AF] transition-colors font-medium">
+            <Link href="/" className="hover:text-[#214ECF] transition-colors font-medium">
               Home
             </Link>
-            <ChevronRight size={12} className="text-slate-400" />
-            <span className="text-[#1E40AF] font-bold">Contact</span>
+            <ChevronRight size={12} className="text-slate-500" />
+            <span className="text-[#214ECF] font-bold">Contact</span>
           </motion.nav>
 
           {/* ── Page Header Hero ── */}
@@ -307,8 +307,8 @@ export default function ContactPage() {
               transition={{ duration: 0.5, ease }}
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/70 mb-5 shadow-2xs"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-[#1E40AF] animate-pulse" />
-              <span className="text-[11px] font-mono font-bold uppercase tracking-[0.22em] text-[#1E40AF]">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#214ECF] animate-pulse" />
+              <span className="text-[11px] font-mono font-bold uppercase tracking-[0.22em] text-[#214ECF]">
                 Let's talk
               </span>
             </motion.div>
@@ -322,7 +322,7 @@ export default function ContactPage() {
             >
               Let's Build Something
               <br />
-              <span className="text-[#1E40AF]">
+              <span className="text-[#214ECF]">
                 Exceptional.
               </span>
             </motion.h1>
@@ -353,7 +353,7 @@ export default function ContactPage() {
                   const Icon = info.icon;
                   const cardContent = (
                     <div className="flex items-start gap-4 p-4 rounded-2xl border border-slate-200/90 bg-white/90 shadow-2xs hover:border-blue-300 hover:shadow-xs transition-all duration-200 group">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-blue-50/90 border border-blue-200/60 text-[#1E40AF] group-hover:scale-105 transition-transform">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-blue-50/90 border border-blue-200/60 text-[#214ECF] group-hover:scale-105 transition-transform">
                         <Icon size={16} />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -363,7 +363,7 @@ export default function ContactPage() {
                         {info.lines.map((line, idx) => (
                           <p
                             key={idx}
-                            className="text-sm font-semibold text-slate-900 leading-snug group-hover:text-[#1E40AF] transition-colors truncate"
+                            className="text-sm font-semibold text-slate-900 leading-snug group-hover:text-[#214ECF] transition-colors truncate"
                           >
                             {line}
                           </p>
@@ -388,7 +388,7 @@ export default function ContactPage() {
               {/* Enterprise Assurance Card */}
               <div className="rounded-2xl border border-slate-200/90 bg-white/90 p-5 shadow-2xs">
                 <div className="flex items-center gap-2 mb-3">
-                  <ShieldCheck size={16} className="text-[#1E40AF]" />
+                  <ShieldCheck size={16} className="text-[#214ECF]" />
                   <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-900">
                     Enterprise Assurance Standards
                   </span>
@@ -457,7 +457,7 @@ export default function ContactPage() {
                         </div>
                         <button
                           onClick={reset}
-                          className="mt-2 text-sm font-semibold text-[#1E40AF] hover:underline underline-offset-4 cursor-pointer"
+                          className="mt-2 text-sm font-semibold text-[#214ECF] hover:underline underline-offset-4 cursor-pointer"
                         >
                           Send another message
                         </button>
@@ -475,7 +475,7 @@ export default function ContactPage() {
                         {/* High-End Step Progress HUD */}
                         <div className="flex items-center justify-between pb-6 mb-8 border-b border-slate-100">
                           <div className="flex items-center gap-3">
-                            <span className="w-7 h-7 rounded-full bg-[#1E40AF] text-white text-xs font-mono font-bold flex items-center justify-center shadow-xs">
+                            <span className="w-7 h-7 rounded-full bg-[#214ECF] text-white text-xs font-mono font-bold flex items-center justify-center shadow-xs">
                               01
                             </span>
                             <div>
@@ -547,7 +547,7 @@ export default function ContactPage() {
                             type="submit"
                             whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.98 }}
-                            className="mt-4 flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-display font-bold text-sm text-white bg-[#1E40AF] hover:bg-[#1D4ED8] transition-all shadow-[0_4px_20px_rgba(30,64,175,0.25)] cursor-pointer"
+                            className="mt-4 flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-display font-bold text-sm text-white bg-[#214ECF] hover:bg-[#1A3DB3] transition-all shadow-[0_4px_20px_rgba(30,64,175,0.25)] cursor-pointer"
                           >
                             Continue
                             <ArrowRight size={15} />
@@ -567,7 +567,7 @@ export default function ContactPage() {
                         {/* High-End Step Progress HUD */}
                         <div className="flex items-center justify-between pb-6 mb-8 border-b border-slate-100">
                           <div className="flex items-center gap-3">
-                            <span className="w-7 h-7 rounded-full bg-[#1E40AF] text-white text-xs font-mono font-bold flex items-center justify-center shadow-xs">
+                            <span className="w-7 h-7 rounded-full bg-[#214ECF] text-white text-xs font-mono font-bold flex items-center justify-center shadow-xs">
                               02
                             </span>
                             <div>
@@ -595,7 +595,7 @@ export default function ContactPage() {
                           {/* Department selection */}
                           <div>
                             <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-slate-600 font-bold mb-3">
-                              Department <span className="text-[#1E40AF]">*</span>
+                              Department <span className="text-[#214ECF]">*</span>
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               {departments.map((dept) => (
@@ -675,7 +675,7 @@ export default function ContactPage() {
                               disabled={status === "submitting"}
                               whileHover={{ scale: 1.01 }}
                               whileTap={{ scale: 0.98 }}
-                              className="flex-1 flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-display font-bold text-sm text-white bg-[#1E40AF] hover:bg-[#1D4ED8] transition-all shadow-[0_4px_20px_rgba(30,64,175,0.25)] disabled:opacity-60 cursor-pointer"
+                              className="flex-1 flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-display font-bold text-sm text-white bg-[#214ECF] hover:bg-[#1A3DB3] transition-all shadow-[0_4px_20px_rgba(30,64,175,0.25)] disabled:opacity-60 cursor-pointer"
                             >
                               {status === "submitting" ? (
                                 <>
@@ -699,11 +699,11 @@ export default function ContactPage() {
               <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-500 px-2">
                 <span>Enterprise encryption · Zero data retention guarantee</span>
                 <div className="flex items-center gap-3">
-                  <Link href="/privacy-policy" className="hover:text-[#1E40AF] transition-colors">
+                  <Link href="/privacy-policy" className="hover:text-[#214ECF] transition-colors">
                     Privacy Policy
                   </Link>
                   <span>·</span>
-                  <Link href="/terms" className="hover:text-[#1E40AF] transition-colors">
+                  <Link href="/terms" className="hover:text-[#214ECF] transition-colors">
                     Terms
                   </Link>
                 </div>

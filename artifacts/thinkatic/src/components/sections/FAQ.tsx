@@ -84,7 +84,7 @@ function FAQItem({ faq, index }: { faq: typeof FAQS[0]; index: number }) {
           className="mt-0.5 flex-shrink-0 hidden sm:inline-flex px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider"
           style={{
             background: "rgba(33,78,207,0.09)",
-            color: "#1E40AF",
+            color: "#214ECF",
             border: "1px solid rgba(33,78,207,0.15)",
           }}
         >
@@ -108,7 +108,7 @@ function FAQItem({ faq, index }: { faq: typeof FAQS[0]; index: number }) {
             transition: "background 0.3s, border-color 0.3s",
           }}
         >
-          <ChevronDown size={14} style={{ color: open ? "#1E40AF" : "#64748B" }} />
+          <ChevronDown size={14} style={{ color: open ? "#214ECF" : "#64748B" }} />
         </motion.div>
       </button>
 
@@ -161,7 +161,7 @@ export function FAQ() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease }}
             className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] mb-5"
-            style={{ color: "#1E40AF" }}
+            style={{ color: "#214ECF" }}
           >
             FAQ
           </motion.p>

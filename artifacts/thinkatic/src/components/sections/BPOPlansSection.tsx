@@ -22,7 +22,7 @@ export function BPOPlansSection() {
             </span>
           </div>
           <h2 id="bpo-plans-title" className="font-display font-black text-3xl sm:text-4xl md:text-5xl text-slate-900 tracking-tight leading-[1.1] mb-5">
-            BPO Plans for <span className="bg-gradient-to-r from-[#1E40AF] via-[#214ECF] to-[#60A5FA] bg-clip-text text-transparent">Operational Scale</span>
+            BPO Plans for <span className="bg-gradient-to-r from-[#214ECF] via-[#214ECF] to-[#2D5FE8] bg-clip-text text-transparent">Operational Scale</span>
           </h2>
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
             A structured outsourcing partnership for teams that need the people, processes, technology, and operational support to scale with confidence.
@@ -39,7 +39,7 @@ export function BPOPlansSection() {
               transition={{ duration: 0.6, ease, delay: 0.1 * index }}
               className={`relative rounded-xl p-7 sm:p-8 flex flex-col bg-white transition-all duration-300 ${
                 plan.isPopular
-                  ? "border-2 border-[#1E40AF] shadow-lg ring-4 ring-blue-500/10"
+                  ? "border-2 border-[#214ECF] shadow-lg ring-4 ring-blue-500/10"
                   : "border border-slate-200 shadow-xs hover:border-slate-300 hover:shadow-md"
               }`}
             >
@@ -48,7 +48,7 @@ export function BPOPlansSection() {
                   BPO PLAN {String(index + 1).padStart(2, "0")}
                 </span>
                 {plan.isPopular && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-bold bg-[#1E40AF] text-white shadow-2xs">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-bold bg-[#214ECF] text-white shadow-2xs">
                     <Star size={11} className="fill-white" />
                     MOST POPULAR
                   </span>
@@ -59,7 +59,7 @@ export function BPOPlansSection() {
                 <h3 className="font-display font-bold text-2xl sm:text-3xl text-slate-900 tracking-tight mb-2">
                   {plan.name}
                 </h3>
-                <div className="font-display font-black text-3xl sm:text-4xl text-[#1E40AF] tracking-tight mb-4">
+                <div className="font-display font-black text-3xl sm:text-4xl text-[#214ECF] tracking-tight mb-4">
                   {plan.priceFormatted}
                 </div>
                 <div className="flex flex-wrap gap-2 text-xs font-semibold text-slate-700">
@@ -75,11 +75,11 @@ export function BPOPlansSection() {
                 <div className="space-y-5">
                   {plan.featureGroups.map((group) => (
                     <div key={group.title}>
-                      <h4 className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-[#1E40AF]">{group.title}</h4>
+                      <h4 className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-[#214ECF]">{group.title}</h4>
                       <ul className="space-y-2.5">
                         {group.items.map((item) => (
                           <li key={item} className="flex items-start gap-2.5 text-xs text-slate-800 font-medium">
-                            <CheckCircle2 size={15} className="text-[#1E40AF] shrink-0 mt-0.5" />
+                            <CheckCircle2 size={15} className="text-[#214ECF] shrink-0 mt-0.5" />
                             <span className="leading-snug">{item}</span>
                           </li>
                         ))}
@@ -87,7 +87,7 @@ export function BPOPlansSection() {
                     </div>
                   ))}
                   <div className="border-t border-slate-100 pt-4">
-                    <h4 className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-[#1E40AF]">Live Project Portfolio Access</h4>
+                    <h4 className="mb-2 text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-[#214ECF]">Live Project Portfolio Access</h4>
                     <p className="text-xs font-medium leading-snug text-slate-800">{plan.portfolioAccess}</p>
                   </div>
                 </div>

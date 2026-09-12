@@ -53,7 +53,7 @@ export default function AdminLoginPage() {
         className="absolute inset-0 pointer-events-none opacity-50"
         style={{ backgroundImage: "linear-gradient(rgba(71,163,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(71,163,255,0.06) 1px, transparent 1px)", backgroundSize: "48px 48px" }}
       />
-      <div className="absolute -top-48 -right-40 w-[560px] h-[560px] rounded-full border border-blue-400/10 pointer-events-none" />
+      <div className="absolute -top-48 -right-40 w-[560px] h-[560px] rounded-full border border-primary/10 pointer-events-none" />
       <motion.div
         initial={{ opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
@@ -181,7 +181,7 @@ export default function AdminLoginPage() {
           </form>
         </div>
 
-        <p className="text-center mt-6 text-xs text-slate-400">
+        <p className="text-center mt-6 text-xs text-slate-500">
           Thinkatic Admin · Restricted Access
         </p>
       </motion.div>

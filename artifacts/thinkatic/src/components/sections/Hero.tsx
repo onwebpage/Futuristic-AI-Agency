@@ -25,7 +25,7 @@ const CERT_BADGES = [
 ];
 
 const ARCHITECTURE_METRICS = [
-  { value: '99.99%', label: 'Cloud Uptime SLA', color: '#1E40AF', sub: 'High Availability' },
+  { value: '99.99%', label: 'Cloud Uptime SLA', color: '#214ECF', sub: 'High Availability' },
   { value: 'Zero Trust', label: 'Security Baseline', color: '#059669', sub: 'NIST & SOC 2' },
   { value: '2B+', label: 'Annual Operations', color: '#7C3AED', sub: 'Mission-Critical' },
   { value: '<25ms', label: 'Platform Latency', color: '#D97706', sub: 'Real-Time Edge' },
@@ -72,8 +72,8 @@ export function Hero() {
         >
           <line x1="0" y1="144" x2="100%" y2="144" stroke="#0F172A" strokeWidth="1" />
           <line x1="0" y1="576" x2="100%" y2="576" stroke="#0F172A" strokeWidth="1" strokeDasharray="6 6" />
-          <circle cx="50%" cy="144" r="3" fill="#1E40AF" />
-          <circle cx="75%" cy="576" r="3" fill="#1E40AF" />
+          <circle cx="50%" cy="144" r="3" fill="#214ECF" />
+          <circle cx="75%" cy="576" r="3" fill="#214ECF" />
         </svg>
 
         {/* Subtle bottom division */}
@@ -94,7 +94,7 @@ export function Hero() {
           >
             {/* Technical Eyebrow Badge */}
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-md border border-slate-200 bg-slate-50/80 mb-6 shadow-2xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#1E40AF] animate-pulse" aria-hidden="true" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#214ECF] animate-pulse" aria-hidden="true" />
               <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-slate-800 font-bold">
                 Enterprise Technology Transformation Partner
               </span>
@@ -105,7 +105,7 @@ export function Hero() {
               <span className="block text-4xl sm:text-5xl lg:text-[4rem] xl:text-[4.25rem] text-slate-900">
                 {HERO_LINES[0]}
               </span>
-              <span className="block text-4xl sm:text-5xl lg:text-[4rem] xl:text-[4.25rem] text-[#1E40AF] mt-1 mb-1">
+              <span className="block text-4xl sm:text-5xl lg:text-[4rem] xl:text-[4.25rem] text-[#214ECF] mt-1 mb-1">
                 {HERO_LINES[1]}
               </span>
               <span className="block text-3xl sm:text-4xl lg:text-[3.25rem] xl:text-[3.5rem] text-slate-900 font-bold tracking-tight">
@@ -134,7 +134,7 @@ export function Hero() {
               className="w-full max-w-xl mb-8"
             >
               <div className="flex items-center gap-2 mb-2.5">
-                <Terminal size={12} className="text-[#1E40AF]" />
+                <Terminal size={12} className="text-[#214ECF]" />
                 <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-500">
                   Core Engineering Disciplines
                 </span>
@@ -143,9 +143,9 @@ export function Hero() {
                 {CAPABILITIES.map(({ label, icon: Icon }) => (
                   <div
                     key={label}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white border border-slate-200/90 text-xs font-mono font-medium text-slate-800 transition-all hover:border-[#93C5FD] hover:text-[#1E40AF] cursor-default shadow-2xs"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white border border-slate-200/90 text-xs font-mono font-medium text-slate-800 transition-all hover:border-[#93C5FD] hover:text-[#214ECF] cursor-default shadow-2xs"
                   >
-                    <Icon size={12} className="text-[#1E40AF]" />
+                    <Icon size={12} className="text-[#214ECF]" />
                     <span>{label}</span>
                   </div>
                 ))}
@@ -161,7 +161,7 @@ export function Hero() {
             >
               <Link href="/contact">
                 <button
-                  className="h-12 px-7 rounded-xl font-bold text-white text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 transition-all duration-200 hover:bg-[#1D4ED8] bg-[#1E40AF] cursor-pointer shadow-xs hover:shadow-sm"
+                  className="h-12 px-7 rounded-xl font-bold text-white text-xs tracking-wider uppercase flex items-center justify-center gap-2.5 transition-all duration-200 hover:bg-[#1A3DB3] bg-[#214ECF] cursor-pointer shadow-xs hover:shadow-sm"
                 >
                   <CalendarDays size={15} aria-hidden="true" />
                   Plan Your Transformation
@@ -172,7 +172,7 @@ export function Hero() {
                   className="h-12 px-7 rounded-xl font-bold text-slate-800 text-xs tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-200 hover:bg-slate-50 hover:border-slate-300 border border-slate-200 bg-white cursor-pointer shadow-2xs"
                 >
                   View Enterprise Plans
-                  <ArrowRight size={14} className="text-[#1E40AF]" aria-hidden="true" />
+                  <ArrowRight size={14} className="text-[#214ECF]" aria-hidden="true" />
                 </button>
               </Link>
             </motion.div>
@@ -186,12 +186,12 @@ export function Hero() {
             >
               {CERT_BADGES.map(({ icon: Icon, label }, i) => (
                 <div key={label} className="flex items-center gap-1.5 text-slate-600">
-                  <Icon size={13} className="text-[#1E40AF]" aria-hidden="true" />
+                  <Icon size={13} className="text-[#214ECF]" aria-hidden="true" />
                   <span className="text-[11px] font-mono uppercase tracking-wider text-slate-600 font-semibold">
                     {label}
                   </span>
                   {i < CERT_BADGES.length - 1 && (
-                    <span className="hidden sm:inline-block ml-3 text-slate-300 select-none">·</span>
+                    <span className="hidden sm:inline-block ml-3 text-slate-400 select-none">·</span>
                   )}
                 </div>
               ))}
@@ -214,15 +214,15 @@ export function Hero() {
               {/* Panel A: Mission-Critical Telemetry Console */}
               <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-xs relative overflow-hidden">
                 {/* Corner registration crosshairs */}
-                <div className="absolute top-2 left-2 text-slate-300 font-mono text-[9px] select-none">+</div>
-                <div className="absolute top-2 right-2 text-slate-300 font-mono text-[9px] select-none">+</div>
+                <div className="absolute top-2 left-2 text-slate-400 font-mono text-[9px] select-none">+</div>
+                <div className="absolute top-2 right-2 text-slate-400 font-mono text-[9px] select-none">+</div>
 
                 {/* Header Strip */}
                 <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
                   <div className="flex items-center gap-2">
-                    <Activity size={14} className="text-[#1E40AF]" />
+                    <Activity size={14} className="text-[#214ECF]" />
                     <div>
-                      <p className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#1E40AF]">
+                      <p className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#214ECF]">
                         Enterprise Architecture
                       </p>
                       <h3 className="text-slate-900 font-display text-base font-bold leading-tight">
@@ -264,7 +264,7 @@ export function Hero() {
               <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs relative overflow-hidden">
                 <div className="flex items-center justify-between mb-3 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-500">
                   <span>Active Production Pipelines</span>
-                  <span className="text-[#1E40AF]">Live Signal</span>
+                  <span className="text-[#214ECF]">Live Signal</span>
                 </div>
 
                 <div className="space-y-2">
@@ -284,7 +284,7 @@ export function Hero() {
                           </div>
                         </div>
                       </div>
-                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-blue-50 text-[#1E40AF] border border-blue-200/70">
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-blue-50 text-[#214ECF] border border-blue-200/70">
                         {item.status}
                       </span>
                     </div>
@@ -294,9 +294,9 @@ export function Hero() {
 
               {/* Panel C: Executive Endorsement Anchor */}
               <div className="rounded-xl border border-slate-200 bg-slate-50/90 p-4.5 shadow-2xs relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-1 h-full bg-[#1E40AF]" />
+                <div className="absolute top-0 left-0 w-1 h-full bg-[#214ECF]" />
                 <div className="flex items-start gap-3 pl-1">
-                  <div className="w-8 h-8 rounded-md flex items-center justify-center font-mono font-bold text-xs border border-[#1E40AF]/30 bg-[#1E40AF]/10 text-[#1E40AF] shrink-0">
+                  <div className="w-8 h-8 rounded-md flex items-center justify-center font-mono font-bold text-xs border border-[#214ECF]/30 bg-[#214ECF]/10 text-[#214ECF] shrink-0">
                     CTO
                   </div>
                   <div>

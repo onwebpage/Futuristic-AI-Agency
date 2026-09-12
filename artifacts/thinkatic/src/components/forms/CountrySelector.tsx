@@ -123,7 +123,7 @@ export function CountrySelector({
           className={cn(
             "w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-sm transition-all duration-200 bg-white text-slate-900 cursor-pointer shadow-2xs",
             open
-              ? "border-[#1E40AF] ring-2 ring-[#1E40AF]/15"
+              ? "border-[#214ECF] ring-2 ring-[#214ECF]/15"
               : error
                 ? "border-red-500/50"
                 : "border-slate-200 hover:border-slate-300 hover:bg-slate-50/60",
@@ -136,7 +136,7 @@ export function CountrySelector({
               <span className="text-slate-500 text-xs font-mono">{selected.dialCode}</span>
             </>
           ) : (
-            <span className="text-slate-400 flex-1 text-left">{placeholder}</span>
+            <span className="text-slate-500 flex-1 text-left">{placeholder}</span>
           )}
           <ChevronDown
             size={14}
@@ -156,16 +156,16 @@ export function CountrySelector({
               {/* Search */}
               <div className="p-2 border-b border-slate-100 bg-slate-50/60">
                 <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-slate-200">
-                  <Search size={13} className="text-slate-400 shrink-0" />
+                  <Search size={13} className="text-slate-500 shrink-0" />
                   <input
                     ref={searchRef}
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                     placeholder="Search countries..."
-                    className="bg-transparent text-sm text-slate-900 placeholder:text-slate-400 flex-1 outline-none"
+                    className="bg-transparent text-sm text-slate-900 placeholder:text-slate-500 flex-1 outline-none"
                   />
                   {search && (
-                    <button onClick={() => setSearch("")} className="text-slate-400 hover:text-slate-600">
+                    <button onClick={() => setSearch("")} className="text-slate-500 hover:text-slate-600">
                       <X size={12} />
                     </button>
                   )}
@@ -189,16 +189,16 @@ export function CountrySelector({
                       className={cn(
                         "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm transition-colors text-left cursor-pointer",
                         country.code === value
-                          ? "bg-blue-50 text-[#1E40AF] font-semibold"
+                          ? "bg-blue-50 text-[#214ECF] font-semibold"
                           : "hover:bg-slate-50 text-slate-700 hover:text-slate-900 font-normal",
                       )}
                     >
                       <span className="text-lg leading-none">{country.flag}</span>
                       <span className="flex-1">{country.name}</span>
-                      <span className="text-slate-400 text-xs font-mono">{country.dialCode}</span>
+                      <span className="text-slate-500 text-xs font-mono">{country.dialCode}</span>
                       {country.code === value && (
                         <svg viewBox="0 0 10 8" fill="none" className="w-3 h-3 shrink-0">
-                          <path d="M1 4L3.5 6.5L9 1" stroke="#1E40AF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M1 4L3.5 6.5L9 1" stroke="#214ECF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       )}
                     </button>

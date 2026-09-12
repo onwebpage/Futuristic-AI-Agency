@@ -87,7 +87,7 @@ export default function PricingPage() {
 
             <h1 className="font-display font-black text-3xl sm:text-5xl md:text-6xl tracking-tight leading-[1.08] mb-5 text-slate-900">
               Architectural Engagements &amp; <br className="hidden sm:inline" />
-              <span className="bg-gradient-to-r from-[#1E40AF] via-[#214ECF] to-[#60A5FA] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#214ECF] via-[#214ECF] to-[#2D5FE8] bg-clip-text text-transparent">
                 Transparent Investment
               </span>
             </h1>
@@ -99,18 +99,18 @@ export default function PricingPage() {
             {/* Search Filter Box */}
             <div className="w-full max-w-md relative mb-8">
               <div className="relative flex items-center">
-                <Search size={16} className="absolute left-4 text-slate-400 pointer-events-none" />
+                <Search size={16} className="absolute left-4 text-slate-500 pointer-events-none" />
                 <input
                   type="text"
                   placeholder="Filter by capability, e.g. RAG, Zero Trust, Cloud, ETL..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3 rounded-full text-xs sm:text-sm bg-white border border-[#DCE5FF] shadow-sm focus:outline-none focus:border-[#214ECF] focus:ring-2 focus:ring-[#214ECF]/15 transition-all text-slate-900 placeholder:text-slate-400"
+                  className="w-full pl-11 pr-4 py-3 rounded-full text-xs sm:text-sm bg-white border border-[#DCE5FF] shadow-sm focus:outline-none focus:border-[#214ECF] focus:ring-2 focus:ring-[#214ECF]/15 transition-all text-slate-900 placeholder:text-slate-500"
                 />
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery("")}
-                    className="absolute right-3 text-xs text-slate-400 hover:text-slate-600 px-2 py-1"
+                    className="absolute right-3 text-xs text-slate-500 hover:text-slate-600 px-2 py-1"
                   >
                     Clear
                   </button>
@@ -194,7 +194,7 @@ export default function PricingPage() {
           {/* ── 16 Plans Grid ── */}
           {filteredPlans.length === 0 ? (
             <div className="text-center py-20 bg-slate-50 rounded-3xl border border-dashed border-slate-300 mb-16">
-              <Search size={32} className="text-slate-400 mx-auto mb-3" />
+              <Search size={32} className="text-slate-500 mx-auto mb-3" />
               <h3 className="font-bold text-slate-800 text-base mb-1">No matching plans found</h3>
               <p className="text-xs text-slate-500 mb-4">Try clearing your search query or selecting a different category.</p>
               <button
@@ -219,7 +219,7 @@ export default function PricingPage() {
                     transition={{ duration: 0.4, ease: smoothEase }}
                     className={`relative rounded-xl p-7 flex flex-col justify-between transition-all duration-300 bg-white border ${
                       isPopular
-                        ? "border-2 border-[#1E40AF] shadow-lg ring-4 ring-blue-500/10"
+                        ? "border-2 border-[#214ECF] shadow-lg ring-4 ring-blue-500/10"
                         : "border-slate-200 shadow-xs hover:border-slate-300 hover:shadow-md"
                     }`}
                   >
@@ -229,14 +229,14 @@ export default function PricingPage() {
                         <span className="text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-slate-500">
                           {plan.planNumber}
                         </span>
-                        <span className="text-[10px] font-medium text-slate-400">·</span>
-                        <span className="text-[10px] font-mono font-semibold text-[#1E40AF] uppercase">
+                        <span className="text-[10px] font-medium text-slate-500">·</span>
+                        <span className="text-[10px] font-mono font-semibold text-[#214ECF] uppercase">
                           {plan.categoryLabel}
                         </span>
                       </div>
 
                       {isPopular ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-mono font-bold bg-[#1E40AF] text-white shadow-2xs">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-mono font-bold bg-[#214ECF] text-white shadow-2xs">
                           <Star size={10} className="fill-white" />
                           Most Popular
                         </span>
@@ -254,7 +254,7 @@ export default function PricingPage() {
                       </h3>
                       <div className="flex items-baseline gap-2 mb-3">
                         <span className="text-xs font-mono uppercase tracking-wider text-slate-600 font-semibold">Starting at</span>
-                        <span className="font-display font-black text-3xl text-[#1E40AF] tracking-tight">
+                        <span className="font-display font-black text-3xl text-[#214ECF] tracking-tight">
                           {plan.startingPriceFormatted}
                         </span>
                       </div>
@@ -281,7 +281,7 @@ export default function PricingPage() {
                       <ul className="space-y-2">
                         {plan.keyOutcomes.map((outcome, idx) => (
                           <li key={idx} className="flex items-start gap-2 text-xs text-slate-800 font-medium">
-                            <CheckCircle2 size={14} className="text-[#1E40AF] shrink-0 mt-0.5" />
+                            <CheckCircle2 size={14} className="text-[#214ECF] shrink-0 mt-0.5" />
                             <span className="leading-snug">{outcome}</span>
                           </li>
                         ))}
@@ -296,7 +296,7 @@ export default function PricingPage() {
                         </span>
                         <button
                           onClick={() => toggleExpand(plan.id)}
-                          className="text-[11px] font-semibold text-[#1E40AF] flex items-center gap-1 hover:underline cursor-pointer"
+                          className="text-[11px] font-semibold text-[#214ECF] flex items-center gap-1 hover:underline cursor-pointer"
                         >
                           {isExpanded ? (
                             <>Hide details <ChevronUp size={12} /></>
@@ -309,12 +309,12 @@ export default function PricingPage() {
                       <ul className="space-y-1.5">
                         {(isExpanded ? plan.includes : plan.includes.slice(0, 4)).map((item, i) => (
                           <li key={i} className="flex items-start gap-2 text-[11px] text-slate-700">
-                            <span className="text-[#1E40AF] font-bold text-xs leading-none">•</span>
+                            <span className="text-[#214ECF] font-bold text-xs leading-none">•</span>
                             <span className="leading-snug">{item}</span>
                           </li>
                         ))}
                         {!isExpanded && plan.includes.length > 4 && (
-                          <li className="text-[10px] font-mono text-[#1E40AF] pt-1 font-semibold">
+                          <li className="text-[10px] font-mono text-[#214ECF] pt-1 font-semibold">
                             + {plan.includes.length - 4} more deliverables
                           </li>
                         )}
@@ -326,7 +326,7 @@ export default function PricingPage() {
                       <PayPalButton packageId={plan.id} />
 
                       <Link href={`/services/${plan.id}`}>
-                        <button className="w-full py-2 px-4 rounded-lg text-[11px] font-semibold text-slate-600 hover:text-[#1E40AF] hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 cursor-pointer">
+                        <button className="w-full py-2 px-4 rounded-lg text-[11px] font-semibold text-slate-600 hover:text-[#214ECF] hover:bg-slate-100 transition-colors flex items-center justify-center gap-1 cursor-pointer">
                           <span>Review technical architecture</span>
                           <ArrowUpRight size={12} />
                         </button>
@@ -343,7 +343,7 @@ export default function PricingPage() {
           {/* ── Section 6: Mandatory Pricing Disclaimer ── */}
           <div className="relative rounded-xl p-8 sm:p-12 border border-slate-200 bg-white shadow-2xs overflow-hidden">
             <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
-              <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#1E40AF] mb-5">
+              <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#214ECF] mb-5">
                 <HelpCircle size={22} />
               </div>
 
@@ -355,13 +355,13 @@ export default function PricingPage() {
                 Our plans provide a starting point. Final investment depends on your technology environment, business requirements, integrations, scale and transformation goals.
               </p>
 
-              <p className="text-sm font-semibold text-[#1E40AF] mb-8">
+              <p className="text-sm font-semibold text-[#214ECF] mb-8">
                 Have a complex technology challenge? Let's build the right solution together.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-4">
                 <Link href="/contact">
-                  <button className="w-full sm:w-auto h-12 px-7 rounded-xl font-bold text-white text-xs tracking-wider uppercase bg-[#1E40AF] hover:bg-[#1D4ED8] shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer">
+                  <button className="w-full sm:w-auto h-12 px-7 rounded-xl font-bold text-white text-xs tracking-wider uppercase bg-[#214ECF] hover:bg-[#1A3DB3] shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer">
                     <MessageSquare size={15} />
                     Discuss Your Project
                   </button>

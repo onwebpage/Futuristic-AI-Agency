@@ -932,7 +932,7 @@ export default function UserDashboardPage() {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <RefreshCw className="animate-spin text-blue-600" size={32} />
+          <RefreshCw className="animate-spin text-primary" size={32} />
           <p className="text-sm text-slate-500 font-medium">Connecting to Thinkatic Cloud...</p>
         </div>
       </div>
@@ -947,7 +947,7 @@ export default function UserDashboardPage() {
           {/* Logo & Portal Label */}
           <Link href="/" className="flex items-center gap-3 min-w-0">
             <BrandLogo larger />
-            <span className="text-xs font-mono tracking-widest text-blue-600 uppercase font-bold border-l border-slate-300 pl-3 flex-shrink-0">
+            <span className="text-xs font-mono tracking-widest text-primary uppercase font-bold border-l border-slate-300 pl-3 flex-shrink-0">
                 Client Portal
             </span>
           </Link>
@@ -960,13 +960,13 @@ export default function UserDashboardPage() {
               className="p-2 text-slate-500 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors flex-shrink-0"
               title="Refresh Data"
             >
-              <RefreshCw size={16} className={refreshing ? "animate-spin text-blue-600" : ""} />
+              <RefreshCw size={16} className={refreshing ? "animate-spin text-primary" : ""} />
             </button>
 
             <div className="h-8 w-px bg-slate-200 flex-shrink-0" />
 
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold uppercase flex-shrink-0">
+              <div className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold uppercase flex-shrink-0">
                 {profile?.fullName ? profile.fullName.charAt(0) : "U"}
               </div>
               <div className="hidden sm:block text-left min-w-0">
@@ -1016,7 +1016,7 @@ export default function UserDashboardPage() {
                   onClick={() => setTab(item.id as any)}
                   className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                     isActive
-                      ? "bg-blue-600 text-white shadow-xs"
+                      ? "bg-primary text-white shadow-xs"
                       : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                   }`}
                 >
@@ -1028,7 +1028,7 @@ export default function UserDashboardPage() {
                     <span
                       className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
                         isActive
-                          ? "bg-blue-500 text-white"
+                          ? "bg-primary/50 text-white"
                           : item.badge === "Verified"
                           ? "bg-emerald-100 text-emerald-700"
                           : item.badge === "Required"
@@ -1045,10 +1045,10 @@ export default function UserDashboardPage() {
           </nav>
 
           {/* Quick Help Card */}
-          <div className="mt-6 bg-gradient-to-br from-blue-900 to-indigo-950 rounded-2xl p-5 text-white shadow-md">
-            <Sparkles size={20} className="text-blue-400 mb-2" />
+          <div className="mt-6 bg-gradient-to-br from-primary to-indigo-950 rounded-2xl p-5 text-white shadow-md">
+            <Sparkles size={20} className="text-primary/60 mb-2" />
             <div className="text-xs font-bold mb-1">Dedicated Enterprise Support</div>
-            <p className="text-[11px] text-blue-200 leading-relaxed mb-3">
+            <p className="text-[11px] text-primary/40 leading-relaxed mb-3">
               Need custom enterprise architecture or 24/7 SLA governance?
             </p>
             <Link
@@ -1102,7 +1102,7 @@ export default function UserDashboardPage() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setTab("plans")}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-xs transition-colors cursor-pointer"
+                    className="px-4 py-2 bg-primary hover:bg-primary text-white rounded-xl text-xs font-bold shadow-xs transition-colors cursor-pointer"
                   >
                     Browse 16 Plans
                   </button>
@@ -1119,9 +1119,9 @@ export default function UserDashboardPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {/* Card 1: Wallet Balance */}
                 <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-                  <div className="flex items-center justify-between mb-3 text-slate-400">
+                  <div className="flex items-center justify-between mb-3 text-slate-500">
                     <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Wallet Balance</span>
-                    <Wallet size={16} className="text-blue-600" />
+                    <Wallet size={16} className="text-primary" />
                   </div>
                   <div className="text-2xl font-black text-slate-900">
                     ${wallet?.balance.toLocaleString("en-US", { minimumFractionDigits: 2 }) || "0.00"}
@@ -1131,7 +1131,7 @@ export default function UserDashboardPage() {
                     {bpoEligible && (
                       <button
                         onClick={() => setTab("wallet")}
-                        className="text-blue-600 font-semibold hover:underline"
+                        className="text-primary font-semibold hover:underline"
                       >
                         Payout →
                       </button>
@@ -1141,7 +1141,7 @@ export default function UserDashboardPage() {
 
                 {/* Card 2: Active Plan */}
                 <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-                  <div className="flex items-center justify-between mb-3 text-slate-400">
+                  <div className="flex items-center justify-between mb-3 text-slate-500">
                     <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Active Service</span>
                     <Layers size={16} className="text-indigo-600" />
                   </div>
@@ -1161,7 +1161,7 @@ export default function UserDashboardPage() {
 
                 {/* Card 3: Today's Shift */}
                 <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-                  <div className="flex items-center justify-between mb-3 text-slate-400">
+                  <div className="flex items-center justify-between mb-3 text-slate-500">
                     <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Shift Status</span>
                     <Clock size={16} className="text-amber-600" />
                   </div>
@@ -1185,7 +1185,7 @@ export default function UserDashboardPage() {
 
                 {/* Card 4: KYC Status */}
                 <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-                  <div className="flex items-center justify-between mb-3 text-slate-400">
+                  <div className="flex items-center justify-between mb-3 text-slate-500">
                     <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Identity KYC</span>
                     <ShieldCheck size={16} className="text-emerald-600" />
                   </div>
@@ -1205,8 +1205,8 @@ export default function UserDashboardPage() {
               </div>
 
               <section className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-                <div className="flex items-center justify-between mb-3"><h2 className="text-sm font-bold text-slate-900">Notifications</h2><div className="flex items-center gap-3"><button onClick={async () => { await authFetch("/user/notifications/read-all", { method: "POST" }); setNotifications((items) => items.map((item) => ({ ...item, read_at: new Date().toISOString() }))); }} className="text-[11px] font-semibold text-blue-600">Mark all read</button><span className="text-[11px] text-slate-500">{notifications.length} total</span></div></div>
-                {notifications.length === 0 ? <p className="text-xs text-slate-500 py-4">No project notifications yet.</p> : <div className="space-y-2">{notifications.slice(0, 5).map((notification) => <button onClick={async () => { await authFetch(`/user/notifications/${notification.id}/read`, { method: "POST" }); setNotifications((items) => items.map((item) => item.id === notification.id ? { ...item, read_at: new Date().toISOString() } : item)); }} key={notification.id} className={`block w-full rounded-xl border p-3 text-left ${notification.read_at ? "border-slate-100 bg-slate-50" : "border-blue-100 bg-blue-50"}`}><div className="flex items-start justify-between gap-3"><p className="text-xs font-semibold text-slate-800">{notification.title}</p><time className="text-[10px] text-slate-400 whitespace-nowrap">{new Date(notification.created_at).toLocaleDateString()}</time></div><p className="text-xs text-slate-500 mt-1">{notification.body}</p></button>)}</div>}
+                <div className="flex items-center justify-between mb-3"><h2 className="text-sm font-bold text-slate-900">Notifications</h2><div className="flex items-center gap-3"><button onClick={async () => { await authFetch("/user/notifications/read-all", { method: "POST" }); setNotifications((items) => items.map((item) => ({ ...item, read_at: new Date().toISOString() }))); }} className="text-[11px] font-semibold text-primary">Mark all read</button><span className="text-[11px] text-slate-500">{notifications.length} total</span></div></div>
+                {notifications.length === 0 ? <p className="text-xs text-slate-500 py-4">No project notifications yet.</p> : <div className="space-y-2">{notifications.slice(0, 5).map((notification) => <button onClick={async () => { await authFetch(`/user/notifications/${notification.id}/read`, { method: "POST" }); setNotifications((items) => items.map((item) => item.id === notification.id ? { ...item, read_at: new Date().toISOString() } : item)); }} key={notification.id} className={`block w-full rounded-xl border p-3 text-left ${notification.read_at ? "border-slate-100 bg-slate-50" : "border-primary/10 bg-primary/5"}`}><div className="flex items-start justify-between gap-3"><p className="text-xs font-semibold text-slate-800">{notification.title}</p><time className="text-[10px] text-slate-500 whitespace-nowrap">{new Date(notification.created_at).toLocaleDateString()}</time></div><p className="text-xs text-slate-500 mt-1">{notification.body}</p></button>)}</div>}
               </section>
 
               {/* Recent Ledger & Attendance Previews */}
@@ -1217,13 +1217,13 @@ export default function UserDashboardPage() {
                     <h2 className="text-sm font-bold text-slate-900">Recent Attendance Logs</h2>
                     <button
                       onClick={() => setTab("attendance")}
-                      className="text-xs font-semibold text-blue-600 hover:underline"
+                      className="text-xs font-semibold text-primary hover:underline"
                     >
                       View All
                     </button>
                   </div>
                   {attendance.length === 0 ? (
-                    <p className="text-xs text-slate-400 py-6 text-center">No attendance logged yet.</p>
+                    <p className="text-xs text-slate-500 py-6 text-center">No attendance logged yet.</p>
                   ) : (
                     <div className="space-y-2.5">
                       {attendance.slice(0, 4).map((rec) => (
@@ -1232,7 +1232,7 @@ export default function UserDashboardPage() {
                           className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs"
                         >
                           <div className="flex items-center gap-2.5">
-                            <Calendar size={14} className="text-slate-400" />
+                            <Calendar size={14} className="text-slate-500" />
                             <span className="font-semibold text-slate-800">{rec.date}</span>
                           </div>
                           <div className="flex items-center gap-3">
@@ -1253,13 +1253,13 @@ export default function UserDashboardPage() {
                     <h2 className="text-sm font-bold text-slate-900">Wallet Activity</h2>
                     <button
                       onClick={() => setTab("wallet")}
-                      className="text-xs font-semibold text-blue-600 hover:underline"
+                      className="text-xs font-semibold text-primary hover:underline"
                     >
                       View Wallet
                     </button>
                   </div>
                   {transactions.length === 0 ? (
-                    <p className="text-xs text-slate-400 py-6 text-center">No wallet activity recorded.</p>
+                    <p className="text-xs text-slate-500 py-6 text-center">No wallet activity recorded.</p>
                   ) : (
                     <div className="space-y-2.5">
                       {transactions.slice(0, 4).map((tx) => (
@@ -1269,13 +1269,13 @@ export default function UserDashboardPage() {
                         >
                           <div>
                             <div className="font-semibold text-slate-800">{tx.description}</div>
-                            <div className="text-[10px] text-slate-400">{new Date(tx.createdAt).toLocaleDateString()}</div>
+                            <div className="text-[10px] text-slate-500">{new Date(tx.createdAt).toLocaleDateString()}</div>
                           </div>
                           <div className="text-right">
                             <div className={`font-bold ${tx.type === "deposit" || tx.type === "commission" ? "text-emerald-600" : "text-slate-900"}`}>
                               {tx.type === "withdrawal" ? "-" : "+"}${tx.amount.toFixed(2)}
                             </div>
-                            <span className="text-[10px] text-slate-400 capitalize">{tx.status}</span>
+                            <span className="text-[10px] text-slate-500 capitalize">{tx.status}</span>
                           </div>
                         </div>
                       ))}
@@ -1290,7 +1290,7 @@ export default function UserDashboardPage() {
           {tab === "projects" && (
             <div className="space-y-6">
               <div><h1 className="text-xl font-bold text-slate-900">Projects</h1><p className="text-xs text-slate-500 mt-0.5">Track delivery progress, milestones, tasks, and client-visible deliverables.</p></div>
-              {projectsLoading ? <div className="py-16 text-center text-sm text-slate-500">Loading projects...</div> : projects.length === 0 ? <div className="bg-white rounded-2xl border border-slate-200 p-10 text-center shadow-xs"><FolderKanban size={28} className="mx-auto mb-3 text-slate-300" /><p className="text-sm font-semibold text-slate-700">No projects assigned yet</p><p className="text-xs text-slate-500 mt-1">Your project workspace will appear here when a project is assigned.</p></div> : <div className="space-y-4">{selectedProject ? <div className="space-y-5"><button onClick={() => setSelectedProject(null)} className="text-xs font-bold text-blue-700">← All Projects</button><div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs"><div className="flex flex-wrap items-start justify-between gap-3"><div><span className="font-mono text-[10px] text-blue-700">PROJECT #{selectedProject.id}</span><h2 className="text-xl font-bold text-slate-900">{selectedProject.name}</h2><p className="text-xs text-slate-500">{selectedProject.project_type}</p></div><span className="px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold uppercase">{selectedProject.status.replaceAll("_", " ")}</span></div><div className="mt-5"><div className="flex justify-between text-xs font-semibold text-slate-600"><span>Overall progress</span><span>{selectedProject.progress_percent}%</span></div><div className="mt-2 h-2 rounded-full bg-slate-100 overflow-hidden"><div className="h-full bg-blue-600 rounded-full" style={{ width: `${selectedProject.progress_percent}%` }} /></div></div>{selectedProject.description && <p className="mt-5 text-sm text-slate-600 whitespace-pre-wrap">{selectedProject.description}</p>}</div><div className="grid grid-cols-1 lg:grid-cols-2 gap-5"><section className="bg-white rounded-2xl border border-slate-200 p-5"><h3 className="font-bold text-sm text-slate-900 mb-3">Milestones</h3>{(selectedProject.project_milestones || []).length === 0 ? <p className="text-xs text-slate-500">No milestones yet.</p> : <div className="space-y-3">{selectedProject.project_milestones?.map((milestone) => <div key={milestone.id} className="border-b border-slate-100 pb-3"><div className="flex justify-between gap-2"><span className="text-sm font-semibold text-slate-800">{milestone.name}</span><span className="text-[10px] uppercase font-bold text-slate-500">{milestone.status.replaceAll("_", " ")}</span></div><div className="mt-2 h-1.5 bg-slate-100 rounded-full"><div className="h-full bg-emerald-500 rounded-full" style={{ width: `${milestone.completion_percent}%` }} /></div><p className="text-[10px] text-slate-500 mt-1">{milestone.completion_percent}%{milestone.due_date ? ` · Due ${milestone.due_date}` : ""}</p></div>)}</div>}</section><section className="bg-white rounded-2xl border border-slate-200 p-5"><h3 className="font-bold text-sm text-slate-900 mb-3">Tasks</h3>{(selectedProject.project_tasks || []).length === 0 ? <p className="text-xs text-slate-500">No client-visible tasks yet.</p> : <div className="space-y-2">{selectedProject.project_tasks?.map((task) => <div key={task.id} className="flex items-center justify-between gap-3 border-b border-slate-100 pb-2"><div><p className="text-sm font-semibold text-slate-800">{task.name}</p><p className="text-[10px] text-slate-500">{task.status.replaceAll("_", " ")}{task.due_date ? ` · Due ${task.due_date}` : ""}</p></div><span className="text-[10px] font-bold uppercase text-slate-500">{task.priority}</span></div>)}</div>}</section><section className="bg-white rounded-2xl border border-slate-200 p-5"><h3 className="font-bold text-sm text-slate-900 mb-3">Deliverables</h3>{(selectedProject.project_deliverables || []).length === 0 ? <p className="text-xs text-slate-500">No deliverables yet.</p> : <div className="space-y-2">{selectedProject.project_deliverables?.map((deliverable) => <div key={deliverable.id} className="flex justify-between gap-3 border-b border-slate-100 pb-2"><span className="text-sm font-semibold text-slate-800">{deliverable.name}</span><span className="text-[10px] uppercase font-bold text-blue-700">{deliverable.status.replaceAll("_", " ")}</span></div>)}</div>}</section><section className="bg-white rounded-2xl border border-slate-200 p-5"><h3 className="font-bold text-sm text-slate-900 mb-3">Activity</h3>{(selectedProject.project_activity || []).length === 0 ? <p className="text-xs text-slate-500">No activity yet.</p> : <div className="space-y-2">{selectedProject.project_activity?.slice(0, 10).map((event) => <div key={event.id} className="flex gap-2"><Activity size={14} className="text-blue-600 shrink-0 mt-0.5" /><div><p className="text-xs text-slate-700">{event.description}</p><p className="text-[10px] text-slate-400">{new Date(event.created_at).toLocaleString()}</p></div></div>)}</div>}</section></div></div> : projects.map((project) => <button key={project.id} onClick={() => openProject(project)} className="w-full text-left bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:border-blue-300 transition-colors"><div className="flex flex-wrap items-start justify-between gap-3"><div><span className="font-mono text-[10px] text-blue-700">PROJECT #{project.id}</span><h2 className="text-base font-bold text-slate-900">{project.name}</h2><p className="text-xs text-slate-500">{project.project_type}</p></div><span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase">{project.status.replaceAll("_", " ")}</span></div><div className="mt-4"><div className="flex justify-between text-xs text-slate-500"><span>Progress</span><span>{project.progress_percent}%</span></div><div className="mt-1.5 h-2 rounded-full bg-slate-100"><div className="h-full bg-blue-600 rounded-full" style={{ width: `${project.progress_percent}%` }} /></div></div><div className="mt-3 flex flex-wrap gap-4 text-[10px] text-slate-500"><span>Start: {project.start_date || "Not set"}</span><span>Expected: {project.expected_end_date || "Not set"}</span></div></button>)}</div>}
+              {projectsLoading ? <div className="py-16 text-center text-sm text-slate-500">Loading projects...</div> : projects.length === 0 ? <div className="bg-white rounded-2xl border border-slate-200 p-10 text-center shadow-xs"><FolderKanban size={28} className="mx-auto mb-3 text-slate-500" /><p className="text-sm font-semibold text-slate-700">No projects assigned yet</p><p className="text-xs text-slate-500 mt-1">Your project workspace will appear here when a project is assigned.</p></div> : <div className="space-y-4">{selectedProject ? <div className="space-y-5"><button onClick={() => setSelectedProject(null)} className="text-xs font-bold text-primary">← All Projects</button><div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs"><div className="flex flex-wrap items-start justify-between gap-3"><div><span className="font-mono text-[10px] text-primary">PROJECT #{selectedProject.id}</span><h2 className="text-xl font-bold text-slate-900">{selectedProject.name}</h2><p className="text-xs text-slate-500">{selectedProject.project_type}</p></div><span className="px-2.5 py-1 rounded-full bg-primary/5 text-primary text-[10px] font-bold uppercase">{selectedProject.status.replaceAll("_", " ")}</span></div><div className="mt-5"><div className="flex justify-between text-xs font-semibold text-slate-600"><span>Overall progress</span><span>{selectedProject.progress_percent}%</span></div><div className="mt-2 h-2 rounded-full bg-slate-100 overflow-hidden"><div className="h-full bg-primary rounded-full" style={{ width: `${selectedProject.progress_percent}%` }} /></div></div>{selectedProject.description && <p className="mt-5 text-sm text-slate-600 whitespace-pre-wrap">{selectedProject.description}</p>}</div><div className="grid grid-cols-1 lg:grid-cols-2 gap-5"><section className="bg-white rounded-2xl border border-slate-200 p-5"><h3 className="font-bold text-sm text-slate-900 mb-3">Milestones</h3>{(selectedProject.project_milestones || []).length === 0 ? <p className="text-xs text-slate-500">No milestones yet.</p> : <div className="space-y-3">{selectedProject.project_milestones?.map((milestone) => <div key={milestone.id} className="border-b border-slate-100 pb-3"><div className="flex justify-between gap-2"><span className="text-sm font-semibold text-slate-800">{milestone.name}</span><span className="text-[10px] uppercase font-bold text-slate-500">{milestone.status.replaceAll("_", " ")}</span></div><div className="mt-2 h-1.5 bg-slate-100 rounded-full"><div className="h-full bg-emerald-500 rounded-full" style={{ width: `${milestone.completion_percent}%` }} /></div><p className="text-[10px] text-slate-500 mt-1">{milestone.completion_percent}%{milestone.due_date ? ` · Due ${milestone.due_date}` : ""}</p></div>)}</div>}</section><section className="bg-white rounded-2xl border border-slate-200 p-5"><h3 className="font-bold text-sm text-slate-900 mb-3">Tasks</h3>{(selectedProject.project_tasks || []).length === 0 ? <p className="text-xs text-slate-500">No client-visible tasks yet.</p> : <div className="space-y-2">{selectedProject.project_tasks?.map((task) => <div key={task.id} className="flex items-center justify-between gap-3 border-b border-slate-100 pb-2"><div><p className="text-sm font-semibold text-slate-800">{task.name}</p><p className="text-[10px] text-slate-500">{task.status.replaceAll("_", " ")}{task.due_date ? ` · Due ${task.due_date}` : ""}</p></div><span className="text-[10px] font-bold uppercase text-slate-500">{task.priority}</span></div>)}</div>}</section><section className="bg-white rounded-2xl border border-slate-200 p-5"><h3 className="font-bold text-sm text-slate-900 mb-3">Deliverables</h3>{(selectedProject.project_deliverables || []).length === 0 ? <p className="text-xs text-slate-500">No deliverables yet.</p> : <div className="space-y-2">{selectedProject.project_deliverables?.map((deliverable) => <div key={deliverable.id} className="flex justify-between gap-3 border-b border-slate-100 pb-2"><span className="text-sm font-semibold text-slate-800">{deliverable.name}</span><span className="text-[10px] uppercase font-bold text-primary">{deliverable.status.replaceAll("_", " ")}</span></div>)}</div>}</section><section className="bg-white rounded-2xl border border-slate-200 p-5"><h3 className="font-bold text-sm text-slate-900 mb-3">Activity</h3>{(selectedProject.project_activity || []).length === 0 ? <p className="text-xs text-slate-500">No activity yet.</p> : <div className="space-y-2">{selectedProject.project_activity?.slice(0, 10).map((event) => <div key={event.id} className="flex gap-2"><Activity size={14} className="text-primary shrink-0 mt-0.5" /><div><p className="text-xs text-slate-700">{event.description}</p><p className="text-[10px] text-slate-500">{new Date(event.created_at).toLocaleString()}</p></div></div>)}</div>}</section></div></div> : projects.map((project) => <button key={project.id} onClick={() => openProject(project)} className="w-full text-left bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:border-blue-300 transition-colors"><div className="flex flex-wrap items-start justify-between gap-3"><div><span className="font-mono text-[10px] text-primary">PROJECT #{project.id}</span><h2 className="text-base font-bold text-slate-900">{project.name}</h2><p className="text-xs text-slate-500">{project.project_type}</p></div><span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase">{project.status.replaceAll("_", " ")}</span></div><div className="mt-4"><div className="flex justify-between text-xs text-slate-500"><span>Progress</span><span>{project.progress_percent}%</span></div><div className="mt-1.5 h-2 rounded-full bg-slate-100"><div className="h-full bg-primary rounded-full" style={{ width: `${project.progress_percent}%` }} /></div></div><div className="mt-3 flex flex-wrap gap-4 text-[10px] text-slate-500"><span>Start: {project.start_date || "Not set"}</span><span>Expected: {project.expected_end_date || "Not set"}</span></div></button>)}</div>}
             </div>
           )}
 
@@ -1304,8 +1304,8 @@ export default function UserDashboardPage() {
                   </p>
                 </div>
                 {profile?.selectedPlan && (
-                  <div className="px-3.5 py-1.5 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-800 font-semibold flex items-center gap-2">
-                    <Check size={14} className="text-blue-600" />
+                  <div className="px-3.5 py-1.5 rounded-xl bg-primary/5 border border-primary/20 text-xs text-primary font-semibold flex items-center gap-2">
+                    <Check size={14} className="text-primary" />
                     <span>Active: {activePlanObj?.name || profile.selectedPlan}</span>
                   </div>
                 )}
@@ -1337,17 +1337,17 @@ export default function UserDashboardPage() {
                       key={plan.serviceId}
                       className={`bg-white rounded-2xl border transition-all flex flex-col p-6 relative ${
                         isCurrent
-                          ? "border-blue-600 shadow-md ring-2 ring-blue-500/20"
+                          ? "border-primary shadow-md ring-2 ring-primary/20"
                           : "border-slate-200 hover:border-slate-300 shadow-xs"
                       }`}
                     >
                       {plan.popular && (
-                        <div className="absolute top-4 right-4 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-700">
+                        <div className="absolute top-4 right-4 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary">
                           {plan.tag || "Popular"}
                         </div>
                       )}
 
-                      <div className="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-1">
+                      <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-1">
                         #{plan.serviceNumber} · {plan.category}
                       </div>
                       <h3 className="text-base font-bold text-slate-900 mb-2">{plan.name}</h3>
@@ -1357,7 +1357,7 @@ export default function UserDashboardPage() {
 
                       <div className="text-2xl font-extrabold text-slate-900 mb-4">
                         ${plan.price.toLocaleString()}{" "}
-                        <span className="text-xs font-normal text-slate-400">
+                        <span className="text-xs font-normal text-slate-500">
                           {plan.category === "Managed Services" ? "/month" : "one-time"}
                         </span>
                       </div>
@@ -1365,12 +1365,12 @@ export default function UserDashboardPage() {
                       <div className="border-t border-slate-100 pt-4 mb-6 flex-1 space-y-2">
                         {plan.features.slice(0, 4).map((f, i) => (
                           <div key={i} className="flex items-start gap-2 text-xs text-slate-600">
-                            <Check size={14} className="text-blue-600 shrink-0 mt-0.5" />
+                            <Check size={14} className="text-primary shrink-0 mt-0.5" />
                             <span>{f}</span>
                           </div>
                         ))}
                         {plan.features.length > 4 && (
-                          <div className="text-[11px] text-slate-400 pl-5">
+                          <div className="text-[11px] text-slate-500 pl-5">
                             +{plan.features.length - 4} more enterprise features
                           </div>
                         )}
@@ -1382,7 +1382,7 @@ export default function UserDashboardPage() {
                         className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                           isCurrent
                             ? "bg-emerald-50 text-emerald-700 border border-emerald-200 cursor-default"
-                            : "bg-blue-600 hover:bg-blue-700 text-white shadow-xs"
+                            : "bg-primary hover:bg-primary text-white shadow-xs"
                         }`}
                       >
                         {isCurrent ? "Currently Active Plan" : plan.isBpo ? "Discuss BPO Plan" : "Select Enterprise Plan"}
@@ -1405,7 +1405,7 @@ export default function UserDashboardPage() {
 
               {updates.length === 0 ? (
                 <div className="bg-white rounded-2xl border border-slate-200 p-10 text-center shadow-xs">
-                  <MessageSquare size={28} className="mx-auto mb-3 text-slate-300" />
+                  <MessageSquare size={28} className="mx-auto mb-3 text-slate-500" />
                   <p className="text-sm font-semibold text-slate-700">No updates yet</p>
                   <p className="text-xs text-slate-500 mt-1">Your client-specific updates will appear here.</p>
                 </div>
@@ -1417,9 +1417,9 @@ export default function UserDashboardPage() {
                         <div>
                           <div className="flex items-center gap-2 mb-1">
                             <h2 className="text-base font-bold text-slate-900">{update.title}</h2>
-                            {update.category && <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-semibold">{update.category}</span>}
+                            {update.category && <span className="px-2 py-0.5 rounded-full bg-primary/5 text-primary text-[10px] font-semibold">{update.category}</span>}
                           </div>
-                          <time className="text-[11px] text-slate-400" dateTime={update.publishedAt || update.createdAt}>
+                          <time className="text-[11px] text-slate-500" dateTime={update.publishedAt || update.createdAt}>
                             {new Date(update.publishedAt || update.createdAt).toLocaleString()}
                           </time>
                         </div>
@@ -1448,7 +1448,7 @@ export default function UserDashboardPage() {
                 <input required value={meetingRequest.subject} onChange={(event) => setMeetingRequest((value) => ({ ...value, subject: event.target.value }))} placeholder="Request subject" className="px-3 py-2 rounded-xl border border-slate-200 text-xs" />
                 <input required type="datetime-local" value={meetingRequest.startsAt} onChange={(event) => setMeetingRequest((value) => ({ ...value, startsAt: event.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 text-xs" />
                 <input required type="datetime-local" value={meetingRequest.endsAt} onChange={(event) => setMeetingRequest((value) => ({ ...value, endsAt: event.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 text-xs" />
-                <button type="submit" className="px-3 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">Request meeting</button>
+                <button type="submit" className="px-3 py-2 rounded-xl bg-primary text-white text-xs font-bold">Request meeting</button>
                 <textarea required value={meetingRequest.reason} onChange={(event) => setMeetingRequest((value) => ({ ...value, reason: event.target.value }))} placeholder="Reason / agenda" className="md:col-span-5 px-3 py-2 rounded-xl border border-slate-200 text-xs" rows={2} />
               </form>
 
@@ -1464,7 +1464,7 @@ export default function UserDashboardPage() {
                             <p className="text-xs text-slate-500 mt-1">{new Date(meeting.starts_at).toLocaleString()} · {meeting.timezone}</p>
                           </div>
                           {/* BUG 11 FIX: status is now in the interface */}
-                          <span className={`text-[10px] uppercase font-bold ${meeting.status === "cancelled" ? "text-red-600" : meeting.status === "completed" ? "text-emerald-700" : "text-blue-700"}`}>{meeting.status.replaceAll("_", " ")}</span>
+                          <span className={`text-[10px] uppercase font-bold ${meeting.status === "cancelled" ? "text-red-600" : meeting.status === "completed" ? "text-emerald-700" : "text-primary"}`}>{meeting.status.replaceAll("_", " ")}</span>
                         </div>
                         {meeting.location && <p className="text-xs text-slate-500 mt-2">{meeting.location}</p>}
                       </button>
@@ -1474,7 +1474,7 @@ export default function UserDashboardPage() {
 
               {/* Selected meeting detail panel */}
               {selectedMeeting && (
-                <div className="rounded-2xl border border-blue-200 bg-blue-50/40 p-5 space-y-4">
+                <div className="rounded-2xl border border-primary/20 bg-primary/5/40 p-5 space-y-4">
                   <div className="flex items-start justify-between">
                     <div>
                       <h2 className="font-bold text-slate-900">{selectedMeeting.title}</h2>
@@ -1517,7 +1517,7 @@ export default function UserDashboardPage() {
                       <div className="space-y-2">
                         {selectedMeeting.notes.map((note) => (
                           <div key={note.id} className="rounded-xl bg-white border border-slate-100 p-3">
-                            <span className="text-[10px] uppercase font-bold text-slate-400">{note.note_type.replaceAll("_", " ")}</span>
+                            <span className="text-[10px] uppercase font-bold text-slate-500">{note.note_type.replaceAll("_", " ")}</span>
                             <p className="mt-1 text-sm text-slate-700">{note.body}</p>
                           </div>
                         ))}
@@ -1535,11 +1535,11 @@ export default function UserDashboardPage() {
                             <div>
                               <p className="text-sm font-semibold text-slate-800">{item.title}</p>
                               {item.description && <p className="text-xs text-slate-500 mt-0.5">{item.description}</p>}
-                              {item.due_date && <p className="text-[10px] text-slate-400 mt-0.5">Due {item.due_date}</p>}
+                              {item.due_date && <p className="text-[10px] text-slate-500 mt-0.5">Due {item.due_date}</p>}
                             </div>
                             <div className="flex flex-col items-end gap-1 shrink-0">
-                              <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${item.status === "completed" ? "bg-emerald-100 text-emerald-700" : item.status === "cancelled" ? "bg-slate-100 text-slate-400" : "bg-amber-100 text-amber-700"}`}>{item.status}</span>
-                              <span className="text-[10px] text-slate-400 uppercase">{item.priority}</span>
+                              <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${item.status === "completed" ? "bg-emerald-100 text-emerald-700" : item.status === "cancelled" ? "bg-slate-100 text-slate-500" : "bg-amber-100 text-amber-700"}`}>{item.status}</span>
+                              <span className="text-[10px] text-slate-500 uppercase">{item.priority}</span>
                             </div>
                           </div>
                         ))}
@@ -1554,7 +1554,7 @@ export default function UserDashboardPage() {
           {tab === "reports" && (
             <div className="space-y-5">
               <div><h1 className="text-xl font-bold text-slate-900">Reports</h1><p className="text-xs text-slate-500 mt-0.5">Your projects, invoices, and support activity.</p></div>
-              {!clientReports ? <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-500">No report data available.</div> : <div className="grid gap-5 md:grid-cols-3">{Object.entries(clientReports).filter(([key]) => ["projects", "invoices", "tickets"].includes(key)).map(([name, report]: [string, any]) => <section key={name} className="rounded-2xl border border-slate-200 bg-white p-5"><h2 className="font-black capitalize">{name}</h2><p className="mt-2 text-xs text-slate-500">{report.total || 0} records</p><div className="mt-4 space-y-2">{(report.data || []).slice(0, 5).map((row: any) => <div key={row.id} className="rounded-lg bg-slate-50 p-2 text-xs text-slate-700">{row.name || row.subject || row.invoice_number || `Record ${row.id}`}<span className="ml-2 text-slate-400">{row.status || ""}</span></div>)}</div></section>)}</div>}
+              {!clientReports ? <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-500">No report data available.</div> : <div className="grid gap-5 md:grid-cols-3">{Object.entries(clientReports).filter(([key]) => ["projects", "invoices", "tickets"].includes(key)).map(([name, report]: [string, any]) => <section key={name} className="rounded-2xl border border-slate-200 bg-white p-5"><h2 className="font-black capitalize">{name}</h2><p className="mt-2 text-xs text-slate-500">{report.total || 0} records</p><div className="mt-4 space-y-2">{(report.data || []).slice(0, 5).map((row: any) => <div key={row.id} className="rounded-lg bg-slate-50 p-2 text-xs text-slate-700">{row.name || row.subject || row.invoice_number || `Record ${row.id}`}<span className="ml-2 text-slate-500">{row.status || ""}</span></div>)}</div></section>)}</div>}
             </div>
           )}
 
@@ -1570,7 +1570,7 @@ export default function UserDashboardPage() {
               {billingSummary && (
                 <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
                   {[
-                    { label: "Total Billed", value: `$${billingSummary.totalBilled.toLocaleString("en-US", { minimumFractionDigits: 2 })}`, icon: TrendingUp, color: "text-blue-600" },
+                    { label: "Total Billed", value: `$${billingSummary.totalBilled.toLocaleString("en-US", { minimumFractionDigits: 2 })}`, icon: TrendingUp, color: "text-primary" },
                     { label: "Total Paid", value: `$${billingSummary.totalPaid.toLocaleString("en-US", { minimumFractionDigits: 2 })}`, icon: BadgeCheck, color: "text-emerald-600" },
                     { label: "Pending", value: `$${billingSummary.totalPending.toLocaleString("en-US", { minimumFractionDigits: 2 })}`, icon: Clock3, color: "text-amber-600" },
                     { label: "Overdue", value: `$${billingSummary.totalOverdue.toLocaleString("en-US", { minimumFractionDigits: 2 })}`, icon: AlertTriangle, color: "text-red-600" },
@@ -1593,17 +1593,17 @@ export default function UserDashboardPage() {
 
               {/* Invoice detail panel */}
               {selectedInvoice && (
-                <div className="bg-white rounded-2xl border border-blue-200 shadow-sm p-6 space-y-5">
+                <div className="bg-white rounded-2xl border border-primary/20 shadow-sm p-6 space-y-5">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="flex items-center gap-3 mb-1">
-                        <span className="font-mono text-xs text-blue-700 font-bold">{selectedInvoice.invoice_number}</span>
+                        <span className="font-mono text-xs text-primary font-bold">{selectedInvoice.invoice_number}</span>
                         <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${
                           selectedInvoice.status === "paid" ? "bg-emerald-100 text-emerald-700" :
                           selectedInvoice.status === "overdue" ? "bg-red-100 text-red-700" :
                           selectedInvoice.status === "cancelled" ? "bg-slate-100 text-slate-500" :
                           selectedInvoice.status === "partially_paid" ? "bg-amber-100 text-amber-700" :
-                          "bg-blue-100 text-blue-700"
+                          "bg-primary/10 text-primary"
                         }`}>{selectedInvoice.status.replaceAll("_", " ")}</span>
                       </div>
                       <h2 className="text-lg font-bold text-slate-900">Invoice Detail</h2>
@@ -1679,7 +1679,7 @@ export default function UserDashboardPage() {
                             <div>
                               <p className="font-semibold text-slate-800">${Number(pmt.amount).toFixed(2)} {pmt.currency}</p>
                               <p className="text-slate-500">{pmt.payment_method.replaceAll("_", " ")} {pmt.reference ? `· Ref: ${pmt.reference}` : ""}</p>
-                              {pmt.paid_at && <p className="text-slate-400">{new Date(pmt.paid_at).toLocaleString()}</p>}
+                              {pmt.paid_at && <p className="text-slate-500">{new Date(pmt.paid_at).toLocaleString()}</p>}
                             </div>
                             <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${
                               pmt.status === "successful" ? "bg-emerald-100 text-emerald-700" :
@@ -1716,12 +1716,12 @@ export default function UserDashboardPage() {
                       <button
                         onClick={() => initiatePayPalPayment(selectedInvoice)}
                         disabled={payingInvoiceId === selectedInvoice.id}
-                        className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-xs transition-colors disabled:opacity-50"
+                        className="flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary text-white rounded-xl text-xs font-bold shadow-xs transition-colors disabled:opacity-50"
                       >
                         <CreditCard size={14} />
                         {payingInvoiceId === selectedInvoice.id ? "Processing..." : `Pay $${Number(selectedInvoice.balance_due).toFixed(2)} via PayPal`}
                       </button>
-                      <p className="text-[10px] text-slate-400 mt-1.5">Secure payment via PayPal. Your financial information is never stored on our servers.</p>
+                      <p className="text-[10px] text-slate-500 mt-1.5">Secure payment via PayPal. Your financial information is never stored on our servers.</p>
                     </div>
                   )}
                 </div>
@@ -1734,7 +1734,7 @@ export default function UserDashboardPage() {
                 </div>
               ) : invoices.length === 0 ? (
                 <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center shadow-xs">
-                  <Receipt size={28} className="mx-auto mb-3 text-slate-300" />
+                  <Receipt size={28} className="mx-auto mb-3 text-slate-500" />
                   <p className="text-sm font-semibold text-slate-700">No invoices yet</p>
                   <p className="text-xs text-slate-500 mt-1">Your invoices will appear here when issued by your account manager.</p>
                 </div>
@@ -1755,8 +1755,8 @@ export default function UserDashboardPage() {
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                       {invoices.map((inv) => (
-                        <tr key={inv.id} className={`hover:bg-slate-50/50 ${selectedInvoice?.id === inv.id ? "bg-blue-50/50" : ""}`}>
-                          <td className="p-3 font-mono font-bold text-blue-700">{inv.invoice_number}</td>
+                        <tr key={inv.id} className={`hover:bg-slate-50/50 ${selectedInvoice?.id === inv.id ? "bg-primary/5/50" : ""}`}>
+                          <td className="p-3 font-mono font-bold text-primary">{inv.invoice_number}</td>
                           <td className="p-3 text-slate-600">{inv.invoice_date}</td>
                           <td className={`p-3 font-semibold ${inv.status === "overdue" ? "text-red-600" : "text-slate-600"}`}>{inv.due_date}</td>
                           <td className="p-3 text-right text-slate-800 font-semibold">${Number(inv.total).toFixed(2)}</td>
@@ -1769,20 +1769,20 @@ export default function UserDashboardPage() {
                               inv.status === "cancelled" ? "bg-slate-100 text-slate-500" :
                               inv.status === "draft" ? "bg-slate-100 text-slate-600" :
                               inv.status === "partially_paid" ? "bg-amber-100 text-amber-700" :
-                              "bg-blue-100 text-blue-700"
+                              "bg-primary/10 text-primary"
                             }`}>{inv.status.replaceAll("_", " ")}</span>
                           </td>
                           <td className="p-3">
                             <div className="flex items-center gap-2">
                               <button
                                 onClick={() => openInvoice(inv)}
-                                className="text-blue-700 font-bold text-[10px] hover:underline"
+                                className="text-primary font-bold text-[10px] hover:underline"
                               >View</button>
                               {["sent","pending_payment","partially_paid","overdue"].includes(inv.status) && Number(inv.balance_due) > 0 && (
                                 <button
                                   onClick={() => { openInvoice(inv); }}
                                   disabled={payingInvoiceId === inv.id}
-                                  className="text-[10px] font-bold text-white bg-blue-600 px-2 py-0.5 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                                  className="text-[10px] font-bold text-white bg-primary px-2 py-0.5 rounded-lg hover:bg-primary disabled:opacity-50"
                                 >Pay</button>
                               )}
                             </div>
@@ -1813,7 +1813,7 @@ export default function UserDashboardPage() {
                       <tbody className="divide-y divide-slate-100">
                         {billingPayments.slice(0, 50).map((pmt: any) => (
                           <tr key={pmt.id} className="hover:bg-slate-50/50">
-                            <td className="p-3 font-mono text-blue-700">{pmt.invoices?.invoice_number ?? `#${pmt.invoice_id}`}</td>
+                            <td className="p-3 font-mono text-primary">{pmt.invoices?.invoice_number ?? `#${pmt.invoice_id}`}</td>
                             <td className="p-3 font-semibold text-slate-800">${Number(pmt.amount).toFixed(2)}</td>
                             <td className="p-3 capitalize text-slate-600">{pmt.payment_method?.replaceAll("_", " ")}</td>
                             <td className="p-3 text-slate-500">{pmt.reference ?? pmt.gateway_order_id ?? "—"}</td>
@@ -1837,16 +1837,16 @@ export default function UserDashboardPage() {
 
           {tab === "documents" && (
             <div className="space-y-5">
-              <div className="flex flex-wrap items-end justify-between gap-3"><div><h1 className="text-xl font-bold text-slate-900">Documents</h1><p className="text-xs text-slate-500 mt-1">Secure project files shared with your account.</p></div><label className="px-3 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold cursor-pointer">Upload document<input type="file" className="hidden" onChange={uploadDocument} /></label></div>
+              <div className="flex flex-wrap items-end justify-between gap-3"><div><h1 className="text-xl font-bold text-slate-900">Documents</h1><p className="text-xs text-slate-500 mt-1">Secure project files shared with your account.</p></div><label className="px-3 py-2 rounded-xl bg-primary text-white text-xs font-bold cursor-pointer">Upload document<input type="file" className="hidden" onChange={uploadDocument} /></label></div>
               <div className="flex flex-wrap gap-2"><input value={documentSearch} onChange={(event) => setDocumentSearch(event.target.value)} placeholder="Search documents" className="flex-1 min-w-48 px-3 py-2 rounded-xl border border-slate-200 text-xs" /><select value={documentCategory} onChange={(event) => setDocumentCategory(event.target.value)} className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs"><option value="all">All categories</option>{["Contract", "Proposal", "Requirement", "Project Document", "Design", "Technical", "Deliverable", "Report", "Other"].map((category) => <option key={category} value={category}>{category}</option>)}</select></div>
-              {documents.length === 0 ? <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-sm text-slate-500">No documents available.</div> : <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">{documents.filter((document) => (!documentSearch || document.original_file_name.toLowerCase().includes(documentSearch.toLowerCase())) && (documentCategory === "all" || document.category === documentCategory)).map((document) => <div key={document.id} className="rounded-2xl border border-slate-200 bg-white p-4"><div className="flex items-start justify-between gap-3"><div><p className="text-sm font-bold text-slate-900">{document.original_file_name}</p><p className="text-xs text-slate-500 mt-1">{document.category} · {(document.file_size / 1024).toFixed(1)} KB</p><p className="text-[11px] text-slate-400 mt-1">Uploaded by {document.uploaded_by} · {new Date(document.created_at).toLocaleDateString()}</p></div><span className="text-[10px] uppercase font-bold text-emerald-700">{document.status}</span></div><button onClick={async () => { const response = await authFetch(`/documents/${document.id}/download`); if (response.ok) window.open((await response.json()).url, "_blank", "noopener,noreferrer"); }} className="mt-3 px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 text-xs font-bold">Download</button></div>)}</div>}
+              {documents.length === 0 ? <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-sm text-slate-500">No documents available.</div> : <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">{documents.filter((document) => (!documentSearch || document.original_file_name.toLowerCase().includes(documentSearch.toLowerCase())) && (documentCategory === "all" || document.category === documentCategory)).map((document) => <div key={document.id} className="rounded-2xl border border-slate-200 bg-white p-4"><div className="flex items-start justify-between gap-3"><div><p className="text-sm font-bold text-slate-900">{document.original_file_name}</p><p className="text-xs text-slate-500 mt-1">{document.category} · {(document.file_size / 1024).toFixed(1)} KB</p><p className="text-[11px] text-slate-500 mt-1">Uploaded by {document.uploaded_by} · {new Date(document.created_at).toLocaleDateString()}</p></div><span className="text-[10px] uppercase font-bold text-emerald-700">{document.status}</span></div><button onClick={async () => { const response = await authFetch(`/documents/${document.id}/download`); if (response.ok) window.open((await response.json()).url, "_blank", "noopener,noreferrer"); }} className="mt-3 px-3 py-1.5 rounded-lg bg-primary/5 text-primary text-xs font-bold">Download</button></div>)}</div>}
             </div>
           )}
 
           {tab === "communications" && (
             <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-5">
-              <section className="space-y-3"><div className="flex items-center justify-between"><h1 className="text-xl font-bold text-slate-900">Project Chat</h1><button onClick={() => setSelectedConversation(null)} className="text-xs font-bold text-blue-700">New</button></div><form onSubmit={createConversation} className="rounded-xl border border-slate-200 bg-white p-3 space-y-2"><select required value={conversationProjectId} onChange={(event) => setConversationProjectId(event.target.value)} className="w-full px-2 py-2 rounded-lg border border-slate-200 bg-white text-xs"><option value="">Select project</option>{projects.map((project) => <option key={project.id} value={project.id}>{project.name}</option>)}</select><input required value={conversationSubject} onChange={(event) => setConversationSubject(event.target.value)} placeholder="Conversation subject" className="w-full px-2 py-2 rounded-lg border border-slate-200 text-xs" /><button className="w-full px-3 py-2 rounded-lg bg-blue-600 text-white text-xs font-bold">Start conversation</button></form>{conversations.map((conversation) => <button key={conversation.id} onClick={() => openConversation(conversation)} className={`w-full text-left rounded-xl border p-3 ${selectedConversation?.id === conversation.id ? "border-blue-500 bg-blue-50" : "border-slate-200 bg-white"}`}><p className="text-xs font-bold text-slate-900">{conversation.subject}</p><p className="text-[11px] text-slate-500">{conversation.messages.at(-1)?.body || "No messages yet"}</p></button>)}</section>
-              <section className="rounded-2xl border border-slate-200 bg-white p-5 min-h-96 flex flex-col">{!selectedConversation ? <div className="m-auto text-center text-sm text-slate-500">Select a conversation to begin.</div> : <><div className="border-b border-slate-100 pb-3"><h2 className="font-bold text-slate-900">{selectedConversation.subject}</h2><p className="text-xs text-slate-500">Project #{selectedConversation.project_id}</p></div><div className="flex-1 space-y-3 py-4 overflow-y-auto">{selectedConversation.messages.map((message) => <div key={message.id} className={`max-w-[85%] rounded-xl p-3 text-xs ${message.sender_user_id ? "ml-auto bg-blue-600 text-white" : "bg-slate-100 text-slate-800"}`}><p>{message.body}</p>{message.attachments?.map((attachment) => <p key={attachment.id} className="mt-2 text-[10px] underline">{attachment.file_name}</p>)}<time className="block mt-1 text-[10px] opacity-70">{new Date(message.created_at).toLocaleString()}</time></div>)}</div><form onSubmit={(event) => { event.preventDefault(); sendProjectMessage(); }} className="flex flex-wrap gap-2"><input value={messageDraft} onChange={(event) => setMessageDraft(event.target.value)} placeholder="Write a project message" className="flex-1 min-w-40 px-3 py-2 rounded-xl border border-slate-200 text-xs" /><label className="px-3 py-2 rounded-xl border border-slate-200 text-xs cursor-pointer">{messageAttachment ? messageAttachment.fileName : "Attach"}<input type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,.txt,.csv,.zip,.docx,.xlsx" className="hidden" onChange={async (event) => { const file = event.target.files?.[0]; if (file && file.size <= 10 * 1024 * 1024) setMessageAttachment(await fileAsAttachment(file)); else if (file) showToast("error", "Attachments must be 10 MB or smaller"); }} /></label><button className="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">Send</button></form></>}</section>
+              <section className="space-y-3"><div className="flex items-center justify-between"><h1 className="text-xl font-bold text-slate-900">Project Chat</h1><button onClick={() => setSelectedConversation(null)} className="text-xs font-bold text-primary">New</button></div><form onSubmit={createConversation} className="rounded-xl border border-slate-200 bg-white p-3 space-y-2"><select required value={conversationProjectId} onChange={(event) => setConversationProjectId(event.target.value)} className="w-full px-2 py-2 rounded-lg border border-slate-200 bg-white text-xs"><option value="">Select project</option>{projects.map((project) => <option key={project.id} value={project.id}>{project.name}</option>)}</select><input required value={conversationSubject} onChange={(event) => setConversationSubject(event.target.value)} placeholder="Conversation subject" className="w-full px-2 py-2 rounded-lg border border-slate-200 text-xs" /><button className="w-full px-3 py-2 rounded-lg bg-primary text-white text-xs font-bold">Start conversation</button></form>{conversations.map((conversation) => <button key={conversation.id} onClick={() => openConversation(conversation)} className={`w-full text-left rounded-xl border p-3 ${selectedConversation?.id === conversation.id ? "border-blue-500 bg-primary/5" : "border-slate-200 bg-white"}`}><p className="text-xs font-bold text-slate-900">{conversation.subject}</p><p className="text-[11px] text-slate-500">{conversation.messages.at(-1)?.body || "No messages yet"}</p></button>)}</section>
+              <section className="rounded-2xl border border-slate-200 bg-white p-5 min-h-96 flex flex-col">{!selectedConversation ? <div className="m-auto text-center text-sm text-slate-500">Select a conversation to begin.</div> : <><div className="border-b border-slate-100 pb-3"><h2 className="font-bold text-slate-900">{selectedConversation.subject}</h2><p className="text-xs text-slate-500">Project #{selectedConversation.project_id}</p></div><div className="flex-1 space-y-3 py-4 overflow-y-auto">{selectedConversation.messages.map((message) => <div key={message.id} className={`max-w-[85%] rounded-xl p-3 text-xs ${message.sender_user_id ? "ml-auto bg-primary text-white" : "bg-slate-100 text-slate-800"}`}><p>{message.body}</p>{message.attachments?.map((attachment) => <p key={attachment.id} className="mt-2 text-[10px] underline">{attachment.file_name}</p>)}<time className="block mt-1 text-[10px] opacity-70">{new Date(message.created_at).toLocaleString()}</time></div>)}</div><form onSubmit={(event) => { event.preventDefault(); sendProjectMessage(); }} className="flex flex-wrap gap-2"><input value={messageDraft} onChange={(event) => setMessageDraft(event.target.value)} placeholder="Write a project message" className="flex-1 min-w-40 px-3 py-2 rounded-xl border border-slate-200 text-xs" /><label className="px-3 py-2 rounded-xl border border-slate-200 text-xs cursor-pointer">{messageAttachment ? messageAttachment.fileName : "Attach"}<input type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,.txt,.csv,.zip,.docx,.xlsx" className="hidden" onChange={async (event) => { const file = event.target.files?.[0]; if (file && file.size <= 10 * 1024 * 1024) setMessageAttachment(await fileAsAttachment(file)); else if (file) showToast("error", "Attachments must be 10 MB or smaller"); }} /></label><button className="px-4 py-2 rounded-xl bg-primary text-white text-xs font-bold">Send</button></form></>}</section>
             </div>
           )}
 
@@ -1858,9 +1858,9 @@ export default function UserDashboardPage() {
                 <select value={ticketForm.category} onChange={(e) => setTicketForm((p) => ({ ...p, category: e.target.value }))} className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm bg-white">{(profile?.role === "partner" || profile?.role === "bpo_partner" ? ["Process Issue", "Technical Issue", "Payment Issue", "Project Issue", "Employee Issue", "Training", "General Support"] : ["Technical Issue", "Billing Issue", "Project Issue", "Feature Request", "General Support"]).map((category) => <option key={category}>{category}</option>)}</select>
                 <textarea required rows={4} value={ticketForm.description} onChange={(e) => setTicketForm((p) => ({ ...p, description: e.target.value }))} placeholder="Describe the issue" className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm" />
                 <input type="file" accept="image/jpeg,image/png,application/pdf,text/plain,application/zip" multiple onChange={async (e) => { try { setTicketAttachments(await Promise.all(Array.from(e.target.files || []).slice(0, 5).map(fileAsAttachment))); } catch (error: any) { showToast("error", error.message); } }} className="w-full text-xs text-slate-500" />
-                <button disabled={ticketBusy} className="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold disabled:opacity-50">{ticketBusy ? "Submitting..." : "Create Ticket"}</button>
+                <button disabled={ticketBusy} className="px-4 py-2 rounded-xl bg-primary text-white text-xs font-bold disabled:opacity-50">{ticketBusy ? "Submitting..." : "Create Ticket"}</button>
               </form>
-              <div className="space-y-3">{tickets.length === 0 ? <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center text-sm text-slate-500">No tickets yet.</div> : tickets.map((ticket) => <article key={ticket.id} className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs"><div className="flex flex-wrap items-center justify-between gap-2"><div><span className="font-mono text-xs font-bold text-blue-700">{ticket.ticket_number}</span><h2 className="font-bold text-slate-900">{ticket.subject}</h2></div><div className="flex items-center gap-2"><span className="text-[10px] uppercase font-bold text-slate-600 bg-slate-100 rounded-full px-2 py-1">{ticket.status}</span>{["resolved", "closed"].includes(ticket.status) && <button onClick={async () => { const res = await authFetch(`/tickets/${ticket.id}/reopen`, { method: "PATCH" }); if (res.ok) { showToast("success", "Ticket reopened."); loadAllData(); } else { const data = await res.json(); showToast("error", data.error || "Unable to reopen ticket"); } }} className="text-[10px] font-bold text-blue-700">Reopen</button>}</div></div><p className="mt-3 text-sm text-slate-600 whitespace-pre-wrap">{ticket.description}</p><div className="mt-3 space-y-2">{(ticket.ticket_messages || []).filter((message) => message.body !== ticket.description).map((message) => <div key={message.id} className="rounded-xl bg-slate-50 border border-slate-100 p-3"><div className="text-[10px] uppercase font-bold text-slate-400">{message.author_admin_id ? "Support" : "You"} · {new Date(message.created_at).toLocaleString()}</div><p className="mt-1 text-sm text-slate-600 whitespace-pre-wrap">{message.body}</p></div>)}</div><div className="mt-4 flex gap-2"><input value={ticketReply[ticket.id] || ""} onChange={(e) => setTicketReply((p) => ({ ...p, [ticket.id]: e.target.value }))} placeholder="Reply to support" className="flex-1 px-3 py-2 rounded-xl border border-slate-200 text-sm" /><button onClick={() => replyToTicket(ticket)} className="px-3 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold">Reply</button></div><input type="file" accept="image/jpeg,image/png,application/pdf,text/plain,application/zip" multiple onChange={async (e) => { try { const attachments = await Promise.all(Array.from(e.target.files || []).slice(0, 5).map(fileAsAttachment)); setReplyAttachments((p) => ({ ...p, [ticket.id]: attachments })); } catch (error: any) { showToast("error", error.message); } }} className="mt-2 w-full text-xs text-slate-500" /></article>)}</div>
+              <div className="space-y-3">{tickets.length === 0 ? <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center text-sm text-slate-500">No tickets yet.</div> : tickets.map((ticket) => <article key={ticket.id} className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs"><div className="flex flex-wrap items-center justify-between gap-2"><div><span className="font-mono text-xs font-bold text-primary">{ticket.ticket_number}</span><h2 className="font-bold text-slate-900">{ticket.subject}</h2></div><div className="flex items-center gap-2"><span className="text-[10px] uppercase font-bold text-slate-600 bg-slate-100 rounded-full px-2 py-1">{ticket.status}</span>{["resolved", "closed"].includes(ticket.status) && <button onClick={async () => { const res = await authFetch(`/tickets/${ticket.id}/reopen`, { method: "PATCH" }); if (res.ok) { showToast("success", "Ticket reopened."); loadAllData(); } else { const data = await res.json(); showToast("error", data.error || "Unable to reopen ticket"); } }} className="text-[10px] font-bold text-primary">Reopen</button>}</div></div><p className="mt-3 text-sm text-slate-600 whitespace-pre-wrap">{ticket.description}</p><div className="mt-3 space-y-2">{(ticket.ticket_messages || []).filter((message) => message.body !== ticket.description).map((message) => <div key={message.id} className="rounded-xl bg-slate-50 border border-slate-100 p-3"><div className="text-[10px] uppercase font-bold text-slate-500">{message.author_admin_id ? "Support" : "You"} · {new Date(message.created_at).toLocaleString()}</div><p className="mt-1 text-sm text-slate-600 whitespace-pre-wrap">{message.body}</p></div>)}</div><div className="mt-4 flex gap-2"><input value={ticketReply[ticket.id] || ""} onChange={(e) => setTicketReply((p) => ({ ...p, [ticket.id]: e.target.value }))} placeholder="Reply to support" className="flex-1 px-3 py-2 rounded-xl border border-slate-200 text-sm" /><button onClick={() => replyToTicket(ticket)} className="px-3 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold">Reply</button></div><input type="file" accept="image/jpeg,image/png,application/pdf,text/plain,application/zip" multiple onChange={async (e) => { try { const attachments = await Promise.all(Array.from(e.target.files || []).slice(0, 5).map(fileAsAttachment)); setReplyAttachments((p) => ({ ...p, [ticket.id]: attachments })); } catch (error: any) { showToast("error", error.message); } }} className="mt-2 w-full text-xs text-slate-500" /></article>)}</div>
             </div>
           )}
 
@@ -1878,7 +1878,7 @@ export default function UserDashboardPage() {
               <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-100">
                   <div>
-                    <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Today's Date</div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-slate-500">Today's Date</div>
                     <div className="text-lg font-extrabold text-slate-900">
                       {new Date().toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric", year: "numeric" })}
                     </div>
@@ -1945,7 +1945,7 @@ export default function UserDashboardPage() {
                     <tbody className="divide-y divide-slate-100">
                       {attendance.length === 0 ? (
                         <tr>
-                          <td colSpan={6} className="py-8 text-center text-slate-400">
+                          <td colSpan={6} className="py-8 text-center text-slate-500">
                             No attendance history found.
                           </td>
                         </tr>
@@ -1997,7 +1997,7 @@ export default function UserDashboardPage() {
                     ? "bg-amber-50 border-amber-200 text-amber-800"
                     : kyc?.status === "rejected"
                     ? "bg-red-50 border-red-200 text-red-800"
-                    : "bg-blue-50 border-blue-200 text-blue-800"
+                    : "bg-primary/5 border-primary/20 text-primary"
                 }`}
               >
                 <ShieldCheck size={20} className="shrink-0 mt-0.5" />
@@ -2104,7 +2104,7 @@ export default function UserDashboardPage() {
                     <button
                       type="submit"
                       disabled={submittingKyc}
-                      className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-xs transition-colors cursor-pointer"
+                      className="px-6 py-2.5 bg-primary hover:bg-primary text-white rounded-xl text-xs font-bold shadow-xs transition-colors cursor-pointer"
                     >
                       {submittingKyc ? "Submitting..." : "Submit for Verification"}
                     </button>
@@ -2133,7 +2133,7 @@ export default function UserDashboardPage() {
                   </div>
                   <button
                     onClick={() => copyToClipboard(affiliate?.referralLink || "")}
-                    className="w-full sm:w-auto px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                    className="w-full sm:w-auto px-4 py-3 bg-primary hover:bg-primary text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
                   >
                     <Copy size={14} />
                     <span>Copy Link</span>
@@ -2144,19 +2144,19 @@ export default function UserDashboardPage() {
               {/* Affiliate Stats */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-                  <div className="text-xs font-semibold uppercase text-slate-400 mb-1">Total Referrals</div>
+                  <div className="text-xs font-semibold uppercase text-slate-500 mb-1">Total Referrals</div>
                   <div className="text-2xl font-black text-slate-900">{affiliate?.totalReferrals || 0}</div>
                   <div className="text-[11px] text-slate-500 mt-1">Enterprise accounts invited</div>
                 </div>
 
                 <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-                  <div className="text-xs font-semibold uppercase text-slate-400 mb-1">Commission Rate</div>
-                  <div className="text-2xl font-black text-blue-600">10.00%</div>
+                  <div className="text-xs font-semibold uppercase text-slate-500 mb-1">Commission Rate</div>
+                  <div className="text-2xl font-black text-primary">10.00%</div>
                   <div className="text-[11px] text-slate-500 mt-1">Per signed contract</div>
                 </div>
 
                 <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-                  <div className="text-xs font-semibold uppercase text-slate-400 mb-1">Total Commission Earned</div>
+                  <div className="text-xs font-semibold uppercase text-slate-500 mb-1">Total Commission Earned</div>
                   <div className="text-2xl font-black text-emerald-600">
                     ${affiliate?.totalEarned.toFixed(2) || "0.00"}
                   </div>
@@ -2183,7 +2183,7 @@ export default function UserDashboardPage() {
                     <tbody className="divide-y divide-slate-100">
                       {(!affiliate?.referrals || affiliate.referrals.length === 0) ? (
                         <tr>
-                          <td colSpan={5} className="py-8 text-center text-slate-400">
+                          <td colSpan={5} className="py-8 text-center text-slate-500">
                             No referrals yet. Share your link to start earning commissions!
                           </td>
                         </tr>
@@ -2197,7 +2197,7 @@ export default function UserDashboardPage() {
                               {new Date(r.createdAt).toLocaleDateString()}
                             </td>
                             <td className="py-3.5 px-4">
-                              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-700 capitalize">
+                              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary capitalize">
                                 {r.status}
                               </span>
                             </td>
@@ -2237,7 +2237,7 @@ export default function UserDashboardPage() {
               {/* Balance Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-                  <div className="text-xs font-semibold uppercase text-slate-400 mb-1">Available Balance</div>
+                  <div className="text-xs font-semibold uppercase text-slate-500 mb-1">Available Balance</div>
                   <div className="text-3xl font-black text-slate-900">
                     ${wallet?.balance.toLocaleString("en-US", { minimumFractionDigits: 2 }) || "0.00"}
                   </div>
@@ -2245,7 +2245,7 @@ export default function UserDashboardPage() {
                 </div>
 
                 <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-                  <div className="text-xs font-semibold uppercase text-slate-400 mb-1">Pending Settlement</div>
+                  <div className="text-xs font-semibold uppercase text-slate-500 mb-1">Pending Settlement</div>
                   <div className="text-3xl font-black text-amber-600">
                     ${wallet?.pendingBalance.toLocaleString("en-US", { minimumFractionDigits: 2 }) || "0.00"}
                   </div>
@@ -2253,8 +2253,8 @@ export default function UserDashboardPage() {
                 </div>
 
                 <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
-                  <div className="text-xs font-semibold uppercase text-slate-400 mb-1">Currency & Safety</div>
-                  <div className="text-3xl font-black text-blue-600">USD</div>
+                  <div className="text-xs font-semibold uppercase text-slate-500 mb-1">Currency & Safety</div>
+                  <div className="text-3xl font-black text-primary">USD</div>
                   <div className="text-[11px] text-slate-500 mt-1">Escrow & Ledger Protected</div>
                 </div>
               </div>
@@ -2279,7 +2279,7 @@ export default function UserDashboardPage() {
                     <tbody className="divide-y divide-slate-100">
                       {transactions.length === 0 ? (
                         <tr>
-                          <td colSpan={6} className="py-8 text-center text-slate-400">
+                          <td colSpan={6} className="py-8 text-center text-slate-500">
                             No transactions recorded yet.
                           </td>
                         </tr>
@@ -2312,8 +2312,8 @@ export default function UserDashboardPage() {
                 <form onSubmit={savePayoutDetail} className="bg-white border border-slate-200 rounded-2xl p-5 space-y-3">
                   <div className="font-bold text-sm text-slate-900">Manage payout details</div>
                   <div className="flex gap-2">
-                    <button type="button" onClick={() => setWithdrawMethod("paypal")} className={`px-3 py-2 rounded-lg text-xs font-bold ${withdrawMethod === "paypal" ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-600"}`}>PayPal</button>
-                    <button type="button" onClick={() => setWithdrawMethod("indian_bank")} className={`px-3 py-2 rounded-lg text-xs font-bold ${withdrawMethod === "indian_bank" ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-600"}`}>Indian Bank</button>
+                    <button type="button" onClick={() => setWithdrawMethod("paypal")} className={`px-3 py-2 rounded-lg text-xs font-bold ${withdrawMethod === "paypal" ? "bg-primary text-white" : "bg-slate-100 text-slate-600"}`}>PayPal</button>
+                    <button type="button" onClick={() => setWithdrawMethod("indian_bank")} className={`px-3 py-2 rounded-lg text-xs font-bold ${withdrawMethod === "indian_bank" ? "bg-primary text-white" : "bg-slate-100 text-slate-600"}`}>Indian Bank</button>
                   </div>
                   {withdrawMethod === "paypal" ? (
                     <input required type="email" value={payoutEmail} onChange={(e) => setPayoutEmail(e.target.value)} placeholder="PayPal email" className="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs" />
@@ -2368,7 +2368,7 @@ export default function UserDashboardPage() {
                     value={profile?.email || ""}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-500 cursor-not-allowed"
                   />
-                  <span className="text-[10px] text-slate-400 mt-0.5 block">Email cannot be changed directly</span>
+                  <span className="text-[10px] text-slate-500 mt-0.5 block">Email cannot be changed directly</span>
                 </div>
 
                 <div>
@@ -2385,7 +2385,7 @@ export default function UserDashboardPage() {
                   <button
                     type="submit"
                     disabled={savingProfile}
-                    className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-xs transition-colors cursor-pointer"
+                    className="px-5 py-2.5 bg-primary hover:bg-primary text-white rounded-xl text-xs font-bold shadow-xs transition-colors cursor-pointer"
                   >
                     {savingProfile ? "Saving Changes..." : "Save Profile"}
                   </button>
@@ -2406,7 +2406,7 @@ export default function UserDashboardPage() {
               </h3>
               <button
                 onClick={() => setPlanToConfirm(null)}
-                className="text-slate-400 hover:text-slate-600"
+                className="text-slate-500 hover:text-slate-600"
               >
                 <X size={18} />
               </button>
@@ -2420,11 +2420,11 @@ export default function UserDashboardPage() {
                 : "This will assign the package to your enterprise account and alert your engineering account executive."}
             </p>
 
-            <div className="p-3 bg-blue-50 border border-blue-100 rounded-xl text-xs text-blue-800 space-y-1">
+            <div className="p-3 bg-primary/5 border border-primary/10 rounded-xl text-xs text-primary space-y-1">
               <div className="font-bold">Included:</div>
               {planToConfirm.features.slice(0, 3).map((f, i) => (
                 <div key={i} className="flex items-center gap-1.5">
-                  <Check size={12} className="text-blue-600 shrink-0" />
+                  <Check size={12} className="text-primary shrink-0" />
                   <span>{f}</span>
                 </div>
               ))}
@@ -2453,7 +2453,7 @@ export default function UserDashboardPage() {
               <button
                 type="button"
                 onClick={() => setWithdrawModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600"
+                className="text-slate-500 hover:text-slate-600"
               >
                 <X size={18} />
               </button>

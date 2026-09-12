@@ -327,9 +327,9 @@ export default function ChatBot() {
         whileTap={{ scale: 0.95 }}
         className="fixed bottom-6 right-6 z-[998] w-13 h-13 rounded-xl flex items-center justify-center shadow-lg border cursor-pointer transition-colors"
         style={{
-          background: open ? "#FFFFFF" : "#1E40AF",
-          borderColor: open ? "#CBD5E1" : "#1D4ED8",
-          boxShadow: "0 10px 25px -5px rgba(30, 64, 175, 0.25), 0 8px 10px -6px rgba(30, 64, 175, 0.2)",
+          background: open ? "#FFFFFF" : "#214ECF",
+          borderColor: open ? "#CBD5E1" : "#1A3DB3",
+          boxShadow: "0 10px 25px -5px rgba(33, 78, 207, 0.25), 0 8px 10px -6px rgba(33, 78, 207, 0.2)",
         }}
         aria-label="Open chat"
       >
@@ -367,7 +367,7 @@ export default function ChatBot() {
               className="flex items-center gap-3 px-5 py-4 flex-shrink-0 border-b border-slate-100 bg-white"
             >
               <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 bg-[#1E40AF]"
+                className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 bg-[#214ECF]"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="3" />
@@ -399,7 +399,7 @@ export default function ChatBot() {
                     className="px-4 py-3 rounded-2xl text-sm leading-relaxed max-w-[85%] whitespace-pre-wrap"
                     style={
                       msg.role === "user"
-                        ? { background: "#1E40AF", color: "#fff", fontWeight: 500, borderBottomRightRadius: 6 }
+                        ? { background: "#214ECF", color: "#fff", fontWeight: 500, borderBottomRightRadius: 6 }
                         : { background: "#F8FAFC", color: "#0F172A", borderBottomLeftRadius: 6, border: "1px solid #E2E8F0" }
                     }
                     dangerouslySetInnerHTML={{
@@ -418,7 +418,7 @@ export default function ChatBot() {
                           href={l.href}
                           onClick={() => setOpen(false)}
                           className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-150 hover:opacity-80"
-                          style={{ background: "rgba(59,130,246,0.12)", color: "#3B82F6", border: "1px solid rgba(59,130,246,0.25)" }}
+                          style={{ background: "rgba(33,78,207,0.12)", color: "#214ECF", border: "1px solid rgba(33,78,207,0.25)" }}
                         >
                           {l.label}
                         </Link>

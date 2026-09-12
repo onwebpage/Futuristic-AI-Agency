@@ -76,8 +76,8 @@
   --elevate-1: rgba(33, 78, 207, 0.04);
   --elevate-2: rgba(33, 78, 207, 0.08);
 
-  /* white/light-blue design system */
-  --background: 210 100% 99%;
+  /* WHITE + #214ECF design system */
+  --background: 0 0% 100%;
   --foreground: 222 47% 11%;
 
   --card: 0 0% 100%;
@@ -88,14 +88,14 @@
   --popover-foreground: 222 47% 11%;
   --popover-border: 214 32% 91%;
 
-  --primary: 223 78% 44%;
+  --primary: 223 78% 47%;
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 220 100% 97%;
-  --secondary-foreground: 222 47% 11%;
+  --secondary: 0 0% 100%;
+  --secondary-foreground: 223 78% 47%;
 
-  --muted: 220 100% 97%;
-  --muted-foreground: 215 25% 27%;
+  --muted: 220 14% 96%;
+  --muted-foreground: 215 16% 47%;
 
   --accent: 220 100% 97%;
   --accent-foreground: 222 47% 11%;
@@ -105,16 +105,16 @@
 
   --border: 214 32% 91%;
   --input: 0 0% 100%;
-  --ring: 223 78% 46%;
+  --ring: 223 78% 47%;
 
-  --sidebar: 210 100% 99%;
+  --sidebar: 0 0% 100%;
   --sidebar-foreground: 222 47% 11%;
   --sidebar-border: 214 32% 91%;
-  --sidebar-primary: 223 78% 46%;
+  --sidebar-primary: 223 78% 47%;
   --sidebar-primary-foreground: 0 0% 100%;
   --sidebar-accent: 220 100% 97%;
-  --sidebar-accent-foreground: 222 47% 11%;
-  --sidebar-ring: 223 78% 46%;
+  --sidebar-accent-foreground: 223 78% 47%;
+  --sidebar-ring: 223 78% 47%;
 
   --app-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --app-font-display: 'Plus Jakarta Sans', 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -128,15 +128,15 @@
   --primary-100: 223 100% 96%;
   --primary-200: 223 93% 89%;
   --primary-300: 223 80% 74%;
-  --primary-400: 223 78% 46%;
-  --primary-500: 223 71% 40%;
-  --primary-600: 223 73% 34%;
+  --primary-400: 223 78% 47%;
+  --primary-500: 223 78% 40%;
+  --primary-600: 223 78% 34%;
 
-  /* Surface hierarchy */
-  --surface-0: hsl(var(--background));
-  --surface-1: hsl(var(--card));
-  --surface-2: rgba(33, 78, 207, 0.04);
-  --surface-3: rgba(33, 78, 207, 0.08);
+  /* Surface hierarchy - WHITE backgrounds */
+  --surface-0: hsl(0, 0%, 100%);
+  --surface-1: hsl(0, 0%, 100%);
+  --surface-2: hsl(0, 0%, 100%);
+  --surface-3: hsl(220, 14%, 96%);
 
   /* Glow tokens */
   --glow-primary: rgba(33, 78, 207, 0.12);
@@ -209,7 +209,8 @@
     font-feature-settings: 'cv02' 1, 'cv03' 1, 'cv04' 1, 'cv11' 1, 'ss01' 1;
     letter-spacing: -0.011em;
     line-height: 1.6;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    background: #FFFFFF;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.015'/%3E%3C/svg%3E");
     background-attachment: fixed;
   }
 
@@ -283,11 +284,11 @@
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-[#214ECF];
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-[#214ECF] to-primary;
 }
 
 .text-gradient-blue {
-  background: linear-gradient(135deg, #214ECF 0%, #4A7BFF 100%);
+  background: linear-gradient(135deg, #214ECF 0%, #2D5FE8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -484,7 +485,7 @@ img[loading="lazy"] {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.25em;
-  color: #1E40AF;
+  color: #214ECF;
 }
 
 .editorial-headline-hero {

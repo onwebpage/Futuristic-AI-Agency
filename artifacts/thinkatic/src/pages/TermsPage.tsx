@@ -163,7 +163,7 @@ function SectionBlock({ s, index }: { s: Section; index: number }) {
                 <ul className="flex flex-col gap-1.5 mb-3 pl-4">
                   {sub.bullets.map((b) => (
                     <li key={b} className="text-muted-foreground text-sm flex items-start gap-2">
-                      <span className="text-[#3B82F6] mt-1.5 flex-shrink-0">•</span>{b}
+                      <span className="text-[#214ECF] mt-1.5 flex-shrink-0">•</span>{b}
                     </li>
                   ))}
                 </ul>
@@ -179,7 +179,7 @@ function SectionBlock({ s, index }: { s: Section; index: number }) {
             <ul className="flex flex-col gap-1.5 mb-4 pl-4">
               {s.bullets.map((b) => (
                 <li key={b} className="text-muted-foreground text-sm flex items-start gap-2">
-                  <span className="text-[#3B82F6] mt-1.5 flex-shrink-0">•</span>{b}
+                  <span className="text-[#214ECF] mt-1.5 flex-shrink-0">•</span>{b}
                 </li>
               ))}
             </ul>
@@ -197,7 +197,7 @@ export default function TermsPage() {
       <section className="pt-40 pb-24 bg-background">
         <div className="max-w-4xl mx-auto px-6">
           <motion.p initial="hidden" animate="visible" variants={fadeUp}
-            className="text-xs font-mono uppercase tracking-[0.25em] mb-4" style={{ color: "#3B82F6" }}>
+            className="text-xs font-mono uppercase tracking-[0.25em] mb-4" style={{ color: "#214ECF" }}>
             Legal
           </motion.p>
           <motion.h1 initial="hidden" animate="visible" variants={fadeUp} transition={{ delay: 0.05 }}

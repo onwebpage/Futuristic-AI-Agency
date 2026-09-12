@@ -92,7 +92,7 @@ export function ProjectCTA() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, ease }}
             className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] mb-6"
-            style={{ color: "#1E40AF" }}
+            style={{ color: "#214ECF" }}
           >
             Get Started · No Commitment
           </motion.p>
@@ -109,7 +109,7 @@ export function ProjectCTA() {
               Ready to scale your
               <br />
               <span
-                style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 50%, #60A5FA 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+                style={{ background: "linear-gradient(135deg, #214ECF 0%, #214ECF 50%, #2D5FE8 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
               >
                 operations with AI?
               </span>

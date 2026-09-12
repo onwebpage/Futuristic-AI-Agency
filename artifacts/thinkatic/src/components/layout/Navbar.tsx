@@ -76,7 +76,7 @@ function MegaMenu({ visible }: { visible: boolean }) {
             <span className="text-[9px] font-mono tracking-[0.28em] uppercase" style={{ color: "#214ECF" }}>
               Enterprise Technology Capabilities
             </span>
-            <span className="text-[9px] font-mono tracking-widest uppercase text-slate-400">
+            <span className="text-[9px] font-mono tracking-widest uppercase text-slate-500">
               Mission-Critical Systems
             </span>
           </div>
@@ -163,7 +163,7 @@ function MegaMenu({ visible }: { visible: boolean }) {
             <Link
               href="/services"
               className="text-[11px] font-medium flex items-center gap-1.5 transition-all hover:gap-2.5 duration-200"
-              style={{ color: "rgba(37,99,235,0.75)" }}
+              style={{ color: "#214ECF" }}
             >
               View All Services
               <ArrowRight size={10} />
@@ -306,7 +306,7 @@ export default function Navbar() {
                         fontSize: "11px",
                         letterSpacing: "0.1em",
                         fontWeight: 600,
-                        color: isActive ? "#1E40AF" : "#0F172A",
+                        color: isActive ? "#214ECF" : "#0F172A",
                       }}
                     >
                       {item.label}
@@ -322,7 +322,7 @@ export default function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="activeUnderline"
-                        className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#1E40AF] rounded-full"
+                        className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#214ECF] rounded-full"
                         transition={{ duration: 0.3, ease }}
                       />
                     )}
@@ -335,12 +335,12 @@ export default function Navbar() {
                 <div key={item.label} className="relative">
                   <Link
                     href={item.href}
-                    className="px-3 py-2 rounded-md transition-colors duration-150 block hover:bg-slate-100/60 hover:text-[#1E40AF]"
+                    className="px-3 py-2 rounded-md transition-colors duration-150 block hover:bg-slate-100/60 hover:text-[#214ECF]"
                     style={{
                       fontSize: "11px",
                       letterSpacing: "0.1em",
                       fontWeight: 600,
-                      color: isActive ? "#1E40AF" : "#0F172A",
+                      color: isActive ? "#214ECF" : "#0F172A",
                     }}
                   >
                     {item.label}
@@ -348,7 +348,7 @@ export default function Navbar() {
                   {isActive && (
                     <motion.div
                       layoutId="activeUnderline"
-                      className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#1E40AF] rounded-full"
+                      className="absolute bottom-0 left-3 right-3 h-[2px] bg-[#214ECF] rounded-full"
                       transition={{ duration: 0.3, ease }}
                     />
                   )}
@@ -404,7 +404,7 @@ export default function Navbar() {
               <motion.button
                 whileHover={{ y: -1, boxShadow: "0 4px 12px rgba(30,64,175,0.2)" }}
                 whileTap={{ y: 0 }}
-                className="h-9 flex items-center gap-2 px-4 rounded-lg font-bold text-white transition-all duration-200 bg-[#1E40AF] hover:bg-[#1D4ED8] text-[11px] tracking-wider shadow-xs"
+                className="h-9 flex items-center gap-2 px-4 rounded-lg font-bold text-white transition-all duration-200 bg-[#214ECF] hover:bg-[#1A3DB3] text-[11px] tracking-wider shadow-xs"
                 data-testid="button-book-consultation"
               >
                 <CalendarDays size={11} aria-hidden="true" />

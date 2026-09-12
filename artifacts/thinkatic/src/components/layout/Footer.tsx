@@ -308,7 +308,7 @@ export default function Footer() {
                 <span
                   key={cert}
                   className="inline-flex items-center gap-1 text-[9px] font-mono uppercase tracking-widest px-2 py-1 rounded-md"
-                  style={{ background: "rgba(37,99,235,0.07)", border: "1px solid rgba(37,99,235,0.14)", color: "#1E40AF" }}
+                  style={{ background: "rgba(37,99,235,0.07)", border: "1px solid rgba(37,99,235,0.14)", color: "#214ECF" }}
                 >
                   <CheckCircle2 size={8} aria-hidden="true" />
                   {cert}
@@ -415,8 +415,8 @@ export default function Footer() {
                 <motion.span
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white text-[11px] font-bold cursor-pointer transition-all bg-[#1E40AF] hover:bg-[#1D4ED8]"
-                  style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 12px rgba(37,99,235,0.3)" }}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-white text-[11px] font-bold cursor-pointer transition-all bg-[#214ECF] hover:bg-[#1A3DB3]"
+                  style={{ background: "linear-gradient(135deg,#214ECF,#214ECF)", boxShadow: "0 0 12px rgba(33,78,207,0.3)" }}
                 >
                   Book Free Call
                   <ArrowRight size={10} aria-hidden="true" />
@@ -456,7 +456,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-1.5 order-3 hidden sm:flex">
             <span className="text-xs text-slate-500">Built with</span>
-            <span className="text-xs font-bold text-[#1E40AF]">AI</span>
+            <span className="text-xs font-bold text-[#214ECF]">AI</span>
             <span className="text-xs text-slate-500">by Thinkatic</span>
           </div>
         </motion.div>

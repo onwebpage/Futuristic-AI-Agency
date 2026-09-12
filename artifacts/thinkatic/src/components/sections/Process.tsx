@@ -16,7 +16,7 @@ const STEPS = [
     desc: "We map your business goals, identify automation opportunities, and define measurable success criteria before writing a single line of code.",
     tags: ["Stakeholder Interviews", "ROI Modeling", "Feasibility Analysis"],
     icon: Compass,
-    accent: "#1E40AF",
+    accent: "#214ECF",
     benchmark: "Phase 01 · Inception",
   },
   {
@@ -26,7 +26,7 @@ const STEPS = [
     desc: "Selecting the right LLMs, vector databases, orchestration layers, and data pipelines for your specific use case and compliance requirements.",
     tags: ["Model Selection", "Vector DB", "Pipeline Design"],
     icon: Layout,
-    accent: "#2563EB",
+    accent: "#214ECF",
     benchmark: "Phase 02 · Engineering",
   },
   {
@@ -66,7 +66,7 @@ const STEPS = [
     desc: "Zero-downtime production launch on your preferred cloud infrastructure with auto-scaling, CDN, monitoring, and incident response in place from day one.",
     tags: ["Cloud Deploy", "Auto-scaling", "Zero Downtime"],
     icon: Rocket,
-    accent: "#1E40AF",
+    accent: "#214ECF",
     benchmark: "Phase 06 · Production",
   },
   {
@@ -118,20 +118,20 @@ function StepCard({
           transition={{ duration: 0.5, ease: EASE, delay: 0.05 }}
           className={`relative z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-xl border flex flex-col items-center justify-center transition-all duration-300 ${
             isActive
-              ? "border-[#1E40AF] bg-[#1E40AF] text-white shadow-md"
+              ? "border-[#214ECF] bg-[#214ECF] text-white shadow-md"
               : "border-slate-200 bg-white text-slate-800 shadow-2xs group-hover:border-[#93C5FD] group-hover:shadow-xs"
           }`}
         >
           <span
             className={`font-mono font-bold text-xs sm:text-sm tracking-wider ${
-              isActive ? "text-white" : "text-[#1E40AF]"
+              isActive ? "text-white" : "text-[#214ECF]"
             }`}
           >
             {step.number}
           </span>
           <span
             className={`text-[8px] font-mono uppercase tracking-widest hidden sm:block ${
-              isActive ? "text-blue-100" : "text-slate-400"
+              isActive ? "text-blue-100" : "text-slate-500"
             }`}
           >
             STEP
@@ -143,7 +143,7 @@ function StepCard({
           <div className="flex-1 w-[2px] bg-slate-200 my-2 relative overflow-hidden min-h-[48px]">
             {/* Animated signal line */}
             <motion.div
-              className="absolute top-0 left-0 w-full bg-gradient-to-b from-[#1E40AF] via-[#3B82F6] to-transparent"
+              className="absolute top-0 left-0 w-full bg-gradient-to-b from-[#214ECF] via-[#214ECF] to-transparent"
               initial={{ height: "0%" }}
               animate={inView ? { height: "100%" } : {}}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
@@ -172,7 +172,7 @@ function StepCard({
         />
 
         {/* Corner registration mark */}
-        <div className="absolute top-2.5 right-2.5 text-slate-200 group-hover:text-slate-400 transition-colors font-mono text-[10px] select-none leading-none">
+        <div className="absolute top-2.5 right-2.5 text-slate-200 group-hover:text-slate-500 transition-colors font-mono text-[10px] select-none leading-none">
           +
         </div>
 
@@ -182,11 +182,11 @@ function StepCard({
             <div
               className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border border-slate-200 bg-slate-50 transition-colors group-hover:border-[#93C5FD] group-hover:bg-blue-50/50"
             >
-              <Icon size={18} className="text-[#1E40AF]" />
+              <Icon size={18} className="text-[#214ECF]" />
             </div>
 
             <div>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#1E40AF] block">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#214ECF] block">
                 STAGE {step.number} // {step.phaseName}
               </span>
               <h3 className="font-display font-bold text-slate-900 text-lg sm:text-xl leading-tight">
@@ -208,7 +208,7 @@ function StepCard({
 
         {/* Tags / Deliverables row */}
         <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-2">
-          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mr-1">
+          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 mr-1">
             Deliverables:
           </span>
           {step.tags.map((tag) => (
@@ -216,7 +216,7 @@ function StepCard({
               key={tag}
               className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-slate-50 text-slate-700 border border-slate-200 shadow-2xs"
             >
-              <CheckCircle2 size={11} className="text-[#1E40AF] shrink-0" />
+              <CheckCircle2 size={11} className="text-[#214ECF] shrink-0" />
               <span>{tag}</span>
             </span>
           ))}
@@ -290,8 +290,8 @@ export function Process() {
               transition={{ duration: 0.5, ease: EASE }}
               className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-blue-200/80 bg-blue-50/60 mb-5"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-[#1E40AF] animate-pulse" />
-              <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#1E40AF]">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#214ECF] animate-pulse" />
+              <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#214ECF]">
                 How We Work
               </span>
             </motion.div>
@@ -305,7 +305,7 @@ export function Process() {
                 className="font-display font-black text-slate-900 leading-[1.02] tracking-tight text-3xl sm:text-4xl lg:text-5xl"
               >
                 Our battle-tested <br />
-                <span className="bg-gradient-to-r from-[#1E40AF] via-[#214ECF] to-[#60A5FA] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#214ECF] via-[#214ECF] to-[#2D5FE8] bg-clip-text text-transparent">
                   7-step process.
                 </span>
               </motion.h2>
@@ -330,7 +330,7 @@ export function Process() {
             >
               <Link href="/contact">
                 <button
-                  className="inline-flex items-center gap-2.5 h-12 px-7 rounded-xl font-bold text-xs tracking-wider uppercase text-white bg-[#1E40AF] hover:bg-[#1D4ED8] transition-all shadow-xs hover:shadow-sm cursor-pointer"
+                  className="inline-flex items-center gap-2.5 h-12 px-7 rounded-xl font-bold text-xs tracking-wider uppercase text-white bg-[#214ECF] hover:bg-[#1A3DB3] transition-all shadow-xs hover:shadow-sm cursor-pointer"
                 >
                   <span>Start Your Journey</span>
                   <ArrowRight size={15} />
@@ -352,7 +352,7 @@ export function Process() {
             <div className="hidden lg:block rounded-xl border border-slate-200 bg-slate-50/60 p-4 shadow-2xs">
               <div className="flex items-center justify-between pb-3 border-b border-slate-200/80 mb-3">
                 <div className="flex items-center gap-1.5">
-                  <Activity size={13} className="text-[#1E40AF]" />
+                  <Activity size={13} className="text-[#214ECF]" />
                   <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-600">
                     Execution Telemetry
                   </span>
@@ -370,7 +370,7 @@ export function Process() {
                     onClick={() => scrollToStep(idx)}
                     className={`py-1.5 px-1 rounded text-center transition-all cursor-pointer ${
                       activeStepIndex === idx
-                        ? "bg-[#1E40AF] text-white font-bold shadow-2xs"
+                        ? "bg-[#214ECF] text-white font-bold shadow-2xs"
                         : "bg-white text-slate-600 border border-slate-200/80 hover:border-slate-300 hover:text-slate-900"
                     }`}
                   >

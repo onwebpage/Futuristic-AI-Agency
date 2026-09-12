@@ -47,7 +47,7 @@ function ServiceCard({ svc }: { svc: ServiceItem }) {
             <span className="text-xs font-mono font-bold tracking-[0.2em] text-[#214ECF]">
               {svc.number}
             </span>
-            <span className="text-slate-300">·</span>
+            <span className="text-slate-400">·</span>
             <span className="text-xs font-mono font-semibold uppercase text-slate-500">
               {svc.categoryLabel}
             </span>
@@ -101,7 +101,7 @@ function ServiceCard({ svc }: { svc: ServiceItem }) {
       {/* Bottom meta row */}
       {svc.technologies && (
         <div className="mt-6 pt-5 border-t border-slate-100 flex flex-wrap items-center gap-2">
-          <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold mr-2">
+          <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 font-bold mr-2">
             Technologies:
           </span>
           {svc.technologies.slice(0, 8).map((tech) => (
@@ -165,7 +165,7 @@ export default function ServicesPage() {
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-display font-black text-slate-900 mb-6 tracking-tight leading-[1.06]">
             Architecting Mission-Critical <br />
-            <span className="bg-gradient-to-r from-[#1E40AF] via-[#214ECF] to-[#60A5FA] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#214ECF] via-[#214ECF] to-[#2D5FE8] bg-clip-text text-transparent">
               Technology Systems
             </span>
           </h1>

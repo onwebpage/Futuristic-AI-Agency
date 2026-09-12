@@ -249,7 +249,7 @@ export function OurClients() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease }}
             className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] mb-5"
-            style={{ color: "#1E40AF" }}
+            style={{ color: "#214ECF" }}
           >
             Trusted Companies
           </motion.p>

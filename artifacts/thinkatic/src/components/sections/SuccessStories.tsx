@@ -76,7 +76,7 @@ export function SuccessStories() {
               variants={fadeUp}
               className="bg-[#FFFFFF] border border-border rounded-2xl p-8 flex flex-col justify-between min-h-[160px] hover:border-border transition-colors group relative overflow-hidden"
             >
-              <div className="absolute inset-0 bg-[#3B82F6]/0 group-hover:bg-[#3B82F6]/[0.03] transition-colors rounded-2xl pointer-events-none" />
+              <div className="absolute inset-0 bg-[#214ECF]/0 group-hover:bg-[#214ECF]/[0.03] transition-colors rounded-2xl pointer-events-none" />
               <p
                 className="font-display font-bold leading-tight mb-4"
                 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)', color: '#214ECF' }}

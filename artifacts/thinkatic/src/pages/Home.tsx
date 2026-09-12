@@ -95,7 +95,7 @@ function FinalCTA() {
                 <br />
                 <span
                   style={{
-                    background: "linear-gradient(135deg, #1E40AF 0%, #214ECF 60%, #60A5FA 100%)",
+                    background: "linear-gradient(135deg, #214ECF 0%, #214ECF 60%, #2D5FE8 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
@@ -148,7 +148,7 @@ function FinalCTA() {
             >
               <Link href="/contact">
                 <button
-                  className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl font-bold text-white text-xs tracking-wider uppercase bg-[#1E40AF] hover:bg-[#1D4ED8] shadow-xs hover:shadow-sm transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2.5 h-12 px-7 rounded-xl font-bold text-white text-xs tracking-wider uppercase bg-[#214ECF] hover:bg-[#1A3DB3] shadow-xs hover:shadow-sm transition-all cursor-pointer"
                 >
                   <Calendar size={15} />
                   Book Architectural Consultation
@@ -160,7 +160,7 @@ function FinalCTA() {
                 >
                   <FileText size={15} className="text-slate-500" />
                   Request a Proposal
-                  <ArrowRight size={14} className="text-[#1E40AF]" />
+                  <ArrowRight size={14} className="text-[#214ECF]" />
                 </button>
               </Link>
             </motion.div>
@@ -182,13 +182,13 @@ function FinalCTA() {
                 style={{ background: "linear-gradient(90deg, transparent, rgba(30,64,175,0.6) 30%, rgba(30,64,175,0.9) 50%, rgba(30,64,175,0.6) 70%, transparent)" }}
               />
 
-              <p className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] mb-8 text-[#1E40AF]">
+              <p className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] mb-8 text-[#214ECF]">
                 Enterprise Partnership Benchmarks
               </p>
 
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {[
-                  { value: "500+", label: "Enterprise Clients", color: "#1E40AF" },
+                  { value: "500+", label: "Enterprise Clients", color: "#214ECF" },
                   { value: "99.99%", label: "Cloud Uptime SLA", color: "#059669" },
                   { value: "2B+", label: "Ops / Year", color: "#7C3AED" },
                   { value: "<24h", label: "Consultation SLA", color: "#D97706" },
@@ -215,7 +215,7 @@ function FinalCTA() {
                 className="rounded-xl border p-5 bg-slate-50/80 border-slate-200"
               >
                 <div className="flex items-start gap-3.5">
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-xs bg-[#1E40AF]/10 border border-[#1E40AF]/30 text-[#1E40AF] shrink-0">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-xs bg-[#214ECF]/10 border border-[#214ECF]/30 text-[#214ECF] shrink-0">
                     CTO
                   </div>
                   <div>

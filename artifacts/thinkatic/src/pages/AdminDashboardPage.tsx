@@ -162,10 +162,10 @@ const EMPTY_PLAN_FORM: PlanFormData = {
 };
 
 const STATUS_COLORS: Record<string, { bg: string; text: string }> = {
-  new: { bg: "rgba(59,130,246,0.12)", text: "#1D4ED8" },
+  new: { bg: "rgba(59,130,246,0.12)", text: "#1A3DB3" },
   contacted: { bg: "rgba(99,102,241,0.12)", text: "#4338CA" },
   qualified: { bg: "rgba(251,191,36,0.12)", text: "#92400E" },
-  closed_won: { bg: "rgba(59,130,246,0.18)", text: "#1D4ED8" },
+  closed_won: { bg: "rgba(59,130,246,0.18)", text: "#1A3DB3" },
   closed_lost: { bg: "rgba(239,68,68,0.12)", text: "#B91C1C" },
 };
 
@@ -1962,7 +1962,7 @@ export default function AdminDashboardPage() {
                     </div>
                     <button
                       onClick={loadBpoPartners}
-                      className="flex items-center gap-2 rounded-xl border border-blue-100 bg-blue-50 px-3 py-2 text-xs font-semibold text-blue-700"
+                      className="flex items-center gap-2 rounded-xl border border-primary/10 bg-primary/5 px-3 py-2 text-xs font-semibold text-primary"
                     >
                       <RefreshCw size={13} className={bpoPartnerLoading ? "animate-spin" : ""} />
                       Refresh
@@ -1986,7 +1986,7 @@ export default function AdminDashboardPage() {
                           <div key={partner.id} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                             <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                               <div>
-                                <div className="text-xs font-bold uppercase tracking-widest text-blue-700">{partner.partner_code || "BPO"}</div>
+                                <div className="text-xs font-bold uppercase tracking-widest text-primary">{partner.partner_code || "BPO"}</div>
                                 <h3 className="text-xl font-black text-slate-900">{partner.name}</h3>
                               </div>
                               <StatusBadge status={partner.status || "active"} />
@@ -2019,7 +2019,7 @@ export default function AdminDashboardPage() {
                     </div>
                     <button
                       onClick={loadAttendance}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-blue-600 bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-colors"
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-primary bg-primary/5 border border-primary/10 hover:bg-primary/10 transition-colors"
                     >
                       <RefreshCw size={13} className={attendanceLoading ? "animate-spin" : ""} />
                       Refresh Attendance
@@ -2043,7 +2043,7 @@ export default function AdminDashboardPage() {
                         <tbody className="divide-y divide-slate-100">
                           {attendanceRecords.length === 0 ? (
                             <tr>
-                              <td colSpan={7} className="py-8 text-center text-slate-400">
+                              <td colSpan={7} className="py-8 text-center text-slate-500">
                                 No attendance records recorded in Supabase yet.
                               </td>
                             </tr>
@@ -2083,7 +2083,7 @@ export default function AdminDashboardPage() {
                     </div>
                     <button
                       onClick={loadKyc}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-blue-600 bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-colors"
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-primary bg-primary/5 border border-primary/10 hover:bg-primary/10 transition-colors"
                     >
                       <RefreshCw size={13} className={kycLoading ? "animate-spin" : ""} />
                       Refresh KYC
@@ -2107,7 +2107,7 @@ export default function AdminDashboardPage() {
                         <tbody className="divide-y divide-slate-100">
                           {kycRecords.length === 0 ? (
                             <tr>
-                              <td colSpan={7} className="py-8 text-center text-slate-400">
+                              <td colSpan={7} className="py-8 text-center text-slate-500">
                                 No KYC submissions awaiting review.
                               </td>
                             </tr>
@@ -2152,7 +2152,7 @@ export default function AdminDashboardPage() {
                                     </div>
                                   )}
                                   {k.status !== "pending" && (
-                                    <span className="text-[11px] text-slate-400">Reviewed</span>
+                                    <span className="text-[11px] text-slate-500">Reviewed</span>
                                   )}
                                 </td>
                               </tr>
@@ -2177,7 +2177,7 @@ export default function AdminDashboardPage() {
                     </div>
                     <button
                       onClick={loadAffiliates}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-blue-600 bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-colors"
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-primary bg-primary/5 border border-primary/10 hover:bg-primary/10 transition-colors"
                     >
                       <RefreshCw size={13} className={affiliatesLoading ? "animate-spin" : ""} />
                       Refresh Affiliates
@@ -2202,7 +2202,7 @@ export default function AdminDashboardPage() {
                         <tbody className="divide-y divide-slate-100">
                           {affiliates.length === 0 ? (
                             <tr>
-                              <td colSpan={8} className="py-8 text-center text-slate-400">
+                              <td colSpan={8} className="py-8 text-center text-slate-500">
                                 No affiliate referrals recorded yet.
                               </td>
                             </tr>
@@ -2212,11 +2212,11 @@ export default function AdminDashboardPage() {
                                 <td className="py-3 px-4 font-mono font-medium text-slate-900">#{aff.id}</td>
                                 <td className="py-3 px-4 font-mono text-slate-700">{aff.referrer_id.slice(0, 8)}...</td>
                                 <td className="py-3 px-4 font-mono text-slate-700">{aff.referred_user_id.slice(0, 8)}...</td>
-                                <td className="py-3 px-4 font-bold text-blue-600 uppercase">{aff.referral_code}</td>
+                                <td className="py-3 px-4 font-bold text-primary uppercase">{aff.referral_code}</td>
                                 <td className="py-3 px-4 text-slate-600">{aff.commission_rate}%</td>
                                 <td className="py-3 px-4 font-bold text-emerald-600">${parseFloat(aff.total_reward).toFixed(2)}</td>
                                 <td className="py-3 px-4">
-                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-700 capitalize">
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary capitalize">
                                     {aff.status}
                                   </span>
                                 </td>
@@ -2235,11 +2235,11 @@ export default function AdminDashboardPage() {
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
                     <div><h2 className="text-base font-bold text-foreground">Withdrawal Users</h2><p className="text-xs text-slate-500">Manage and review all user payout/withdrawal requests with complete details.</p></div>
-                    <button onClick={loadWithdrawals} className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-blue-600 bg-blue-50 border border-blue-100"><RefreshCw size={13} className={withdrawalsLoading ? "animate-spin" : ""} />Refresh</button>
+                    <button onClick={loadWithdrawals} className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-primary bg-primary/5 border border-primary/10"><RefreshCw size={13} className={withdrawalsLoading ? "animate-spin" : ""} />Refresh</button>
                   </div>
                   <div className="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-xs">
                     <div className="overflow-x-auto"><table className="w-full text-left text-xs"><thead className="bg-slate-50 text-slate-500 uppercase font-mono text-[10px] border-b border-slate-200"><tr><th className="py-3 px-4">Request ID</th><th className="py-3 px-4">Full Name</th><th className="py-3 px-4">Email</th><th className="py-3 px-4">Account Type</th><th className="py-3 px-4">Plan</th><th className="py-3 px-4">Amount</th><th className="py-3 px-4">Method</th><th className="py-3 px-4">Date</th><th className="py-3 px-4">Status</th><th className="py-3 px-4">Action</th></tr></thead><tbody className="divide-y divide-slate-100">
-                      {withdrawals.length === 0 ? <tr><td colSpan={10} className="py-8 text-center text-slate-400">No withdrawal requests.</td></tr> : withdrawals.map((withdrawal: any) => <tr key={withdrawal.id}><td className="py-3 px-4 font-mono font-bold text-slate-900">#{withdrawal.id}</td><td className="py-3 px-4 font-semibold text-slate-900">{withdrawal.userFullName || "N/A"}</td><td className="py-3 px-4 text-slate-700">{withdrawal.userEmail || "N/A"}</td><td className="py-3 px-4"><span className={`px-2 py-1 rounded text-[10px] font-bold ${withdrawal.userAccountType === "BPO" ? "bg-purple-100 text-purple-700" : "bg-blue-100 text-blue-700"}`}>{withdrawal.userAccountType}</span></td><td className="py-3 px-4 text-slate-700">{withdrawal.userPlan || "N/A"}</td><td className="py-3 px-4 font-bold text-slate-900">${withdrawal.amount.toFixed(2)}</td><td className="py-3 px-4">{withdrawal.method === "indian_bank" ? "🏦 Bank" : "💳 PayPal"}</td><td className="py-3 px-4 text-slate-600">{new Date(withdrawal.createdAt).toLocaleDateString()}</td><td className="py-3 px-4"><span className={`px-2 py-1 rounded-full text-[10px] font-bold ${withdrawal.status === "PENDING" ? "bg-yellow-100 text-yellow-700" : withdrawal.status === "APPROVED" ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700"}`}>{withdrawal.status}</span></td><td className="py-3 px-4">{withdrawal.status === "PENDING" ? <div className="flex gap-1"><button onClick={async () => { const res = await apiCall(`/admin/withdrawals/${withdrawal.id}`, { method: "PATCH", body: JSON.stringify({ status: "APPROVED" }) }); if (res.ok) loadWithdrawals(); }} className="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-lg font-bold hover:bg-emerald-100 transition-colors" title="Approve this withdrawal">✓</button><button onClick={async () => { const reason = window.prompt("Rejection reason") || "Rejected by admin"; const res = await apiCall(`/admin/withdrawals/${withdrawal.id}`, { method: "PATCH", body: JSON.stringify({ status: "REJECTED", rejectionReason: reason }) }); if (res.ok) loadWithdrawals(); }} className="px-2.5 py-1 bg-red-50 text-red-700 rounded-lg font-bold hover:bg-red-100 transition-colors" title="Reject this withdrawal">✕</button></div> : <span className="text-slate-400 text-[10px]">{withdrawal.reviewedAt ? new Date(withdrawal.reviewedAt).toLocaleDateString() : "—"}</span>}</td></tr>)}
+                      {withdrawals.length === 0 ? <tr><td colSpan={10} className="py-8 text-center text-slate-500">No withdrawal requests.</td></tr> : withdrawals.map((withdrawal: any) => <tr key={withdrawal.id}><td className="py-3 px-4 font-mono font-bold text-slate-900">#{withdrawal.id}</td><td className="py-3 px-4 font-semibold text-slate-900">{withdrawal.userFullName || "N/A"}</td><td className="py-3 px-4 text-slate-700">{withdrawal.userEmail || "N/A"}</td><td className="py-3 px-4"><span className={`px-2 py-1 rounded text-[10px] font-bold ${withdrawal.userAccountType === "BPO" ? "bg-purple-100 text-purple-700" : "bg-primary/10 text-primary"}`}>{withdrawal.userAccountType}</span></td><td className="py-3 px-4 text-slate-700">{withdrawal.userPlan || "N/A"}</td><td className="py-3 px-4 font-bold text-slate-900">${withdrawal.amount.toFixed(2)}</td><td className="py-3 px-4">{withdrawal.method === "indian_bank" ? "🏦 Bank" : "💳 PayPal"}</td><td className="py-3 px-4 text-slate-600">{new Date(withdrawal.createdAt).toLocaleDateString()}</td><td className="py-3 px-4"><span className={`px-2 py-1 rounded-full text-[10px] font-bold ${withdrawal.status === "PENDING" ? "bg-yellow-100 text-yellow-700" : withdrawal.status === "APPROVED" ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700"}`}>{withdrawal.status}</span></td><td className="py-3 px-4">{withdrawal.status === "PENDING" ? <div className="flex gap-1"><button onClick={async () => { const res = await apiCall(`/admin/withdrawals/${withdrawal.id}`, { method: "PATCH", body: JSON.stringify({ status: "APPROVED" }) }); if (res.ok) loadWithdrawals(); }} className="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-lg font-bold hover:bg-emerald-100 transition-colors" title="Approve this withdrawal">✓</button><button onClick={async () => { const reason = window.prompt("Rejection reason") || "Rejected by admin"; const res = await apiCall(`/admin/withdrawals/${withdrawal.id}`, { method: "PATCH", body: JSON.stringify({ status: "REJECTED", rejectionReason: reason }) }); if (res.ok) loadWithdrawals(); }} className="px-2.5 py-1 bg-red-50 text-red-700 rounded-lg font-bold hover:bg-red-100 transition-colors" title="Reject this withdrawal">✕</button></div> : <span className="text-slate-500 text-[10px]">{withdrawal.reviewedAt ? new Date(withdrawal.reviewedAt).toLocaleDateString() : "—"}</span>}</td></tr>)}
                     </tbody></table></div>
                   </div>
 
@@ -2278,7 +2278,7 @@ export default function AdminDashboardPage() {
                     </div>
                     <button
                       onClick={loadWallets}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-blue-600 bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-colors"
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-primary bg-primary/5 border border-primary/10 hover:bg-primary/10 transition-colors"
                     >
                       <RefreshCw size={13} className={walletsLoading ? "animate-spin" : ""} />
                       Refresh Wallets
@@ -2305,7 +2305,7 @@ export default function AdminDashboardPage() {
                         <tbody className="divide-y divide-slate-100">
                           {walletsData.wallets.length === 0 ? (
                             <tr>
-                              <td colSpan={6} className="py-8 text-center text-slate-400">
+                              <td colSpan={6} className="py-8 text-center text-slate-500">
                                 No user wallets provisioned yet.
                               </td>
                             </tr>
@@ -2355,7 +2355,7 @@ export default function AdminDashboardPage() {
                         <tbody className="divide-y divide-slate-100">
                           {walletsData.recentTransactions.length === 0 ? (
                             <tr>
-                              <td colSpan={7} className="py-8 text-center text-slate-400">
+                              <td colSpan={7} className="py-8 text-center text-slate-500">
                                 No ledger transactions logged.
                               </td>
                             </tr>
@@ -2389,33 +2389,33 @@ export default function AdminDashboardPage() {
               {tab === "projects" && (
                 <div className="space-y-6">
                   <div><h2 className="text-base font-bold text-slate-900">Project Management</h2><p className="text-xs text-slate-500 mt-1">Create and manage client delivery projects, milestones, tasks, and deliverables.</p></div>
-                  <form onSubmit={createAdminProject} className="rounded-2xl border border-slate-200 bg-white p-5 space-y-3"><div className="grid grid-cols-1 md:grid-cols-3 gap-3"><input required value={projectForm.clientId} onChange={(e) => setProjectForm((p) => ({ ...p, clientId: e.target.value }))} placeholder="Client profile UUID" className="px-3 py-2 rounded-xl border border-slate-200 text-sm" /><input required value={projectForm.name} onChange={(e) => setProjectForm((p) => ({ ...p, name: e.target.value }))} placeholder="Project name" className="px-3 py-2 rounded-xl border border-slate-200 text-sm" /><select value={projectForm.status} onChange={(e) => setProjectForm((p) => ({ ...p, status: e.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 text-sm bg-white"><option value="planning">Planning</option><option value="design">Design</option><option value="development">Development</option><option value="testing">Testing</option><option value="deployment">Deployment</option><option value="completed">Completed</option><option value="on_hold">On hold</option></select></div><textarea value={projectForm.description} onChange={(e) => setProjectForm((p) => ({ ...p, description: e.target.value }))} placeholder="Project description" rows={3} className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm" /><button disabled={projectSaving} className="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">{projectSaving ? "Creating..." : "Create Project"}</button></form>
-                  {projectsLoading ? <div className="py-12 text-center text-sm text-slate-500">Loading projects...</div> : <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">{projects.length === 0 ? <div className="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-10 text-center text-sm text-slate-500">No projects created yet.</div> : projects.map((project) => <div key={project.id} className="rounded-2xl border border-slate-200 bg-white p-5"><div className="flex items-start justify-between gap-3"><div><span className="font-mono text-[10px] text-blue-700">PROJECT #{project.id}</span><h3 className="font-bold text-slate-900">{project.name}</h3><p className="text-xs text-slate-500">Client: {project.client_id}</p></div><span className="text-[10px] font-bold uppercase text-slate-600">{project.status.replaceAll("_", " ")}</span></div><div className="mt-4 flex justify-between text-xs text-slate-500"><span>Progress</span><span>{project.progress_percent}%</span></div><div className="mt-1 h-2 bg-slate-100 rounded-full"><div className="h-full bg-blue-600 rounded-full" style={{ width: `${project.progress_percent}%` }} /></div><button onClick={() => openAdminProject(project)} className="mt-4 px-3 py-2 rounded-xl bg-blue-50 text-blue-700 text-xs font-bold">Open project</button></div>)}</div>}
-                  {selectedProject && <div className="rounded-2xl border border-blue-200 bg-blue-50/40 p-5 space-y-4"><div className="flex items-center justify-between"><div><span className="font-mono text-[10px] text-blue-700">PROJECT #{selectedProject.id}</span><h3 className="text-lg font-bold text-slate-900">{selectedProject.name}</h3></div><button onClick={() => setSelectedProject(null)} className="text-xs font-bold text-slate-500">Close</button></div><div className="flex flex-wrap gap-2"><select value={selectedProject.status} onChange={(e) => updateAdminProject({ status: e.target.value })} className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs"><option value="planning">Planning</option><option value="design">Design</option><option value="development">Development</option><option value="testing">Testing</option><option value="deployment">Deployment</option><option value="completed">Completed</option><option value="on_hold">On hold</option></select><input type="number" min="0" max="100" defaultValue={selectedProject.progress_percent} onBlur={(e) => updateAdminProject({ progressPercent: Number(e.target.value) })} className="w-32 px-3 py-2 rounded-xl border border-slate-200 text-xs" placeholder="Progress %" /></div><div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs"><div className="rounded-xl bg-white border border-slate-200 p-3"><b>Milestones</b><p className="mt-1 text-slate-500">{selectedProject.project_milestones?.length || 0}</p></div><div className="rounded-xl bg-white border border-slate-200 p-3"><b>Tasks</b><p className="mt-1 text-slate-500">{selectedProject.project_tasks?.length || 0}</p></div><div className="rounded-xl bg-white border border-slate-200 p-3"><b>Deliverables</b><p className="mt-1 text-slate-500">{selectedProject.project_deliverables?.length || 0}</p></div></div><div className="space-y-2">{(selectedProject.project_activity || []).slice(0, 8).map((event: any) => <div key={event.id} className="text-xs text-slate-600">{event.description} · {new Date(event.created_at).toLocaleString()}</div>)}</div></div>}
+                  <form onSubmit={createAdminProject} className="rounded-2xl border border-slate-200 bg-white p-5 space-y-3"><div className="grid grid-cols-1 md:grid-cols-3 gap-3"><input required value={projectForm.clientId} onChange={(e) => setProjectForm((p) => ({ ...p, clientId: e.target.value }))} placeholder="Client profile UUID" className="px-3 py-2 rounded-xl border border-slate-200 text-sm" /><input required value={projectForm.name} onChange={(e) => setProjectForm((p) => ({ ...p, name: e.target.value }))} placeholder="Project name" className="px-3 py-2 rounded-xl border border-slate-200 text-sm" /><select value={projectForm.status} onChange={(e) => setProjectForm((p) => ({ ...p, status: e.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 text-sm bg-white"><option value="planning">Planning</option><option value="design">Design</option><option value="development">Development</option><option value="testing">Testing</option><option value="deployment">Deployment</option><option value="completed">Completed</option><option value="on_hold">On hold</option></select></div><textarea value={projectForm.description} onChange={(e) => setProjectForm((p) => ({ ...p, description: e.target.value }))} placeholder="Project description" rows={3} className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm" /><button disabled={projectSaving} className="px-4 py-2 rounded-xl bg-primary text-white text-xs font-bold">{projectSaving ? "Creating..." : "Create Project"}</button></form>
+                  {projectsLoading ? <div className="py-12 text-center text-sm text-slate-500">Loading projects...</div> : <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">{projects.length === 0 ? <div className="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-10 text-center text-sm text-slate-500">No projects created yet.</div> : projects.map((project) => <div key={project.id} className="rounded-2xl border border-slate-200 bg-white p-5"><div className="flex items-start justify-between gap-3"><div><span className="font-mono text-[10px] text-primary">PROJECT #{project.id}</span><h3 className="font-bold text-slate-900">{project.name}</h3><p className="text-xs text-slate-500">Client: {project.client_id}</p></div><span className="text-[10px] font-bold uppercase text-slate-600">{project.status.replaceAll("_", " ")}</span></div><div className="mt-4 flex justify-between text-xs text-slate-500"><span>Progress</span><span>{project.progress_percent}%</span></div><div className="mt-1 h-2 bg-slate-100 rounded-full"><div className="h-full bg-primary rounded-full" style={{ width: `${project.progress_percent}%` }} /></div><button onClick={() => openAdminProject(project)} className="mt-4 px-3 py-2 rounded-xl bg-primary/5 text-primary text-xs font-bold">Open project</button></div>)}</div>}
+                  {selectedProject && <div className="rounded-2xl border border-primary/20 bg-primary/5/40 p-5 space-y-4"><div className="flex items-center justify-between"><div><span className="font-mono text-[10px] text-primary">PROJECT #{selectedProject.id}</span><h3 className="text-lg font-bold text-slate-900">{selectedProject.name}</h3></div><button onClick={() => setSelectedProject(null)} className="text-xs font-bold text-slate-500">Close</button></div><div className="flex flex-wrap gap-2"><select value={selectedProject.status} onChange={(e) => updateAdminProject({ status: e.target.value })} className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs"><option value="planning">Planning</option><option value="design">Design</option><option value="development">Development</option><option value="testing">Testing</option><option value="deployment">Deployment</option><option value="completed">Completed</option><option value="on_hold">On hold</option></select><input type="number" min="0" max="100" defaultValue={selectedProject.progress_percent} onBlur={(e) => updateAdminProject({ progressPercent: Number(e.target.value) })} className="w-32 px-3 py-2 rounded-xl border border-slate-200 text-xs" placeholder="Progress %" /></div><div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs"><div className="rounded-xl bg-white border border-slate-200 p-3"><b>Milestones</b><p className="mt-1 text-slate-500">{selectedProject.project_milestones?.length || 0}</p></div><div className="rounded-xl bg-white border border-slate-200 p-3"><b>Tasks</b><p className="mt-1 text-slate-500">{selectedProject.project_tasks?.length || 0}</p></div><div className="rounded-xl bg-white border border-slate-200 p-3"><b>Deliverables</b><p className="mt-1 text-slate-500">{selectedProject.project_deliverables?.length || 0}</p></div></div><div className="space-y-2">{(selectedProject.project_activity || []).slice(0, 8).map((event: any) => <div key={event.id} className="text-xs text-slate-600">{event.description} · {new Date(event.created_at).toLocaleString()}</div>)}</div></div>}
                 </div>
               )}
 
               {tab === "projects" && selectedProject && (
-                <div className="rounded-2xl border border-blue-200 bg-blue-50/40 p-5 space-y-4">
+                <div className="rounded-2xl border border-primary/20 bg-primary/5/40 p-5 space-y-4">
                   <h3 className="text-sm font-bold text-slate-900">Project actions</h3>
                   <form onSubmit={(event) => { event.preventDefault(); createProjectChild("milestones", { ...milestoneForm, completionPercent: Number(milestoneForm.completionPercent) }); }} className="grid grid-cols-1 md:grid-cols-4 gap-2">
                     <input required value={milestoneForm.name} onChange={(event) => setMilestoneForm((value) => ({ ...value, name: event.target.value }))} placeholder="Milestone name" className="px-3 py-2 rounded-xl border border-slate-200 text-xs" />
                     <select value={milestoneForm.status} onChange={(event) => setMilestoneForm((value) => ({ ...value, status: event.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs"><option value="not_started">Not started</option><option value="in_progress">In progress</option><option value="at_risk">At risk</option><option value="completed">Completed</option></select>
                     <input type="number" min="0" max="100" value={milestoneForm.completionPercent} onChange={(event) => setMilestoneForm((value) => ({ ...value, completionPercent: event.target.value }))} placeholder="Completion %" className="px-3 py-2 rounded-xl border border-slate-200 text-xs" />
-                    <button className="px-3 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">Create milestone</button>
+                    <button className="px-3 py-2 rounded-xl bg-primary text-white text-xs font-bold">Create milestone</button>
                   </form>
                   <form onSubmit={(event) => { event.preventDefault(); createProjectChild("tasks", { ...taskForm, completionPercent: taskForm.status === "completed" ? 100 : 0 }); }} className="grid grid-cols-1 md:grid-cols-5 gap-2">
                     <input required value={taskForm.name} onChange={(event) => setTaskForm((value) => ({ ...value, name: event.target.value }))} placeholder="Task name" className="px-3 py-2 rounded-xl border border-slate-200 text-xs" />
                     <input value={taskForm.assignedName} onChange={(event) => setTaskForm((value) => ({ ...value, assignedName: event.target.value }))} placeholder="Assign to" className="px-3 py-2 rounded-xl border border-slate-200 text-xs" />
                     <select value={taskForm.status} onChange={(event) => setTaskForm((value) => ({ ...value, status: event.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs"><option value="todo">To do</option><option value="in_progress">In progress</option><option value="blocked">Blocked</option><option value="review">Review</option><option value="completed">Completed</option></select>
                     <select value={taskForm.priority} onChange={(event) => setTaskForm((value) => ({ ...value, priority: event.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="critical">Critical</option></select>
-                    <button className="px-3 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">Create and assign task</button>
+                    <button className="px-3 py-2 rounded-xl bg-primary text-white text-xs font-bold">Create and assign task</button>
                   </form>
                   <form onSubmit={(event) => { event.preventDefault(); createProjectChild("deliverables", deliverableForm); }} className="grid grid-cols-1 md:grid-cols-4 gap-2">
                     <input required value={deliverableForm.name} onChange={(event) => setDeliverableForm((value) => ({ ...value, name: event.target.value }))} placeholder="Deliverable name" className="px-3 py-2 rounded-xl border border-slate-200 text-xs" />
                     <input value={deliverableForm.filePath} onChange={(event) => setDeliverableForm((value) => ({ ...value, filePath: event.target.value }))} placeholder="File path" className="px-3 py-2 rounded-xl border border-slate-200 text-xs" />
                     <select value={deliverableForm.status} onChange={(event) => setDeliverableForm((value) => ({ ...value, status: event.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs"><option value="submitted">Submitted</option><option value="under_review">Under review</option><option value="resubmitted">Resubmitted</option></select>
-                    <button className="px-3 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">Submit deliverable</button>
+                    <button className="px-3 py-2 rounded-xl bg-primary text-white text-xs font-bold">Submit deliverable</button>
                   </form>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">{(selectedProject.project_tasks || []).map((task: any) => <label key={task.id} className="flex items-center gap-2 rounded-xl bg-white border border-slate-200 p-2 text-xs"><span className="flex-1">{task.name}{task.assigned_name ? ` - ${task.assigned_name}` : ""}</span><select value={task.status} onChange={(event) => updateProjectChild("tasks", task.id, { status: event.target.value, completionPercent: event.target.value === "completed" ? 100 : task.completion_percent })} className="px-2 py-1 rounded border border-slate-200 bg-white text-xs"><option value="todo">To do</option><option value="in_progress">In progress</option><option value="blocked">Blocked</option><option value="review">Review</option><option value="completed">Completed</option></select></label>)}</div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">{(selectedProject.project_deliverables || []).map((deliverable: any) => <label key={deliverable.id} className="flex items-center gap-2 rounded-xl bg-white border border-slate-200 p-2 text-xs"><span className="flex-1">{deliverable.name}</span><select value={deliverable.status} onChange={(event) => updateProjectChild("deliverables", deliverable.id, { status: event.target.value })} className="px-2 py-1 rounded border border-slate-200 bg-white text-xs"><option value="submitted">Submitted</option><option value="under_review">Under review</option><option value="changes_requested">Request changes</option><option value="resubmitted">Resubmitted</option><option value="approved">Approve</option></select></label>)}</div>
@@ -2438,7 +2438,7 @@ export default function AdminDashboardPage() {
                     <input required type="datetime-local" value={meetingForm.startsAt} onChange={(event) => setMeetingForm((value) => ({ ...value, startsAt: event.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 text-xs" />
                     <input required type="datetime-local" value={meetingForm.endsAt} onChange={(event) => setMeetingForm((value) => ({ ...value, endsAt: event.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 text-xs" />
                     <input value={meetingForm.location} onChange={(event) => setMeetingForm((value) => ({ ...value, location: event.target.value }))} placeholder="Location or meeting link" className="px-3 py-2 rounded-xl border border-slate-200 text-xs" />
-                    <button type="submit" className="px-3 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">Schedule meeting</button>
+                    <button type="submit" className="px-3 py-2 rounded-xl bg-primary text-white text-xs font-bold">Schedule meeting</button>
                     <textarea value={meetingForm.agenda} onChange={(event) => setMeetingForm((value) => ({ ...value, agenda: event.target.value }))} placeholder="Agenda (optional)" className="md:col-span-4 px-3 py-2 rounded-xl border border-slate-200 text-xs" rows={2} />
                   </form>
 
@@ -2477,13 +2477,13 @@ export default function AdminDashboardPage() {
                           <thead className="bg-slate-50 text-slate-500"><tr><th className="p-3">Meeting</th><th className="p-3">Client</th><th className="p-3">Project</th><th className="p-3">When</th><th className="p-3">Status</th><th className="p-3">Action</th></tr></thead>
                           <tbody className="divide-y divide-slate-100">
                             {meetings.map((meeting: any) => (
-                              <tr key={meeting.id} className={selectedMeeting?.id === meeting.id ? "bg-blue-50" : ""}>
+                              <tr key={meeting.id} className={selectedMeeting?.id === meeting.id ? "bg-primary/5" : ""}>
                                 <td className="p-3 font-semibold">{meeting.title}</td>
                                 <td className="p-3 font-mono text-[10px]">{meeting.client_id?.slice(0, 8)}...</td>
                                 <td className="p-3">#{meeting.project_id}</td>
                                 <td className="p-3">{new Date(meeting.starts_at).toLocaleString()}</td>
                                 <td className="p-3 uppercase text-[10px] font-bold">{meeting.status?.replaceAll("_", " ")}</td>
-                                <td className="p-3"><button onClick={() => openAdminMeeting(meeting)} className="text-blue-700 font-bold">Open</button></td>
+                                <td className="p-3"><button onClick={() => openAdminMeeting(meeting)} className="text-primary font-bold">Open</button></td>
                               </tr>
                             ))}
                           </tbody>
@@ -2493,7 +2493,7 @@ export default function AdminDashboardPage() {
 
                   {/* Selected meeting detail panel */}
                   {selectedMeeting && (
-                    <div className="rounded-2xl border border-blue-200 bg-blue-50/40 p-5 space-y-4">
+                    <div className="rounded-2xl border border-primary/20 bg-primary/5/40 p-5 space-y-4">
                       <div className="flex items-center justify-between">
                         <div>
                           <h3 className="font-bold text-slate-900">{selectedMeeting.title}</h3>
@@ -2534,13 +2534,13 @@ export default function AdminDashboardPage() {
                         <h4 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Notes ({(selectedMeeting.notes || []).length})</h4>
                         <div className="space-y-2 mb-3">
                           {(selectedMeeting.notes || []).length === 0
-                            ? <p className="text-xs text-slate-400">No notes yet.</p>
+                            ? <p className="text-xs text-slate-500">No notes yet.</p>
                             : (selectedMeeting.notes || []).map((note: any) => (
                                 <div key={note.id} className="rounded-xl bg-white border border-slate-100 p-3">
                                   <div className="flex items-center gap-2 mb-1">
-                                    <span className="text-[10px] uppercase font-bold text-slate-400">{note.note_type?.replaceAll("_", " ")}</span>
+                                    <span className="text-[10px] uppercase font-bold text-slate-500">{note.note_type?.replaceAll("_", " ")}</span>
                                     {note.client_visible && <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded-full">Client visible</span>}
-                                    {!note.client_visible && <span className="text-[10px] text-slate-400 font-bold bg-slate-50 px-1.5 py-0.5 rounded-full">Internal</span>}
+                                    {!note.client_visible && <span className="text-[10px] text-slate-500 font-bold bg-slate-50 px-1.5 py-0.5 rounded-full">Internal</span>}
                                   </div>
                                   <p className="text-sm text-slate-700">{note.body}</p>
                                 </div>
@@ -2573,13 +2573,13 @@ export default function AdminDashboardPage() {
                         <h4 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">Action Items ({(selectedMeeting.action_items || []).length})</h4>
                         <div className="space-y-2 mb-3">
                           {(selectedMeeting.action_items || []).length === 0
-                            ? <p className="text-xs text-slate-400">No action items yet.</p>
+                            ? <p className="text-xs text-slate-500">No action items yet.</p>
                             : (selectedMeeting.action_items || []).map((item: any) => (
                                 <div key={item.id} className="rounded-xl bg-white border border-slate-100 p-3 flex items-start justify-between gap-3">
                                   <div>
                                     <p className="text-sm font-semibold text-slate-800">{item.title}</p>
                                     {item.description && <p className="text-xs text-slate-500 mt-0.5">{item.description}</p>}
-                                    <p className="text-[10px] text-slate-400 mt-1">
+                                    <p className="text-[10px] text-slate-500 mt-1">
                                       {item.assigned_user_id ? `Assigned to user ${item.assigned_user_id.slice(0, 6)}` : "Unassigned"}
                                       {item.due_date ? ` · Due ${item.due_date}` : ""}
                                     </p>
@@ -2598,7 +2598,7 @@ export default function AdminDashboardPage() {
                                       <option value="completed">Completed</option>
                                       <option value="cancelled">Cancelled</option>
                                     </select>
-                                    <span className="text-[10px] text-slate-400 uppercase">{item.priority}</span>
+                                    <span className="text-[10px] text-slate-500 uppercase">{item.priority}</span>
                                   </div>
                                 </div>
                               ))
@@ -2612,7 +2612,7 @@ export default function AdminDashboardPage() {
                           <select value={actionItemForm.priority} onChange={(event) => setActionItemForm((value) => ({ ...value, priority: event.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs">
                             <option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="critical">Critical</option>
                           </select>
-                          <button onClick={addAdminActionItem} disabled={addingActionItem || !actionItemForm.title.trim()} className="px-3 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold disabled:opacity-50">
+                          <button onClick={addAdminActionItem} disabled={addingActionItem || !actionItemForm.title.trim()} className="px-3 py-2 rounded-xl bg-primary text-white text-xs font-bold disabled:opacity-50">
                             {addingActionItem ? "Adding..." : "Add action item"}
                           </button>
                         </div>
@@ -2625,8 +2625,8 @@ export default function AdminDashboardPage() {
                           <div className="space-y-1">
                             {selectedMeeting.activity.slice(0, 20).map((entry: any) => (
                               <div key={entry.id} className="flex items-start gap-2 text-xs text-slate-600">
-                                <span className="text-[10px] text-slate-400 whitespace-nowrap mt-0.5">{new Date(entry.created_at).toLocaleString()}</span>
-                                <span className="font-mono text-[10px] text-blue-600">{entry.action.replaceAll("_", " ")}</span>
+                                <span className="text-[10px] text-slate-500 whitespace-nowrap mt-0.5">{new Date(entry.created_at).toLocaleString()}</span>
+                                <span className="font-mono text-[10px] text-primary">{entry.action.replaceAll("_", " ")}</span>
                               </div>
                             ))}
                           </div>
@@ -2638,11 +2638,11 @@ export default function AdminDashboardPage() {
               )}
 
               {tab === "documents" && (
-                <div className="space-y-5"><div><h2 className="text-base font-bold text-slate-900">Document Centre</h2><p className="text-xs text-slate-500 mt-1">Manage private client and project documents.</p></div><div className="rounded-2xl border border-slate-200 bg-white p-4 grid grid-cols-1 md:grid-cols-5 gap-2"><input value={adminDocumentForm.clientId} onChange={(event) => setAdminDocumentForm((value) => ({ ...value, clientId: event.target.value }))} placeholder="Client profile UUID" className="px-3 py-2 rounded-xl border border-slate-200 text-xs" /><input value={adminDocumentForm.projectId} onChange={(event) => setAdminDocumentForm((value) => ({ ...value, projectId: event.target.value }))} placeholder="Project ID" className="px-3 py-2 rounded-xl border border-slate-200 text-xs" /><select value={adminDocumentForm.category} onChange={(event) => setAdminDocumentForm((value) => ({ ...value, category: event.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs"><option>Other</option><option>Contract</option><option>Proposal</option><option>Requirement</option><option>Project Document</option><option>Design</option><option>Technical</option><option>Deliverable</option><option>Report</option></select><select value={adminDocumentForm.visibility} onChange={(event) => setAdminDocumentForm((value) => ({ ...value, visibility: event.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs"><option value="client_visible">Client visible</option><option value="internal_only">Internal only</option></select><label className="px-3 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold text-center cursor-pointer">Upload<input type="file" className="hidden" onChange={uploadAdminDocument} /></label></div><div className="rounded-2xl border border-slate-200 bg-white overflow-x-auto"><table className="w-full text-left text-xs"><thead className="bg-slate-50 text-slate-500"><tr><th className="p-3">Document</th><th className="p-3">Client</th><th className="p-3">Category</th><th className="p-3">Visibility</th><th className="p-3">Status</th><th className="p-3">Actions</th></tr></thead><tbody className="divide-y divide-slate-100">{adminDocuments.length === 0 ? <tr><td colSpan={6} className="p-8 text-center text-slate-500">No documents found.</td></tr> : adminDocuments.map((document) => <tr key={document.id}><td className="p-3 font-semibold">{document.original_file_name}<div className="text-[10px] text-slate-400">{new Date(document.created_at).toLocaleString()}</div></td><td className="p-3 font-mono text-[10px]">{document.client_id.slice(0, 8)}...</td><td className="p-3">{document.category}</td><td className="p-3">{document.visibility}</td><td className="p-3">{document.status}</td><td className="p-3 flex gap-2"><button onClick={async () => { const response = await apiCall(`/admin/documents/${document.id}/download`); if (response.ok) window.open((await response.json()).url, "_blank", "noopener,noreferrer"); }} className="text-blue-700 font-bold">Download</button><button onClick={async () => { await apiCall(`/admin/documents/${document.id}`, { method: "PATCH", body: JSON.stringify({ status: document.status === "archived" ? "active" : "archived" }) }); await loadDocuments(); }} className="text-amber-700 font-bold">{document.status === "archived" ? "Restore" : "Archive"}</button></td></tr>)}</tbody></table></div></div>
+                <div className="space-y-5"><div><h2 className="text-base font-bold text-slate-900">Document Centre</h2><p className="text-xs text-slate-500 mt-1">Manage private client and project documents.</p></div><div className="rounded-2xl border border-slate-200 bg-white p-4 grid grid-cols-1 md:grid-cols-5 gap-2"><input value={adminDocumentForm.clientId} onChange={(event) => setAdminDocumentForm((value) => ({ ...value, clientId: event.target.value }))} placeholder="Client profile UUID" className="px-3 py-2 rounded-xl border border-slate-200 text-xs" /><input value={adminDocumentForm.projectId} onChange={(event) => setAdminDocumentForm((value) => ({ ...value, projectId: event.target.value }))} placeholder="Project ID" className="px-3 py-2 rounded-xl border border-slate-200 text-xs" /><select value={adminDocumentForm.category} onChange={(event) => setAdminDocumentForm((value) => ({ ...value, category: event.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs"><option>Other</option><option>Contract</option><option>Proposal</option><option>Requirement</option><option>Project Document</option><option>Design</option><option>Technical</option><option>Deliverable</option><option>Report</option></select><select value={adminDocumentForm.visibility} onChange={(event) => setAdminDocumentForm((value) => ({ ...value, visibility: event.target.value }))} className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs"><option value="client_visible">Client visible</option><option value="internal_only">Internal only</option></select><label className="px-3 py-2 rounded-xl bg-primary text-white text-xs font-bold text-center cursor-pointer">Upload<input type="file" className="hidden" onChange={uploadAdminDocument} /></label></div><div className="rounded-2xl border border-slate-200 bg-white overflow-x-auto"><table className="w-full text-left text-xs"><thead className="bg-slate-50 text-slate-500"><tr><th className="p-3">Document</th><th className="p-3">Client</th><th className="p-3">Category</th><th className="p-3">Visibility</th><th className="p-3">Status</th><th className="p-3">Actions</th></tr></thead><tbody className="divide-y divide-slate-100">{adminDocuments.length === 0 ? <tr><td colSpan={6} className="p-8 text-center text-slate-500">No documents found.</td></tr> : adminDocuments.map((document) => <tr key={document.id}><td className="p-3 font-semibold">{document.original_file_name}<div className="text-[10px] text-slate-500">{new Date(document.created_at).toLocaleString()}</div></td><td className="p-3 font-mono text-[10px]">{document.client_id.slice(0, 8)}...</td><td className="p-3">{document.category}</td><td className="p-3">{document.visibility}</td><td className="p-3">{document.status}</td><td className="p-3 flex gap-2"><button onClick={async () => { const response = await apiCall(`/admin/documents/${document.id}/download`); if (response.ok) window.open((await response.json()).url, "_blank", "noopener,noreferrer"); }} className="text-primary font-bold">Download</button><button onClick={async () => { await apiCall(`/admin/documents/${document.id}`, { method: "PATCH", body: JSON.stringify({ status: document.status === "archived" ? "active" : "archived" }) }); await loadDocuments(); }} className="text-amber-700 font-bold">{document.status === "archived" ? "Restore" : "Archive"}</button></td></tr>)}</tbody></table></div></div>
               )}
 
               {tab === "communications" && (
-                <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-5"><section className="space-y-3"><h2 className="text-base font-bold text-slate-900">Project Communications</h2>{adminConversations.length === 0 ? <div className="rounded-xl border border-slate-200 bg-white p-6 text-xs text-slate-500">No active conversations.</div> : adminConversations.map((conversation) => <button key={conversation.id} onClick={() => openAdminConversation(conversation)} className={`w-full text-left rounded-xl border p-3 ${selectedAdminConversation?.id === conversation.id ? "border-blue-500 bg-blue-50" : "border-slate-200 bg-white"}`}><p className="text-xs font-bold">{conversation.subject}</p><p className="text-[10px] text-slate-500">Client {conversation.client_id.slice(0, 8)}... · {conversation.status}</p></button>)}</section><section className="rounded-2xl border border-slate-200 bg-white p-5 min-h-96 flex flex-col">{!selectedAdminConversation ? <div className="m-auto text-sm text-slate-500">Select a project conversation.</div> : <><div className="border-b border-slate-100 pb-3"><h2 className="font-bold text-slate-900">{selectedAdminConversation.subject}</h2><button onClick={async () => { await apiCall(`/admin/conversations/${selectedAdminConversation.id}`, { method: "PATCH", body: JSON.stringify({ status: selectedAdminConversation.status === "open" ? "closed" : "open" }) }); await loadConversations(); }} className="text-xs text-blue-700 font-bold">{selectedAdminConversation.status === "open" ? "Close conversation" : "Reopen conversation"}</button></div><div className="flex-1 space-y-3 py-4 overflow-y-auto">{selectedAdminConversation.messages.map((message: any) => <div key={message.id} className={`max-w-[85%] rounded-xl p-3 text-xs ${message.sender_admin_id ? "ml-auto bg-blue-600 text-white" : "bg-slate-100"}`}><p>{message.body}</p><time className="block mt-1 text-[10px] opacity-70">{new Date(message.created_at).toLocaleString()}</time></div>)}</div><form onSubmit={(event) => { event.preventDefault(); sendAdminMessage(); }} className="flex gap-2"><input value={adminMessage} onChange={(event) => setAdminMessage(event.target.value)} placeholder="Reply to client" className="flex-1 px-3 py-2 rounded-xl border border-slate-200 text-xs" /><button className="px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">Send</button></form></>}</section></div>
+                <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-5"><section className="space-y-3"><h2 className="text-base font-bold text-slate-900">Project Communications</h2>{adminConversations.length === 0 ? <div className="rounded-xl border border-slate-200 bg-white p-6 text-xs text-slate-500">No active conversations.</div> : adminConversations.map((conversation) => <button key={conversation.id} onClick={() => openAdminConversation(conversation)} className={`w-full text-left rounded-xl border p-3 ${selectedAdminConversation?.id === conversation.id ? "border-blue-500 bg-primary/5" : "border-slate-200 bg-white"}`}><p className="text-xs font-bold">{conversation.subject}</p><p className="text-[10px] text-slate-500">Client {conversation.client_id.slice(0, 8)}... · {conversation.status}</p></button>)}</section><section className="rounded-2xl border border-slate-200 bg-white p-5 min-h-96 flex flex-col">{!selectedAdminConversation ? <div className="m-auto text-sm text-slate-500">Select a project conversation.</div> : <><div className="border-b border-slate-100 pb-3"><h2 className="font-bold text-slate-900">{selectedAdminConversation.subject}</h2><button onClick={async () => { await apiCall(`/admin/conversations/${selectedAdminConversation.id}`, { method: "PATCH", body: JSON.stringify({ status: selectedAdminConversation.status === "open" ? "closed" : "open" }) }); await loadConversations(); }} className="text-xs text-primary font-bold">{selectedAdminConversation.status === "open" ? "Close conversation" : "Reopen conversation"}</button></div><div className="flex-1 space-y-3 py-4 overflow-y-auto">{selectedAdminConversation.messages.map((message: any) => <div key={message.id} className={`max-w-[85%] rounded-xl p-3 text-xs ${message.sender_admin_id ? "ml-auto bg-primary text-white" : "bg-slate-100"}`}><p>{message.body}</p><time className="block mt-1 text-[10px] opacity-70">{new Date(message.created_at).toLocaleString()}</time></div>)}</div><form onSubmit={(event) => { event.preventDefault(); sendAdminMessage(); }} className="flex gap-2"><input value={adminMessage} onChange={(event) => setAdminMessage(event.target.value)} placeholder="Reply to client" className="flex-1 px-3 py-2 rounded-xl border border-slate-200 text-xs" /><button className="px-4 py-2 rounded-xl bg-primary text-white text-xs font-bold">Send</button></form></>}</section></div>
               )}
 
               {tab === "tickets" && (
@@ -2668,11 +2668,11 @@ export default function AdminDashboardPage() {
                     <select value={ticketPriority} onChange={(e) => { setTicketPriority(e.target.value); }} className="px-3 py-2 rounded-xl border border-slate-200 text-sm bg-white">
                       <option value="all">All priorities</option><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="urgent">Urgent</option>
                     </select>
-                    <button onClick={loadTickets} className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-blue-600 bg-blue-50 border border-blue-100"><RefreshCw size={13} className={ticketsLoading ? "animate-spin" : ""} />Refresh</button>
+                    <button onClick={loadTickets} className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-primary bg-primary/5 border border-primary/10"><RefreshCw size={13} className={ticketsLoading ? "animate-spin" : ""} />Refresh</button>
                   </div>
                   <div className="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-xs">
                     <div className="overflow-x-auto"><table className="w-full text-left text-xs"><thead className="bg-slate-50 text-slate-500 uppercase font-mono text-[10px] border-b border-slate-200"><tr><th className="py-3 px-4">Ticket</th><th className="py-3 px-4">Requester</th><th className="py-3 px-4">Subject</th><th className="py-3 px-4">Priority</th><th className="py-3 px-4">Status</th><th className="py-3 px-4">Created</th><th className="py-3 px-4">Action</th></tr></thead><tbody className="divide-y divide-slate-100">
-                      {tickets.length === 0 ? <tr><td colSpan={7} className="py-8 text-center text-slate-400">No tickets match these filters.</td></tr> : tickets.map((ticket) => <tr key={ticket.id} className="hover:bg-slate-50/50"><td className="py-3 px-4 font-mono font-bold text-blue-700">{ticket.ticket_number}</td><td className="py-3 px-4 capitalize text-slate-600">{ticket.requester_role}</td><td className="py-3 px-4 font-semibold text-slate-900">{ticket.subject}<div className="text-[10px] font-normal text-slate-500">{ticket.category}</div></td><td className="py-3 px-4"><select value={ticket.priority} onChange={(e) => updateTicket(ticket, { priority: e.target.value })} className="rounded-lg border border-slate-200 px-2 py-1 text-[11px] bg-white"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="urgent">Urgent</option></select></td><td className="py-3 px-4"><select value={ticket.status} onChange={(e) => updateTicket(ticket, { status: e.target.value })} className="rounded-lg border border-slate-200 px-2 py-1 text-[11px] bg-white"><option value="open">Open</option><option value="assigned">Assigned</option><option value="in_progress">In progress</option><option value="waiting_for_requester">Waiting</option><option value="resolved">Resolved</option><option value="closed">Closed</option></select></td><td className="py-3 px-4 text-slate-500">{new Date(ticket.created_at).toLocaleString()}</td><td className="py-3 px-4"><button onClick={() => openTicket(ticket)} className="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 font-bold">View</button></td></tr>)}
+                      {tickets.length === 0 ? <tr><td colSpan={7} className="py-8 text-center text-slate-500">No tickets match these filters.</td></tr> : tickets.map((ticket) => <tr key={ticket.id} className="hover:bg-slate-50/50"><td className="py-3 px-4 font-mono font-bold text-primary">{ticket.ticket_number}</td><td className="py-3 px-4 capitalize text-slate-600">{ticket.requester_role}</td><td className="py-3 px-4 font-semibold text-slate-900">{ticket.subject}<div className="text-[10px] font-normal text-slate-500">{ticket.category}</div></td><td className="py-3 px-4"><select value={ticket.priority} onChange={(e) => updateTicket(ticket, { priority: e.target.value })} className="rounded-lg border border-slate-200 px-2 py-1 text-[11px] bg-white"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="urgent">Urgent</option></select></td><td className="py-3 px-4"><select value={ticket.status} onChange={(e) => updateTicket(ticket, { status: e.target.value })} className="rounded-lg border border-slate-200 px-2 py-1 text-[11px] bg-white"><option value="open">Open</option><option value="assigned">Assigned</option><option value="in_progress">In progress</option><option value="waiting_for_requester">Waiting</option><option value="resolved">Resolved</option><option value="closed">Closed</option></select></td><td className="py-3 px-4 text-slate-500">{new Date(ticket.created_at).toLocaleString()}</td><td className="py-3 px-4"><button onClick={() => openTicket(ticket)} className="px-2.5 py-1 rounded-lg bg-primary/5 text-primary font-bold">View</button></td></tr>)}
                     </tbody></table></div>
                   </div>
                 </div>
@@ -2681,8 +2681,8 @@ export default function AdminDashboardPage() {
               {tab === "settings" && (
                 <div className="max-w-md space-y-6">
                   <div className="rounded-2xl p-6 bg-white border border-slate-200">
-                    <div className="flex items-center justify-between mb-4"><div><h2 className="font-semibold text-slate-900">Feature Control</h2><p className="text-xs text-slate-500 mt-1">These settings are enforced by the backend.</p></div><button onClick={loadModuleSettings} className="p-2 rounded-lg text-blue-600 hover:bg-blue-50" title="Refresh feature settings"><RefreshCw size={14} className={moduleSettingsLoading ? "animate-spin" : ""} /></button></div>
-                    <div className="space-y-2">{moduleSettings.map((setting) => <div key={setting.module_key} className="flex items-center justify-between rounded-xl border border-slate-100 px-3 py-2.5"><span className="text-sm font-medium text-slate-700 capitalize">{setting.module_key.replaceAll("_", " ")}</span><button type="button" role="switch" aria-checked={setting.enabled} onClick={() => toggleModule(setting)} className={`relative h-6 w-11 rounded-full transition-colors ${setting.enabled ? "bg-blue-600" : "bg-slate-300"}`}><span className={`absolute top-1 h-4 w-4 rounded-full bg-white transition-transform ${setting.enabled ? "left-6" : "left-1"}`} /></button></div>)}</div>
+                    <div className="flex items-center justify-between mb-4"><div><h2 className="font-semibold text-slate-900">Feature Control</h2><p className="text-xs text-slate-500 mt-1">These settings are enforced by the backend.</p></div><button onClick={loadModuleSettings} className="p-2 rounded-lg text-primary hover:bg-primary/5" title="Refresh feature settings"><RefreshCw size={14} className={moduleSettingsLoading ? "animate-spin" : ""} /></button></div>
+                    <div className="space-y-2">{moduleSettings.map((setting) => <div key={setting.module_key} className="flex items-center justify-between rounded-xl border border-slate-100 px-3 py-2.5"><span className="text-sm font-medium text-slate-700 capitalize">{setting.module_key.replaceAll("_", " ")}</span><button type="button" role="switch" aria-checked={setting.enabled} onClick={() => toggleModule(setting)} className={`relative h-6 w-11 rounded-full transition-colors ${setting.enabled ? "bg-primary" : "bg-slate-300"}`}><span className={`absolute top-1 h-4 w-4 rounded-full bg-white transition-transform ${setting.enabled ? "left-6" : "left-1"}`} /></button></div>)}</div>
                   </div>
                   <div
                     className="rounded-2xl p-6"
@@ -2783,11 +2783,11 @@ export default function AdminDashboardPage() {
       {selectedTicket && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4">
           <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl border border-slate-200 space-y-5">
-            <div className="flex items-start justify-between"><div><div className="font-mono text-xs font-bold text-blue-700">{selectedTicket.ticket_number}</div><h2 className="text-lg font-bold text-slate-900">{selectedTicket.subject}</h2><p className="text-xs text-slate-500">{selectedTicket.requester_role} · {selectedTicket.category}</p></div><button onClick={() => setSelectedTicket(null)} className="text-slate-400 hover:text-slate-700"><X size={18} /></button></div>
+            <div className="flex items-start justify-between"><div><div className="font-mono text-xs font-bold text-primary">{selectedTicket.ticket_number}</div><h2 className="text-lg font-bold text-slate-900">{selectedTicket.subject}</h2><p className="text-xs text-slate-500">{selectedTicket.requester_role} · {selectedTicket.category}</p></div><button onClick={() => setSelectedTicket(null)} className="text-slate-500 hover:text-slate-700"><X size={18} /></button></div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3"><select value={selectedTicket.status} onChange={async (e) => { const res = await apiCall(`/admin/tickets/${selectedTicket.id}`, { method: "PATCH", body: JSON.stringify({ status: e.target.value }) }); if (res.ok) { await openTicket(selectedTicket); loadTickets(); } else { const data = await res.json(); setDataError(data.error || "Unable to update status"); } }} className="px-3 py-2 rounded-xl border border-slate-200 text-sm bg-white"><option value="open">Open</option><option value="assigned">Assigned</option><option value="in_progress">In progress</option><option value="waiting_for_requester">Waiting</option><option value="resolved">Resolved</option><option value="closed">Closed</option></select><select value={selectedTicket.priority} onChange={async (e) => { await updateTicket(selectedTicket, { priority: e.target.value }); openTicket(selectedTicket); }} className="px-3 py-2 rounded-xl border border-slate-200 text-sm bg-white"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="urgent">Urgent</option></select><input type="number" value={selectedTicket.assigned_to || ""} onChange={(e) => setSelectedTicket((previous: any) => ({ ...previous, assigned_to: e.target.value ? Number(e.target.value) : null }))} onBlur={async () => { const res = await apiCall(`/admin/tickets/${selectedTicket.id}`, { method: "PATCH", body: JSON.stringify({ assignedTo: selectedTicket.assigned_to }) }); if (res.ok) { await openTicket(selectedTicket); loadTickets(); } }} placeholder="Admin ID to assign" className="px-3 py-2 rounded-xl border border-slate-200 text-sm" /></div>
             <div className="space-y-3">{(selectedTicket.ticket_messages || []).map((message: any) => <div key={message.id} className={`rounded-xl p-3 ${message.is_internal ? "bg-amber-50 border border-amber-200" : "bg-slate-50 border border-slate-200"}`}><div className="text-[10px] uppercase font-bold text-slate-500">{message.is_internal ? "Internal note" : message.author_admin_id ? "Admin reply" : "Requester message"} · {new Date(message.created_at).toLocaleString()}</div><p className="mt-1 text-sm text-slate-700 whitespace-pre-wrap">{message.body}</p></div>)}</div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3"><div><textarea value={ticketReply} onChange={(e) => setTicketReply(e.target.value)} rows={3} placeholder="Reply to requester" className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm" /><button onClick={() => addTicketMessage(false)} className="mt-2 px-3 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold">Send Reply</button></div><div><textarea value={ticketNote} onChange={(e) => setTicketNote(e.target.value)} rows={3} placeholder="Internal note (never shown to requester)" className="w-full px-3 py-2 rounded-xl border border-amber-200 text-sm" /><button onClick={() => addTicketMessage(true)} className="mt-2 px-3 py-2 rounded-xl bg-amber-600 text-white text-xs font-bold">Add Internal Note</button></div></div>
-            <div className="border-t border-slate-200 pt-4"><h3 className="text-xs font-bold uppercase tracking-widest text-slate-500">Audit history</h3><div className="mt-2 space-y-1">{ticketAudit.length === 0 ? <p className="text-xs text-slate-400">No audit events.</p> : ticketAudit.map((event: any) => <div key={event.id} className="text-xs text-slate-600">{event.action} · {new Date(event.created_at).toLocaleString()}</div>)}</div></div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3"><div><textarea value={ticketReply} onChange={(e) => setTicketReply(e.target.value)} rows={3} placeholder="Reply to requester" className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm" /><button onClick={() => addTicketMessage(false)} className="mt-2 px-3 py-2 rounded-xl bg-primary text-white text-xs font-bold">Send Reply</button></div><div><textarea value={ticketNote} onChange={(e) => setTicketNote(e.target.value)} rows={3} placeholder="Internal note (never shown to requester)" className="w-full px-3 py-2 rounded-xl border border-amber-200 text-sm" /><button onClick={() => addTicketMessage(true)} className="mt-2 px-3 py-2 rounded-xl bg-amber-600 text-white text-xs font-bold">Add Internal Note</button></div></div>
+            <div className="border-t border-slate-200 pt-4"><h3 className="text-xs font-bold uppercase tracking-widest text-slate-500">Audit history</h3><div className="mt-2 space-y-1">{ticketAudit.length === 0 ? <p className="text-xs text-slate-500">No audit events.</p> : ticketAudit.map((event: any) => <div key={event.id} className="text-xs text-slate-600">{event.action} · {new Date(event.created_at).toLocaleString()}</div>)}</div></div>
           </div>
         </div>
       )}
@@ -2801,7 +2801,7 @@ export default function AdminDashboardPage() {
                 <h3 className="text-base font-bold text-slate-900">{editingClientUpdate ? "Edit Client Update" : "Send Client Update"}</h3>
                 <p className="text-[11px] text-slate-500 mt-1">Only {selectedUpdateClient.clientName} ({selectedUpdateClient.email})</p>
               </div>
-              <button type="button" onClick={() => setUpdateModalOpen(false)} className="text-slate-400 hover:text-slate-600"><X size={18} /></button>
+              <button type="button" onClick={() => setUpdateModalOpen(false)} className="text-slate-500 hover:text-slate-600"><X size={18} /></button>
             </div>
             <InputField label="Update Title" value={updateForm.title} onChange={(value) => setUpdateForm((prev) => ({ ...prev, title: value }))} placeholder="Daily Progress Update" required />
             <div className="flex flex-col gap-1.5">
@@ -2821,7 +2821,7 @@ export default function AdminDashboardPage() {
             <div className="text-[11px] text-slate-500">Date/time: {new Date().toLocaleString()} (recorded by the server when saved)</div>
             <div className="flex items-center justify-end gap-2.5 pt-2">
               <button type="button" onClick={() => setUpdateModalOpen(false)} className="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl">Cancel</button>
-              <button type="submit" disabled={savingClientUpdate} className="px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-xs font-bold rounded-xl shadow-xs cursor-pointer">
+              <button type="submit" disabled={savingClientUpdate} className="px-5 py-2 bg-primary hover:bg-primary disabled:opacity-50 text-white text-xs font-bold rounded-xl shadow-xs cursor-pointer">
                 {savingClientUpdate ? "Saving..." : editingClientUpdate ? "Save Changes" : "Send / Publish"}
               </button>
             </div>
@@ -2835,7 +2835,7 @@ export default function AdminDashboardPage() {
           <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-bold text-slate-900">Reject KYC Submission</h3>
-              <button onClick={() => setKycReviewModal(null)} className="text-slate-400 hover:text-slate-600">
+              <button onClick={() => setKycReviewModal(null)} className="text-slate-500 hover:text-slate-600">
                 <X size={18} />
               </button>
             </div>

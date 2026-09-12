@@ -15,7 +15,7 @@ const TESTIMONIALS = [
     photo: "https://randomuser.me/api/portraits/men/32.jpg",
     metric: "68%",
     metricLabel: "reduction in support tickets",
-    accent: "#1E40AF",
+    accent: "#214ECF",
     benchmarkTag: "Ticket Deflection",
   },
   {
@@ -28,7 +28,7 @@ const TESTIMONIALS = [
     photo: "https://randomuser.me/api/portraits/women/44.jpg",
     metric: "6 wks",
     metricLabel: "from kickoff to launch",
-    accent: "#1E40AF",
+    accent: "#214ECF",
     benchmarkTag: "Time-to-Market",
   },
   {
@@ -126,7 +126,7 @@ function Slide({ t, direction }: { t: typeof TESTIMONIALS[0]; direction: number 
             <img
               src={t.photo}
               alt={t.name}
-              className="w-13 h-13 rounded-full object-cover shrink-0 ring-2 ring-[#1E40AF]/20 ring-offset-2 shadow-xs"
+              className="w-13 h-13 rounded-full object-cover shrink-0 ring-2 ring-[#214ECF]/20 ring-offset-2 shadow-xs"
               loading="lazy"
             />
             <div>
@@ -134,14 +134,14 @@ function Slide({ t, direction }: { t: typeof TESTIMONIALS[0]; direction: number 
                 {t.name}
               </p>
               <p className="text-xs md:text-sm font-medium text-slate-600 mt-0.5">
-                {t.title} <span className="text-slate-300 mx-1">·</span>{" "}
-                <span className="text-[#1E40AF] font-semibold">{t.company}</span>
+                {t.title} <span className="text-slate-400 mx-1">·</span>{" "}
+                <span className="text-[#214ECF] font-semibold">{t.company}</span>
               </p>
             </div>
           </div>
 
           <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200/80 text-[11px] font-mono text-slate-600">
-            <Shield size={12} className="text-[#1E40AF]" />
+            <Shield size={12} className="text-[#214ECF]" />
             <span>Verified Executive Sponsor</span>
           </div>
         </div>
@@ -173,7 +173,7 @@ function Slide({ t, direction }: { t: typeof TESTIMONIALS[0]; direction: number 
           <div className="my-3">
             <p
               className="font-display font-black leading-none tracking-tight"
-              style={{ fontSize: "clamp(3.2rem, 5vw, 4.4rem)", color: "#1E40AF" }}
+              style={{ fontSize: "clamp(3.2rem, 5vw, 4.4rem)", color: "#214ECF" }}
             >
               {t.metric}
             </p>
@@ -189,7 +189,7 @@ function Slide({ t, direction }: { t: typeof TESTIMONIALS[0]; direction: number 
               <span className="font-bold text-slate-900">{t.benchmarkTag}</span>
             </div>
             <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-              <div className="h-full bg-[#1E40AF] rounded-full w-4/5" />
+              <div className="h-full bg-[#214ECF] rounded-full w-4/5" />
             </div>
           </div>
         </div>
@@ -199,7 +199,7 @@ function Slide({ t, direction }: { t: typeof TESTIMONIALS[0]; direction: number 
           <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-600">
             Client
           </span>
-          <span className="text-xs font-mono font-bold text-[#1E40AF]">
+          <span className="text-xs font-mono font-bold text-[#214ECF]">
             {t.company}
           </span>
         </div>
@@ -257,8 +257,8 @@ export function Testimonials() {
               transition={{ duration: 0.6, ease }}
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/80 border border-blue-200/60 mb-4"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-[#1E40AF]" />
-              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.28em] text-[#1E40AF]">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#214ECF]" />
+              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.28em] text-[#214ECF]">
                 Client Testimonials
               </span>
             </motion.div>
@@ -273,7 +273,7 @@ export function Testimonials() {
               >
                 What our clients
                 <br />
-                <span className="text-[#1E40AF]">
+                <span className="text-[#214ECF]">
                   say about us.
                 </span>
               </motion.h2>
@@ -338,7 +338,7 @@ export function Testimonials() {
                 className="relative h-2 rounded-full transition-all duration-300 overflow-hidden cursor-pointer"
                 style={{
                   width: i === index ? "40px" : "10px",
-                  background: i === index ? "#1E40AF" : "rgba(148,163,184,0.3)",
+                  background: i === index ? "#214ECF" : "rgba(148,163,184,0.3)",
                 }}
               >
                 {i === index && !paused && !shouldReduce && (
@@ -370,7 +370,7 @@ export function Testimonials() {
                 onClick={() => goTo(i)}
                 className={`p-3.5 rounded-xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between ${
                   isSelected
-                    ? "bg-white border-[#1E40AF] shadow-sm ring-1 ring-[#1E40AF]/20"
+                    ? "bg-white border-[#214ECF] shadow-sm ring-1 ring-[#214ECF]/20"
                     : "bg-slate-50/60 border-slate-200/80 hover:bg-white hover:border-slate-300"
                 }`}
               >
@@ -379,7 +379,7 @@ export function Testimonials() {
                     src={t.photo}
                     alt={t.name}
                     className={`w-7 h-7 rounded-full object-cover shrink-0 ${
-                      isSelected ? "ring-2 ring-[#1E40AF]" : "opacity-80"
+                      isSelected ? "ring-2 ring-[#214ECF]" : "opacity-80"
                     }`}
                     loading="lazy"
                   />
@@ -392,7 +392,7 @@ export function Testimonials() {
                 </div>
 
                 <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
-                  <span className={`text-[10px] font-mono font-bold ${isSelected ? "text-[#1E40AF]" : "text-slate-600"}`}>
+                  <span className={`text-[10px] font-mono font-bold ${isSelected ? "text-[#214ECF]" : "text-slate-600"}`}>
                     {t.metric}
                   </span>
                   <span className="text-[9px] font-mono text-slate-600 uppercase truncate max-w-[80px]">

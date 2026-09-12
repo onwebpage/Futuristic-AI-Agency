@@ -408,7 +408,7 @@ export default function TechnologyPage() {
               style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)" }}
             >
               Build Intelligent Digital<br />
-              <span style={{ background: "linear-gradient(135deg,#214ECF 0%,#214ECF 60%,#93c5fd 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span style={{ background: "linear-gradient(135deg,#214ECF 0%,#214ECF 60%,#2D5FE8 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 Products
               </span>{" "}
               That Solve Real<br />Business Problems.
@@ -422,7 +422,7 @@ export default function TechnologyPage() {
                   whileHover={{ scale: 1.04, boxShadow: "0 0 32px rgba(37,99,235,0.5)" }}
                   whileTap={{ scale: 0.97 }}
                   className="px-8 py-4 rounded-full font-bold text-foreground text-sm tracking-wider"
-                  style={{ background: "linear-gradient(135deg,#214ECF 0%,#214ECF 50%,#3b82f6 100%)", boxShadow: "0 0 24px rgba(37,99,235,0.3)" }}
+                  style={{ background: "linear-gradient(135deg,#214ECF 0%,#214ECF 50%,#2D5FE8 100%)", boxShadow: "0 0 24px rgba(33,78,207,0.3)" }}
                 >
                   Book a Consultation
                 </motion.button>

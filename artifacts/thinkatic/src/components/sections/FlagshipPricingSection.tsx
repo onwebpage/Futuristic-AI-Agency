@@ -58,7 +58,7 @@ export function FlagshipPricingSection() {
             className="font-display font-black text-3xl sm:text-4xl md:text-5xl text-slate-900 tracking-tight leading-[1.1] mb-5"
           >
             Mission-Critical Transformation. <br />
-            <span className="bg-gradient-to-r from-[#1E40AF] via-[#214ECF] to-[#60A5FA] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#214ECF] via-[#214ECF] to-[#2D5FE8] bg-clip-text text-transparent">
               Transparent Investment.
             </span>
           </motion.h2>
@@ -89,7 +89,7 @@ export function FlagshipPricingSection() {
                 whileHover={{ y: -4 }}
                 className={`relative rounded-xl p-8 sm:p-9 flex flex-col justify-between transition-all duration-300 ${
                   isPopular
-                    ? "bg-[#FFFFFF] border-2 border-[#1E40AF] shadow-lg ring-4 ring-blue-500/10"
+                    ? "bg-[#FFFFFF] border-2 border-[#214ECF] shadow-lg ring-4 ring-blue-500/10"
                     : "bg-[#FFFFFF] border border-slate-200 shadow-xs hover:border-slate-300 hover:shadow-md"
                 }`}
               >
@@ -100,7 +100,7 @@ export function FlagshipPricingSection() {
                   </span>
 
                   {isPopular ? (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-bold bg-[#1E40AF] text-white shadow-2xs">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-bold bg-[#214ECF] text-white shadow-2xs">
                       <Star size={11} className="fill-white" />
                       Most Popular
                     </span>
@@ -118,7 +118,7 @@ export function FlagshipPricingSection() {
                   </h3>
                   <div className="flex items-baseline gap-2 mb-4">
                     <span className="text-xs font-mono uppercase tracking-wider text-slate-600 font-semibold">Starting at</span>
-                    <span className="font-display font-black text-3xl sm:text-4xl text-[#1E40AF] tracking-tight">
+                    <span className="font-display font-black text-3xl sm:text-4xl text-[#214ECF] tracking-tight">
                       {plan.startingPriceFormatted}
                     </span>
                   </div>
@@ -144,12 +144,12 @@ export function FlagshipPricingSection() {
                   <ul className="space-y-2.5">
                     {plan.includes.slice(0, 6).map((item, i) => (
                       <li key={i} className="flex items-start gap-2.5 text-xs text-slate-800 font-medium">
-                        <CheckCircle2 size={15} className="text-[#1E40AF] shrink-0 mt-0.5" />
+                        <CheckCircle2 size={15} className="text-[#214ECF] shrink-0 mt-0.5" />
                         <span className="leading-snug">{item}</span>
                       </li>
                     ))}
                     {plan.includes.length > 6 && (
-                      <li className="text-[11px] font-mono text-[#1E40AF] pl-6 pt-1 font-semibold">
+                      <li className="text-[11px] font-mono text-[#214ECF] pl-6 pt-1 font-semibold">
                         + {plan.includes.length - 6} more enterprise deliverables
                       </li>
                     )}
@@ -162,7 +162,7 @@ export function FlagshipPricingSection() {
                     <button
                       className={`w-full h-12 px-6 rounded-xl font-bold text-xs tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer ${
                         isPopular
-                          ? "bg-[#1E40AF] text-white shadow-xs hover:bg-[#1D4ED8]"
+                          ? "bg-[#214ECF] text-white shadow-xs hover:bg-[#1A3DB3]"
                           : "bg-slate-900 text-white hover:bg-slate-800 shadow-xs"
                       }`}
                     >
@@ -185,7 +185,7 @@ export function FlagshipPricingSection() {
           className="rounded-xl border border-slate-200 p-6 sm:p-8 bg-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xs"
         >
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-[#1E40AF] shrink-0">
+            <div className="w-12 h-12 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-[#214ECF] shrink-0">
               <Layers size={22} />
             </div>
             <div>
@@ -202,7 +202,7 @@ export function FlagshipPricingSection() {
             <Link href="/pricing">
               <button className="w-full md:w-auto h-11 px-5 rounded-xl font-bold text-xs tracking-wider uppercase bg-white border border-slate-200 text-slate-900 hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 flex items-center justify-center gap-2 shadow-2xs cursor-pointer">
                 View Full Pricing & Plans
-                <ArrowUpRight size={14} className="text-[#1E40AF]" />
+                <ArrowUpRight size={14} className="text-[#214ECF]" />
               </button>
             </Link>
           </div>

@@ -37,7 +37,7 @@ export function Display({ children, className, as: Tag = 'h1', gradient, gradien
       className={cn(
         'font-display font-extrabold tracking-[-0.038em] leading-[0.98]',
         'text-[clamp(2.75rem,6vw,5rem)] text-slate-900',
-        muted && 'text-slate-500',
+        muted && 'text-slate-600',
         gradient && 'text-gradient',
         gradientBlue && 'text-gradient-blue',
         className,
@@ -56,7 +56,7 @@ export function DisplaySm({ children, className, as: Tag = 'h1', gradient, gradi
       className={cn(
         'font-display font-extrabold tracking-[-0.032em] leading-[1.02]',
         'text-[clamp(2rem,4.5vw,3.75rem)] text-slate-900',
-        muted && 'text-slate-500',
+        muted && 'text-slate-600',
         gradient && 'text-gradient',
         gradientBlue && 'text-gradient-blue',
         className,
@@ -75,7 +75,7 @@ export function H1({ children, className, as: Tag = 'h1', gradient, gradientBlue
       className={cn(
         'font-display font-bold tracking-[-0.03em] leading-[1.05]',
         'text-[clamp(1.875rem,3.5vw,3rem)] text-slate-900',
-        muted && 'text-slate-500',
+        muted && 'text-slate-600',
         gradient && 'text-gradient',
         gradientBlue && 'text-gradient-blue',
         className,
@@ -94,7 +94,7 @@ export function H2({ children, className, as: Tag = 'h2', gradient, gradientBlue
       className={cn(
         'font-display font-bold tracking-[-0.028em] leading-[1.08]',
         'text-[clamp(1.5rem,2.5vw,2.5rem)] text-slate-900',
-        muted && 'text-slate-500',
+        muted && 'text-slate-600',
         gradient && 'text-gradient',
         gradientBlue && 'text-gradient-blue',
         className,
@@ -113,7 +113,7 @@ export function H3({ children, className, as: Tag = 'h3', gradient, gradientBlue
       className={cn(
         'font-display font-bold tracking-[-0.02em] leading-[1.18]',
         'text-[clamp(1.125rem,1.75vw,1.625rem)] text-slate-900',
-        muted && 'text-slate-500',
+        muted && 'text-slate-600',
         gradient && 'text-gradient',
         gradientBlue && 'text-gradient-blue',
         className,
@@ -132,7 +132,7 @@ export function H4({ children, className, as: Tag = 'h4', gradient, gradientBlue
       className={cn(
         'font-display font-semibold tracking-[-0.015em] leading-[1.28]',
         'text-[clamp(1rem,1.5vw,1.25rem)] text-slate-900',
-        muted && 'text-slate-500',
+        muted && 'text-slate-600',
         gradient && 'text-gradient',
         gradientBlue && 'text-gradient-blue',
         className,
@@ -227,7 +227,7 @@ export function Eyebrow({ children, className, as: Tag = 'span', dot, variant = 
       className={cn(
         'inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.22em]',
         variant === 'default' && 'text-slate-600',
-        variant === 'primary' && 'text-[#1E40AF]',
+        variant === 'primary' && 'text-[#214ECF]',
         variant === 'secondary' && 'text-[#059669]',
         className,
       )}
@@ -236,7 +236,7 @@ export function Eyebrow({ children, className, as: Tag = 'span', dot, variant = 
         <span
           className={cn(
             'inline-block w-1.5 h-1.5 rounded-full shrink-0',
-            variant === 'primary' ? 'bg-[#1E40AF] shadow-[0_0_6px_rgba(30,64,175,0.6)]' : 'bg-slate-400',
+            variant === 'primary' ? 'bg-[#214ECF] shadow-[0_0_6px_rgba(33,78,207,0.6)]' : 'bg-slate-400',
           )}
           aria-hidden="true"
         />

@@ -65,7 +65,7 @@ export function BentoStats() {
                 <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">{card.desc}</p>
               </div>
               {/* Subtle green glow on hover */}
-              <div className="absolute inset-0 rounded-2xl bg-[#3B82F6]/0 group-hover:bg-[#3B82F6]/[0.03] transition-colors pointer-events-none" />
+              <div className="absolute inset-0 rounded-2xl bg-[#214ECF]/0 group-hover:bg-[#214ECF]/[0.03] transition-colors pointer-events-none" />
             </motion.div>
           ))}
         </div>
@@ -92,7 +92,7 @@ export function BentoStats() {
                 </p>
                 <p className="text-muted-foreground text-sm leading-relaxed">{card.desc}</p>
               </div>
-              <div className="absolute inset-0 rounded-2xl bg-[#3B82F6]/0 group-hover:bg-[#3B82F6]/[0.03] transition-colors pointer-events-none" />
+              <div className="absolute inset-0 rounded-2xl bg-[#214ECF]/0 group-hover:bg-[#214ECF]/[0.03] transition-colors pointer-events-none" />
             </motion.div>
           ))}
         </div>

@@ -45,7 +45,7 @@ export function Showreel() {
             </p>
             <div className="sm:ml-auto flex items-center gap-3 flex-wrap">
               {['ACCERN (2023)', 'VT.NEWS (2024)', 'ELVA (2025)'].map((award) => (
-                <span key={award} className="flex items-center gap-1 px-3 py-1.5 border border-[#DCE5FF] rounded-full text-xs text-muted-foreground font-medium hover:border-[#3B82F6]/50 hover:text-foreground transition-colors cursor-default">
+                <span key={award} className="flex items-center gap-1 px-3 py-1.5 border border-[#DCE5FF] rounded-full text-xs text-muted-foreground font-medium hover:border-[#214ECF]/50 hover:text-foreground transition-colors cursor-default">
                   {award}
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
                 </span>
@@ -82,7 +82,7 @@ export function Showreel() {
             className="relative mt-0 pt-28 pb-0 flex justify-center"
           >
             {/* Glow behind the video */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-32 bg-[#3B82F6]/10 blur-3xl rounded-full pointer-events-none" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-32 bg-[#214ECF]/10 blur-3xl rounded-full pointer-events-none" />
 
             {/* Video preview — autoplays, loops, no controls */}
             <div
@@ -106,7 +106,7 @@ export function Showreel() {
               <div className="absolute inset-0 bg-background/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <motion.div
                   whileHover={{ scale: 1.1 }}
-                  className="w-20 h-20 rounded-full bg-[#3B82F6] flex items-center justify-center shadow-[0_0_50px_rgba(33,78,207,0.22)]"
+                  className="w-20 h-20 rounded-full bg-[#214ECF] flex items-center justify-center shadow-[0_0_50px_rgba(33,78,207,0.22)]"
                 >
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="black">
                     <polygon points="5 3 19 12 5 21 5 3" />

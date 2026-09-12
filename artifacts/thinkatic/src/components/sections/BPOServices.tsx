@@ -78,7 +78,7 @@ function ServiceChip({ label, accent }: { label: string; accent: string }) {
     <div
       className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium border border-slate-200 bg-white text-slate-700 shadow-2xs"
     >
-      <CheckCheck size={11} className="text-[#1E40AF] shrink-0" />
+      <CheckCheck size={11} className="text-[#214ECF] shrink-0" />
       <span>{label}</span>
     </div>
   );
@@ -106,8 +106,8 @@ function CapabilityCard({ capability, index }: { capability: (typeof capabilitie
         <div
           className="absolute top-5 right-5 flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-bold bg-blue-50 border border-blue-200"
         >
-          <Star size={11} fill="#1E40AF" color="#1E40AF" />
-          <span className="text-[10px] uppercase tracking-wider text-[#1E40AF]">
+          <Star size={11} fill="#214ECF" color="#214ECF" />
+          <span className="text-[10px] uppercase tracking-wider text-[#214ECF]">
             Front Door Capability
           </span>
         </div>
@@ -119,10 +119,10 @@ function CapabilityCard({ capability, index }: { capability: (typeof capabilitie
           <div
             className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0 border bg-blue-50/60 border-blue-200/80"
           >
-            <Icon size={20} className="text-[#1E40AF]" />
+            <Icon size={20} className="text-[#214ECF]" />
           </div>
           <div>
-            <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#1E40AF] uppercase">
+            <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#214ECF] uppercase">
               CAPABILITY {capability.id}
             </span>
             <h3 className="font-display font-bold text-slate-900 text-lg md:text-xl leading-tight">
@@ -156,7 +156,7 @@ function CapabilityCard({ capability, index }: { capability: (typeof capabilitie
 
         <Link href={`/services/${capability.slug}`}>
           <div
-            className="flex items-center gap-1.5 text-xs font-bold text-[#1E40AF] group-hover:translate-x-0.5 transition-transform cursor-pointer"
+            className="flex items-center gap-1.5 text-xs font-bold text-[#214ECF] group-hover:translate-x-0.5 transition-transform cursor-pointer"
           >
             <span>Architecture details</span>
             <ArrowRight size={13} />
@@ -202,7 +202,7 @@ export function BPOServices() {
               style={{ fontSize: "clamp(2.3rem, 4.5vw, 4rem)" }}
             >
               Mission-Critical <br />
-              <span className="bg-gradient-to-r from-[#1E40AF] via-[#214ECF] to-[#60A5FA] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#214ECF] via-[#214ECF] to-[#2D5FE8] bg-clip-text text-transparent">
                 Capabilities at Scale.
               </span>
             </motion.h2>
@@ -273,7 +273,7 @@ export function BPOServices() {
           </div>
           <Link href="/contact">
             <button
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs tracking-wider uppercase text-white bg-[#1E40AF] hover:bg-[#1D4ED8] shadow-xs hover:shadow-sm transition-all shrink-0 cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs tracking-wider uppercase text-white bg-[#214ECF] hover:bg-[#1A3DB3] shadow-xs hover:shadow-sm transition-all shrink-0 cursor-pointer"
             >
               Consult an Architect
               <ArrowRight size={14} />

@@ -16,8 +16,8 @@ import {
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const STATS = [
-  { icon: Globe,     value: "25+",   label: "Countries",         color: "#1E40AF" },
-  { icon: Clock,     value: "24/7",  label: "Global Coverage",   color: "#1E40AF" },
+  { icon: Globe,     value: "25+",   label: "Countries",         color: "#214ECF" },
+  { icon: Clock,     value: "24/7",  label: "Global Coverage",   color: "#214ECF" },
   { icon: Languages, value: "14",    label: "Languages",          color: "#059669" },
   { icon: Wifi,      value: "99.9%", label: "Uptime SLA",        color: "#7C3AED" },
   { icon: Shield,    value: "ISO",   label: "27001 Certified",   color: "#D97706" },
@@ -25,18 +25,18 @@ const STATS = [
 
 // Hub locations: { label, x %, y %, desc, size, color }
 const HUBS = [
-  { label: "New York",     x: 23, y: 34, desc: "Americas HQ",       size: "lg", color: "#3B82F6", tz: "UTC-5" },
-  { label: "Toronto",      x: 24, y: 29, desc: "Canada Hub",        size: "sm", color: "#60A5FA", tz: "UTC-5" },
+  { label: "New York",     x: 23, y: 34, desc: "Americas HQ",       size: "lg", color: "#214ECF", tz: "UTC-5" },
+  { label: "Toronto",      x: 24, y: 29, desc: "Canada Hub",        size: "sm", color: "#2D5FE8", tz: "UTC-5" },
   { label: "São Paulo",    x: 32, y: 68, desc: "LATAM Hub",         size: "md", color: "#F59E0B", tz: "UTC-3" },
-  { label: "London",       x: 48, y: 26, desc: "EMEA HQ",           size: "lg", color: "#3B82F6", tz: "UTC+0" },
+  { label: "London",       x: 48, y: 26, desc: "EMEA HQ",           size: "lg", color: "#214ECF", tz: "UTC+0" },
   { label: "Frankfurt",    x: 51, y: 24, desc: "EU Data Center",    size: "sm", color: "#818CF8", tz: "UTC+1" },
   { label: "Cairo",        x: 54, y: 39, desc: "MENA Hub",          size: "sm", color: "#38BDF8", tz: "UTC+2" },
   { label: "Dubai",        x: 60, y: 38, desc: "Middle East Hub",   size: "md", color: "#10B981", tz: "UTC+4" },
   { label: "Mumbai",       x: 66, y: 44, desc: "South Asia Hub",    size: "md", color: "#F59E0B", tz: "UTC+5.5" },
-  { label: "Bangalore",    x: 67, y: 49, desc: "Tech & AI Center",  size: "md", color: "#3B82F6", tz: "UTC+5.5" },
+  { label: "Bangalore",    x: 67, y: 49, desc: "Tech & AI Center",  size: "md", color: "#214ECF", tz: "UTC+5.5" },
   { label: "Singapore",    x: 77, y: 53, desc: "SE Asia Hub",       size: "md", color: "#A78BFA", tz: "UTC+8" },
   { label: "Manila",       x: 82, y: 48, desc: "APAC Operations",   size: "lg", color: "#10B981", tz: "UTC+8" },
-  { label: "Sydney",       x: 88, y: 72, desc: "ANZ Hub",           size: "sm", color: "#3B82F6", tz: "UTC+11" },
+  { label: "Sydney",       x: 88, y: 72, desc: "ANZ Hub",           size: "sm", color: "#214ECF", tz: "UTC+11" },
 ];
 
 // Major transmission arcs linking primary enterprise nodes
@@ -58,7 +58,7 @@ const REGIONS = [
     offices: ["New York", "Toronto", "São Paulo"],
     timezone: "UTC−8 to UTC−3",
     languages: ["English", "Spanish", "Portuguese"],
-    accent: "#1E40AF",
+    accent: "#214ECF",
     leadHub: "New York HQ",
   },
   {
@@ -67,7 +67,7 @@ const REGIONS = [
     offices: ["London", "Frankfurt", "Dubai", "Cairo"],
     timezone: "UTC+0 to UTC+4",
     languages: ["English", "German", "Arabic", "French"],
-    accent: "#1E40AF",
+    accent: "#214ECF",
     leadHub: "London HQ",
   },
   {
@@ -147,7 +147,7 @@ function MapPin({
       {/* Label for major hubs */}
       {isLg && (
         <span
-          className="absolute top-4 left-1/2 -translate-x-1/2 text-[9px] font-mono font-bold tracking-wider text-slate-300 pointer-events-none uppercase whitespace-nowrap px-1.5 py-0.5 rounded bg-slate-900/80 border border-slate-700/60"
+          className="absolute top-4 left-1/2 -translate-x-1/2 text-[9px] font-mono font-bold tracking-wider text-slate-400 pointer-events-none uppercase whitespace-nowrap px-1.5 py-0.5 rounded bg-slate-900/80 border border-slate-700/60"
         >
           {hub.label}
         </span>
@@ -174,7 +174,7 @@ function MapPin({
           </p>
           <div className="mt-2 pt-1.5 border-t border-slate-800 flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider">Active NOC Node</span>
+            <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider">Active NOC Node</span>
           </div>
         </div>
         <div
@@ -214,7 +214,7 @@ function RegionCard({ region, index }: { region: typeof REGIONS[0]; index: numbe
               <p className="text-xs font-mono font-medium text-slate-500 mt-0.5">{region.timezone}</p>
             </div>
           </div>
-          <span className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider bg-blue-50 text-[#1E40AF] border border-blue-200/80 shrink-0">
+          <span className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider bg-blue-50 text-[#214ECF] border border-blue-200/80 shrink-0">
             {region.offices.length} offices
           </span>
         </div>
@@ -230,7 +230,7 @@ function RegionCard({ region, index }: { region: typeof REGIONS[0]; index: numbe
                 key={office}
                 className="px-2.5 py-1 rounded-lg text-xs font-mono font-medium bg-slate-50 text-slate-800 border border-slate-200/80 flex items-center gap-1.5 group-hover:border-slate-300 transition-colors"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#1E40AF]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#214ECF]" />
                 {office}
               </span>
             ))}
@@ -246,7 +246,7 @@ function RegionCard({ region, index }: { region: typeof REGIONS[0]; index: numbe
             {region.languages.map((lang) => (
               <span
                 key={lang}
-                className="px-2.5 py-1 rounded-lg text-xs font-mono font-semibold bg-blue-50/70 text-[#1E40AF] border border-blue-200/60"
+                className="px-2.5 py-1 rounded-lg text-xs font-mono font-semibold bg-blue-50/70 text-[#214ECF] border border-blue-200/60"
               >
                 {lang}
               </span>
@@ -261,7 +261,7 @@ function RegionCard({ region, index }: { region: typeof REGIONS[0]; index: numbe
           <CheckCircle2 size={13} className="text-emerald-600" />
           24/7 Redundant Dispatch
         </span>
-        <span className="text-[10px] uppercase tracking-wider font-bold text-slate-400">
+        <span className="text-[10px] uppercase tracking-wider font-bold text-slate-500">
           Tier-1 SLAs
         </span>
       </div>
@@ -302,8 +302,8 @@ export function GlobalCoverage() {
             transition={{ duration: 0.6, ease }}
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/80 border border-blue-200/60 mb-5"
           >
-            <div className="w-1.5 h-1.5 rounded-full bg-[#1E40AF]" />
-            <span className="text-[10px] font-mono font-bold uppercase tracking-[0.28em] text-[#1E40AF]">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#214ECF]" />
+            <span className="text-[10px] font-mono font-bold uppercase tracking-[0.28em] text-[#214ECF]">
               Global Delivery
             </span>
           </motion.div>
@@ -318,7 +318,7 @@ export function GlobalCoverage() {
             >
               Wherever you operate,
               <br />
-              <span className="text-[#1E40AF]">
+              <span className="text-[#214ECF]">
                 we're already there.
               </span>
             </motion.h2>
@@ -383,7 +383,7 @@ export function GlobalCoverage() {
                 [ NETWORK OPERATIONS CENTER // MULTI-SHORE FABRIC ]
               </span>
             </div>
-            <div className="hidden sm:flex items-center gap-4 text-[10px] font-mono text-slate-400">
+            <div className="hidden sm:flex items-center gap-4 text-[10px] font-mono text-slate-500">
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
                 LATENCY: &lt;28ms CROSS-REGION
@@ -438,8 +438,8 @@ export function GlobalCoverage() {
             <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 100 100" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="arcGlow" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.8" />
-                  <stop offset="50%" stopColor="#60A5FA" stopOpacity="0.4" />
+                  <stop offset="0%" stopColor="#214ECF" stopOpacity="0.8" />
+                  <stop offset="50%" stopColor="#2D5FE8" stopOpacity="0.4" />
                   <stop offset="100%" stopColor="#10B981" stopOpacity="0.8" />
                 </linearGradient>
               </defs>
@@ -476,17 +476,17 @@ export function GlobalCoverage() {
             ))}
 
             {/* Bottom HUD bar within map */}
-            <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[11px] font-mono text-slate-300 pointer-events-none">
+            <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[11px] font-mono text-slate-400 pointer-events-none">
               <div className="flex items-center gap-2 bg-slate-900/90 px-3 py-1.5 rounded-lg border border-slate-700/60 backdrop-blur-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping" />
                 <span className="font-semibold text-slate-200">{HUBS.length} Strategic Hubs Connected</span>
               </div>
               <div className="hidden md:flex items-center gap-3 bg-slate-900/90 px-3 py-1.5 rounded-lg border border-slate-700/60 backdrop-blur-sm">
-                <span className="text-slate-400">Active Zones:</span>
+                <span className="text-slate-500">Active Zones:</span>
                 <span className="text-blue-400 font-semibold">Americas</span>
-                <span className="text-slate-400">·</span>
+                <span className="text-slate-500">·</span>
                 <span className="text-indigo-400 font-semibold">EMEA</span>
-                <span className="text-slate-400">·</span>
+                <span className="text-slate-500">·</span>
                 <span className="text-emerald-400 font-semibold">APAC</span>
               </div>
             </div>

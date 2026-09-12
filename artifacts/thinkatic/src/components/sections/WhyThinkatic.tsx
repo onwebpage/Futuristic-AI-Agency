@@ -28,7 +28,7 @@ const FEATURES = [
     icon: Globe,
     title: "24×7 Global Delivery",
     desc: "Three regional hubs across Americas, EMEA, and APAC ensure round-the-clock coverage in every market.",
-    color: "#1E40AF",
+    color: "#214ECF",
     tag: "Follow-The-Sun",
   },
   {
@@ -60,7 +60,7 @@ const FEATURES = [
     icon: TrendingUp,
     title: "Scalable Teams",
     desc: "Ramp from 5 to 500 agents in days. Our elastic capacity model scales with your business cycle.",
-    color: "#1E40AF",
+    color: "#214ECF",
     tag: "Elastic Capacity",
   },
 ];
@@ -71,7 +71,7 @@ const COUNTERS = [
     end: 500,
     suffix: "+",
     label: "Enterprise Clients",
-    color: "#1E40AF",
+    color: "#214ECF",
     micro: "Fortune 500 & High-Growth",
     trend: "+34% YoY",
     barWidth: "88%",
@@ -201,13 +201,13 @@ export function WhyThinkatic() {
           <path
             d="M-100 200 C 300 120, 600 350, 1100 240 S 1600 100, 2000 220"
             fill="none"
-            stroke="#1E40AF"
+            stroke="#214ECF"
             strokeWidth="1.5"
           />
           <path
             d="M-100 450 C 400 380, 800 620, 1300 480 S 1700 350, 2000 420"
             fill="none"
-            stroke="#1E40AF"
+            stroke="#214ECF"
             strokeWidth="1.5"
             strokeDasharray="4 8"
           />
@@ -233,8 +233,8 @@ export function WhyThinkatic() {
                 transition={{ duration: 0.5, ease }}
                 className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-blue-200/80 bg-blue-50/60 mb-6"
               >
-                <div className="w-1.5 h-1.5 rounded-full bg-[#1E40AF] animate-pulse" />
-                <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#1E40AF]">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#214ECF] animate-pulse" />
+                <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#214ECF]">
                   Why Choose Us
                 </span>
               </motion.div>
@@ -248,7 +248,7 @@ export function WhyThinkatic() {
                   className="font-display font-black text-slate-900 tracking-tight leading-[1.03] text-4xl sm:text-5xl lg:text-6xl"
                 >
                   Intelligence meets <br />
-                  <span className="bg-gradient-to-r from-[#1E40AF] via-[#214ECF] to-[#60A5FA] bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[#214ECF] via-[#214ECF] to-[#2D5FE8] bg-clip-text text-transparent">
                     human expertise.
                   </span>
                 </motion.h2>
@@ -264,7 +264,7 @@ export function WhyThinkatic() {
             >
               {/* Line 1 & Line 2: The Core Thesis */}
               <div className="p-5 sm:p-6 rounded-xl border border-slate-200/90 bg-slate-50/60 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-1.5 h-full bg-[#1E40AF]" />
+                <div className="absolute top-0 left-0 w-1.5 h-full bg-[#214ECF]" />
                 <p className="text-xs font-mono font-bold tracking-wider uppercase text-slate-500 mb-2">
                   {LINES[0]}
                 </p>
@@ -276,11 +276,11 @@ export function WhyThinkatic() {
               {/* Line 3 & Line 4: The Operational Paradigm */}
               <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 pt-1 text-slate-700">
                 <div className="flex items-center gap-2 text-sm font-semibold text-slate-800 shrink-0">
-                  <CheckCircle2 size={16} className="text-[#1E40AF]" />
+                  <CheckCircle2 size={16} className="text-[#214ECF]" />
                   <span>{LINES[2]}</span>
                 </div>
                 <div className="hidden sm:block w-px h-4 bg-slate-300" />
-                <p className="text-sm font-semibold text-[#1E40AF] leading-relaxed">
+                <p className="text-sm font-semibold text-[#214ECF] leading-relaxed">
                   {LINES[3]}
                 </p>
               </div>
@@ -296,15 +296,15 @@ export function WhyThinkatic() {
           >
             <div className="relative rounded-2xl border border-slate-200 bg-white p-7 sm:p-8 shadow-xs overflow-hidden">
               {/* Corner crosshairs registration marks */}
-              <div className="absolute top-2.5 left-2.5 text-slate-300 font-mono text-[10px] select-none leading-none">+</div>
-              <div className="absolute top-2.5 right-2.5 text-slate-300 font-mono text-[10px] select-none leading-none">+</div>
-              <div className="absolute bottom-2.5 left-2.5 text-slate-300 font-mono text-[10px] select-none leading-none">+</div>
-              <div className="absolute bottom-2.5 right-2.5 text-slate-300 font-mono text-[10px] select-none leading-none">+</div>
+              <div className="absolute top-2.5 left-2.5 text-slate-400 font-mono text-[10px] select-none leading-none">+</div>
+              <div className="absolute top-2.5 right-2.5 text-slate-400 font-mono text-[10px] select-none leading-none">+</div>
+              <div className="absolute bottom-2.5 left-2.5 text-slate-400 font-mono text-[10px] select-none leading-none">+</div>
+              <div className="absolute bottom-2.5 right-2.5 text-slate-400 font-mono text-[10px] select-none leading-none">+</div>
 
               {/* Console Header */}
               <div className="flex items-center justify-between pb-5 border-b border-slate-100 mb-6">
                 <div className="flex items-center gap-2">
-                  <Activity size={14} className="text-[#1E40AF]" />
+                  <Activity size={14} className="text-[#214ECF]" />
                   <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-slate-600">
                     Scale Benchmarks
                   </span>
@@ -360,7 +360,7 @@ export function WhyThinkatic() {
               {/* Console Footnote */}
               <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono text-slate-500">
                 <span>Continuously Monitored</span>
-                <span className="text-[#1E40AF] font-semibold">ISO 27001 / SOC 2</span>
+                <span className="text-[#214ECF] font-semibold">ISO 27001 / SOC 2</span>
               </div>
             </div>
           </motion.div>
@@ -371,7 +371,7 @@ export function WhyThinkatic() {
           {/* Section Subtitle Bar */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-200">
             <div className="flex items-center gap-2.5">
-              <Layers size={16} className="text-[#1E40AF]" />
+              <Layers size={16} className="text-[#214ECF]" />
               <h3 className="font-display font-bold text-lg text-slate-900 tracking-tight">
                 Enterprise Capability Architecture
               </h3>
@@ -403,7 +403,7 @@ export function WhyThinkatic() {
                   />
 
                   {/* Corner crosshair for structural elegance */}
-                  <div className="absolute top-2.5 right-2.5 text-slate-200 group-hover:text-slate-400 transition-colors font-mono text-[10px] select-none leading-none">
+                  <div className="absolute top-2.5 right-2.5 text-slate-200 group-hover:text-slate-500 transition-colors font-mono text-[10px] select-none leading-none">
                     +
                   </div>
 
@@ -420,13 +420,13 @@ export function WhyThinkatic() {
                         <Icon size={20} style={{ color: feature.color }} />
                       </div>
 
-                      <span className="font-mono text-xs font-bold tracking-widest text-slate-400 group-hover:text-slate-700 transition-colors">
+                      <span className="font-mono text-xs font-bold tracking-widest text-slate-500 group-hover:text-slate-700 transition-colors">
                         {feature.id}
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h4 className="font-display font-bold text-slate-900 text-lg mb-2.5 tracking-tight group-hover:text-[#1E40AF] transition-colors">
+                    <h4 className="font-display font-bold text-slate-900 text-lg mb-2.5 tracking-tight group-hover:text-[#214ECF] transition-colors">
                       {feature.title}
                     </h4>
 
@@ -449,7 +449,7 @@ export function WhyThinkatic() {
                       {feature.tag}
                     </span>
 
-                    <span className="text-xs text-slate-400 group-hover:text-slate-700 group-hover:translate-x-0.5 transition-all">
+                    <span className="text-xs text-slate-500 group-hover:text-slate-700 group-hover:translate-x-0.5 transition-all">
                       →
                     </span>
                   </div>

@@ -362,7 +362,7 @@ function IndustryCard({ industry, index, isActive, onActivate }: IndustryCardPro
             style={{
               background: isActive ? "rgba(30,64,175,0.08)" : "rgba(30,64,175,0.03)",
               borderColor: isActive ? "#93C5FD" : "#E2E8F0",
-              color: isActive ? "#1E40AF" : "#334155",
+              color: isActive ? "#214ECF" : "#334155",
             }}
             className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center border"
           >
@@ -374,7 +374,7 @@ function IndustryCard({ industry, index, isActive, onActivate }: IndustryCardPro
             <h3 className="font-display font-semibold text-base md:text-lg leading-snug truncate text-slate-900">
               {industry.title}
             </h3>
-            <span className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-[#1E40AF]">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-[0.18em] text-[#214ECF]">
               {industry.category}
             </span>
           </div>
@@ -386,7 +386,7 @@ function IndustryCard({ industry, index, isActive, onActivate }: IndustryCardPro
             className="flex-shrink-0 w-7 h-7 rounded-md border flex items-center justify-center border-slate-200"
             style={{
               background: isActive ? "rgba(30,64,175,0.08)" : "transparent",
-              color: isActive ? "#1E40AF" : "#475569",
+              color: isActive ? "#214ECF" : "#475569",
             }}
           >
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -431,7 +431,7 @@ function IndustryCard({ industry, index, isActive, onActivate }: IndustryCardPro
                       className="relative rounded-xl px-4 py-3.5 mb-7 bg-slate-50 border border-slate-200"
                     >
                       <p className="text-[13px] leading-relaxed font-normal text-slate-800">
-                        <span style={{ color: "#1E40AF", fontFamily: "monospace", fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", marginRight: 8, fontWeight: 700 }}>
+                        <span style={{ color: "#214ECF", fontFamily: "monospace", fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", marginRight: 8, fontWeight: 700 }}>
                           Business Impact
                         </span>
                         <br className="sm:hidden" />
@@ -447,7 +447,7 @@ function IndustryCard({ industry, index, isActive, onActivate }: IndustryCardPro
                       whileHover={{ y: -1 }}
                       whileTap={{ y: 0 }}
                       onClick={(e) => { e.stopPropagation(); setLocation("/contact"); }}
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs tracking-wider uppercase text-white bg-[#1E40AF] hover:bg-[#1D4ED8] transition-all shadow-xs cursor-pointer"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs tracking-wider uppercase text-white bg-[#214ECF] hover:bg-[#1A3DB3] transition-all shadow-xs cursor-pointer"
                     >
                       {industry.cta}
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -525,7 +525,7 @@ function ReasonCard({ reason, index }: { reason: typeof REASONS[number]; index: 
       <div>
         <div className="flex items-center justify-between mb-5 relative z-10">
           <div className="flex items-center gap-2">
-            <span className="font-mono font-bold text-[11px] text-[#1E40AF] bg-blue-50/90 border border-blue-200/60 px-2 py-0.5 rounded tracking-wider">
+            <span className="font-mono font-bold text-[11px] text-[#214ECF] bg-blue-50/90 border border-blue-200/60 px-2 py-0.5 rounded tracking-wider">
               {reason.id}
             </span>
             <span className="text-[10px] font-mono font-semibold uppercase tracking-widest text-slate-500">
@@ -539,12 +539,12 @@ function ReasonCard({ reason, index }: { reason: typeof REASONS[number]; index: 
               border: "1px solid rgba(30,64,175,0.15)",
             }}
           >
-            <Icon size={16} className="text-[#1E40AF] transition-colors" />
+            <Icon size={16} className="text-[#214ECF] transition-colors" />
           </div>
         </div>
 
         {/* Title */}
-        <h4 className="text-slate-900 font-bold text-base md:text-lg tracking-tight leading-snug group-hover:text-[#1E40AF] transition-colors relative z-10">
+        <h4 className="text-slate-900 font-bold text-base md:text-lg tracking-tight leading-snug group-hover:text-[#214ECF] transition-colors relative z-10">
           {reason.title}
         </h4>
       </div>
@@ -557,7 +557,7 @@ function ReasonCard({ reason, index }: { reason: typeof REASONS[number]; index: 
             {reason.highlight}
           </span>
         </div>
-        <ArrowUpRight size={13} className="text-slate-400 group-hover:text-[#1E40AF] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+        <ArrowUpRight size={13} className="text-slate-500 group-hover:text-[#214ECF] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
       </div>
     </motion.div>
   );
@@ -600,7 +600,7 @@ export function IndustriesSection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, ease }}
             className="text-[10px] font-mono uppercase tracking-[0.28em] mb-5 text-center"
-            style={{ color: "#1E40AF" }}
+            style={{ color: "#214ECF" }}
           >
             Industries We Serve
           </motion.p>
@@ -661,8 +661,8 @@ export function IndustriesSection() {
                 transition={{ duration: 0.6, ease }}
                 className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/80 border border-blue-200/60 mb-4"
               >
-                <div className="w-1.5 h-1.5 rounded-full bg-[#1E40AF]" />
-                <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#1E40AF]">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#214ECF]" />
+                <span className="text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#214ECF]">
                   Why businesses choose Thinkatic
                 </span>
               </motion.div>
