@@ -354,21 +354,32 @@ export default function UserDashboardPage() {
   const authFetch = useCallback(
     async (path: string, options: RequestInit = {}) => {
       if (!token) throw new Error("Unauthorized");
-      const res = await fetch(`/api${path}`, {
-        ...options,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-          ...(options.headers || {}),
-        },
-      });
-      if (res.status === 401) {
-        localStorage.removeItem("user_token");
-        localStorage.removeItem("user_profile");
-        setLocation("/login");
-        throw new Error("Session expired");
+      
+      // Add timeout to prevent hanging requests
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      
+      try {
+        const res = await fetch(`/api${path}`, {
+          ...options,
+          signal: controller.signal,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            ...(options.headers || {}),
+          },
+        });
+        
+        if (res.status === 401) {
+          localStorage.removeItem("user_token");
+          localStorage.removeItem("user_profile");
+          setLocation("/login");
+          throw new Error("Session expired");
+        }
+        return res;
+      } finally {
+        clearTimeout(timeoutId);
       }
-      return res;
     },
     [token, setLocation]
   );
@@ -380,124 +391,297 @@ export default function UserDashboardPage() {
     }
 
     try {
-      let availableModules = modules;
-      let mayUseBpoWithdrawals = false;
-      // 1. Profile
-      const pRes = await authFetch("/user/profile");
-      if (pRes.ok) {
-        const pData = await pRes.json();
+      // ===============================
+      // PHASE 1: CRITICAL DATA (Load immediately and show dashboard shell)
+      // ===============================
+      const [profileRes, modulesRes, plansRes] = await Promise.all([
+        authFetch("/user/profile").catch(err => ({ ok: false, error: err.message })),
+        authFetch("/user/modules").catch(err => ({ ok: false, error: err.message })),
+        fetch("/api/plans").catch(err => ({ ok: false, error: err.message }))
+      ]);
+
+      let availableModules: ModuleAvailability = {};
+
+      // Process profile
+      if (profileRes.ok) {
+        const pData = await profileRes.json();
         setProfile(pData);
         setProfileFullName(pData.fullName || "");
-        mayUseBpoWithdrawals = pData.role === "partner" || pData.role === "bpo_partner" || BPO_PLAN_IDS.has(pData.selectedPlan || "");
       }
-      const modulesRes = await authFetch("/user/modules");
+
+      // Process modules
       if (modulesRes.ok) {
         const moduleRows = await modulesRes.json() as Array<{ module_key: string; enabled: boolean }>;
         availableModules = Object.fromEntries(moduleRows.map((item) => [item.module_key, item.enabled]));
         setModules(availableModules);
       }
 
-      // 2. Plans
-      const plansRes = await fetch("/api/plans");
+      // Process plans
       if (plansRes.ok) {
         const plansData = await plansRes.json();
         const technologyPlans = plansData.filter((plan: Plan) => !BPO_PLAN_IDS.has(plan.serviceId));
         setPlans([...technologyPlans, ...BPO_DASHBOARD_PLANS]);
       }
 
+      // Show dashboard shell immediately after critical data loads
+      setLoading(false);
+
+      // ===============================
+      // PHASE 2: PRIMARY FEATURES (Load core functionality data)
+      // ===============================
+      const primaryRequests = [];
+      
       if (availableModules.projects !== false) {
         setProjectsLoading(true);
-        const projectsRes = await authFetch("/projects");
-        if (projectsRes.ok) setProjects(await projectsRes.json());
-        setProjectsLoading(false);
+        primaryRequests.push(
+          authFetch("/projects")
+            .then(res => res.ok ? res.json().then(data => ({ type: 'projects', data })) : null)
+            .catch(() => null)
+        );
       }
 
-      const notificationsRes = await authFetch("/user/notifications");
-      if (notificationsRes.ok) setNotifications(await notificationsRes.json());
-      const reportsRes = await authFetch("/user/reports?page=1&pageSize=25");
-      if (reportsRes.ok) setClientReports(await reportsRes.json());
-      if (availableModules.documents !== false) { const documentsRes = await authFetch("/documents"); if (documentsRes.ok) setDocuments(await documentsRes.json()); }
-      if (availableModules.communication !== false) { const conversationsRes = await authFetch("/conversations"); if (conversationsRes.ok) setConversations(await conversationsRes.json()); }
-      if (availableModules.meetings !== false) {
-        const meetingsRes = await authFetch("/meetings");
-        if (meetingsRes.ok) setMeetings(await meetingsRes.json());
-        else if (meetingsRes.status === 503) showToast("error", "Meetings module is currently disabled");
-      }
+      // Core notifications and reports
+      primaryRequests.push(
+        authFetch("/user/notifications")
+          .then(res => res.ok ? res.json().then(data => ({ type: 'notifications', data })) : null)
+          .catch(() => null),
+        authFetch("/user/reports?page=1&pageSize=25")
+          .then(res => res.ok ? res.json().then(data => ({ type: 'reports', data })) : null)
+          .catch(() => null)
+      );
 
+      // Billing data (often critical for business users)
       if (availableModules.billing !== false) {
-        const [invRes, sumRes, pymtRes] = await Promise.all([
-          authFetch("/invoices"),
-          authFetch("/invoices/summary"),
-          authFetch("/billing/payments"),
-        ]);
-        if (invRes.ok) setInvoices(await invRes.json());
-        if (sumRes.ok) setBillingSummary(await sumRes.json());
-        if (pymtRes.ok) setBillingPayments(await pymtRes.json());
-        if (invRes.status === 503) showToast("error", "Billing module is currently disabled");
+        primaryRequests.push(
+          Promise.all([
+            authFetch("/invoices").catch(() => ({ ok: false })),
+            authFetch("/invoices/summary").catch(() => ({ ok: false })),
+            authFetch("/billing/payments").catch(() => ({ ok: false }))
+          ]).then(([invRes, sumRes, pymtRes]) => ({
+            type: 'billing',
+            data: { invRes, sumRes, pymtRes }
+          }))
+        );
       }
 
-      const updatesRes = availableModules.client_updates === false ? null : await authFetch("/user/updates");
-      if (updatesRes?.ok) {
-        setUpdates(await updatesRes.json());
+      // Process primary data as it loads
+      const primaryResults = await Promise.allSettled(primaryRequests);
+      primaryResults.forEach((result) => {
+        if (result.status === 'fulfilled' && result.value) {
+          const { type, data } = result.value;
+          switch (type) {
+            case 'projects':
+              setProjects(data);
+              setProjectsLoading(false);
+              break;
+            case 'notifications':
+              setNotifications(data);
+              break;
+            case 'reports':
+              setClientReports(data);
+              break;
+            case 'billing':
+              const { invRes, sumRes, pymtRes } = data;
+              if (invRes.ok) invRes.json().then(setInvoices).catch(() => {});
+              if (sumRes.ok) sumRes.json().then(setBillingSummary).catch(() => {});
+              if (pymtRes.ok) pymtRes.json().then(setBillingPayments).catch(() => {});
+              if (invRes.status === 503) showToast("error", "Billing module is currently disabled");
+              break;
+          }
+        }
+      });
+
+      // ===============================
+      // PHASE 3: SECONDARY FEATURES (Load in background)
+      // ===============================
+      const secondaryRequests = [];
+
+      // Documents and communication
+      if (availableModules.documents !== false) {
+        secondaryRequests.push(
+          authFetch("/documents")
+            .then(res => res.ok ? res.json().then(data => ({ type: 'documents', data })) : null)
+            .catch(() => null)
+        );
       }
 
-      const ticketsRes = availableModules.tickets === false ? null : await authFetch("/tickets");
-      if (ticketsRes?.ok) setTickets(await ticketsRes.json());
-
-      // 3. Attendance
-      const attRes = availableModules.attendance === false ? null : await authFetch("/user/attendance");
-      if (attRes?.ok) {
-        const attData = await attRes.json();
-        setAttendance(attData);
+      if (availableModules.communication !== false) {
+        secondaryRequests.push(
+          authFetch("/conversations")
+            .then(res => res.ok ? res.json().then(data => ({ type: 'conversations', data })) : null)
+            .catch(() => null)
+        );
       }
 
-      // 4. KYC
-      const kycRes = availableModules.kyc === false ? null : await authFetch("/user/kyc");
-      if (kycRes?.ok) {
-        const kycData = await kycRes.json();
-        setKyc(kycData);
-        if (kycData.fullName) {
-          setKycForm((prev) => ({ ...prev, fullName: kycData.fullName }));
+      if (availableModules.meetings !== false) {
+        secondaryRequests.push(
+          authFetch("/meetings")
+            .then(res => {
+              if (res.ok) return res.json().then(data => ({ type: 'meetings', data }));
+              if (res.status === 503) showToast("error", "Meetings module is currently disabled");
+              return null;
+            })
+            .catch(() => null)
+        );
+      }
+
+      // Updates and tickets
+      if (availableModules.client_updates !== false) {
+        secondaryRequests.push(
+          authFetch("/user/updates")
+            .then(res => res.ok ? res.json().then(data => ({ type: 'updates', data })) : null)
+            .catch(() => null)
+        );
+      }
+
+      if (availableModules.tickets !== false) {
+        secondaryRequests.push(
+          authFetch("/tickets")
+            .then(res => res.ok ? res.json().then(data => ({ type: 'tickets', data })) : null)
+            .catch(() => null)
+        );
+      }
+
+      // Process secondary data
+      const secondaryResults = await Promise.allSettled(secondaryRequests);
+      secondaryResults.forEach((result) => {
+        if (result.status === 'fulfilled' && result.value) {
+          const { type, data } = result.value;
+          switch (type) {
+            case 'documents':
+              setDocuments(data);
+              break;
+            case 'conversations':
+              setConversations(data);
+              break;
+            case 'meetings':
+              setMeetings(data);
+              break;
+            case 'updates':
+              setUpdates(data);
+              break;
+            case 'tickets':
+              setTickets(data);
+              break;
+          }
+        }
+      });
+
+      // ===============================
+      // PHASE 4: OPTIONAL FEATURES (Load only if needed)
+      // ===============================
+      const optionalRequests = [];
+
+      // Attendance data
+      if (availableModules.attendance !== false) {
+        optionalRequests.push(
+          authFetch("/user/attendance")
+            .then(res => res.ok ? res.json().then(data => ({ type: 'attendance', data })) : null)
+            .catch(() => null)
+        );
+      }
+
+      // KYC data
+      if (availableModules.kyc !== false) {
+        optionalRequests.push(
+          authFetch("/user/kyc")
+            .then(res => res.ok ? res.json().then(data => ({ type: 'kyc', data })) : null)
+            .catch(() => null)
+        );
+      }
+
+      // Affiliate data
+      if (availableModules.affiliate !== false) {
+        optionalRequests.push(
+          authFetch("/user/affiliate")
+            .then(res => res.ok ? res.json().then(data => ({ type: 'affiliate', data })) : null)
+            .catch(() => null)
+        );
+      }
+
+      // Wallet and transactions
+      if (availableModules.wallet !== false) {
+        optionalRequests.push(
+          authFetch("/user/wallet")
+            .then(res => res.ok ? res.json().then(data => ({ type: 'wallet', data })) : null)
+            .catch(() => null),
+          authFetch("/user/wallet/transactions")
+            .then(res => res.ok ? res.json().then(data => ({ type: 'transactions', data })) : null)
+            .catch(() => null)
+        );
+      }
+
+      // Purchases (needed for BPO eligibility)
+      optionalRequests.push(
+        authFetch("/user/purchases")
+          .then(res => res.ok ? res.json().then(data => ({ type: 'purchases', data })) : null)
+          .catch(() => null)
+      );
+
+      // Process optional data
+      const optionalResults = await Promise.allSettled(optionalRequests);
+      optionalResults.forEach((result) => {
+        if (result.status === 'fulfilled' && result.value) {
+          const { type, data } = result.value;
+          switch (type) {
+            case 'attendance':
+              setAttendance(data);
+              break;
+            case 'kyc':
+              setKyc(data);
+              if (data.fullName) {
+                setKycForm((prev) => ({ ...prev, fullName: data.fullName }));
+              }
+              break;
+            case 'affiliate':
+              setAffiliate(data);
+              break;
+            case 'wallet':
+              setWallet(data);
+              break;
+            case 'transactions':
+              setTransactions(data);
+              break;
+            case 'purchases':
+              setPurchases(data);
+              break;
+          }
+        }
+      });
+
+      // ===============================
+      // PHASE 5: BPO WITHDRAWAL ACCESS (Check server-side eligibility)
+      // ===============================
+      if (availableModules.bpo_withdrawals !== false) {
+        try {
+          const accessRes = await authFetch("/user/withdrawals/access");
+          const eligible = accessRes?.ok === true;
+          setBpoEligible(eligible);
+          
+          if (eligible) {
+            const [detailRes, withdrawalRes] = await Promise.allSettled([
+              authFetch("/user/payout-details"),
+              authFetch("/user/withdrawals")
+            ]);
+            
+            if (detailRes.status === 'fulfilled' && detailRes.value.ok) {
+              detailRes.value.json().then(setPayoutDetails).catch(() => {});
+            }
+            if (withdrawalRes.status === 'fulfilled' && withdrawalRes.value.ok) {
+              withdrawalRes.value.json().then(setWithdrawals).catch(() => {});
+            }
+          }
+        } catch (err) {
+          console.warn("BPO withdrawal access check failed:", err);
         }
       }
 
-      // 5. Affiliate
-      const affRes = availableModules.affiliate === false ? null : await authFetch("/user/affiliate");
-      if (affRes?.ok) {
-        const affData = await affRes.json();
-        setAffiliate(affData);
-      }
-
-      // 6. Wallet
-      const wRes = availableModules.wallet === false ? null : await authFetch("/user/wallet");
-      if (wRes?.ok) {
-        const wData = await wRes.json();
-        setWallet(wData);
-      }
-
-      // 7. Transactions
-      const txRes = availableModules.wallet === false ? null : await authFetch("/user/wallet/transactions");
-      if (txRes?.ok) {
-        const txData = await txRes.json();
-        setTransactions(txData);
-      }
-
-      const purchaseRes = await authFetch("/user/purchases");
-      if (purchaseRes.ok) {
-        const purchaseData = await purchaseRes.json();
-        setPurchases(purchaseData);
-      }
-
-      const accessRes = mayUseBpoWithdrawals && availableModules.bpo_withdrawals !== false ? await authFetch("/user/withdrawals/access") : null;
-      const eligible = accessRes?.ok === true;
-      setBpoEligible(eligible);
-      if (eligible) {
-        const [detailRes, withdrawalRes] = await Promise.all([authFetch("/user/payout-details"), authFetch("/user/withdrawals")]);
-        if (detailRes.ok) setPayoutDetails(await detailRes.json());
-        if (withdrawalRes.ok) setWithdrawals(await withdrawalRes.json());
-      }
     } catch (err: any) {
       console.error("Failed to load dashboard data:", err);
+      // Don't show error toast for timeouts or network errors
+      if (!err.message?.includes("aborted") && !err.message?.includes("timeout")) {
+        showToast("error", "Some data failed to load. Try refreshing the page.");
+      }
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -944,12 +1128,14 @@ export default function UserDashboardPage() {
                   </div>
                   <div className="text-[11px] text-slate-500 mt-1 flex items-center justify-between">
                     <span>Pending: ${wallet?.pendingBalance.toFixed(2) || "0.00"}</span>
-                    <button
-                      onClick={() => setTab("wallet")}
-                      className="text-blue-600 font-semibold hover:underline"
-                    >
-                      Payout →
-                    </button>
+                    {bpoEligible && (
+                      <button
+                        onClick={() => setTab("wallet")}
+                        className="text-blue-600 font-semibold hover:underline"
+                      >
+                        Payout →
+                      </button>
+                    )}
                   </div>
                 </div>
 
@@ -2037,13 +2223,15 @@ export default function UserDashboardPage() {
                     Manage available funds, payouts, and view the immutable transaction ledger.
                   </p>
                 </div>
-                <button
-                  onClick={() => setWithdrawModalOpen(true)}
-                  disabled={!wallet || wallet.balance <= 0}
-                  className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white rounded-xl text-xs font-bold shadow-xs transition-colors cursor-pointer"
-                >
-                  Request Payout / Withdrawal
-                </button>
+                {bpoEligible && (
+                  <button
+                    onClick={() => setWithdrawModalOpen(true)}
+                    disabled={!wallet || wallet.balance <= 0}
+                    className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white rounded-xl text-xs font-bold shadow-xs transition-colors cursor-pointer"
+                  >
+                    Request Payout / Withdrawal
+                  </button>
+                )}
               </div>
 
               {/* Balance Cards */}

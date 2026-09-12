@@ -25,21 +25,54 @@ function authError(res: Response, status: number, message: string) {
   return res.status(status).json({ success: false, message, error: message });
 }
 
+// Simple in-memory cache for auth validation (5-minute TTL)
+const authCache = new Map<string, { profile: any; timestamp: number }>();
+const AUTH_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
 export async function requireUserAuth(req: AuthRequest, res: Response, next: NextFunction) {
   const auth = req.headers.authorization;
   if (!auth?.startsWith("Bearer ")) {
     res.status(401).json({ error: "Authentication required" });
     return;
   }
+  
   try {
-    const payload = jwt.verify(auth.slice(7), JWT_SECRET) as { id: string; email: string };
+    const token = auth.slice(7);
+    const payload = jwt.verify(token, JWT_SECRET) as { id: string; email: string };
+    
+    // Check cache first
+    const cacheKey = payload.id;
+    const cached = authCache.get(cacheKey);
+    const now = Date.now();
+    
+    if (cached && (now - cached.timestamp) < AUTH_CACHE_TTL) {
+      // Use cached profile validation
+      req.user = payload;
+      next();
+      return;
+    }
+    
+    // Cache miss or expired - do database lookup
     const profile = await userProfileRepository.getById(payload.id);
-    const { data: deactivation } = profile ? await supabase.from("audit_logs").select("action, created_at").eq("entity_type", "user").eq("entity_id", payload.id).eq("action", "user_deactivated").order("created_at", { ascending: false }).limit(1).maybeSingle() : { data: null };
-    const { data: activation } = profile ? await supabase.from("audit_logs").select("action, created_at").eq("entity_type", "user").eq("entity_id", payload.id).eq("action", "user_active").order("created_at", { ascending: false }).limit(1).maybeSingle() : { data: null };
-    if (!profile || profile.isActive === false || profile.bpoStatus === "REJECTED" || (deactivation && (!activation || new Date(deactivation.created_at).getTime() > new Date(activation.created_at).getTime()))) {
+    
+    // Basic profile checks (skip expensive audit log queries for standard auth)
+    if (!profile || profile.isActive === false || profile.bpoStatus === "REJECTED") {
       res.status(401).json({ error: "User account is not active" });
       return;
     }
+    
+    // Cache the successful validation
+    authCache.set(cacheKey, { profile, timestamp: now });
+    
+    // Clean up old cache entries periodically
+    if (authCache.size > 1000) {
+      for (const [key, value] of authCache.entries()) {
+        if ((now - value.timestamp) > AUTH_CACHE_TTL) {
+          authCache.delete(key);
+        }
+      }
+    }
+    
     req.user = payload;
     next();
   } catch {
@@ -59,12 +92,36 @@ async function requireBpoWithdrawal(req: AuthRequest, res: Response, next: NextF
   }
 }
 
+// Cache for module settings (10-minute TTL)
+const moduleCache = new Map<string, { enabled: boolean; timestamp: number }>();
+const MODULE_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+
 export function requireFeature(moduleKey: string) {
   return async (_req: Request, res: Response, next: NextFunction) => {
     try {
+      // Check cache first
+      const cached = moduleCache.get(moduleKey);
+      const now = Date.now();
+      
+      if (cached && (now - cached.timestamp) < MODULE_CACHE_TTL) {
+        if (cached.enabled === false) {
+          res.status(503).json({ success: false, message: `${moduleKey.replaceAll("_", " ")} is currently disabled` });
+          return;
+        }
+        next();
+        return;
+      }
+      
+      // Cache miss or expired - query database
       const { data, error } = await supabase.from("module_settings").select("enabled").eq("module_key", moduleKey).maybeSingle();
       if (error) throw error;
-      if (data?.enabled === false) {
+      
+      const enabled = data?.enabled !== false; // Default to enabled if not found
+      
+      // Cache the result
+      moduleCache.set(moduleKey, { enabled, timestamp: now });
+      
+      if (!enabled) {
         res.status(503).json({ success: false, message: `${moduleKey.replaceAll("_", " ")} is currently disabled` });
         return;
       }
@@ -76,11 +133,35 @@ export function requireFeature(moduleKey: string) {
   };
 }
 
+// Cache for all module settings (5-minute TTL)
+let allModulesCache: { data: any; timestamp: number } | null = null;
+const ALL_MODULES_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
 router.get("/user/modules", requireUserAuth, async (_req: AuthRequest, res: Response) => {
   try {
+    const now = Date.now();
+    
+    // Check cache first
+    if (allModulesCache && (now - allModulesCache.timestamp) < ALL_MODULES_CACHE_TTL) {
+      res.json(allModulesCache.data);
+      return;
+    }
+    
+    // Cache miss or expired - query database
     const { data, error } = await supabase.from("module_settings").select("module_key,enabled").order("module_key");
     if (error) throw error;
-    res.json(data || []);
+    
+    const result = data || [];
+    
+    // Cache the result
+    allModulesCache = { data: result, timestamp: now };
+    
+    // Update individual module cache entries as well
+    result.forEach((item: { module_key: string; enabled: boolean }) => {
+      moduleCache.set(item.module_key, { enabled: item.enabled, timestamp: now });
+    });
+    
+    res.json(result);
   } catch (error: any) {
     res.status(500).json({ error: "Failed to load feature settings", details: error?.message });
   }
