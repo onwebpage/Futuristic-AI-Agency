@@ -273,7 +273,25 @@ router.post("/user/auth/signup", async (req: Request, res: Response) => {
     const { passwordHash: _, ...safeProfile } = profile;
     return res.status(201).json({ token, profile: safeProfile });
   } catch (err: any) {
-    console.error("User signup error:", err);
+    // Enhanced error logging for production debugging
+    console.error("[Signup] User signup error:", {
+      message: err?.message,
+      code: err?.code,
+      hint: err?.hint,
+      details: err?.details,
+      name: err?.name,
+    });
+    
+    // Check for specific Supabase API key errors
+    if (err?.message?.includes("API key") || err?.message?.includes("Unregistered")) {
+      console.error("[Signup] CRITICAL: Supabase API key is invalid or not configured properly.");
+      console.error("[Signup] Check environment variables: SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY");
+      return res.status(500).json({ 
+        error: "Database configuration error", 
+        details: "Server authentication issue. Please contact support." 
+      });
+    }
+    
     return res.status(500).json({ error: "Signup failed", details: err?.message });
   }
 });

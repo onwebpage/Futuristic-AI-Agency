@@ -1,14 +1,39 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
+// Supabase URL - fallback to VITE_ prefix for compatibility, with hardcoded default
 const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || "https://gkcmdngzatpdrzfdahcq.supabase.co";
-const supabaseKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY || "";
 
+// Supabase Service Role Key - MUST be service_role key, NOT anon/publishable key
+// Priority: SUPABASE_SECRET_KEY > SUPABASE_SERVICE_ROLE_KEY
+// Never fall back to VITE_SUPABASE_PUBLISHABLE_KEY as it's an anon key without permissions
+const supabaseKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+
+// Validate configuration
 if (!supabaseUrl) {
-  console.warn("[Supabase] Warning: Neither SUPABASE_URL nor VITE_SUPABASE_URL is set in environment.");
+  console.error("[Supabase] CRITICAL: Supabase URL is not configured. Set SUPABASE_URL or VITE_SUPABASE_URL environment variable.");
 }
 
 if (!supabaseKey) {
-  console.warn("[Supabase] Warning: Neither SUPABASE_SECRET_KEY nor VITE_SUPABASE_PUBLISHABLE_KEY is set in environment.");
+  console.error("[Supabase] CRITICAL: Supabase service role key is not configured.");
+  console.error("[Supabase] Set one of these environment variables:");
+  console.error("[Supabase]   - SUPABASE_SECRET_KEY (recommended)");
+  console.error("[Supabase]   - SUPABASE_SERVICE_ROLE_KEY");
+  console.error("[Supabase] DO NOT use VITE_SUPABASE_PUBLISHABLE_KEY - it lacks required permissions.");
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("Supabase service role key must be configured in production");
+  }
+}
+
+// Log which key source is being used (without exposing the key itself)
+if (supabaseKey) {
+  const keySource = process.env.SUPABASE_SECRET_KEY
+    ? "SUPABASE_SECRET_KEY"
+    : process.env.SUPABASE_SERVICE_ROLE_KEY
+    ? "SUPABASE_SERVICE_ROLE_KEY"
+    : "NONE";
+  console.log(`[Supabase] Initialized with URL: ${supabaseUrl}`);
+  console.log(`[Supabase] Using key from: ${keySource}`);
+  console.log(`[Supabase] Key format check: ${supabaseKey.startsWith("eyJ") ? "JWT format (service_role)" : supabaseKey.startsWith("sb_") ? "Prefixed key" : "Unknown format"}`);
 }
 
 export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey, {

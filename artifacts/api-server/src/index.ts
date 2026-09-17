@@ -1,5 +1,15 @@
 import app from "./app";
 import { logger } from "./lib/logger";
+import { validateEnvironment, logValidationResults } from "./lib/validate-env";
+
+// Validate environment variables before starting server
+const validationResult = validateEnvironment();
+logValidationResults(validationResult);
+
+if (!validationResult.valid) {
+  console.error("\n❌ Server startup aborted due to configuration errors.\n");
+  process.exit(1);
+}
 
 const rawPort = process.env["PORT"];
 
