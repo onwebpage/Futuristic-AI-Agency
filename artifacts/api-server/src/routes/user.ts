@@ -15,7 +15,7 @@ import {
 } from "@workspace/db";
 
 const router: IRouter = Router();
-const JWT_SECRET = process.env.SESSION_SECRET ?? "thinkatic-user-secret-2026";
+const JWT_SECRET = process.env.USER_SESSION_SECRET || (process.env.NODE_ENV === "production" ? (() => { throw new Error("USER_SESSION_SECRET must be set in production"); })() : "thinkatic-user-secret-2026");
 
 interface AuthRequest extends Request {
   user?: { id: string; email: string };
